@@ -20,6 +20,7 @@ using System.Windows.Input;
 using Windows.Security.Cryptography.Core;
 using Windows.Devices.WiFi;
 using AtlasToolbox.Commands.ConfigurationButtonsCommand;
+using AtlasToolbox.Utils;
 
 namespace AtlasToolbox.HostBuilder
 {
@@ -118,21 +119,21 @@ namespace AtlasToolbox.HostBuilder
 
             foreach (FileInfo file in profileFile)
             {
-                List<string> keys = new List<string>();
-                bool loop = true;
-                string profileKeyname = file.Name;
-                string profileName;
-                using (StreamReader profile = new StreamReader(file.FullName, Encoding.UTF8))
-                {
-                    profileName = profile.ReadLine();
-                    while (loop)
-                    {
-                        string key = profile.ReadLine();
-                        if (key == null) { loop = false; }
-                        else { keys.Add(key); }
-                    }
-                }
-                configurationDictionary.Add(new(profileName, profileKeyname,keys));
+                //List<string> keys = new List<string>();
+                //bool loop = true;
+                //string profileKeyname = file.Name;
+                //string profileName;
+                //using (StreamReader profile = new StreamReader(file.FullName, Encoding.UTF8))
+                //{
+                //    profileName = profile.ReadLine();
+                //    while (loop)
+                //    {
+                //        string key = profile.ReadLine();
+                //        if (key == null) { loop = false; }
+                //        else { keys.Add(key); }
+                //    }
+                //}
+                configurationDictionary.Add(ProfileSerializing.DeserializeProfile(file));
             };
             host.ConfigureServices((_, services) =>
             {
