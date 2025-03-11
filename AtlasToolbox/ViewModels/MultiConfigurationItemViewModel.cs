@@ -20,6 +20,7 @@ namespace AtlasToolbox.ViewModels
         public ConfigurationType Type => Configuration.Type;
 
         public List<string> Options => _configurationStore.Options; 
+        public string Key => Configuration.Key;
 
         public Color Color { get; set; }
 

@@ -119,21 +119,7 @@ namespace AtlasToolbox.HostBuilder
 
             foreach (FileInfo file in profileFile)
             {
-                //List<string> keys = new List<string>();
-                //bool loop = true;
-                //string profileKeyname = file.Name;
-                //string profileName;
-                //using (StreamReader profile = new StreamReader(file.FullName, Encoding.UTF8))
-                //{
-                //    profileName = profile.ReadLine();
-                //    while (loop)
-                //    {
-                //        string key = profile.ReadLine();
-                //        if (key == null) { loop = false; }
-                //        else { keys.Add(key); }
-                //    }
-                //}
-                configurationDictionary.Add(ProfileSerializing.DeserializeProfile(file));
+                configurationDictionary.Add(ProfileSerializing.DeserializeProfile(file.FullName));
             };
             host.ConfigureServices((_, services) =>
             {

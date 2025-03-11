@@ -81,18 +81,18 @@ namespace AtlasToolbox.ViewModels
             //        }
             //    }
             //}
-                //ProfilesList.Add(new(Name, Name.Trim()));
+            ProfilesList.Add(ProfileSerializing.CreateProfile(Name.Trim()));
         }
 
         [RelayCommand]
         private void RemoveProfile() 
         {
-            DirectoryInfo profilesDirectory = new DirectoryInfo("..\\..\\..\\..\\Profiles\\");
+            DirectoryInfo profilesDirectory = new DirectoryInfo($"{Environment.GetEnvironmentVariable("windir")}\\AtlasModules\\Toolbox\\Profiles\\");
             FileInfo[] profileFile = profilesDirectory.GetFiles();
 
             foreach (FileInfo file in profileFile.ToList())
             {
-                if (ProfileSelected.Key + ".txt" == file.Name)
+                if (ProfileSelected.Key + ".json" == file.Name)
                 {
                     File.Delete(file.FullName);
                     break;
@@ -118,7 +118,8 @@ namespace AtlasToolbox.ViewModels
             //        {
             //            viewModel.CurrentSetting = false;
             //        }
-            //    } catch (Exception e)
+            //    }
+            //    catch (Exception e)
             //    {
             //        App.logger.Warn("Failed to set a profile due to not having a selected profile");
             //    }
