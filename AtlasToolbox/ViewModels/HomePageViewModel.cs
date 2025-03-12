@@ -18,6 +18,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Foundation.Collections;
 using Windows.Services.Maps;
 using WinRT.AtlasToolboxVtableClasses;
 
@@ -27,6 +28,7 @@ namespace AtlasToolbox.ViewModels
     {
         private IEnumerable<Profiles> _profiles;
         private IEnumerable<ConfigurationItemViewModel> ConfigurationItemViewModels { get; }
+        private IEnumerable<MultiOptionConfigurationItemViewModel> MultiOptionConfigurationItemViewModels { get; }
 
         [ObservableProperty]
         public ObservableCollection<Profiles> _profilesList;
@@ -60,27 +62,6 @@ namespace AtlasToolbox.ViewModels
         private void AddProfile()
         {
             ProfileSerializing.CreateProfile(Name.Trim());
-            ////todo: Change profiles to be Json files 
-            //DirectoryInfo profilesDirectory = new DirectoryInfo("..\\..\\..\\..\\Profiles\\");
-            //FileInfo[] profileFile = profilesDirectory.GetFiles();
-
-            //using (StreamWriter outputFile = new StreamWriter(Path.Combine($"{Environment.GetEnvironmentVariable("windir")}\\AtlasModules\\Toolbox\\Profiles", Name.Trim() + ".txt")))
-            //{
-            //    outputFile.WriteLine(Name);
-
-            //    IEnumerable<ConfigurationItemViewModel> configViewModels = App._host.Services.GetRequiredService<IEnumerable<ConfigurationItemViewModel>>();
-
-            //    List<string> configItemKeys = new List<string>();
-
-            //    foreach (ConfigurationItemViewModel configItemViewModel in configViewModels)
-            //    {
-            //        if (configItemViewModel.CurrentSetting)
-            //        {
-            //            outputFile.WriteLine(configItemViewModel.Key);
-            //            configItemKeys.Add(configItemViewModel.Key);
-            //        }
-            //    }
-            //}
             ProfilesList.Add(ProfileSerializing.CreateProfile(Name.Trim()));
         }
 
@@ -92,11 +73,7 @@ namespace AtlasToolbox.ViewModels
 
             foreach (FileInfo file in profileFile.ToList())
             {
-                if (ProfileSelected.Key + ".json" == file.Name)
-                {
-                    File.Delete(file.FullName);
-                    break;
-                }
+                if (ProfileSelected.Key + ".json" == file.Name) File.Delete(file.FullName);
             }
             ProfilesList.Remove(ProfileSelected);
         }
@@ -104,26 +81,39 @@ namespace AtlasToolbox.ViewModels
         [RelayCommand]
         private void SetProfile()
         {
-            //List<ConfigurationItemViewModel> configurationItemVMs = ConfigurationItemViewModels.ToList();
-            //foreach (ConfigurationItemViewModel viewModel in configurationItemVMs)
-            //{
-            //    try
-            //    {
-            //        if (ProfileSelected.ConfigurationServices.Contains(viewModel.Key))
-            //        {
-            //            //ConfigurationItemViewModel config = App._host.Services.GetKeyedService<ConfigurationItemViewModel>(viewModel.Key);
-            //            viewModel.CurrentSetting = true;
-            //        }
-            //        else if (viewModel.CurrentSetting == true)
-            //        {
-            //            viewModel.CurrentSetting = false;
-            //        }
-            //    }
-            //    catch (Exception e)
-            //    {
-            //        App.logger.Warn("Failed to set a profile due to not having a selected profile");
-            //    }
-            //}
+            // need more research to figure out a better way to do this
+            List<ConfigurationItemViewModel> configurationItemVMs = ConfigurationItemViewModels.ToList();
+            List<MultiOptionConfigurationItemViewModel> multiConfigurationItemVMs = MultiOptionConfigurationItemViewModels.ToList();
+            foreach (ConfigurationItemViewModel viewModel in configurationItemVMs)
+            {
+                try
+                {
+                    if (ProfileSelected.ConfigurationServices.Contains(viewModel.Key))
+                    {
+                        //ConfigurationItemViewModel config = App._host.Services.GetKeyedService<ConfigurationItemViewModel>(viewModel.Key);
+                        viewModel.CurrentSetting = true;
+                    }
+                    else if (viewModel.CurrentSetting == true)
+                    {
+                        viewModel.CurrentSetting = false;
+                    }
+                }
+                catch
+                {
+                    App.logger.Warn("Failed to set a profile due to not having a selected profile");
+                }
+            }
+            foreach (KeyValuePair<string, string> keyPair in ProfileSelected.MultiOptionConfigServices)
+            {
+                foreach (MultiOptionConfigurationItemViewModel vm in multiConfigurationItemVMs)
+                {
+                    if (vm.Key == keyPair.Key && vm.CurrentSetting != keyPair.Value)
+                    {
+                        vm.CurrentSetting = keyPair.Value;
+                    }
+                }
+            }
+            App.ContentDialogCaller("restart");
         }
     }
 }
