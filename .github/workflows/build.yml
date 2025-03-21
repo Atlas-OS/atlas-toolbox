@@ -26,7 +26,7 @@ jobs:
       run: |
         choco install visualstudio2022buildtools --no-progress --confirm
         choco install visualstudio-installer --no-progress --confirm
-        "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" modify --quiet --wait --installPath "C:\BuildTools" --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.Component.MSBuild
+        cmd /C "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" modify --quiet --wait --installPath "C:\BuildTools" --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.Component.MSBuild
 
     - name: Restore Dependencies
       run: msbuild AtlasToolbox-WinUI3.sln /t:restore
