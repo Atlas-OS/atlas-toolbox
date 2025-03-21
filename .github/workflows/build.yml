@@ -1,0 +1,41 @@
+name: Build and Upload Artifacts
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Restore Dependencies
+      run: dotnet restore AtlasToolbox-WinUI3.sln
+
+    - name: Build Solution
+      run: dotnet build AtlasToolbox-WinUI3.sln --configuration Release --no-restore
+
+    - name: Publish Artifacts
+      run: dotnet publish AtlasToolbox-WinUI3.sln --configuration Release --output ./artifacts
+
+    - name: Create ZIP of EXE
+      run: powershell Compress-Archive -Path ./artifacts/* -DestinationPath ./AtlasToolbox.zip
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: AtlasToolbox
+        path: ./AtlasToolbox.zip
