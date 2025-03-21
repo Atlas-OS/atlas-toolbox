@@ -22,11 +22,17 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
+    - name: Install Visual Studio Build Tools
+      run: |
+        choco install visualstudio2022buildtools --no-progress --confirm
+        choco install visualstudio-installer --no-progress --confirm
+        "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" modify --quiet --wait --installPath "C:\BuildTools" --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.Component.MSBuild
+
     - name: Restore Dependencies
-      run: dotnet restore AtlasToolbox-WinUI3.sln
+      run: msbuild AtlasToolbox-WinUI3.sln /t:restore
 
     - name: Build Solution
-      run: dotnet build AtlasToolbox-WinUI3.sln --configuration Release --no-restore
+      run: msbuild AtlasToolbox-WinUI3.sln /p:Configuration=Release
 
     - name: Publish Artifacts
       run: dotnet publish AtlasToolbox-WinUI3.sln --configuration Release --output ./artifacts
