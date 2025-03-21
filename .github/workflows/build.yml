@@ -21,16 +21,9 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.0.x'
-        
-    - name: Install Visual Studio Build Tools
-      run: |
-        choco install visualstudio2022buildtools --no-progress --confirm
-        if (choco list --local-only | findstr /c:"visualstudio-installer") == "" (
-          choco install visualstudio-installer --no-progress --confirm
-        ) else (
-          echo "Visual Studio Installer already installed, skipping..."
-        )
-        cmd /C "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" modify --quiet --wait --installPath "C:\BuildTools" --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.Component.MSBuild --includeRecommended --includeOptional
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
 
     - name: Restore Dependencies
       run: msbuild AtlasToolbox-WinUI3.sln /t:restore
