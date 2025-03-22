@@ -83,7 +83,7 @@ namespace AtlasToolbox
         /// App behavior on launch
         /// </summary>
         /// <param name="args"></param>
-        protected async override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             if (CompatibilityHelper.IsCompatible())
             {
