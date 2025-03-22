@@ -26,7 +26,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1
 
     - name: Print Working Directory
-      run: echo "Current Directory: $PWD" 
+      run: pwd
 
     - name: List Initial Directory Structure
       run: dir
