@@ -22,6 +22,9 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
     - name: Build IsWiX Installer
       run: dotnet build D:\a\atlas-toolbox\atlas-toolbox\Installer\wixproj.wixproj --configuration Release -p:DefineConstants="MSIProductVersion=1.0.0.0" --output "D:\a\atlas-toolbox\atlas-toolbox\artifacts\"
 
