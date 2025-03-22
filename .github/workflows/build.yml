@@ -25,6 +25,12 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
 
+    - name: Print Working Directory
+      run: echo "Current Directory: $PWD" 
+
+    - name: List Initial Directory Structure
+      run: dir
+
     - name: Restore Dependencies
       run: msbuild AtlasToolbox-WinUI3.sln /t:restore /p:Platform="x64"
 
@@ -32,13 +38,16 @@ jobs:
       run: msbuild AtlasToolbox-WinUI3.sln /p:Configuration=Release /p:Platform="x64"
 
     - name: Publish Artifacts
-      run: msbuild AtlasToolbox-WinUI3.sln /t:Publish /p:Configuration=Release /p:Platform="x64" /p:OutDir="./artifacts/"
+      run: msbuild AtlasToolbox-WinUI3.sln /t:Publish /p:Configuration=Release /p:Platform="x64" /p:PublishDir="$(System.DefaultWorkingDirectory)\artifacts\"
 
-    - name: List Published Files (for Debugging)
-      run: dir "./artifacts"
+    - name: List Directory Structure After Publish
+      run: dir
+
+    - name: List Artifacts Directory
+      run: dir "$(System.DefaultWorkingDirectory)\artifacts\"
 
     - name: Create ZIP of EXE
-      run: powershell Compress-Archive -Path "./artifacts/*" -DestinationPath "./AtlasToolbox.zip"
+      run: powershell Compress-Archive -Path "$(System.DefaultWorkingDirectory)\artifacts\*" -DestinationPath "$(System.DefaultWorkingDirectory)\AtlasToolbox.zip"
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
