@@ -1,4 +1,4 @@
-name: Build and Upload Installer
+name: Build and Upload Artifacts
 
 on:
   push:
@@ -31,23 +31,25 @@ jobs:
     - name: List Initial Directory Structure
       run: dir
 
-    - name: Build Solution using MSBuild
-      run: msbuild D:\a\atlas-toolbox\atlas-toolbox\AtlasToolbox-WinUI3.sln /p:Configuration=Release /p:Platform="x64"
+    - name: Restore Dependencies
+      run: msbuild AtlasToolbox-WinUI3.sln /t:restore /p:Platform="x64"
 
-    # Use dotnet publish to get the output files
-    - name: Publish Application
-      run: dotnet publish D:\a\atlas-toolbox\atlas-toolbox\AtlasToolbox\AtlasToolbox-WinUI3.sln --configuration Release --output "D:\a\atlas-toolbox\atlas-toolbox\Deploy\src"
+    - name: Build Solution
+      run: msbuild AtlasToolbox-WinUI3.sln /p:Configuration=Release /p:Platform="x64"
 
-    - name: List Published Files
-      run: dir "D:\a\atlas-toolbox\atlas-toolbox\Deploy\src"
+    - name: Publish Artifacts
+      run: msbuild AtlasToolbox-WinUI3.sln /t:Publish /p:Configuration=Release /p:Platform="x64" /p:PublishDir="D:\a\atlas-toolbox\atlas-toolbox\artifacts\"
+
+    - name: List Directory Structure After Publish
+      run: dir "D:\a\atlas-toolbox\atlas-toolbox\artifacts\"
 
     - name: Build IsWiX Installer
       run: dotnet build D:\a\atlas-toolbox\atlas-toolbox\Installer\wixproj.wixproj --configuration Release -p:MSIProductVersion=1.0.0.0 --output "D:\a\atlas-toolbox\atlas-toolbox\artifacts\"
 
-    - name: List Directory Structure After Build
+    - name: List Directory Structure After MSI Build
       run: dir "D:\a\atlas-toolbox\atlas-toolbox\artifacts\"
 
-    - name: Create ZIP of MSI
+    - name: Create ZIP of Artifacts
       run: powershell Compress-Archive -Path "D:\a\atlas-toolbox\atlas-toolbox\artifacts\*" -DestinationPath "D:\a\atlas-toolbox\atlas-toolbox\AtlasToolbox.zip"
 
     - name: Upload Build Artifacts
