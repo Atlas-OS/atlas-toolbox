@@ -38,19 +38,16 @@ jobs:
       run: msbuild AtlasToolbox-WinUI3.sln /p:Configuration=Release /p:Platform="x64"
 
     - name: Publish Artifacts
-      run: msbuild AtlasToolbox-WinUI3.sln /t:Publish /p:Configuration=Release /p:Platform="x64" /p:PublishDir="$(System.DefaultWorkingDirectory)\artifacts\"
+      run: msbuild AtlasToolbox-WinUI3.sln /t:Publish /p:Configuration=Release /p:Platform="x64" /p:PublishDir="D:\a\atlas-toolbox\atlas-toolbox\artifacts\"
 
     - name: List Directory Structure After Publish
-      run: dir
-
-    - name: List Artifacts Directory
-      run: dir "$(System.DefaultWorkingDirectory)\artifacts\"
+      run: dir "D:\a\atlas-toolbox\atlas-toolbox\artifacts\"
 
     - name: Create ZIP of EXE
-      run: powershell Compress-Archive -Path "$(System.DefaultWorkingDirectory)\artifacts\*" -DestinationPath "$(System.DefaultWorkingDirectory)\AtlasToolbox.zip"
+      run: powershell Compress-Archive -Path "D:\a\atlas-toolbox\atlas-toolbox\artifacts\*" -DestinationPath "D:\a\atlas-toolbox\atlas-toolbox\AtlasToolbox.zip"
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: AtlasToolbox
-        path: ./AtlasToolbox.zip
+        path: D:\a\atlas-toolbox\atlas-toolbox\AtlasToolbox.zip
