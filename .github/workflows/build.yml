@@ -26,19 +26,19 @@ jobs:
       uses: microsoft/setup-msbuild@v1
 
     - name: Restore Dependencies
-      run: msbuild AtlasToolbox-WinUI3.sln /t:restore
+      run: msbuild AtlasToolbox-WinUI3.sln /t:restore /p:Platform="x64"
 
     - name: Build Solution
       run: msbuild AtlasToolbox-WinUI3.sln /p:Configuration=Release /p:Platform="x64"
 
     - name: Publish Artifacts
-      run: dotnet publish AtlasToolbox/AtlasToolbox.csproj --configuration Release
+      run: msbuild AtlasToolbox-WinUI3.sln /t:Publish /p:Configuration=Release /p:Platform="x64" /p:OutDir="./artifacts/"
 
     - name: List Published Files (for Debugging)
-      run: dir "AtlasToolbox/bin/x64/Release/net8.0-windows10.0.26100.0/publish"
+      run: dir "./artifacts"
 
     - name: Create ZIP of EXE
-      run: powershell Compress-Archive -Path "AtlasToolbox/bin/x64/Release/net8.0-windows10.0.26100.0/publish/*" -DestinationPath ./AtlasToolbox.zip
+      run: powershell Compress-Archive -Path "./artifacts/*" -DestinationPath "./AtlasToolbox.zip"
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
