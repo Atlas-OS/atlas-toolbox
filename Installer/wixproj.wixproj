@@ -1,5 +1,7 @@
 ﻿<Project Sdk="WixToolset.Sdk/5.0.0">
   <PropertyGroup>
+    <MSIProductVersion Condition=" '$(MSIProductVersion)' == '' ">1.0.0.0</MSIProductVersion>
+    <DefineConstants>MSIProductVersion=$(MSIProductVersion)</DefineConstants>
     <AppxCertificateThumbprint Condition=" '$(AppxCertificateThumbprint)' == '' ">
     </AppxCertificateThumbprint>
     <AppxTimestampUrl Condition=" '$(AppxTimestampUrl)' == '' ">
