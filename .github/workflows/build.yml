@@ -23,7 +23,7 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v1
 
     - name: Print Working Directory
       run: pwd
@@ -31,11 +31,12 @@ jobs:
     - name: List Initial Directory Structure
       run: dir
 
-    - name: Build Application
-      run: dotnet build D:\a\atlas-toolbox\atlas-toolbox\AtlasToolbox-WinUI3.sln --configuration Release --output "D:\a\atlas-toolbox\atlas-toolbox\Deploy\src"
+    - name: Build Solution using MSBuild
+      run: msbuild D:\a\atlas-toolbox\atlas-toolbox\AtlasToolbox-WinUI3.sln /p:Configuration=Release /p:Platform="x64"
 
+    # Use dotnet publish to get the output files
     - name: Publish Application
-      run: dotnet publish D:\a\atlas-toolbox\atlas-toolbox\AtlasToolbox-WinUI3.sln --configuration Release --output "D:\a\atlas-toolbox\atlas-toolbox\Deploy\src"
+      run: dotnet publish D:\a\atlas-toolbox\atlas-toolbox\AtlasToolbox\AtlasToolbox-WinUI3.sln --configuration Release --output "D:\a\atlas-toolbox\atlas-toolbox\Deploy\src"
 
     - name: List Published Files
       run: dir "D:\a\atlas-toolbox\atlas-toolbox\Deploy\src"
