@@ -30,7 +30,6 @@
                             <controls:SettingsCard
                                 Click="OnCardClicked"
                                 Description="{Binding Description}"
-                                HeaderIcon="{Binding Icon}"
                                 Header="{Binding Name}"
                                 IsClickEnabled="True"
                                 Style="{StaticResource ConfigurationSettingsCardTemplate}" />
@@ -42,7 +41,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <controls:SettingsCard Header="{Binding Name}" HeaderIcon="{Binding Icon}" Style="{StaticResource ConfigurationSettingsCardTemplate}">
+                                <controls:SettingsCard Header="{Binding Name}" Style="{StaticResource ConfigurationSettingsCardTemplate}">
                                     <ComboBox
                                         x:Name="ConfigSwitch"
                                         ItemsSource="{Binding Options}"
@@ -66,7 +65,6 @@
                                 <controls:SettingsCard
                                     x:Name="SettingsCard"
                                     Header="{Binding Name}"
-                                    HeaderIcon="{Binding Icon}"
                                     Style="{StaticResource ConfigurationSettingsCardTemplate}">
                                     <ToggleSwitch
                                         x:Name="ConfigSwitch"
@@ -94,7 +92,6 @@
                             <controls:SettingsCard
                                 x:Name="SettingsCard"
                                 Header="{Binding Description}"
-                                HeaderIcon="{Binding Icon}"
                                 Style="{StaticResource ConfigurationSettingsCardTemplate}">
                                 <Button Command="{Binding ExecuteCommandCommand}" Content="{Binding Name}" />
                             </controls:SettingsCard>
