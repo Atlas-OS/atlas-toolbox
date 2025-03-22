@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<?define ComponentRules="OneToOne"?>
+	<!-- SourceDir instructs IsWiX the location of the directory that contains files for this wix library -->
+	<?define SourceDir="..\Deploy"?>
+	<Fragment>
+		<ComponentGroup Id="ToolboxPackagingFiles">
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\AtlasToolbox.deps.json" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\AtlasToolbox.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\AtlasToolbox.dll.config" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\AtlasToolbox.exe" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\AtlasToolbox.pdb" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\AtlasToolbox.runtimeconfig.json" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\BcdSharp.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\CommunityToolkit.Common.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\CommunityToolkit.Mvvm.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\CommunityToolkit.WinUI.Animations.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\CommunityToolkit.WinUI.Controls.Primitives.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\CommunityToolkit.WinUI.Controls.SettingsControls.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\CommunityToolkit.WinUI.Extensions.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\CommunityToolkit.WinUI.Helpers.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\CommunityToolkit.WinUI.Triggers.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\ICSharpCode.Decompiler.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Dism.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Configuration.Abstractions.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Configuration.Binder.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Configuration.CommandLine.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Configuration.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Configuration.EnvironmentVariables.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Configuration.FileExtensions.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Configuration.Json.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Configuration.UserSecrets.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.DependencyInjection.Abstractions.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.DependencyInjection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Diagnostics.Abstractions.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Diagnostics.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.FileProviders.Abstractions.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.FileProviders.Physical.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.FileSystemGlobbing.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Hosting.Abstractions.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Hosting.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Logging.Abstractions.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Logging.Configuration.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Logging.Console.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Logging.Debug.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Logging.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Logging.EventLog.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Logging.EventSource.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Options.ConfigurationExtensions.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Options.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Extensions.Primitives.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Graphics.Canvas.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Graphics.Canvas.Interop.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.InteractiveExperiences.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Web.WebView2.Core.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Web.WebView2.Core.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.ApplicationModel.Resources.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.AppLifecycle.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.AppNotifications.Builder.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.AppNotifications.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.Management.Deployment.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.PushNotifications.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.SDK.NET.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.Security.AccessControl.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.Storage.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.System.Power.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.System.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Windows.Widgets.Projection.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.WindowsAppRuntime.Bootstrap.Net.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.WinUI.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Xaml.Interactions.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Microsoft.Xaml.Interactivity.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\MVVMEssentials.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\Newtonsoft.Json.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\NLog.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\NLog.Extensions.Logging.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\resources.pri" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION" Subdirectory="runtimes\win-arm64\native">
+				<File Source="$(var.SourceDir)\src\runtimes\win-arm64\native\Microsoft.Graphics.Canvas.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION" Subdirectory="runtimes\win-arm64\native">
+				<File Source="$(var.SourceDir)\src\runtimes\win-arm64\native\Microsoft.WindowsAppRuntime.Bootstrap.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION" Subdirectory="runtimes\win-arm64\native">
+				<File Source="$(var.SourceDir)\src\runtimes\win-arm64\native\WebView2Loader.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION" Subdirectory="runtimes\win-x64\native">
+				<File Source="$(var.SourceDir)\src\runtimes\win-x64\native\Microsoft.Graphics.Canvas.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION" Subdirectory="runtimes\win-x64\native">
+				<File Source="$(var.SourceDir)\src\runtimes\win-x64\native\Microsoft.WindowsAppRuntime.Bootstrap.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION" Subdirectory="runtimes\win-x64\native">
+				<File Source="$(var.SourceDir)\src\runtimes\win-x64\native\WebView2Loader.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION" Subdirectory="runtimes\win-x86\native">
+				<File Source="$(var.SourceDir)\src\runtimes\win-x86\native\Microsoft.Graphics.Canvas.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION" Subdirectory="runtimes\win-x86\native">
+				<File Source="$(var.SourceDir)\src\runtimes\win-x86\native\Microsoft.WindowsAppRuntime.Bootstrap.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION" Subdirectory="runtimes\win-x86\native">
+				<File Source="$(var.SourceDir)\src\runtimes\win-x86\native\WebView2Loader.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION" Subdirectory="runtimes\win\lib\net7.0">
+				<File Source="$(var.SourceDir)\src\runtimes\win\lib\net7.0\System.Management.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION" Subdirectory="runtimes\win\lib\net7.0">
+				<File Source="$(var.SourceDir)\src\runtimes\win\lib\net7.0\System.ServiceProcess.ServiceController.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION" Subdirectory="runtimes\win\lib\net8.0">
+				<File Source="$(var.SourceDir)\src\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION" Subdirectory="runtimes\win\lib\net8.0">
+				<File Source="$(var.SourceDir)\src\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\System.CodeDom.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\System.Configuration.ConfigurationManager.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\System.Diagnostics.EventLog.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\System.Management.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\System.Runtime.InteropServices.WindowsRuntime.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\System.Security.Cryptography.ProtectedData.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\System.ServiceProcess.ServiceController.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\WindowsDisplayAPI.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\WinRT.Runtime.dll" KeyPath="yes" />
+			</Component>
+			<Component Directory="INSTALLLOCATION">
+				<File Source="$(var.SourceDir)\src\WinUIEx.dll" KeyPath="yes" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

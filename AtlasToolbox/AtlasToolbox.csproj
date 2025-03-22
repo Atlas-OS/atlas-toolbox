@@ -73,12 +73,7 @@
     <Reference Include="BcdSharp">
       <HintPath>..\lib\BcdSharp.dll</HintPath>
     </Reference>
-    <Reference Include="CSharpBCDLib">
-      <HintPath>..\..\..\..\Downloads\CSharpBCDLib-master\CSharpBCDLib\bin\Release\CSharpBCDLib.dll</HintPath>
-    </Reference>
-    <Reference Include="WmiPnp">
-      <HintPath>..\..\..\..\Downloads\WmiPnp-master\WmiPnp\bin\Release\net6.0-windows\WmiPnp.dll</HintPath>
-    </Reference>
+    
   </ItemGroup>
   <!--
     Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
