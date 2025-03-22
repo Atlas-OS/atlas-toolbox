@@ -37,11 +37,11 @@ jobs:
     - name: Build Solution
       run: msbuild AtlasToolbox-WinUI3.sln /p:Configuration=Release /p:Platform="x64"
 
-    - name: Publish Artifacts
-      run: msbuild AtlasToolbox-WinUI3.sln /t:Publish /p:Configuration=Release /p:Platform="x64" /p:PublishDir="D:\a\atlas-toolbox\atlas-toolbox\artifacts\"
+    - name: Publish Application
+      run: msbuild AtlasToolbox-WinUI3.sln /t:Publish /p:Configuration=Release /p:Platform="x64" /p:PublishDir="D:\a\atlas-toolbox\atlas-toolbox\Deploy\src\"
 
     - name: List Directory Structure After Publish
-      run: dir "D:\a\atlas-toolbox\atlas-toolbox\artifacts\"
+      run: dir "D:\a\atlas-toolbox\atlas-toolbox\Deploy\src"
 
     - name: Build IsWiX Installer
       run: dotnet build D:\a\atlas-toolbox\atlas-toolbox\Installer\wixproj.wixproj --configuration Release -p:MSIProductVersion=1.0.0.0 --output "D:\a\atlas-toolbox\atlas-toolbox\artifacts\"
