@@ -23,16 +23,16 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v1
 
     - name: Restore Dependencies
       run: msbuild AtlasToolbox-WinUI3.sln /t:restore
 
     - name: Build Solution
-      run: msbuild AtlasToolbox-WinUI3.sln /p:Configuration=Release
+      run: msbuild AtlasToolbox-WinUI3.sln /p:Configuration=Release /p:Platform="x64"
 
     - name: Publish Artifacts
-      run: dotnet publish AtlasToolbox-WinUI3.sln --configuration Release --output ./artifacts
+      run: msbuild AtlasToolbox-WinUI3.sln /t:Publish /p:Configuration=Release /p:OutDir=./artifacts
 
     - name: Create ZIP of EXE
       run: powershell Compress-Archive -Path ./artifacts/* -DestinationPath ./AtlasToolbox.zip
