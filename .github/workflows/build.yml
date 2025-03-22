@@ -32,7 +32,7 @@ jobs:
       run: dir
 
     - name: Build IsWiX Installer
-      run: dotnet build D:\a\atlas-toolbox\atlas-toolbox\Installer\wixproj.wixproj --configuration Release --output "D:\a\atlas-toolbox\atlas-toolbox\artifacts\"
+      run: dotnet build D:\a\atlas-toolbox\atlas-toolbox\Installer\wixproj.wixproj --configuration Release /p:MSIProductVersion=1.0.0.0 --output "D:\a\atlas-toolbox\atlas-toolbox\artifacts\"
 
     - name: List Directory Structure After Build
       run: dir "D:\a\atlas-toolbox\atlas-toolbox\artifacts\"
