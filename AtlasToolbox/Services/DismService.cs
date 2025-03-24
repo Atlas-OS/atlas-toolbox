@@ -11,12 +11,12 @@ namespace AtlasToolbox.Services
     public class DismService : IDismService, IDisposable
     {
         private bool _isDisposed;
-
         private const string LOG_FILE_PATH = "dism.log";
 
         public DismService()
         {
-            DismApi.Initialize(DismLogLevel.LogErrors, LOG_FILE_PATH);
+            string installLocation = AppDomain.CurrentDomain.BaseDirectory;
+            DismApi.Initialize(DismLogLevel.LogErrors, installLocation + LOG_FILE_PATH);
         }
 
         public DismPackageFeatureState GetFeatureState(string featureName)
