@@ -44,7 +44,8 @@ namespace AtlasToolbox.Views
                 Links.ItemsSource = item.LinksViewModels;
                 SubMenuItems.ItemsSource = item.ConfigurationSubMenuViewModels;
                 ConfigurationButton.ItemsSource = item.ConfigurationButtonViewModels;
-                Folder folder = new Folder { 
+                Folder folder = new Folder
+                {
                     Name = item.Name,
                 };
                 item2.Add(folder);
@@ -72,10 +73,15 @@ namespace AtlasToolbox.Views
         {
             var settingCard = sender as SettingsCard;
             var item = settingCard.DataContext as ConfigurationSubMenuViewModel;
-
             var template = SubMenuItems.ItemTemplate;
 
-            Frame.Navigate(typeof(SubSection), new Tuple<ConfigurationSubMenuViewModel, DataTemplate>(item, template), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            var breadcrumbItems = BreadcrumbBar.ItemsSource as ObservableCollection<Folder>;
+            if (breadcrumbItems == null)
+            {
+                breadcrumbItems = new ObservableCollection<Folder>();
+            }
+
+            Frame.Navigate(typeof(SubSection), new Tuple<ConfigurationSubMenuViewModel, DataTemplate, object>(item, template, breadcrumbItems), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void ToggleSwitch_Loaded(object sender, RoutedEventArgs e)
