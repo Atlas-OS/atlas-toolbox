@@ -24,9 +24,16 @@ namespace AtlasToolbox
         {
             this.InitializeComponent();
 
+            // Enabled DPI scaling features
+            // Set the default DPI awareness for the application
+            Application.Current.Resources.Add("UseLayoutRounding", true);
+
+            var dpiScale = GetDpiForWindow() / 96.0;
+
+
             //Window parameters
-            WindowManager.Get(this).Width = 1250;
-            WindowManager.Get(this).Height = 850;
+            WindowManager.Get(this).Width = 1250 * dpiScale;
+            WindowManager.Get(this).Height = 850 * dpiScale;
             WindowManager.Get(this).IsResizable = false;
             WindowManager.Get(this).IsMaximizable = false;
 
@@ -43,6 +50,15 @@ namespace AtlasToolbox
 
             if (RegistryHelper.IsMatch("HKLM\\SOFTWARE\\AtlasOS\\Toolbox", "OnStartup", 1)) this.Closed += AppBehaviorHelper.HideApp;
             else this.Closed += AppBehaviorHelper.CloseApp;
+
+            // Register for DPI changed events
+            IntPtr hwnd = WindowNative.GetWindowHandle(this);
+            Microsoft.UI.WindowId windowId = Win32Interop.GetWindowIdFromWindow(hwnd);
+            Microsoft.UI.Windowing.AppWindow appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
+            if (appWindow != null)
+            {
+                appWindow.Changed += AppWindow_Changed;
+            }
         }
 
         /// <summary>
@@ -65,7 +81,8 @@ namespace AtlasToolbox
             //var NavView = sender as NavigationView;
             //if (NavView.SelectedItem == args.InvokedItemContainer) { return; };
 
-            if (App.CurrentCategory == args.InvokedItemContainer.Tag.ToString() || (App.CurrentCategory == "SettingsItem" && args.IsSettingsInvoked == true)) { return; };
+            if (App.CurrentCategory == args.InvokedItemContainer.Tag.ToString() || (App.CurrentCategory == "SettingsItem" && args.IsSettingsInvoked == true)) { return; }
+            ;
 
             App.CurrentCategory = args.InvokedItemContainer.Tag.ToString();
             if (args.IsSettingsInvoked == true)
@@ -196,15 +213,40 @@ namespace AtlasToolbox
                 { App.logger.Error("Program tried to open more than one ContentDialog"); }
             });
         }
+
+        // Add DPI helper method
+        [DllImport("user32.dll")]
+        private static extern uint GetDpiForWindow(IntPtr hwnd);
+
+        private uint GetDpiForWindow()
+        {
+            IntPtr hwnd = WindowNative.GetWindowHandle(this);
+            return GetDpiForWindow(hwnd);
+        }
+
+        private void AppWindow_Changed(Microsoft.UI.Windowing.AppWindow sender, Microsoft.UI.Windowing.AppWindowChangedEventArgs args)
+        {
+            // Check for size change instead of DPI change
+            if (args.DidSizeChange)
+            {
+                // Update layout for new DPI
+                var dpiScale = GetDpiForWindow() / 96.0;
+            }
+        }
+
         private void CenterWindowOnScreen()
         {
+            var hwnd = WindowNative.GetWindowHandle(this);
+            var dpi = GetDpiForWindow(hwnd);
+            var dpiScale = dpi / 96.0;
+
             var screenWidth = GetSystemMetrics(SM_CXSCREEN);
             var screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
-            double centerX = (screenWidth - this.Bounds.Width) / 2;
-            double centerY = (screenHeight - this.Bounds.Height) / 2;
+            double centerX = (screenWidth - (WindowManager.Get(this).Width)) / 2;
+            double centerY = (screenHeight - (WindowManager.Get(this).Height)) / 2;
 
-            this.MoveAndResize(centerX, centerY, this.Bounds.Width, this.Bounds.Height);
+            this.MoveAndResize(centerX, centerY, WindowManager.Get(this).Width, WindowManager.Get(this).Height);
         }
 
         private void MoveAndResize(double x, double y, double width, double height)
