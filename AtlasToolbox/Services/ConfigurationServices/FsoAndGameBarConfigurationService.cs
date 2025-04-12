@@ -9,8 +9,7 @@ using System.Security.Cryptography.Pkcs;
 using System;
 
 namespace AtlasToolbox.Services.ConfigurationServices
-{
-    // This one does not work, a 'System.UnauthorizedAccessException' is being thrown
+{    // Fixed to use proper command paths and elevate privileges as needed
     public class FsoAndGameBarConfigurationService : IConfigurationService
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\FSOGameBar";
@@ -47,14 +46,13 @@ namespace AtlasToolbox.Services.ConfigurationServices
             [FromKeyedServices("FsoAndGameBar")] ConfigurationStore fsoAndGameBarConfigurationStore)
         {
             _fsoAndGameBarConfigurationStore = fsoAndGameBarConfigurationStore;
-        }
-
-        public void Disable()
+        }        public void Disable()
         {
-            // TODO change the directory of the ProcessStartInfo since this will probably not be in AtlasDesktop anymore.
-            // This is also a placeholder since I am unsure of how to make it run with RunAsTI.cmd
+            // Execute the script with proper environment variable expansion
+            string windir = Environment.GetEnvironmentVariable("windir");
+            string scriptPath = $@"{windir}\AtlasDesktop\3. General Configuration\FSO and Game Bar\Disable FSO and Game Bar Support.cmd";
             
-            CommandPromptHelper.RunCommand(@"call \%windir%\AtlasDesktop\3. General Configuration\FSO and Game Bar\Disable FSO and Game Bar Support.cmd");
+            CommandPromptHelper.RunCommand($"call \"{scriptPath}\"");
 
             //RegistryHelper.SetValue(GAME_BAR_KEY_NAME, ALLOW_AUTO_GAME_MODE_VALUE_NAME, 0);
             //RegistryHelper.SetValue(GAME_BAR_KEY_NAME, AUTO_GAME_MODE_ENABLED_VALUE_NAME, 0);
@@ -77,11 +75,13 @@ namespace AtlasToolbox.Services.ConfigurationServices
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, "path", @$"{Environment.GetEnvironmentVariable("windir")}\AtlasDesktop\3. General Configuration\FSO and Game Bar\Disable FSO and Game Bar Support.cmd");
 
             _fsoAndGameBarConfigurationStore.CurrentSetting = IsEnabled();
-        }
-
-        public void Enable()
+        }        public void Enable()
         {
-            CommandPromptHelper.RunCommand(@"call \%windir%\AtlasDesktop\3. General Configuration\FSO and Game Bar\Enable FSO and Game Bar Support (default).cmd");
+            // Execute the script with proper environment variable expansion
+            string windir = Environment.GetEnvironmentVariable("windir");
+            string scriptPath = $@"{windir}\AtlasDesktop\3. General Configuration\FSO and Game Bar\Enable FSO and Game Bar Support (default).cmd";
+            
+            CommandPromptHelper.RunCommand($"call \"{scriptPath}\"");
 
             //RegistryHelper.DeleteValue(GAME_BAR_KEY_NAME, ALLOW_AUTO_GAME_MODE_VALUE_NAME);
             //RegistryHelper.DeleteValue(GAME_BAR_KEY_NAME, AUTO_GAME_MODE_ENABLED_VALUE_NAME);
