@@ -13,16 +13,14 @@ namespace AtlasToolbox.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public ConfigurationType Type { get; set; }
+        public ConfigurationCategory Type { get; set; }
         public FontIcon Icon { get; set; }
 
-        public ConfigurationSubMenu(string name, string description, ConfigurationType type, string icon = "\uE897")
+        public ConfigurationSubMenu(string name, string description, ConfigurationCategory type)
         {
             Name = name;
             Description = description;
             Type = type;
-            Icon = new FontIcon();
-            Icon.Glyph = icon;
         }
     }
 }

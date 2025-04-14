@@ -13,10 +13,10 @@ namespace AtlasToolbox.Models
     {
         public string link {  get; set; }
         public string name { get; set; }
-        public ConfigurationType configurationType { get; set; }
+        public ConfigurationCategory configurationType { get; set; }
         public string Icon { get; set; }
 
-        public Links(string link, string name, ConfigurationType configurationType, string icon = "\uF6FA")
+        public Links(string link, string name, ConfigurationCategory configurationType, string icon = "\uF6FA")
         {
             this.link = link;
             this.name = name;

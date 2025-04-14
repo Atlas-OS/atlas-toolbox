@@ -13,11 +13,11 @@ namespace AtlasToolbox.Models
     {
         public string Name { get; set; }
         public string Key { get; set; }
-        public ConfigurationType Type { get; set; }
+        public ConfigurationCategory Type { get; set; }
         public RiskRating RiskRating { get; set; }
         public FontIcon Icon { get; set; }
 
-        public MultiOptionConfiguration(string name, string key, ConfigurationType type, RiskRating riskRating, string icon = "\uE897")
+        public MultiOptionConfiguration(string name, string key, ConfigurationCategory type, RiskRating riskRating, string icon = "\uE897")
         {
             Name = name;
             Key = key;

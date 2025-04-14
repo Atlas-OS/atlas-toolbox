@@ -15,7 +15,7 @@ namespace AtlasToolbox.ViewModels
 
         public string Name => link.name;
         public string Link => link.link;
-        public ConfigurationType ConfigurationType => link.configurationType;
+        public ConfigurationCategory ConfigurationType => link.configurationType;
         public string FontIcon => link.Icon;
 
         public LinksViewModel(Links link)

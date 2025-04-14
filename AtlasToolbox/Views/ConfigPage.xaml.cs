@@ -24,12 +24,12 @@ public sealed partial class ConfigPage : Page
 
         _viewModel = App._host.Services.GetRequiredService<ConfigPageViewModel>();
         // Gets all the items for the choosen category
-        Enum.TryParse(new ConfigurationType().GetType(), App.CurrentCategory, out configType);
-        _viewModel.ShowForType((ConfigurationType)configType);
+        Enum.TryParse(new ConfigurationCategory().GetType(), App.CurrentCategory, out configType);
+        _viewModel.ShowForType((ConfigurationCategory)configType);
 
         this.DataContext = _viewModel;
 
-        ConfigurationType type = (ConfigurationType)configType;
+        ConfigurationCategory type = (ConfigurationCategory)configType;
         BreadcrumbBar.ItemsSource = new ObservableCollection<Folder> { 
             new Folder {Name = type.GetDescription()}
         };

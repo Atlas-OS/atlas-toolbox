@@ -14,10 +14,10 @@ namespace AtlasToolbox.Models
         public ICommand Command { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public ConfigurationType Type { get; set; }
+        public ConfigurationCategory Type { get; set; }
         public FontIcon Icon { get; set; }
 
-        public ConfigurationButton(ICommand command, string name, string description, ConfigurationType type, string icon = "\uE897") 
+        public ConfigurationButton(ICommand command, string name, string description, ConfigurationCategory type, string icon = "\uE897") 
         {
             Command = command;
             Name = name;

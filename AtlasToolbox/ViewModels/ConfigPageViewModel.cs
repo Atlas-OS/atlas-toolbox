@@ -42,9 +42,9 @@ namespace AtlasToolbox.ViewModels
         /// Gets the configuration services
         /// </summary>
         /// <param name="configurationType">Type to get</param>
-        public void ShowForType(ConfigurationType configurationType)
+        public void ShowForType(ConfigurationCategory configurationType)
         {
-            ConfigurationItem = new ObservableCollection<ConfigurationItemViewModel>(ConfigurationItemViewModels.Where(item => item.Type == configurationType));
+            ConfigurationItem = new ObservableCollection<ConfigurationItemViewModel>(ConfigurationItemViewModels.Where(item => item.Category == configurationType));
             MultiOptionConfigurationItem = new ObservableCollection<MultiOptionConfigurationItemViewModel>(MultiOptionConfigurationItemViewModels.Where(item => item.Type == configurationType));
             ConfigurationItemSubMenu = new ObservableCollection<ConfigurationSubMenuViewModel>(ConfigurationSubMenuViewModels.Where(item => item.Type == configurationType));
             LinksItemViewModel = new ObservableCollection<LinksViewModel>(LinksViewModels.Where(item => item.ConfigurationType == configurationType));

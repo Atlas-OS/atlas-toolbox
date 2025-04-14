@@ -17,7 +17,7 @@ namespace AtlasToolbox.ViewModels
 
         public MultiOptionConfiguration Configuration { get; set; }
         public string Name => Configuration.Name;
-        public ConfigurationType Type => Configuration.Type;
+        public ConfigurationCategory Type => Configuration.Type;
         public FontIcon Icon => Configuration.Icon;
 
         public List<string> Options => _configurationStore.Options; 
