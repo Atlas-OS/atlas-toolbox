@@ -35,8 +35,8 @@ namespace AtlasToolbox
             WindowManager.Get(this).Height = 850;
             CenterWindowOnScreen();
             ExtendsContentIntoTitleBar = true;
-            LoadText();
             this.InitializeComponent();
+            LoadText();
         }
 
         private void LoadText()
