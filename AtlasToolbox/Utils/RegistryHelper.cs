@@ -17,6 +17,7 @@ namespace AtlasToolbox.Utils
         {
             using RegistryKey key = OpenKey(keyPath, true);
             key?.SetValue(valueName, value);
+            App.logger.Info($"[REGHELPER] Set registry value: {keyPath}\\{valueName} to {value}");
         }
 
         public static void SetValue(string keyPath, string valueName, object value, RegistryValueKind valueKind)
@@ -31,12 +32,14 @@ namespace AtlasToolbox.Utils
             };
 
             key?.SetValue(valueName, value, valueKind);
+            App.logger.Info($"[REGHELPER] Set registry value: {keyPath}\\{valueName} to {value} ({valueKind})");
         }
 
         public static void DeleteValue(string keyPath, string valueName)
         {
             using RegistryKey key = OpenKey(keyPath, true);
             key?.DeleteValue(valueName, false);
+            App.logger.Info($"[REGHELPER] Deleted registry value: {keyPath}\\{valueName}");
         }
 
         public static bool IsMatch(string keyPath, string valueName, object data)
@@ -94,8 +97,8 @@ namespace AtlasToolbox.Utils
 
             using RegistryKey key = OpenKey(parentKeyPath, true);
             key?.DeleteSubKeyTree(targetKeyName, false);
+            App.logger.Info($"[REGHELPER] Deleted registry key: {keyPath}");
         }
-
         public static bool KeyExists(string keyPath)
         {
             using RegistryKey key = OpenKey(keyPath);
@@ -117,6 +120,7 @@ namespace AtlasToolbox.Utils
             {
                 process.WaitForExit();
             }
+            App.logger.Info($"[REGHELPER] Merged registry file: \"{regFilePath}\"");
         }
 
 }

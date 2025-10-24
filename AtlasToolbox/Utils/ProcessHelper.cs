@@ -27,6 +27,7 @@ namespace AtlasToolbox.Utils
             {
                 process.InvokeMethod("Terminate", Array.Empty<object>());
             }
+            App.logger.Info($"Killed all processes with name: {processName}");
         }
     }
 }

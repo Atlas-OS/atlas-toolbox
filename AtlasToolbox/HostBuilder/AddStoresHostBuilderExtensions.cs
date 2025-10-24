@@ -104,7 +104,7 @@ namespace AtlasToolbox.HostBuilder
                 services.AddKeyedSingleton<MultiOptionConfigurationStore>("Mitigations");
                 services.AddKeyedSingleton<MultiOptionConfigurationStore>("SafeMode");
             });
-
+            App.logger.Info($"[STORE] Added stores to host");
             return host;
         }
 
@@ -134,6 +134,7 @@ namespace AtlasToolbox.HostBuilder
                 services.AddKeyedSingleton<ConfigurationStoreSubMenu>("FileSharingSubMenu");
                 services.AddKeyedSingleton<ConfigurationStoreSubMenu>("WindowsUpdate");
             });
+            App.logger.Info($"[STORE] Added submenu stores to host");
 
             return host;
         }

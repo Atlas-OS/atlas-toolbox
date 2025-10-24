@@ -35,8 +35,7 @@ namespace AtlasToolbox.Commands
         {
             int currentSetting = _configurationItemViewModel.Options.IndexOf(_configurationStore.CurrentSetting);
 
-            RecentTogglesHelper.AddRecentToggle(_configurationItemViewModel.Key, currentSetting.ToString());
-
+            App.logger.Info($"Changed {_configurationItemViewModel.Key} to option index {currentSetting}");
             _configurationItemViewModel.IsBusy = true;
 
             try

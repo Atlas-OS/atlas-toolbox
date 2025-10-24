@@ -52,7 +52,14 @@ public sealed partial class ConfigPage : Page
 
         DataTemplate template = (DataTemplate)MainGrid.Resources["ConfigurationSubMenuTemplate"];
 
-        Frame.Navigate(typeof(SubSection), new Tuple<ConfigurationSubMenuViewModel, DataTemplate, object>(item, template, this.BreadcrumbBar.ItemsSource), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+        try
+        {
+            Frame.Navigate(typeof(SubSection), new Tuple<ConfigurationSubMenuViewModel, DataTemplate, object>(item, template, this.BreadcrumbBar.ItemsSource), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+        }
+        catch (Exception ex)
+        {
+            App.logger.Error($"Exception when attempting to navigate to {item.Type}: \n\t{ex.Message}\n\n{ex.InnerException}");
+        }
     }
 
     private void ToggleSwitch_Loaded(object sender, RoutedEventArgs e)

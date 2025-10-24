@@ -45,6 +45,7 @@ namespace AtlasToolbox.Utils
         public static Profiles DeserializeProfile(string file)
         {
             ProfileModel profileModel = JsonConvert.DeserializeObject<ProfileModel>(File.ReadAllText(file));
+            App.logger.Info($"[PROFILES] Loaded profile: \"{profileModel.Name}\"");
             List<Profiles> listProfiles = new();
 
             return new Profiles(profileModel.Name, profileModel.Name, profileModel.Config, profileModel.MultiConfig);
