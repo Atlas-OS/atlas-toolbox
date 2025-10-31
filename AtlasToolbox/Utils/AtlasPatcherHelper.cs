@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Linq;
-using System.Text.Json;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace AtlasToolbox.Utils
 {
-    public class ToolboxUpdateHelper
+    public class AtlasPatcherHelper
     {
-        const string RELEASE_URL = "https://api.github.com/repos/atlas-os/atlas-toolbox/releases/latest";
-        public static string commandUpdate;
-        public static bool CheckUpdates()
+        public static bool CheckForPatches()
         {
             try
             {
@@ -32,19 +33,13 @@ namespace AtlasToolbox.Utils
                     commandUpdate = $"{tempDirectory}\\{downloadUrl.Split('/').Last()} /silent /install";
                     return true;
                 }
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 App.logger.Error("[UPDATEHELPER] An error occurred while checking for updates.", ex.Message + ex.InnerException);
                 return false;
             }
             return false;
-        }
-
-        public static void InstallUpdate()
-        {
-            // Call the installer and close Toolbox
-            CommandPromptHelper.RunCommand(commandUpdate, true, false);
-            Environment.Exit(0);
         }
     }
 }
