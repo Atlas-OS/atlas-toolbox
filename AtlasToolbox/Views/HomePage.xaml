@@ -74,36 +74,37 @@
                 Grid.Column="1"
                 Margin="16,5,0,0">
                 <TextBlock x:Name="ProfilesHeader" FontSize="20" />
-                <ListView
+                <Border CornerRadius="8" BorderThickness="1" BorderBrush="#15FFFFFF" Margin="0,10,36,10">
+                    <ListView
                     x:Name="ProfilesListView"
                     Grid.Row="1"
                     Grid.Column="1"
                     Height="225"
-                    Margin="0,10,36,10"
                     VerticalAlignment="Top"
                     Background="{ThemeResource ControlFillColorDefault}"
                     CornerRadius="{StaticResource OverlayCornerRadius}"
                     SelectedItem="{Binding ProfileSelected, Mode=TwoWay}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Profiles">
-                            <Grid>
-                                <Grid.ContextFlyout>
-                                    <MenuFlyout x:Name="MenuFlyout">
-                                        <MenuFlyoutItem
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Profiles">
+                                <Grid>
+                                    <Grid.ContextFlyout>
+                                        <MenuFlyout x:Name="MenuFlyout">
+                                            <MenuFlyoutItem
                                             x:Name="SetProfile"
                                             Click="SetProfile_Click"
                                             Loaded="SetProfile_Loaded" />
-                                        <MenuFlyoutItem
+                                            <MenuFlyoutItem
                                             x:Name="DeleteProfile"
                                             Click="DeleteProfile"
                                             Loaded="DeleteProfile_Loaded" />
-                                    </MenuFlyout>
-                                </Grid.ContextFlyout>
-                                <TextBlock Text="{x:Bind Name}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                        </MenuFlyout>
+                                    </Grid.ContextFlyout>
+                                    <TextBlock Text="{x:Bind Name}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Border>
                 <Button
                     x:Name="NewProfileButton"
                     VerticalAlignment="Top"

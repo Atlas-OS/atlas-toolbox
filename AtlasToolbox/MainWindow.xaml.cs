@@ -107,7 +107,7 @@ namespace AtlasToolbox
         }
         public void LoadText()
         {
-            UpdateTitleBar.Title = App.GetValueFromItemList("NewUpdateMessage");
+            UpdateTitleBar.Title = App.GetValueFromItemList("NewUpdateDesc");
             LearnMoreBtn.Content = App.GetValueFromItemList("LearnMore");
             Home.Content = App.GetValueFromItemList("Home_HeaderText");
             Software.Content = App.GetValueFromItemList("Software");

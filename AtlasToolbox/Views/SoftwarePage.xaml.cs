@@ -65,11 +65,18 @@ namespace AtlasToolbox
                 {
                     DownloadingProgressBar.Value += percentageCount;
                     CurrentlyInstalling.Text = $"Currently Installing : {package.Name}";
-                    await Task.Run(() => CommandPromptHelper.RunCommand($"winget install -e --id {package.Key} --accept-package-agreements --accept-source-agreements --disable-interactivity --force -h"));
+
+                    string output = await Task.Run(() => 
+                        CommandPromptHelper.RunCommand($"winget install -e --id {package.Key} --accept-package-agreements --accept-source-agreements --disable-interactivity --force -h")
+                        );
+
+                    // Logs output of each package installation
+                    App.logger.Info($"Package {package.Key} finished with:" + output);
                 }
                 ProgressRingStackPanel.Visibility = Visibility.Collapsed;
                 _viewModel.SelectedSoftwareItemViewModels.Clear();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 App.logger.Error(ex.Message);
                 return;

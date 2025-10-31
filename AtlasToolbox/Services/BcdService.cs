@@ -20,6 +20,7 @@ namespace AtlasToolbox.Services
         {
             using BcdObject @object = _store.OpenObject(objectId);
             @object?.DeleteElement(elementType);
+            App.logger.Info($"[BCDEdit] Deleted element type {elementType} from object {objectId}");
         }
 
         public object GetElementValue(string objectId, uint elementType)

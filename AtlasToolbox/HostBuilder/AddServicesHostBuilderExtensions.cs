@@ -122,7 +122,7 @@ namespace AtlasToolbox.HostBuilder
                 services.AddKeyedTransient<IMultiOptionConfigurationServices, MitigationsConfigurationService>("Mitigations");
                 services.AddKeyedTransient<IMultiOptionConfigurationServices, SafeModeConfigurationService>("SafeMode");
             });
-
+            App.logger.Info($"[SERVICES] Added services to host");
             return host;
         }
 
@@ -152,7 +152,7 @@ namespace AtlasToolbox.HostBuilder
                 services.AddKeyedTransient<IConfigurationSubMenu, FileSharingSubMenu>("FileSharingSubMenu");
                 services.AddKeyedTransient<IConfigurationSubMenu, WindowsUpdateSubMenu>("WindowsUpdate");
             });
-
+            App.logger.Info($"[SERVICES] Added submenu services to host");
             return host;
         }
     }

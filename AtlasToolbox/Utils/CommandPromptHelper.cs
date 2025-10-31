@@ -9,16 +9,33 @@ namespace AtlasToolbox.Utils
         /// </summary>
         /// <param name="command">command</param>
         /// <param name="noWindow">True by default</param>
-        public static void RunCommand(string command, bool noWindow= true, bool waitForExit = true)
+        public static string RunCommand(string command, bool noWindow = true, bool waitForExit = true)
         {
-            Process commandPrompt = new Process();
-            commandPrompt.StartInfo.FileName = "cmd.exe";
-            commandPrompt.StartInfo.Arguments = $"/c {command}";
-            commandPrompt.StartInfo.CreateNoWindow = noWindow;
-            commandPrompt.StartInfo.UseShellExecute = false;
+            using (Process commandPrompt = new Process())
+            {
+                commandPrompt.StartInfo.FileName = "cmd.exe";
+                commandPrompt.StartInfo.Arguments = $"/c {command}";
+                commandPrompt.StartInfo.CreateNoWindow = noWindow;
+                commandPrompt.StartInfo.UseShellExecute = false;
 
-            commandPrompt.Start();
-            if (waitForExit) commandPrompt.WaitForExit();
+                // 👇 redirect both output and error streams
+                commandPrompt.StartInfo.RedirectStandardOutput = true;
+                commandPrompt.StartInfo.RedirectStandardError = true;
+
+                commandPrompt.Start();
+
+                // Read output (non-blocking async way)
+                string output = commandPrompt.StandardOutput.ReadToEnd();
+                string error = commandPrompt.StandardError.ReadToEnd();
+
+                if (waitForExit)
+                    commandPrompt.WaitForExit();
+
+                // Combine both streams if you want full context
+                string result = output + (string.IsNullOrWhiteSpace(error) ? "" : "\n[Error]\n" + error);
+
+                return result;
+            }
         }
         /// <summary>
         /// Restarts explorer.exe

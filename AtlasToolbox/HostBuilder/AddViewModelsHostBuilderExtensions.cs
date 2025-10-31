@@ -31,7 +31,7 @@ namespace AtlasToolbox.HostBuilder
         private static List<Object> subMenuOnlyItems = new List<Object>();
         private static Dictionary<string, string> list = new Dictionary<string, string>();
         public static IHostBuilder AddViewModels(this IHostBuilder host)
-        {            
+        {
             host.ConfigureServices((_, services) =>
             {
                 services.AddSingleton<MainViewModel>();
@@ -48,6 +48,7 @@ namespace AtlasToolbox.HostBuilder
             host.AddConfigurationSubMenu();
             host.AddProfiles();
 
+            App.logger.Info($"[VMHostBuilder] Successfully loaded host");
             return host;
         }
 
@@ -118,6 +119,7 @@ namespace AtlasToolbox.HostBuilder
                     {
                         viewModels.Add(CreateSoftwareItemViewModel(item.Value));
                     }
+                    App.logger.Info($"[VMHostBuilder] Successfully loaded {viewModels.Count} software entries");
                     return viewModels;
                 });
             });
@@ -136,19 +138,22 @@ namespace AtlasToolbox.HostBuilder
             try
             {
                 FileInfo[] profileFile = profilesDirectory.GetFiles();
-            } catch
+            }
+            catch
             {
                 Directory.CreateDirectory($"{Environment.GetEnvironmentVariable("windir")}\\AtlasModules\\Toolbox\\Profiles");
-            } finally
+            }
+            finally
             {
                 FileInfo[] profileFile = profilesDirectory.GetFiles();
                 foreach (FileInfo file in profileFile)
                 {
                     configurationDictionary.Add(ProfileSerializing.DeserializeProfile(file.FullName));
-                };
+                }
+                ;
                 host.ConfigureServices((_, services) =>
                 {
-                    services.AddSingleton<IEnumerable<Profiles>> (provider =>
+                    services.AddSingleton<IEnumerable<Profiles>>(provider =>
                     {
                         return configurationDictionary;
                     });
@@ -167,35 +172,35 @@ namespace AtlasToolbox.HostBuilder
         {
             Dictionary<string, Links> configurationDictionary = new()
             {
-                ["ExplorerPatcher"] = new ("https://github.com/valinet/ExplorerPatcher", "ExplorerPatcher", ConfigurationType.StartMenuSubMenu),
-                ["StartAllBack"] = new ("https://www.startallback.com/", "StartAllBack", ConfigurationType.StartMenuSubMenu),
-                ["OpenShellAtlasPreset"] = new (@"http://github.com/Atlas-OS/Atlas/blob/main/src/playbook/Executables/AtlasDesktop/4.%20Interface%20Tweaks/Start%20Menu/Atlas%20Open-Shell%20Preset.xml", App.GetValueFromItemList("OpenShellAtlasPreset"), ConfigurationType.StartMenuSubMenu),
-                ["InterfaceTweaksDocumentation"] = new (@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/interface-tweaks/", App.GetValueFromItemList("InterfaceTweaksDocumentation"), ConfigurationType.Interface),
-                
-                ["ActivationPage"] = new (@"ms-settings:activation", App.GetValueFromItemList("ActivationPage"), ConfigurationType.Windows, "\uE713"),
-                ["ColorsPage"] = new (@"ms-settings:personalization-colors", App.GetValueFromItemList("ColorsPage"), ConfigurationType.Windows, "\uE713"),
-                ["DateAndTime"] = new (@"ms-settings:dateandtime", App.GetValueFromItemList("DateAndTime"), ConfigurationType.Windows, "\uE713"),
-                ["DefaultApps"] = new (@"ms-settings:defaultapps", App.GetValueFromItemList("DefaultApps"), ConfigurationType.Windows, "\uE713"),
-                ["DefaultGraphicsSettings"] = new (@"ms-settings:display-advancedgraphics-default", App.GetValueFromItemList("DefaultGraphicsSettings"), ConfigurationType.Windows, "\uE713"),
-                ["RegionLanguage"] = new (@"ms-settings:regionlanguage", App.GetValueFromItemList("RegionLanguage"), ConfigurationType.Windows, "\uE713"),
-                ["Privacy"] = new (@"ms-settings:privacy", App.GetValueFromItemList("Privacy"), ConfigurationType.Windows, "\uE713"),
-                ["RegionProperties"] = new (@"ms-settings:regionProperties", App.GetValueFromItemList("RegionProperties"), ConfigurationType.Windows, "\uE713"),
-                ["Taskbar"] = new (@"ms-settings:taskbar", App.GetValueFromItemList("Taskbar"), ConfigurationType.Windows, "\uE713"),
-                ["CoreIsolation"] = new (@"windowsdefender://coreisolation/", App.GetValueFromItemList("CoreIsolation"), ConfigurationType.CoreIsolationSubMenu, "\uE83D"),
+                ["ExplorerPatcher"] = new("https://github.com/valinet/ExplorerPatcher", "ExplorerPatcher", ConfigurationType.StartMenuSubMenu),
+                ["StartAllBack"] = new("https://www.startallback.com/", "StartAllBack", ConfigurationType.StartMenuSubMenu),
+                ["OpenShellAtlasPreset"] = new(@"http://github.com/Atlas-OS/Atlas/blob/main/src/playbook/Executables/AtlasDesktop/4.%20Interface%20Tweaks/Start%20Menu/Atlas%20Open-Shell%20Preset.xml", App.GetValueFromItemList("OpenShellAtlasPreset"), ConfigurationType.StartMenuSubMenu),
+                ["InterfaceTweaksDocumentation"] = new(@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/interface-tweaks/", App.GetValueFromItemList("InterfaceTweaksDocumentation"), ConfigurationType.Interface),
 
-                ["BootConfigExplanations"] = new (@"https://learn.microsoft.com/windows-hardware/drivers/devtest/bcdedit--set", App.GetValueFromItemList("BootConfigExplanations"), ConfigurationType.BootConfigurationSubMenu),
-                ["AdvancedConfigMustRead"] = new (@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/advanced-configuration/", App.GetValueFromItemList("AdvancedConfigMustRead"), ConfigurationType.Advanced),
-                ["NvidiaDisplayContainerMustReadFirst"] = new (@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/advanced-configuration/#nvidia-display-container", App.GetValueFromItemList("NvidiaDisplayContainerMustReadFirst"), ConfigurationType.NvidiaDisplayContainerSubMenu),
-                ["SecurityDocumentation"] = new (@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/security/", App.GetValueFromItemList("SecurityDocumentation"), ConfigurationType.Security),
+                ["ActivationPage"] = new(@"ms-settings:activation", App.GetValueFromItemList("ActivationPage"), ConfigurationType.Windows, "\uE713"),
+                ["ColorsPage"] = new(@"ms-settings:personalization-colors", App.GetValueFromItemList("ColorsPage"), ConfigurationType.Windows, "\uE713"),
+                ["DateAndTime"] = new(@"ms-settings:dateandtime", App.GetValueFromItemList("DateAndTime"), ConfigurationType.Windows, "\uE713"),
+                ["DefaultApps"] = new(@"ms-settings:defaultapps", App.GetValueFromItemList("DefaultApps"), ConfigurationType.Windows, "\uE713"),
+                ["DefaultGraphicsSettings"] = new(@"ms-settings:display-advancedgraphics-default", App.GetValueFromItemList("DefaultGraphicsSettings"), ConfigurationType.Windows, "\uE713"),
+                ["RegionLanguage"] = new(@"ms-settings:regionlanguage", App.GetValueFromItemList("RegionLanguage"), ConfigurationType.Windows, "\uE713"),
+                ["Privacy"] = new(@"ms-settings:privacy", App.GetValueFromItemList("Privacy"), ConfigurationType.Windows, "\uE713"),
+                ["RegionProperties"] = new(@"ms-settings:regionProperties", App.GetValueFromItemList("RegionProperties"), ConfigurationType.Windows, "\uE713"),
+                ["Taskbar"] = new(@"ms-settings:taskbar", App.GetValueFromItemList("Taskbar"), ConfigurationType.Windows, "\uE713"),
+                ["CoreIsolation"] = new(@"windowsdefender://coreisolation/", App.GetValueFromItemList("CoreIsolation"), ConfigurationType.CoreIsolationSubMenu, "\uE83D"),
 
-                ["WindowsSettingsDocumentation"] = new (@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/windows-settings/", App.GetValueFromItemList("WindowsSettingsDocumentation"), ConfigurationType.Windows),
-                ["AutoGpuAffinity"] = new (@"https://github.com/valleyofdoom/AutoGpuAffinity", "AutoGpuAffinity", ConfigurationType.DriverConfigurationSubMenu),
-                ["GoInterruptPolicy"] = new (@"https://github.com/spddl/GoInterruptPolicy", "GoInterruptPolicy", ConfigurationType.DriverConfigurationSubMenu),
-                ["InterrupAffinityTool"] = new (@"https://www.techpowerup.com/download/microsoft-interrupt-affinity-tool", App.GetValueFromItemList("InterrupAffinityTool"), ConfigurationType.DriverConfigurationSubMenu),
-                ["MSIUtilityV3"] = new (@"https://forums.guru3d.com/threads/windows-line-based-vs-message-signaled-based-interrupts-msi-tool.378044", "MSI Utility V3", ConfigurationType.DriverConfigurationSubMenu),
-                ["ProcessExplorerApp"] = new (@"https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer", App.GetValueFromItemList("ProcessExplorer"), ConfigurationType.Advanced),
-                ["ResetPC"] = new (@"https://docs.atlasos.net/getting-started/reverting-atlas/", App.GetValueFromItemList("ResetPC"), ConfigurationType.Troubleshooting),
-                ["TroubleshootingDocumentation"] = new (@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/troubleshooting/", App.GetValueFromItemList("TroubleshootingDocumenation"), ConfigurationType.Troubleshooting),
+                ["BootConfigExplanations"] = new(@"https://learn.microsoft.com/windows-hardware/drivers/devtest/bcdedit--set", App.GetValueFromItemList("BootConfigExplanations"), ConfigurationType.BootConfigurationSubMenu),
+                ["AdvancedConfigMustRead"] = new(@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/advanced-configuration/", App.GetValueFromItemList("AdvancedConfigMustRead"), ConfigurationType.Advanced),
+                ["NvidiaDisplayContainerMustReadFirst"] = new(@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/advanced-configuration/#nvidia-display-container", App.GetValueFromItemList("NvidiaDisplayContainerMustReadFirst"), ConfigurationType.NvidiaDisplayContainerSubMenu),
+                ["SecurityDocumentation"] = new(@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/security/", App.GetValueFromItemList("SecurityDocumentation"), ConfigurationType.Security),
+
+                ["WindowsSettingsDocumentation"] = new(@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/windows-settings/", App.GetValueFromItemList("WindowsSettingsDocumentation"), ConfigurationType.Windows),
+                ["AutoGpuAffinity"] = new(@"https://github.com/valleyofdoom/AutoGpuAffinity", "AutoGpuAffinity", ConfigurationType.DriverConfigurationSubMenu),
+                ["GoInterruptPolicy"] = new(@"https://github.com/spddl/GoInterruptPolicy", "GoInterruptPolicy", ConfigurationType.DriverConfigurationSubMenu),
+                ["InterrupAffinityTool"] = new(@"https://www.techpowerup.com/download/microsoft-interrupt-affinity-tool", App.GetValueFromItemList("InterrupAffinityTool"), ConfigurationType.DriverConfigurationSubMenu),
+                ["MSIUtilityV3"] = new(@"https://forums.guru3d.com/threads/windows-line-based-vs-message-signaled-based-interrupts-msi-tool.378044", "MSI Utility V3", ConfigurationType.DriverConfigurationSubMenu),
+                ["ProcessExplorerApp"] = new(@"https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer", App.GetValueFromItemList("ProcessExplorerDocumentation"), ConfigurationType.Advanced),
+                ["ResetPC"] = new(@"https://docs.atlasos.net/getting-started/reverting-atlas/", App.GetValueFromItemList("ResetPC"), ConfigurationType.Troubleshooting),
+                ["TroubleshootingDocumentation"] = new(@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/troubleshooting/", App.GetValueFromItemList("TroubleshootingDocumenation"), ConfigurationType.Troubleshooting),
             };
 
             host.ConfigureServices((_, services) =>
@@ -208,6 +213,7 @@ namespace AtlasToolbox.HostBuilder
                     {
                         viewModels.Add(CreateLinksViewModel(item.Value));
                     }
+                    App.logger.Info($"[VMHostBuilder] Successfully loaded {viewModels.Count} link entries");
                     return viewModels;
                 });
             });
@@ -250,6 +256,7 @@ namespace AtlasToolbox.HostBuilder
                     {
                         viewModels.Add(CreateButtonViewModel(item.Value));
                     }
+                    App.logger.Info($"[VMHostBuilder] Successfully loaded {viewModels.Count} button entries");
                     return viewModels;
                 });
             });
@@ -276,7 +283,7 @@ namespace AtlasToolbox.HostBuilder
                 ["BootConfigurationSubMenu"] = new(App.GetValueFromItemList("BootConfigurationSubMenu"), App.GetValueFromItemList("BootConfigurationSubMenu", true), ConfigurationType.Advanced),
                 ["FileExplorerSubMenu"] = new(App.GetValueFromItemList("FileExplorerSubMenu"), App.GetValueFromItemList("FileExplorerSubMenu", true), ConfigurationType.Interface),
                 ["DriverConfigurationSubMenu"] = new(App.GetValueFromItemList("DriverConfigurationSubMenu"), App.GetValueFromItemList("DriverConfigurationSubMenu", true), ConfigurationType.Advanced),
-                ["CoreIsolationSubMenu"] = new( App.GetValueFromItemList("CoreIsolationSubMenu"), App.GetValueFromItemList("CoreIsolationSubMenu", true), ConfigurationType.Security),
+                ["CoreIsolationSubMenu"] = new(App.GetValueFromItemList("CoreIsolationSubMenu"), App.GetValueFromItemList("CoreIsolationSubMenu", true), ConfigurationType.Security),
                 ["DefenderSubMenu"] = new(App.GetValueFromItemList("DefenderSubMenu"), App.GetValueFromItemList("DefenderSubMenu", true), ConfigurationType.Security),
                 ["MitigationsSubMenu"] = new(App.GetValueFromItemList("MitigationsSubMenu"), App.GetValueFromItemList("MitigationsSubMenu", true), ConfigurationType.Security),
                 ["TroubleshootingNetwork"] = new(App.GetValueFromItemList("TroubleshootingNetwork"), App.GetValueFromItemList("TroubleshootingNetwork", true), ConfigurationType.Troubleshooting),
@@ -299,6 +306,7 @@ namespace AtlasToolbox.HostBuilder
                         ConfigurationSubMenuViewModel viewModel = CreateConfigurationSubMenuViewModel(provider, itemViewModels, multiOptionItemViewModels, linksViewModel, subMenu.Key, subMenu.Value, configurationSubMenuViewModels, configurationButtonViewModels);
                         viewModels.Add(viewModel);
                     }
+                    App.logger.Info($"[VMHostBuilder] Successfully loaded {viewModels.Count} submenu entries");
                     return viewModels;
                 });
             });
@@ -333,6 +341,7 @@ namespace AtlasToolbox.HostBuilder
                     {
                         viewModels.Add(CreateMultiOptionConfigurationItemViewModel(provider, item.Key, item.Value));
                     }
+                    App.logger.Info($"[VMHostBuilder] Successfully loaded {viewModels.Count} multi-configuration entries");
                     return viewModels;
                 });
             });
@@ -349,7 +358,7 @@ namespace AtlasToolbox.HostBuilder
             // TODO: Change configuration types`
             Dictionary<string, Configuration> configurationDictionary = new()
             {
-                ["Animations"] = new (App.GetValueFromItemList("Animations"), "Animations", ConfigurationType.Interface),
+                ["Animations"] = new(App.GetValueFromItemList("Animations"), "Animations", ConfigurationType.Interface),
                 ["ExtractContextMenu"] = new(App.GetValueFromItemList("ExtractContextMenu"), "ExtractContextMenu", ConfigurationType.ContextMenuSubMenu),
                 ["RunWithPriority"] = new(App.GetValueFromItemList("RunWithPriority"), "RunWithPriority", ConfigurationType.ContextMenuSubMenu),
                 ["Bluetooth"] = new("Bluetooth", "Bluetooth", ConfigurationType.ServicesSubMenu),
@@ -413,25 +422,26 @@ namespace AtlasToolbox.HostBuilder
                 ["MicrosoftStore"] = new(App.GetValueFromItemList("MicrosoftStoreToggle"), "MicrosoftStore", ConfigurationType.Advanced),
             };
 
-            host.ConfigureServices((_,services) =>
+            host.ConfigureServices((_, services) =>
             {
                 services.AddSingleton<IEnumerable<ConfigurationItemViewModel>>(provider =>
                 {
-                List<ConfigurationItemViewModel> viewModels = new();
+                    List<ConfigurationItemViewModel> viewModels = new();
 
-                foreach (KeyValuePair<string, Configuration> item in configurationDictionary)
-                {
-                    //Could work, but needs to await for everything to be completed before returning viewModels
-                    //Task.Run(() => { viewModels.Add(CreateConfigurationItemViewModel(provider, item.Key, item.Value)); });
-                    viewModels.Add(CreateConfigurationItemViewModel(provider, item.Key, item.Value));
-                }
+                    foreach (KeyValuePair<string, Configuration> item in configurationDictionary)
+                    {
+                        //Could work, but needs to await for everything to be completed before returning viewModels
+                        //Task.Run(() => { viewModels.Add(CreateConfigurationItemViewModel(provider, item.Key, item.Value)); });
+                        viewModels.Add(CreateConfigurationItemViewModel(provider, item.Key, item.Value));
+                    }
+                    App.logger.Info($"[VMHostBuilder] Successfully loaded {viewModels.Count} configuration entries");
                     return viewModels;
                 });
             });
             return host;
         }
 
-        
+
 
         private static MultiOptionConfigurationItemViewModel CreateMultiOptionConfigurationItemViewModel(
             IServiceProvider serviceProvider, object key, MultiOptionConfiguration configuration)
@@ -445,12 +455,12 @@ namespace AtlasToolbox.HostBuilder
         private static ConfigurationItemViewModel CreateConfigurationItemViewModel(
             IServiceProvider serviceProvider, object key, Configuration configuration)
         {
-                ConfigurationItemViewModel viewModel = new(
-                    configuration, serviceProvider.GetRequiredKeyedService<ConfigurationStore>(key), serviceProvider.GetRequiredKeyedService<IConfigurationService>(key));
+            ConfigurationItemViewModel viewModel = new(
+                configuration, serviceProvider.GetRequiredKeyedService<ConfigurationStore>(key), serviceProvider.GetRequiredKeyedService<IConfigurationService>(key));
 
-                return viewModel;
+            return viewModel;
         }
-        
+
         #region Create ViewModels
         // Entire region is made to create view models
         private static SoftwareItemViewModel CreateSoftwareItemViewModel(SoftwareItem softwareItem)
@@ -500,7 +510,7 @@ namespace AtlasToolbox.HostBuilder
         {
             ConfigurationStoreSubMenu configurationStoreSubMenu = serviceProvider.GetRequiredKeyedService<ConfigurationStoreSubMenu>(key);
 
-            ConfigurationSubMenuViewModel  viewModel = new(
+            ConfigurationSubMenuViewModel viewModel = new(
                configuration, configurationStoreSubMenu, configurationItemViewModels, multiOptionConfigurationItemViewModel, linksViewModel, configurationSubMenuViewModel, configurationButtonViewModels);
 
             return viewModel;
