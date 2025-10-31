@@ -20,6 +20,7 @@ namespace AtlasToolbox.ViewModels
         public Configuration Configuration { get; set; }
         public string Name => Configuration.Name;
         public string Key => Configuration.Key;
+        public string Description => Configuration.Description;
         public ConfigurationType Type => Configuration.Type;
         public FontIcon Icon => Configuration.Icon;
 

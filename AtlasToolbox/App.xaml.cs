@@ -252,8 +252,18 @@ namespace AtlasToolbox
 
         public static string GetValueFromItemList(string key, bool desc = false)
         {
-            if (!desc) return StringList.Where(item => item.Key == key).Select(item => item.Value).FirstOrDefault();
-            else return StringList.Where(item => item.Key == key + "Description").Select(item => item.Value).FirstOrDefault();
+            try
+            {
+                string toReturn = "";
+                if (!desc) toReturn = StringList.Where(item => item.Key == key).Select(item => item.Value).FirstOrDefault();
+                else toReturn = StringList.Where(item => item.Key == key + "Description").Select(item => item.Value).FirstOrDefault();
+                if (toReturn == "" && toReturn != null) return "To be translated";
+                else return toReturn;
+            }
+            catch
+            {
+                return "To be translated";
+            }
         }
     }
 }

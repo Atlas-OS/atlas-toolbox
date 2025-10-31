@@ -9,6 +9,7 @@ namespace AtlasToolbox.Models
         public string Key { get; set; }
         public ConfigurationType Type { get; set; }
         public FontIcon Icon { get; set; }
+        public string Description { get; set; }
 
         public Configuration(string name, string key, ConfigurationType type, string icon = "\uE897")
         {
@@ -17,6 +18,7 @@ namespace AtlasToolbox.Models
             Type = type;
             Icon = new FontIcon();
             Icon.Glyph = icon;
+            Description = App.GetValueFromItemList(key, true);
         }
     }
 }

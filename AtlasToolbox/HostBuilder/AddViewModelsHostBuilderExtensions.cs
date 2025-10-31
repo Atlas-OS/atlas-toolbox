@@ -198,7 +198,7 @@ namespace AtlasToolbox.HostBuilder
                 ["GoInterruptPolicy"] = new(@"https://github.com/spddl/GoInterruptPolicy", "GoInterruptPolicy", ConfigurationType.DriverConfigurationSubMenu),
                 ["InterrupAffinityTool"] = new(@"https://www.techpowerup.com/download/microsoft-interrupt-affinity-tool", App.GetValueFromItemList("InterrupAffinityTool"), ConfigurationType.DriverConfigurationSubMenu),
                 ["MSIUtilityV3"] = new(@"https://forums.guru3d.com/threads/windows-line-based-vs-message-signaled-based-interrupts-msi-tool.378044", "MSI Utility V3", ConfigurationType.DriverConfigurationSubMenu),
-                ["ProcessExplorerApp"] = new(@"https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer", App.GetValueFromItemList("ProcessExplorer"), ConfigurationType.Advanced),
+                ["ProcessExplorerApp"] = new(@"https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer", App.GetValueFromItemList("ProcessExplorerDocumentation"), ConfigurationType.Advanced),
                 ["ResetPC"] = new(@"https://docs.atlasos.net/getting-started/reverting-atlas/", App.GetValueFromItemList("ResetPC"), ConfigurationType.Troubleshooting),
                 ["TroubleshootingDocumentation"] = new(@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/troubleshooting/", App.GetValueFromItemList("TroubleshootingDocumenation"), ConfigurationType.Troubleshooting),
             };
