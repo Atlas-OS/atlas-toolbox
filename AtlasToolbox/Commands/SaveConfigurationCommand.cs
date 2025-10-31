@@ -35,6 +35,8 @@ namespace AtlasToolbox.Commands
             bool currentSetting = _configurationStore.CurrentSetting;
 
             App.logger.Info($"Toggled {_configurationItemViewModel.Key} to {currentSetting}");
+            // Set service state
+            RegistryHelper.SetServiceState(_configurationItemViewModel.Key, currentSetting ? 1 : 0);
             _configurationItemViewModel.IsBusy = true;
 
             try

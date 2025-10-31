@@ -52,7 +52,6 @@ namespace AtlasToolbox.Services.ConfigurationServices
             {
                 ChangeStatus(0);
                 return options[((int)RegistryHelper.GetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME))];
-
             }
         }
     }

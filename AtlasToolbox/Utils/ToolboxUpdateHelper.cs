@@ -27,8 +27,9 @@ namespace AtlasToolbox.Utils
                 {
                     return true;
                 }
-            }catch
+            }catch (Exception ex)
             {
+                App.logger.Error("[UPDATEHELPER] An error occurred while checking for updates.", ex.Message + ex.InnerException);
                 return false;
             }
             return false;

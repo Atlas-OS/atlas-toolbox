@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using ICSharpCode.Decompiler.IL;
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace AtlasToolbox.Utils
             using RegistryKey key = OpenKey(keyPath);
             return key?.GetValue(valueName);
         }
+
 
         public static void SetValue(string keyPath, string valueName, object value)
         {
@@ -123,5 +125,11 @@ namespace AtlasToolbox.Utils
             App.logger.Info($"[REGHELPER] Merged registry file: \"{regFilePath}\"");
         }
 
-}
+        // Methods for automatic service state management
+        public static void SetServiceState(string serviceKey, int state)
+        {
+            SetValue(@$"HKLM\SOFTWARE\AtlasOS\Services\{serviceKey}", "state", state);
+        }
+
+    }
 }

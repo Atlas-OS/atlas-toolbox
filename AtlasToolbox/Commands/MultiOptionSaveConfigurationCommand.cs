@@ -36,6 +36,7 @@ namespace AtlasToolbox.Commands
             int currentSetting = _configurationItemViewModel.Options.IndexOf(_configurationStore.CurrentSetting);
 
             App.logger.Info($"Changed {_configurationItemViewModel.Key} to option index {currentSetting}");
+            RegistryHelper.SetServiceState(_configurationItemViewModel.Key, currentSetting);
             _configurationItemViewModel.IsBusy = true;
 
             try

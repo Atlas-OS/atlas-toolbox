@@ -200,11 +200,6 @@ namespace AtlasToolbox
                 }
             }
         }
-        
-        //private void InitializeVMSilent()
-        //{
-        //    _host.Services.GetRequiredService<ConfigPageViewModel>();
-        //}
 
         /// <summary>
         /// Starts the program and get all the required services for a faster load time
