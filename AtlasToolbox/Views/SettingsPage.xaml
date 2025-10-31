@@ -45,6 +45,7 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </controls:SettingsCard>
+                    <!--Toolbox Updates-->
                     <controls:SettingsCard x:Name="Update" Style="{StaticResource ConfigurationSettingsCardTemplate}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock
@@ -60,6 +61,25 @@
                                 IsActive="True"
                                 Visibility="Collapsed" />
                             <Button x:Name="CheckUpdateButton" Click="CheckUpdateButton_Click" />
+                        </StackPanel>
+                    </controls:SettingsCard>
+
+                    <!--AtlasOS Patches updates-->
+                    <controls:SettingsCard x:Name="AtlasOSpdate" Style="{StaticResource ConfigurationSettingsCardTemplate}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                x:Name="NoUpdatesBar"
+                                Margin="0,0,16,0"
+                                VerticalAlignment="Center"
+                                Visibility="Collapsed" />
+                            <ProgressRing
+                                x:Name="ProgressRing"
+                                Width="20"
+                                Height="20"
+                                Margin="0,0,10,0"
+                                IsActive="True"
+                                Visibility="Collapsed" />
+                            <Button x:Name="CheckPatchesButton" Click="CheckPatchesButton_Click" />
                         </StackPanel>
                     </controls:SettingsCard>
                 </StackPanel>

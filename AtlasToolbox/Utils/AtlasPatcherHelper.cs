@@ -10,6 +10,9 @@ namespace AtlasToolbox.Utils
 {
     public class AtlasPatcherHelper
     {
+        // Temporary github URL for testing purposes.
+        const string RELEASE_URL = "https://api.github.com/repos/TheyCreeper/Patches/releases/latest";
+        public static string commandUpdate;
         public static bool CheckForPatches()
         {
             try
