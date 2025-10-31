@@ -54,6 +54,7 @@
                         </ComboBox>
                     </controls:SettingsCard>
                     <!--  Update settings  -->
+                    <!--Toolbox Updates-->
                     <controls:SettingsCard x:Name="Update" Style="{StaticResource ConfigurationSettingsCardTemplate}">
                         <controls:SettingsCard.HeaderIcon>
                             <FontIcon Glyph="&#xE895;" />
