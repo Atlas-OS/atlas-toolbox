@@ -1,7 +1,8 @@
 {
   "LangName": "Français (France)",
   "LangKey": "fr_fr",
-  "OpenShellAtlasPreset": "Profile Open Shell",
+
+  "OpenShellAtlasPreset": "Profile AtlasOS Open Shell",
   "InterfaceTweaksDocumentation": "Documentation des réglages d'interface",
   "ActivationPage": "Page d'activation",
   "ColorsPage": "Personnalisation des couleurs",
@@ -17,7 +18,8 @@
   "BootConfigExplanations": "Explications provenant de Microsoft",
   "InterrupAffinityTool": "Outil d'affinité d’interruption",
   "ProcessExplorerApp": "Explorateur de processus",
-  "NvidiaDisplayContainerMustReadFirst": "À lire",
+  "ProcessExplorerDocumentation": "Explorateur de processus documentation",
+  "NvidiaDisplayContainerMustReadFirst": "À lire premièrement",
   "AdvancedConfigMustRead": "Documentation utilisateur avancée",
   "SecurityDocumentation": "Documentation sur la sécurité",
   "ResetPC": "Documentation sur la réinitialisation de windows",
@@ -73,65 +75,192 @@
   "ShortcutIcon": "Modifier l'icône des raccourcis",
   "Mitigations": "Changer le statut (Dangereux)",
   "SafeMode": "Passer en mode sans échec au démarrage",
+
+
+  //Configuration toggles
   "Animations": "Animations",
-  "ExtractContextMenu": "Option « Extraire » dans le menu contextuel",
+  "AnimationsDescription": "Activé ou Désactivé les animations Windows",
+
+  "ExtractContextMenu": "Option \"Extraire\" dans le menu contextuel",
+  "ExtractContextMenuDescription": "Ajouter l'option \"Extraire\" dans le menu contextuel pour les fichiers compressés",
+
   "RunWithPriority": "Ajouter \"Exécuter en priorité (Run with priority)\" dans le menu contextuel",
+  "RunWithPriorityDescription": "Ajouter \"Exécuter en priorité\" dans le menu contextuel des applications",
+
   "LanmanWorkstation": "Station de travail Lanman (SMB)",
+  "LanmanWorkstationDescription": "Activé ou Désactivé le Lanmann service pour le partage de fichiers SMB",
+
   "NetworkDiscovery": "Découverte des réseaux",
+  "NetworkDiscoveryDescription": "Activé ou Désactivé découverte de réseau pour un partage de fichier plus simple",
+
   "Printing": "Impression",
+  "PrintingDescription": "Activé ou Désactivé le service d'impression",
+
   "NvidiaDispayContainer": "Conteneur d'affichage NVIDIA",
+  "NvidiaDispayContainerDescription": "Activé ou Désactivé le service Conteneur d'affichage NVIDIA",
+
   "AddNvidiaDisplayContainerContextMenu": "Conteneur d'affichage NVIDIA dans le menu contextuel",
+  "AddNvidiaDisplayContainerContextMenuDescription": "Ajouté le Conteneur d'affichage NVIDIA dans le menu contextuel",
+
   "CpuIdleContextMenu": "Bascule du CPU inactif dans le menu contextuel",
+  "CpuIdleContextMenuDescription": "Ajouter la Bascule du CPU inactif dans le menu contextuel",
+
   "LockScreen": "Activer l'écran de verrouillage",
+  "LockScreenDescription": "Activé ou Désactivé l'écran de verrouillage",
+
   "ShortcutText": "Texte de raccourci",
+  "ShortcutTextDescription": "Montrer ou Cacher le \"Raccourci\" texte dans raccourcis",
+
   "BootLogo": "Logo de démarrage",
+  "BootLogoDescription": "Activé ou Désactivé le logo de démarrage",
+
   "BootMessages": "Messages de démarrage",
+  "BootMessagesDescription": "Activé ou Désactivé le messages de démarrage",
+
   "NewBootMenu": "Nouveau menu de démarrage",
+  "NewBootMenuDescription": "Activé ou Désactivé le nouveau menu de démarrage",
+
   "SpinningAnimation": "Animation de rotation",
+  "SpinningAnimationDescription": "Activé ou Désactivé les animations de rotation au démarrage",
+
   "AdvancedBootOptions": "Options avancées au démarrage de Windows",
+  "AdvancedBootOptionsDescription": "Activé ou Désactivé les options avancées au démarrage de Windows",
+
   "AutomaticRepair": "Réparation Automatique",
+  "AutomaticRepairDescription": "Activé ou Désactivé la réparation automatique en cas d'échec du démarrage",
+
   "KernelParameters": "Paramètres du noyau au démarrage",
+  "KernelParametersDescription": "Activé ou Désactivé les paramètres du noyau au démarrage",
+
   "HighestMode": "Mode graphique le plus élevé",
+  "HighestModeDescription": "Activé ou Désactivé le mode le plus élevé pour les écrans",
+
   "CompactView": "Vue compacte",
+  "CompactViewDescription": "Activé ou Désactivé la vue compte dans l'explorateur de fichierr",
+
   "RemovableDrivesInSidebar": "Lecteurs amovibles dans la barre latérale",
+  "RemovableDrivesInSidebarDescription": "Monter ou Cacher les périphérique retirable dans le volet de navigationr",
+
   "BackgroundApps": "Applications en arrière-plan",
+  "BackgroundAppsDescription": "Activé ou Désactivé les applications en arrière-plan",
+
   "SearchIndexing": "Indexation des recherches",
+  "SearchIndexingDescription": "Activé ou Désactivé l'indexation des recherches",
+
   "FsoAndGameBar": "FSO et Game Bar",
+  "FsoAndGameBarDescription": "Activé ou Désactivé l'optimisation plein écran et Game Bar",
+
   "AutomaticUpdates": "Mises à jour automatiques",
+  "AutomaticUpdatesDescription": "Activé ou Désactivé les mises à jour automatiques",
+
   "DeliveryOptimisation": "Optimisation de la distribution",
+  "DeliveryOptimisationDescription": "Activé ou Désactivé l'optimisation de la distribution",
+
   "Hibernation": "Mise en veille prolongée",
+  "HibernationDescription": "Activé ou Désactivé la mise en veille prolongée",
+
   "Location": "Localisation",
+  "LocationDescription": "Activé ou Désactivé le service de localisation",
+
   "PhoneLink": "Microsoft Mobile connecté",
+  "PhoneLinkDescription": "Activé ou Désactivé liaison téléphonique et appareils mobiles",
+
   "PowerSaving": "Économie d'énergie",
+  "PowerSavingDescription": "Activé ou Désactivé fonctions d'économie d'énergie",
+
   "Sleep": "Mise en veille",
+  "SleepDescription": "Activé ou Désactivé la mise en veille",
+
   "SystemRestore": "Restauration du Système",
+  "SystemRestoreDescription": "Activé ou Désactivé la restauration du système",
+
   "UpdateNotifications": "Notifications de Mises à Jour",
+  "UpdateNotificationsDescription": "Activé ou Désactivé les notifications de mises à jour",
+
   "WebSearch": "Recherches Web dans le menu démarrer",
+  "WebSearchDescription": "Activé ou Désactivé les recherches Web dans le menu démarrer",
+
   "Widgets": "Widgets Bureau",
-  "WindowsSpotlight": "Windows Spotlight",
+  "WidgetsDescription": "Activé ou Désactivé les windgets du bureau",
+
+  "WindowsSpotlight": "Windows à la Une",
+  "WindowsSpotlightDescription": "Activé ou Désactivé windows à la une sur l'écran de verrouillage",
+
   "AppStoreArchiving": "Archivage Microsoft Store",
+  "AppStoreArchivingDescription": "Activé ou Désactivé l'archivage microsft store",
+
   "TakeOwnership": "Ajouter \"Take Ownership\" dans le menu contextuel",
+  "TakeOwnershipDescription": "Ajouter \"Take Ownership\" dans le menu contextuel pour les fichiers et dossiers",
+
   "OldContextMenu": "Menu contextuel (version antérieure à Windows 11)",
+  "OldContextMenuDescription": "Activé ou Désactivé le menu contextuel legacy de pre-Windows 11",
+
   "EdgeSwipe": "Balayage des bords",
-  "AppIconsThumbnail": "Icônes de l'application par défaut sur les vignettes",
+  "EdgeSwipeDescription": "Activé ou Désactivé le balayage des bords",
+
+  "AppIconsThumbnail": "Icônes d'application par défaut sur les vignettes",
+  "AppIconsThumbnailDescription": "Monter ou Cacher les icônes d'application par défaut sur les vignettes",
+
   "AutomaticFolderDiscovery": "Découverte automatique des dossiers",
+  "AutomaticFolderDiscoveryDescription": "Activé ou Désactivé la Découverte automatique des dossiers dans l'explorateur de fichier",
+
   "Gallery": "Activer la galerie",
-  "SnapLayout": "Active l'ancrage pour les fenêtres",
-  "RecentItems": "Afficher les éléments récents dans l'explorateur de fichiers",
-  "VerboseStatusMessage": "Messages de statut détaillé",
+  "GalleryDescription": "Activé ou Désactivé la galerie dans l'explorateur de fichier",
+
+  "SnapLayout": "Active l'ancrage des fenêtres",
+  "SnapLayoutDescription": "Activé ou Désactivé l'ancrage des fenêtres",
+
+  "RecentItems": "Afficher les éléments récents dans l'explorateur de fichier",
+  "RecentItemsDescription": "Activé ou Désactivé les éléments récents dans l'explorateur de fichier",
+
+  "VerboseStatusMessage": "Messages d'état détaillé",
+  "VerboseStatusMessageDescription": "Activé ou Désactivé les messages d'état lors du démarrage et arrêt de windows",
+
   "SuperFetch": "SuperFetch",
+  "SuperFetchDescription": "Activé ou Désactivé le service SuperFetch (SysMain)",
+
   "StaticIp": "Définir automatiquement l'IP statique",
+  "StaticIpDescription": "Configure automatiquement une adresse IP statique pour votre carte réseau",
+
   "HideAppBrowserControl": "Masquer le contrôle de navigateur & d'application",
+  "HideAppBrowserControlDescription": "Masque le contrôle du navigateur intégré dans certaines applications afin d'améliorer la confidentialité",
+
   "SecurityHealthTray": "Bouton Sécurité dans la barre des tâches",
+  "SecurityHealthTrayDescription": "Monter ou Cacher le bouton Sécurité dans la barre des tâches",
+
   "FaultTolerantHeap": "Tolérance aux pannes",
+  "FaultTolerantHeapDescription": "Activé ou Désactivé le Tas à tolérance de panne",
+
   "Copilot": "Activer Microsoft Copilot",
+  "CopilotDescription": "Activé ou Désactivé l'intégration de Microsoft Copilot",
+
   "Recall": "Activer Windows Recall",
+  "RecallDescription": "Activé ou Désactivé Windows Recall",
+
   "CpuIdle": "Activer CPU Idling",
+  "CpuIdleDescription": "Activé ou Désactivé le CPU idling",
+
   "ProcessExplorer": "Installer l’Explorateur de Processus",
+  "ProcessExplorerDescription": "Installer l’Explorateur de Processus depuis Microsoft Sysinternals",
+
   "VbsState": "Activer VBS",
+  "VbsStateDescription": "Activé ou Désactivé Virtualization Based Security (VBS)",
+
   "GiveAccessToMenu": "Menu \"Donner accès à\"",
+  "GiveAccessToMenuDescription": "Ajouter \"Donner accès à\" dans le menu contextuel pour les fichiers et dossiers",
+
   "NetworkNavigationPane": "Panneau de navigation réseau",
+  "NetworkNavigationPaneDescription": "Monter ou Cacher le panneau de navigation réseau dans l'explorateur de fichier",
+
   "FileSharing": "Partage de fichiers",
+  "FileSharingDescription": "Activé ou Désactivé le partage de fichier",
+
+  "WindowsHello": "Windows Hello",
+  "WindowsHelloDescription": "Activé ou Désactivé l'authentification biométrique Windows Hello",
+
+  // End of configuration toggle
+
+  // Settings and Home texts
   "Home_WinVer": "Version de Windows",
   "Home_PlaybookVer": "Version du Playbook",
   "Home_HeaderText": "Accueil",
@@ -140,11 +269,14 @@
   "NewProfilesButton": "Créer un nouveau profil",
   "IncompatibleVer": "L'installation actuelle d'AtlasOS/Windows est incompatible avec cette version du Toolbox. Veuillez mettre à jour votre version d'AtlasOS !",
   "StatingServices": "Démarrage des services...",
+
+  // Dialog text
   "CurrentConfigIsSavedMessage": "Votre configuration actuelle sera enregistrée dans ce profil",
   "DeleteProfileConfirmation": "Voulez-vous vraiment supprimer ce profil ?",
   "TryDeleteDefaultProfile": "Vous ne pouvez pas supprimer le profil par défaut",
   "Home_SetProfileConfig": "Voulez-vous vraiment définir ce profil ?",
   "RestartPCPromptHeader": "Pour appliquer pleinement les modifications, veuillez redémarrer votre PC",
+  "RelogApplyDesc": "Pour que les modifications soient pleinement prises en compte, veuillez vous déconnecter.",
   "Yes": "Oui",
   "No": "Non",
   "Cancel": "Annuler",
@@ -167,43 +299,21 @@
   "UnstableDescription": "L'utilisation de cette application est actuellement uniquement à des fins de test. Cette application peut contenir des bugs qui pourraient endommager votre installation Windows. À utiliser à vos propres risques.",
   "BetaVersion": "Version Bêta",
   "BetaVersionDescription": "Cette application est actuellement dans une version bêta. Si vous trouvez des bugs, ou si vous voulez suggérer une fonctionnalité, veuillez donner des commentaires sur Discord. Les fonctionnalités sont sujettes à modification.",
-  "Home": "Accueil",
-  "Software": "Logiciels",
-  "GeneralConfig": "Configuration générale",
-  "Interface": "Réglages de l'interface",
-  "Windows": "Réglages Windows",
-  "Advanced": "Configuration avancée",
-  "Security": "Sécurité",
-  "Troubleshooting": "Résolution des problèmes",
-  "Tile_DocumentationTitle": "Documentation",
-  "Tile_DocumentationDescription": "Installer AtlasOS, FAQ, et bien plus encore",
-  "Tile_DiscordTitle": "Discord",
-  "Tile_DiscordDescription": "Demandez de l’assistance et faites-vous des amis !",
-  "Tile_GithubTitle": "GitHub",
-  "Tile_GithubDescription": "Explorez le code d'AtlasOS et contribuez",
-  "Tile_KofiTitle": "Soutenez-nous sur Ko-Fi",
-  "Tile_KofiDescription": "Aidez-nous à continuer ce projet !",
-  "Language": "Langue",
-  "RestartApp": "Redémarrer Toolbox",
-  "RestartAppDesc": "Pour appliquer ces changements, veuillez redémarrer Toolbox.",
-  "RestartAppBtn": "Redémarrer",
+  "RestartApp": "Relancer Toolbox pour appliquer",
+  "RestartAppDesc": "Pour appliquer ces changements, veuillez relancer Toolbox.",
+  "RestartAppBtn": "Relancer",
   "RestartPC": "Redémarrer le PC",
   "RestartPCDesc": "Pour appliquer ces changements, veuillez redémarrer votre ordinateur.",
   "RestartBtn": "Redémarrer maintenant",
   "RelogApply": "Appliquer les changements",
   "ReloadApplyDesc": "Pour appliquer ces changements, veuillez vous reconnecter",
   "RelogBtn": "Déconnecter",
-  "CheckUpdates": "Vérifiez si votre Toolbox est à jour",
+  "CheckUpdates": "Vérifiez si AtlasOS Toolbox est à jour",
   "CheckUpdatesBtn": "Vérifier maintenant",
   "LatestVer": "Vous êtes sur la dernière version disponible !",
   "NewUpdate": "Mettre à jour",
   "NewUpdateDesc": "Une nouvelle mise à jour disponible. Voulez-vous l'installer maintenant ?",
   "InstallNow": "Installer maintenant",
-  "WindowsHello": "Windows Hello",
-  "NoFavorites": "Vous n'avez aucun profil à votre liste de favoris.",
-  "SystemInfo": "À propos de ce système :",
-  "NewUpdateMessage": "Une nouvelle mise à jour est disponible.",
-  "LearnMore": "En savoir plus",
   "ToggleWindowsUpdates": "Activer/Désactiver Windows Update",
   "WindowsUpdate": "Windows Update",
   "WindowsUpdateDescription": "Paramètres relié à Windows Update",
@@ -214,5 +324,33 @@
   "UpdateDeferralPromptTitle": "Modifier le nombre de jours",
   "ResetWindowsUpdateDeferral": "Rétablir les paramètres par défaut",
   "MicrosoftStoreToggle": "Activer/Désactiver Microsoft Store",
+
+
+  // Home Tiles
+  "Tile_DocumentationTitle": "Documentation",
+  "Tile_DocumentationDescription": "Installer AtlasOS, FAQ, et bien plus encore",
+  "Tile_DiscordTitle": "Discord",
+  "Tile_DiscordDescription": "Demandez de l’assistance et faites-vous des amis !",
+  "Tile_GithubTitle": "GitHub",
+  "Tile_GithubDescription": "Explorez le code d'AtlasOS et contribuez",
+  "Tile_KofiTitle": "Soutenez-nous sur Ko-Fi",
+  "Tile_KofiDescription": "Aidez-nous à continuer ce projet !",
+
+  // Menu Items
+  "Home": "Accueil",
+  "Software": "Logiciels",
+  "GeneralConfig": "Configuration générale",
+  "Interface": "Réglages de l'interface",
+  "Windows": "Réglages Windows",
+  "Advanced": "Configuration avancée",
+  "Security": "Sécurité",
+  "Troubleshooting": "Résolution des problèmes",
+
+  "Language": "Langue",
+
+  "NoFavorites": "Vous n'avez aucun profil à votre liste de favoris.",
+  "SystemInfo": "À propos de ce système :",
+  "LearnMore": "En savoir plus",
+  
   "TroubleshootingDocumenation": "Documentation pour la résolution des problèmes"
 }
