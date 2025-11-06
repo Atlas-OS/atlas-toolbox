@@ -27,7 +27,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
         }
         public void Disable()
         {
-            CommandPromptHelper.RunCommand("powercfg /h on");
+            CommandPromptHelper.RunCommand("powercfg /h off");
             RegistryHelper.SetValue(HIBERNATION_BUTTON_OPTION_KEY_NAME, SHOW_HIBERNATION_BUTTON_VALUE_NAME, 0);
 
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 0);
@@ -38,7 +38,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
 
         public void Enable()
         {
-            CommandPromptHelper.RunCommand("powercfg /h off");
+            CommandPromptHelper.RunCommand("powercfg /h on");
             RegistryHelper.SetValue(HIBERNATION_BUTTON_OPTION_KEY_NAME, SHOW_HIBERNATION_BUTTON_VALUE_NAME, 1);
 
 
