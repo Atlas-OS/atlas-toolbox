@@ -24,7 +24,7 @@ namespace AtlasToolbox.ViewModels
         public ConfigurationType Type => _configurationSubMenu.Type;
         public FontIcon Icon => _configurationSubMenu.Icon;
 
-        public string Key => "";
+        public string Key => _configurationSubMenu.Key;
 
         public ConfigurationSubMenuViewModel() { }
 

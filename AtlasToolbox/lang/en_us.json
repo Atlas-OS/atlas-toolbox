@@ -45,7 +45,7 @@
   "BootConfigAppearanceDescription": "Everything related to the appearance of booting Windows",
   "BootConfigBehavior": "Boot behavior",
   "BootConfigBehaviorDescription": "Everything related to booting behavior",
-  "NvidiaDisplayContainerSubMenu": "NVIDIA Display Container",
+  "NvidiaDisplayContainerSubMenu": "NVIDIA Display Container settings",
   "NvidiaDisplayContainerSubMenuDescription": "Everything related to the NVIDIA Display Container",
   "StartMenuSubMenu": "Start Menu",
   "StartMenuSubMenuDescription": "Everything related to customizing the Windows Start Menu",

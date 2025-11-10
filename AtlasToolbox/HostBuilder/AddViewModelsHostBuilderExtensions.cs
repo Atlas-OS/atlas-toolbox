@@ -272,23 +272,23 @@ namespace AtlasToolbox.HostBuilder
         {
             Dictionary<string, ConfigurationSubMenu> configurationDictionary = new()
             {
-                ["BootConfigAppearance"] = new(App.GetValueFromItemList("BootConfigAppearance"), App.GetValueFromItemList("BootConfigAppearance", true), ConfigurationType.BootConfigurationSubMenu),
-                ["BootConfigBehavior"] = new(App.GetValueFromItemList("BootConfigBehavior"), App.GetValueFromItemList("BootConfigBehavior", true), ConfigurationType.BootConfigurationSubMenu),
-                ["NvidiaDisplayContainerSubMenu"] = new(App.GetValueFromItemList("NvidiaDisplayContainerSubMenu"), App.GetValueFromItemList("NvidiaDisplayContainerSubMenu", true), ConfigurationType.ServicesSubMenu),
+                ["BootConfigAppearance"] = new("BootConfigAppearance", App.GetValueFromItemList("BootConfigAppearance"), App.GetValueFromItemList("BootConfigAppearance", true), ConfigurationType.BootConfigurationSubMenu),
+                ["BootConfigBehavior"] = new("BootConfigBehavior", App.GetValueFromItemList("BootConfigBehavior"), App.GetValueFromItemList("BootConfigBehavior", true), ConfigurationType.BootConfigurationSubMenu),
+                ["NvidiaDisplayContainerSubMenu"] = new("NvidiaDisplayContainerSubMenu", App.GetValueFromItemList("NvidiaDisplayContainerSubMenu"), App.GetValueFromItemList("NvidiaDisplayContainerSubMenu", true), ConfigurationType.ServicesSubMenu),
 
-                ["StartMenuSubMenu"] = new(App.GetValueFromItemList("StartMenuSubMenu"), App.GetValueFromItemList("StartMenuSubMenu", true), ConfigurationType.Interface),
-                ["ContextMenuSubMenu"] = new(App.GetValueFromItemList("ContextMenuSubMenu"), App.GetValueFromItemList("ContextMenuSubMenu", true), ConfigurationType.Interface),
-                ["AiSubMenu"] = new(App.GetValueFromItemList("AiSubMenu"), App.GetValueFromItemList("AiSubMenu", true), ConfigurationType.General),
-                ["ServicesSubMenu"] = new(App.GetValueFromItemList("ServicesSubMenu"), App.GetValueFromItemList("ServicesSubMenu", true), ConfigurationType.Advanced),
-                ["BootConfigurationSubMenu"] = new(App.GetValueFromItemList("BootConfigurationSubMenu"), App.GetValueFromItemList("BootConfigurationSubMenu", true), ConfigurationType.Advanced),
-                ["FileExplorerSubMenu"] = new(App.GetValueFromItemList("FileExplorerSubMenu"), App.GetValueFromItemList("FileExplorerSubMenu", true), ConfigurationType.Interface),
-                ["DriverConfigurationSubMenu"] = new(App.GetValueFromItemList("DriverConfigurationSubMenu"), App.GetValueFromItemList("DriverConfigurationSubMenu", true), ConfigurationType.Advanced),
-                ["CoreIsolationSubMenu"] = new(App.GetValueFromItemList("CoreIsolationSubMenu"), App.GetValueFromItemList("CoreIsolationSubMenu", true), ConfigurationType.Security),
-                ["DefenderSubMenu"] = new(App.GetValueFromItemList("DefenderSubMenu"), App.GetValueFromItemList("DefenderSubMenu", true), ConfigurationType.Security),
-                ["MitigationsSubMenu"] = new(App.GetValueFromItemList("MitigationsSubMenu"), App.GetValueFromItemList("MitigationsSubMenu", true), ConfigurationType.Security),
-                ["TroubleshootingNetwork"] = new(App.GetValueFromItemList("TroubleshootingNetwork"), App.GetValueFromItemList("TroubleshootingNetwork", true), ConfigurationType.Troubleshooting),
-                ["FileSharingSubMenu"] = new(App.GetValueFromItemList("FileSharingSubMenu"), App.GetValueFromItemList("FileSharingSubMenu", true), ConfigurationType.General),
-                ["WindowsUpdate"] = new(App.GetValueFromItemList("WindowsUpdate"), App.GetValueFromItemList("WindowsUpdate", true), ConfigurationType.General),
+                ["StartMenuSubMenu"] = new("StartMenuSubMenu", App.GetValueFromItemList("StartMenuSubMenu"), App.GetValueFromItemList("StartMenuSubMenu", true), ConfigurationType.Interface),
+                ["ContextMenuSubMenu"] = new("ContextMenuSubMenu", App.GetValueFromItemList("ContextMenuSubMenu"), App.GetValueFromItemList("ContextMenuSubMenu", true), ConfigurationType.Interface),
+                ["AiSubMenu"] = new("AiSubMenu", App.GetValueFromItemList("AiSubMenu"), App.GetValueFromItemList("AiSubMenu", true), ConfigurationType.General),
+                ["ServicesSubMenu"] = new("ServicesSubMenu", App.GetValueFromItemList("ServicesSubMenu"), App.GetValueFromItemList("ServicesSubMenu", true), ConfigurationType.Advanced),
+                ["BootConfigurationSubMenu"] = new("BootConfigurationSubMenu", App.GetValueFromItemList("BootConfigurationSubMenu"), App.GetValueFromItemList("BootConfigurationSubMenu", true), ConfigurationType.Advanced),
+                ["FileExplorerSubMenu"] = new("FileExplorerSubMenu", App.GetValueFromItemList("FileExplorerSubMenu"), App.GetValueFromItemList("FileExplorerSubMenu", true), ConfigurationType.Interface),
+                ["DriverConfigurationSubMenu"] = new("DriverConfigurationSubMenu", App.GetValueFromItemList("DriverConfigurationSubMenu"), App.GetValueFromItemList("DriverConfigurationSubMenu", true), ConfigurationType.Advanced),
+                ["CoreIsolationSubMenu"] = new("CoreIsolationSubMenu", App.GetValueFromItemList("CoreIsolationSubMenu"), App.GetValueFromItemList("CoreIsolationSubMenu", true), ConfigurationType.Security),
+                ["DefenderSubMenu"] = new("DefenderSubMenu", App.GetValueFromItemList("DefenderSubMenu"), App.GetValueFromItemList("DefenderSubMenu", true), ConfigurationType.Security),
+                ["MitigationsSubMenu"] = new("MitigationsSubMenu", App.GetValueFromItemList("MitigationsSubMenu"), App.GetValueFromItemList("MitigationsSubMenu", true), ConfigurationType.Security),
+                ["TroubleshootingNetwork"] = new("TroubleshootingNetwork", App.GetValueFromItemList("TroubleshootingNetwork"), App.GetValueFromItemList("TroubleshootingNetwork", true), ConfigurationType.Troubleshooting),
+                ["FileSharingSubMenu"] = new("FileSharingSubMenu", App.GetValueFromItemList("FileSharingSubMenu"), App.GetValueFromItemList("FileSharingSubMenu", true), ConfigurationType.General),
+                ["WindowsUpdate"] = new("WindowsUpdate", App.GetValueFromItemList("WindowsUpdate"), App.GetValueFromItemList("WindowsUpdate", true), ConfigurationType.General),
             };
             host.ConfigureServices((_, services) =>
             {

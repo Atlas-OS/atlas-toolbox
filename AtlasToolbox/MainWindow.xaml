@@ -86,15 +86,14 @@
             </NavigationView.Resources>
 
             <!--  Since this is WIP and really buggy at this stage, prefer to comment it rathen than releasing it.  -->
-            <!--<NavigationView.AutoSuggestBox>
+            <NavigationView.AutoSuggestBox>
                 <AutoSuggestBox
-                    Width="300"
                     AutomationProperties.Name="Basic AutoSuggestBox"
                     PlaceholderText="Search a tweak (WIP)"
                     QueryIcon="Find"
                     SuggestionChosen="AutoSuggestBox_SuggestionChosen"
                     TextChanged="AutoSuggestBox_TextChanged" />
-            </NavigationView.AutoSuggestBox>-->
+            </NavigationView.AutoSuggestBox>
 
             <NavigationView.MenuItems>
                 <NavigationViewItem

@@ -1,8 +1,10 @@
+using AtlasToolbox.Enums;
 using AtlasToolbox.Utils;
 using AtlasToolbox.ViewModels;
 using AtlasToolbox.Views;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.WinUI;
+using CommunityToolkit.WinUI.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -11,6 +13,7 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -96,7 +99,7 @@ namespace AtlasToolbox
             }
             return false;
         }
-        
+
         private async void CheckUpdates()
         {
             bool update = await Task.Run(() => ToolboxUpdateHelper.CheckUpdates());
@@ -379,16 +382,61 @@ namespace AtlasToolbox
         {
             var configItem = RootList.Where(item => item.Name == args.SelectedItem.ToString()).FirstOrDefault();
             string type = configItem.Type.ToString();
-
             if (configItem is not null)
             {
-                NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems
-                                .OfType<NavigationViewItem>()
-                                .First(n => n.Tag.Equals(configItem.Type.ToString()));
-                App.CurrentCategory = configItem.Type.ToString();
-                Navigate(configItem.Type.ToString());
+                // Search bar logic. WIP.
+                if (type.Contains("SubMenu"))
+                {
+                    SettingsCard settingCard = new SettingsCard();
+                    try
+                    {
+                        IEnumerable<ConfigurationSubMenuViewModel> items = App._host.Services.GetServices<ConfigurationSubMenuViewModel>();
+                        ConfigurationSubMenuViewModel itemViewModel = items.Where(vm => vm.Key == type).First();
+                        DataTemplate template = new DataTemplate();
+                        ObservableCollection<Folder> folders = new ObservableCollection<Folder>();
+                        while (type.Contains("SubMenu"))
+                        {
+                            string itemViewModelType = itemViewModel.Type.ToString();
+                            folders.Add(new Folder() { Name = itemViewModel.Name });
+                            if (itemViewModelType.Contains("SubMenu"))
+                            {
+                                type = itemViewModelType;
+                                itemViewModel = items.Where(vm => vm.Key == itemViewModelType).First();
+                                configItem = itemViewModel;
+                            }
+                            else
+                            {
+                                folders.Add(new Folder() { Name = itemViewModelType });
+                                type = itemViewModelType;
+                            }
+                        }
+                        //folders.Remove(folders.First());
+                        ContentFrame.Navigate(typeof(SubSection), new Tuple<ConfigurationSubMenuViewModel, DataTemplate, object>
+                            (itemViewModel, template, new ObservableCollection<Folder>(folders.Reverse())), new SlideNavigationTransitionInfo()
+                            { Effect = SlideNavigationTransitionEffect.FromRight });
+                    }
+                    catch (Exception ex)
+                    {
+                        App.logger.Error(ex.Message + ": An exception was thrown when trying to open a submenu:\n\n" + ex.InnerException);
+                    }
+                }
+                else
+                {
+                    NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems
+                                    .OfType<NavigationViewItem>()
+                                    .First(n => n.Tag.Equals(configItem.Type.ToString()));
+                    App.CurrentCategory = configItem.Type.ToString();
+                    Navigate(configItem.Type.ToString());
+                }
             }
         }
+
+
+        //private async Task<IEnumerable<ConfigurationSubMenuViewModel>> GetSubMenuViewModels()
+        //{
+        //    var vms = await Task.Run(() => App._host.Services.GetServices<ConfigurationSubMenuViewModel>());
+        //    return vms;
+        //}
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {

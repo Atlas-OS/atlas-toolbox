@@ -44,10 +44,11 @@
     <None Remove="Resources\HeaderTemplates.xaml" />
     <None Remove="SoftwarePage.xaml" />
     <None Remove="Views\ContentDialogView.xaml" />
+    <None Remove="Views\CustomViews\EdgeRemoverPage.xaml" />
     <None Remove="Views\NewProfilePage.xaml" />
     <None Remove="Views\UpdateDeferralPAge.xaml" />
-	<TrimmerRootAssembly Include="AtlasToolbox"/>
-	<TrimmerRootAssembly Include="Microsoft.WinUI"/>
+	<TrimmerRootAssembly Include="AtlasToolbox" />
+	<TrimmerRootAssembly Include="Microsoft.WinUI" />
   </ItemGroup>
 	<ItemGroup>
 		<Content Include="assets\**">
@@ -203,6 +204,9 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <Page Update="Views\CustomViews\EdgeRemoverPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\UpdateDeferralPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
