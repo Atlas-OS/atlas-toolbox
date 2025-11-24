@@ -392,16 +392,18 @@ namespace AtlasToolbox
                     {
                         IEnumerable<ConfigurationSubMenuViewModel> items = App._host.Services.GetServices<ConfigurationSubMenuViewModel>();
                         ConfigurationSubMenuViewModel itemViewModel = items.Where(vm => vm.Key == type).First();
+                        ConfigurationSubMenuViewModel rootItemViewModel = null;
                         DataTemplate template = new DataTemplate();
                         ObservableCollection<Folder> folders = new ObservableCollection<Folder>();
                         while (type.Contains("SubMenu"))
                         {
                             string itemViewModelType = itemViewModel.Type.ToString();
                             folders.Add(new Folder() { Name = itemViewModel.Name });
+                            if (rootItemViewModel is null) rootItemViewModel = items.Where(vm => vm.Key == type).First();
                             if (itemViewModelType.Contains("SubMenu"))
                             {
                                 type = itemViewModelType;
-                                itemViewModel = items.Where(vm => vm.Key == itemViewModelType).First();
+                                itemViewModel = items.Where(vm => vm.Key == type).First();
                                 configItem = itemViewModel;
                             }
                             else
@@ -412,7 +414,7 @@ namespace AtlasToolbox
                         }
                         //folders.Remove(folders.First());
                         ContentFrame.Navigate(typeof(SubSection), new Tuple<ConfigurationSubMenuViewModel, DataTemplate, object>
-                            (itemViewModel, template, new ObservableCollection<Folder>(folders.Reverse())), new SlideNavigationTransitionInfo()
+                            (rootItemViewModel, template, new ObservableCollection<Folder>(folders.Reverse())), new SlideNavigationTransitionInfo()
                             { Effect = SlideNavigationTransitionEffect.FromRight });
                     }
                     catch (Exception ex)
