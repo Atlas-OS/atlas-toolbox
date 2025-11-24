@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Linq;
 using Windows.ApplicationModel.Core;
+using System.Diagnostics;
 
 namespace AtlasToolbox
 {
@@ -37,14 +38,14 @@ namespace AtlasToolbox
         public App()
         {
             ConfigureNLog();
-            logger.Info("App Started");
+            logger.Info("[APP]: App Started");
             LoadLangString();
             _host = CreateHostBuilder().Build();
-            logger.Info("Building host");
+            logger.Info("[HOST]: Building host");
             _host.Start();
-            logger.Info("Starting host");
+            logger.Info("[HOST]: Starting host");
             this.InitializeComponent();
-            logger.Info("Finished initializing components");
+            logger.Info("[HOST]: Finished initializing components");
             this.UnhandledException += OnAppUnhandledException;
         }
 
