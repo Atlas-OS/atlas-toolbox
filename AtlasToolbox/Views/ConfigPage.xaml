@@ -26,7 +26,8 @@
                         x:Name="SettingsCard"
                         Header="{Binding Name}"
                         Description="{Binding Description}"
-                        Style="{StaticResource ConfigurationSettingsCardTemplate}">
+                        Style="{StaticResource ConfigurationSettingsCardTemplate}"
+                        HeaderIcon="{Binding Icon}">
                         <controls:SettingsCard.ContextFlyout>
                             <MenuFlyout>
                                 <MenuFlyoutItem
@@ -49,12 +50,13 @@
                     Click="OnCardClicked"
                     Description="{Binding Description}"
                     Header="{Binding Name}"
+                    HeaderIcon="{Binding Icon}"
                     IsClickEnabled="True"
                     Style="{StaticResource ConfigurationSettingsCardTemplate}" />
             </DataTemplate>
 
             <DataTemplate x:Key="MultiOptionTemplate" x:DataType="viewmodel:MultiOptionConfigurationItemViewModel">
-                <controls:SettingsCard Header="{Binding Name}" Style="{StaticResource ConfigurationSettingsCardTemplate}">
+                <controls:SettingsCard Header="{Binding Name}" Style="{StaticResource ConfigurationSettingsCardTemplate}" HeaderIcon="{Binding Icon}">
                     <controls:SettingsCard.ContextFlyout>
                         <MenuFlyout>
                             <MenuFlyoutItem
@@ -75,7 +77,8 @@
                 <controls:SettingsCard
                     x:Name="SettingsCard"
                     Header="{Binding Description}"
-                    Style="{StaticResource ConfigurationSettingsCardTemplate}">
+                    Style="{StaticResource ConfigurationSettingsCardTemplate}"
+                    HeaderIcon="{Binding Icon}">
                     <controls:SettingsCard.ContextFlyout>
                         <MenuFlyout>
                             <MenuFlyoutItem
