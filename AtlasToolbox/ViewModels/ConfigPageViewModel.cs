@@ -1,11 +1,8 @@
 ﻿using AtlasToolbox.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
-using ICSharpCode.Decompiler.TypeSystem;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Windows.Storage.AccessCache;
 
 namespace AtlasToolbox.ViewModels
 {

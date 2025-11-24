@@ -11,17 +11,11 @@ using System.Threading;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
-using System.Configuration;
 using AtlasToolbox.Utils;
-using System.Diagnostics;
-using System.Collections.ObjectModel;
-using System.Diagnostics.Contracts;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Linq;
 using Windows.ApplicationModel.Core;
-using System.Collections;
-using System.Reflection;
 
 namespace AtlasToolbox
 {
