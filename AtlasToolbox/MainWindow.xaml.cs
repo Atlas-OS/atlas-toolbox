@@ -42,6 +42,7 @@ namespace AtlasToolbox
             ExtendsContentIntoTitleBar = true;
 
             LoadText();
+            LoadExperiments();
 
             // Setup root list
             RootList = new List<IConfigurationItem>();
@@ -84,6 +85,15 @@ namespace AtlasToolbox
             else this.Closed += AppBehaviorHelper.CloseApp;
         }
 
+        public void LoadExperiments()
+        {
+            // Search Experiment
+            if (RegistryHelper.IsMatch("HKLM\\SOFTWARE\\AtlasOS\\Toolbox\\Experiments\\Search", "enabled", 0))
+            {
+                NavigationViewControl.AutoSuggestBox = null;
+            }
+        }
+
         public bool IsFullscreen()
         {
             var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
@@ -110,8 +120,11 @@ namespace AtlasToolbox
         }
         public void LoadText()
         {
+            // Updates
             UpdateTitleBar.Title = App.GetValueFromItemList("NewUpdateDesc");
             LearnMoreBtn.Content = App.GetValueFromItemList("LearnMore");
+
+            // Navigation Items
             Home.Content = App.GetValueFromItemList("Home_HeaderText");
             Software.Content = App.GetValueFromItemList("Software");
             GeneralConfig.Content = App.GetValueFromItemList("GeneralConfig");
@@ -121,6 +134,9 @@ namespace AtlasToolbox
             Security.Content = App.GetValueFromItemList("Security");
             Troubleshooting.Content = App.GetValueFromItemList("Troubleshooting");
             Setting.Content = App.GetValueFromItemList("Settings");
+
+            // Search Box
+            SearchBox.PlaceholderText = App.GetValueFromItemList("SearchPlaceholder");
         }
 
         /// <summary>

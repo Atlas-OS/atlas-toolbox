@@ -7,8 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:AtlasToolbox"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Title="AtlasOS Toolbox">
+    Title="AtlasOS Toolbox"
+    mc:Ignorable="d">
     <Window.SystemBackdrop>
         <MicaBackdrop Kind="Base" />
     </Window.SystemBackdrop>
@@ -73,7 +73,7 @@
                         Background="#30313E"
                         IsOpen="False">
                         <InfoBar.ActionButton>
-                            <HyperlinkButton NavigateUri="https://github.com/atlas-os/atlas-toolbox/releases/latest" x:Name="LearnMoreBtn"/>
+                            <HyperlinkButton x:Name="LearnMoreBtn" NavigateUri="https://github.com/atlas-os/atlas-toolbox/releases/latest" />
                         </InfoBar.ActionButton>
                     </InfoBar>
                 </Grid>
@@ -86,11 +86,11 @@
                 <CornerRadius x:Key="NavigationViewContentGridCornerRadius">8,0,0,0</CornerRadius>
             </NavigationView.Resources>
 
-            <!--  Since this is WIP and really buggy at this stage, prefer to comment it rathen than releasing it.  -->
+            <!--  Currently an experiment  -->
             <NavigationView.AutoSuggestBox>
                 <AutoSuggestBox
+                    x:Name="SearchBox"
                     AutomationProperties.Name="Basic AutoSuggestBox"
-                    PlaceholderText="Search a tweak (WIP)"
                     QueryIcon="Find"
                     SuggestionChosen="AutoSuggestBox_SuggestionChosen"
                     TextChanged="AutoSuggestBox_TextChanged" />

@@ -206,7 +206,7 @@
 
   "Gallery": "Enable the gallery",
   "GalleryDescription": "Enable or disable the gallery in File Explorer",
-  
+
   "SnapLayout": "Enables snap layouts for windows",
   "SnapLayoutDescription": "Enable or disable snap layouts for windows",
 
@@ -257,7 +257,7 @@
 
   "WindowsHello": "Windows Hello",
   "WindowsHelloDescription": "Enable or disable Windows Hello biometric authentication",
-  
+
   // End of configuration toggles
 
   // Settings and Home texts
@@ -336,7 +336,9 @@
   "Tile_KofiTitle": "Support us on Ko-Fi",
   "Tile_KofiDescription": "Help us continue this project!",
 
-  // Menu Items
+  // Menu Items & other navigation item texts
+  "SearchPlaceholder": "(WIP) Search settings...",
+
   "Home": "Home",
   "Software": "Software",
   "GeneralConfig": "General Configuration",
@@ -352,5 +354,18 @@
   "SystemInfo": "About this system:",
   "LearnMore": "Learn more",
 
-  "TroubleshootingDocumenation": "Troubleshooting documentation"
+  "TroubleshootingDocumenation": "Troubleshooting documentation",
+
+  //
+  // Experiments
+  //
+  "ExperimentsHeader": "Experiments",
+  "ExperimentsCardHeader": "Experimental features",
+  "ExperimentsCardDescription": "These features are experimental and may not work fully as intended. Requires a restart to apply changes",
+  // Search experiment
+  "SearchExperiment": "Search bar",
+  "SearchExperimentDescription": "Enables a search bar to quickly find settings in the Toolbox",
+  // Icons experiment
+  "IconsExperiment": "Icons",
+  "IconsExperimentDescription": "Enables icons next to each setting for easier identification and more visual appeal"
 }
