@@ -90,7 +90,7 @@ namespace AtlasToolbox
             // Search Experiment
             if (RegistryHelper.IsMatch("HKLM\\SOFTWARE\\AtlasOS\\Toolbox\\Experiments\\Search", "enabled", 0))
             {
-                NavigationViewControl.AutoSuggestBox = null;
+                SearchBox.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -148,18 +148,32 @@ namespace AtlasToolbox
             return this.Content.XamlRoot;
         }
 
+        #region Navigation Control
         /// <summary>
         /// navigates to the correct page when a navigation item is clicked
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void NavigationViewControl_ItemInvoked(NavigationView sender,
-                      NavigationViewItemInvokedEventArgs args)
+        private void NavigationViewControl_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            if (App.CurrentCategory == args.InvokedItemContainer.Tag.ToString() || (App.CurrentCategory == "SettingsItem" && args.IsSettingsInvoked == true)) { return; }
-
-            App.CurrentCategory = args.InvokedItemContainer.Tag.ToString();
-            Navigate(args.InvokedItemContainer.Tag.ToString());
+            string selectedItem = args.SelectedItemContainer.Tag.ToString() ?? "";
+            if (App.CurrentCategory == selectedItem || (App.CurrentCategory == "SettingsItem" && args.IsSettingsSelected == true)) { return; }
+            App.CurrentCategory = selectedItem;
+            switch (selectedItem)
+            {
+                case "SettingsPage":
+                    Navigate(typeof(SettingsPage));
+                    break;
+                case "AtlasToolbox.Views.SoftwarePage":
+                    Navigate(typeof(SoftwarePage));
+                    break;
+                case "AtlasToolbox.Views.HomePage":
+                    Navigate(typeof(HomePage));
+                    break;
+                default:
+                    Navigate(typeof(ConfigPage));
+                    break;
+            }
             App.XamlRoot = this.Content.XamlRoot;
         }
 
@@ -167,38 +181,9 @@ namespace AtlasToolbox
         /// Navigates the ContentFrame to the selected page
         /// </summary>
         /// <param name="tag"></param>
-        private void Navigate(string tag)
+        private void Navigate(Type type)
         {
-            switch (tag)
-            {
-                case "SettingsPage":
-                    App.CurrentCategory = "SettingsItem";
-                    ContentFrame.Navigate(
-                        new SettingsPage().GetType(),
-                        null,
-                        new DrillInNavigationTransitionInfo());
-                    break;
-                case "AtlasToolbox.Views.SoftwarePage":
-                    ContentFrame.Navigate(
-                           new SoftwarePage().GetType(),
-                           null,
-                           new DrillInNavigationTransitionInfo()
-                           );
-                    break;
-                case "AtlasToolbox.Views.HomePage":
-                    Type newPage = Type.GetType(tag);
-                    ContentFrame.Navigate(
-                           new HomePage().GetType(),
-                           null,
-                           new DrillInNavigationTransitionInfo());
-                    break;
-                default:
-                    ContentFrame.Navigate(
-                           new ConfigPage().GetType(),
-                           null,
-                           new DrillInNavigationTransitionInfo());
-                    break;
-            }
+            ContentFrame.Navigate(type, null, new DrillInNavigationTransitionInfo());
         }
 
         public void GoBack()
@@ -240,6 +225,12 @@ namespace AtlasToolbox
                     App.logger.Error($"No matching NavigationViewItem found for category: {App.CurrentCategory}");
                 }
             }
+        }
+        #endregion Navigation Control
+
+        private void AppTitleBar_PaneToggleRequested(Microsoft.UI.Xaml.Controls.TitleBar sender, object args)
+        {
+            NavigationViewControl.IsPaneOpen = !NavigationViewControl.IsPaneOpen;
         }
 
 
@@ -444,7 +435,7 @@ namespace AtlasToolbox
                                     .OfType<NavigationViewItem>()
                                     .First(n => n.Tag.Equals(configItem.Type.ToString()));
                     App.CurrentCategory = configItem.Type.ToString();
-                    Navigate(configItem.Type.ToString());
+                    Navigate(typeof(Views.ConfigPage));
                 }
             }
         }
