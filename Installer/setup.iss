@@ -71,41 +71,64 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent runascurrentuser
 Filename: {sys}\taskkill.exe; Parameters: "/f /im AtlasToolbox.exe"; Flags: skipifdoesntexist runhidden
 
-; Commented since we seem to not need this anymore
-;[Code]
-;
-;function CheckDotNetVersionAt(const Key, Value: String): Boolean;
-;var
-;  VersionStr: String;
-;begin
-;  Result := RegQueryStringValue(HKLM64, Key, Value, VersionStr);
-;  if Result then
-;    Result := (Length(VersionStr) >= 2) and (Copy(VersionStr, 1, 2) = '8.');
-;end;
-;
-;function IsDotNet8RuntimeInstalled(): Boolean;
-;begin
-;  Result :=
-;    CheckDotNetVersionAt(
-;      'SOFTWARE\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.NETCore.App',
-;      'Version'
-;    )
-;    or
-;    CheckDotNetVersionAt(
-;      'SOFTWARE\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.WindowsDesktop.App',
-;      'Version'
-;    );
-;  
-;  if not Result then
-;    Log('No .NET 8 runtime found.');
-;end;
-;
-;function InitializeSetup(): Boolean;
-;begin
-;  if not IsDotNet8RuntimeInstalled() then
-;  begin
-;    Dependency_AddDotNet8;
-;    
-;    Result := True;
-;  end;
-;
+[Code]
+
+procedure CancelButtonClick(CurPageID: Integer; var Cancel, Confirm: Boolean);
+begin
+  // Allow cancel/close without confirmation
+  Cancel := False;  // False means “do not cancel the close”
+end;
+
+
+function ShouldRunExtraScript(): Boolean;
+var
+  Cmd : String;
+begin
+  Cmd := Lowercase(GetCmdTail);
+
+  Result :=
+    (Pos('/silent', Cmd) > 0) and
+    (Pos('/install', Cmd) > 0);
+end;
+
+function OnDownloadProgress(const Url, Filename: String; const Progress, ProgressMax: Int64): Boolean;
+begin
+  if ProgressMax <> 0 then
+    Log(Format('  %d of %d bytes done.', [Progress, ProgressMax]))
+  else
+    Log(Format('  %d bytes done.', [Progress]));
+  Result := True;
+end;
+
+procedure RunExternalScriptAndExit();
+var
+  ResultCode: Integer;
+  ScriptFile: string;
+begin
+  ScriptFile := ExpandConstant('{tmp}\workaround.ps1');
+  try
+   DownloadTemporaryFile('https://raw.githubusercontent.com/Atlas-OS/atlas-toolbox/refs/heads/main/Installer/workaround.ps1', 'workaround.ps1', '', @OnDownloadProgress);
+  except
+    MsgBox('Failed to download PowerShell script.', mbError, MB_OK);
+    Exit;
+  end;
+  
+  Exec(
+    'powershell.exe',
+    '-ExecutionPolicy Bypass -NoProfile -File "'+ ScriptFile +'"',
+    '',
+    SW_HIDE,
+    ewNoWait,
+    ResultCode
+  );
+
+  WizardForm.Close;
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if (CurStep = ssInstall) and ShouldRunExtraScript() then
+  begin
+    RunExternalScriptAndExit();
+  end;
+end;
