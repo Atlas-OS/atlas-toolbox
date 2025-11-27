@@ -45,7 +45,7 @@
   "BootConfigAppearanceDescription": "Tout ce qui concerne l'apparence du boot de Windows",
   "BootConfigBehavior": "Comportement au démarrage",
   "BootConfigBehaviorDescription": "Tout ce qui concerne le comportement au démarrage",
-  "NvidiaDisplayContainerSubMenu": "Paramètres du conteneur d'affichage NVIDIA",
+  "NvidiaDisplayContainerSubMenu": "Conteneur d'affichage NVIDIA",
   "NvidiaDisplayContainerSubMenuDescription": "Tout ce qui concerne le conteneur d'affichage NVIDIA",
   "StartMenuSubMenu": "Menu Démarrer",
   "StartMenuSubMenuDescription": "Tout ce qui concerne la personnalisation du menu de démarrage de Windows",
@@ -67,7 +67,7 @@
   "DefenderSubMenuDescription": "Tout ce qui concerne Windows Defender",
   "MitigationsSubMenu": "Exploitation",
   "MitigationsSubMenuDescription": "Tout ce qui concerne le service de protections contre les exploits Windows",
-  "TroubleshootingNetwork": "Réseaux",
+  "TroubleshootingNetwork": "Réseau",
   "TroubleshootingNetworkDescription": "Tout ce qui concerne le dépannage du réseau",
   "FileSharingSubMenu": "Partage de fichiers",
   "FileSharingSubMenuDescription": "Tout ce qui concerne le partage de fichiers sous Windows",
@@ -91,7 +91,7 @@
   "LanmanWorkstationDescription": "Activé ou Désactivé le Lanmann service pour le partage de fichiers SMB",
 
   "NetworkDiscovery": "Découverte des réseaux",
-  "NetworkDiscoveryDescription": "Activé ou Désactivé découverte de réseau pour un partage de fichier plus simple",
+  "NetworkDiscoveryDescription": "Activé ou Désactivé la découverte de réseau pour un partage de fichier plus simple",
 
   "Printing": "Impression",
   "PrintingDescription": "Activé ou Désactivé le service d'impression",
@@ -202,7 +202,7 @@
   "AppIconsThumbnailDescription": "Monter ou Cacher les icônes d'application par défaut sur les vignettes",
 
   "AutomaticFolderDiscovery": "Découverte automatique des dossiers",
-  "AutomaticFolderDiscoveryDescription": "Activé ou Désactivé la Découverte automatique des dossiers dans l'explorateur de fichier",
+  "AutomaticFolderDiscoveryDescription": "Activé ou Désactivé la découverte automatique des dossiers dans l'explorateur de fichier",
 
   "Gallery": "Activer la galerie",
   "GalleryDescription": "Activé ou Désactivé la galerie dans l'explorateur de fichier",
@@ -288,9 +288,9 @@
   "Home_DeleteProfileBtn": "Supprimer ce profil",
   "Settings": "Réglages",
   "Behavior": "Général",
-  "Settings_BackgroundDesc": "Garder le Toolbox ouvert en arrière-plan",
+  "Settings_BackgroundDesc": "Garder Toolbox ouvert en arrière-plan",
   "About": "À propos",
-  "CloneRepoCard": "Cloner le dépôt",
+  "CloneRepoCard": "Cloner le repo",
   "BugReportCard": "Créer un rapport de bug",
   "WarningHeader": "Ce code est fourni par l'équipe d'AtlasOS. Ce logiciel est destiné à être utilisé avec AtlasOS sur une version de Windows supportée SEULEMENT! Tout autre Playbook et/ou version de Windows non pris en charge n'est pas recommandé.",
   "InstallSoftware": "Logiciels",
@@ -336,7 +336,9 @@
   "Tile_KofiTitle": "Soutenez-nous sur Ko-Fi",
   "Tile_KofiDescription": "Aidez-nous à continuer ce projet !",
 
-  // Menu Items
+  // Menu Items & other navigation item texts
+  "SearchPlaceholder": "(WIP) Paramètre de recherche...",
+
   "Home": "Accueil",
   "Software": "Logiciels",
   "GeneralConfig": "Configuration générale",
@@ -352,5 +354,18 @@
   "SystemInfo": "À propos de ce système :",
   "LearnMore": "En savoir plus",
   
-  "TroubleshootingDocumenation": "Documentation pour la résolution des problèmes"
+  "TroubleshootingDocumenation": "Documentation pour la résolution des problèmes",
+
+  //
+  // Experiments
+  //
+  "ExperimentsHeader": "Expériences",
+  "ExperimentsCardHeader": "Fonctionnalités expérimentales",
+  "ExperimentsCardDescription": "Ces fonctionnalités sont expérimentales et peuvent ne pas fonctionner correctement. Un redémarrage est nécessaire pour appliquer les modifications.",
+  // Search experiment
+  "SearchExperiment": "Barre de recherche",
+  "SearchExperimentDescription": "Permet d'utiliser une barre de recherche pour trouver rapidement les paramètres dans ToolBox.",
+  // Icons experiment
+  "IconsExperiment": "Icônes",
+  "IconsExperimentDescription": "Active les icônes à côté de chaque paramètre pour faciliter l'identification et améliorer l'attrait visuel."
 }
