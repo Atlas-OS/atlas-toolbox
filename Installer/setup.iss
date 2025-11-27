@@ -69,14 +69,13 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent runascurrentuser
-Filename: {sys}\taskkill.exe; Parameters: "/f /im AtlasToolbox.exe"; Flags: skipifdoesntexist runhidden
+;Filename: {sys}\taskkill.exe; Parameters: "/f /im AtlasToolbox.exe"; Flags: skipifdoesntexist runhidden
 
 [Code]
 
 procedure CancelButtonClick(CurPageID: Integer; var Cancel, Confirm: Boolean);
 begin
-  // Allow cancel/close without confirmation
-  Cancel := False;  // False means “do not cancel the close”
+  Cancel := False;
 end;
 
 
@@ -125,10 +124,13 @@ begin
   WizardForm.Close;
 end;
 
-procedure CurStepChanged(CurStep: TSetupStep);
+function InitializeSetup(): Boolean;
 begin
-  if (CurStep = ssInstall) and ShouldRunExtraScript() then
+  if ShouldRunExtraScript() then
   begin
     RunExternalScriptAndExit();
-  end;
+    Result := False;
+  end
+  else
+    Result := True;
 end;
