@@ -88,7 +88,7 @@ namespace AtlasToolbox
         public void LoadExperiments()
         {
             // Search Experiment
-            if (RegistryHelper.IsMatch("HKLM\\SOFTWARE\\AtlasOS\\Toolbox\\Experiments\\Search", "enabled", 0))
+            if (RegistryHelper.IsMatch("HKLM\\SOFTWARE\\AtlasOS\\Toolbox\\Experiments\\Search", "enabled", 0) || !RegistryHelper.KeyExists("HKLM\\SOFTWARE\\AtlasOS\\Toolbox\\Experiments\\Search"))
             {
                 SearchBox.Visibility = Visibility.Collapsed;
             }
