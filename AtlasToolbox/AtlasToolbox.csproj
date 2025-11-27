@@ -22,6 +22,8 @@
     <UserSecretsId>b05b26c0-f62c-4dd3-b138-de1a5b0c1243</UserSecretsId>
     <ApplicationIcon>assets\logo\toolbox-icon.ico</ApplicationIcon>
     <Title>AtlasToolbox</Title>
+    <AssemblyVersion>0.1.12</AssemblyVersion>
+    <FileVersion>0.1.12</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Converter\**" />
