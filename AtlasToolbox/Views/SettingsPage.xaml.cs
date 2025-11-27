@@ -102,6 +102,19 @@ namespace AtlasToolbox.Views
                 NoUpdatesBar.Visibility = Visibility.Visible;
             }
         }
+
+        private async void CheckPatchesButton_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsPageViewModel vm = this.DataContext as SettingsPageViewModel;
+            NoUpdatesBar.Visibility = Visibility.Collapsed;
+            ProgressRing.Visibility = Visibility.Visible;
+            bool update = await Task.Run(() => vm.());
+            if (update)
+            {
+                ProgressRing.Visibility = Visibility.Collapsed;
+                NoUpdatesBar.Visibility = Visibility.Visible;
+            }
+        }
         #region experiments
         private void IsExperimentEnabled(object sender, RoutedEventArgs e)
         {
