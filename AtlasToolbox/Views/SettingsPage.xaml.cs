@@ -82,7 +82,7 @@ namespace AtlasToolbox.Views
 
         private async void bugRequestCard_Click(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new Uri("https://github.com/Atlas-OS/atlas-toolbox/issues/new"));
+            await Launcher.LaunchUriAsync(new Uri("https://github.com/Atlas-OS/atlas-toolbox/issues/new?template=bug-report.md"));
         }
 
         private void ConfigSwitch_SelectionChanged(object sender, SelectionChangedEventArgs e)
