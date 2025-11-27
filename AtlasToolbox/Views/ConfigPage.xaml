@@ -24,8 +24,8 @@
                 <Grid>
                     <controls:SettingsCard
                         x:Name="SettingsCard"
-                        Header="{Binding Name}"
                         Description="{Binding Description}"
+                        Header="{Binding Name}"
                         Style="{StaticResource ConfigurationSettingsCardTemplate}">
                         <controls:SettingsCard.ContextFlyout>
                             <MenuFlyout>
@@ -38,23 +38,27 @@
                         <ToggleSwitch
                             x:Name="ConfigSwitch"
                             IsOn="{Binding CurrentSetting}"
-                            Loaded="ToggleSwitch_Loaded"
-                        />
+                            Loaded="ToggleSwitch_Loaded" />
                     </controls:SettingsCard>
                 </Grid>
             </DataTemplate>
 
             <DataTemplate x:Key="ConfigurationSubMenuTemplate" x:DataType="viewmodel:ConfigurationSubMenuViewModel">
                 <controls:SettingsCard
+                    x:Name="SubMenuSettingsCard"
                     Click="OnCardClicked"
                     Description="{Binding Description}"
                     Header="{Binding Name}"
+                    HeaderIcon="{Binding Icon}"
                     IsClickEnabled="True"
                     Style="{StaticResource ConfigurationSettingsCardTemplate}" />
             </DataTemplate>
 
             <DataTemplate x:Key="MultiOptionTemplate" x:DataType="viewmodel:MultiOptionConfigurationItemViewModel">
-                <controls:SettingsCard Header="{Binding Name}" Style="{StaticResource ConfigurationSettingsCardTemplate}">
+                <controls:SettingsCard
+                    Header="{Binding Name}"
+                    HeaderIcon="{Binding Icon}"
+                    Style="{StaticResource ConfigurationSettingsCardTemplate}">
                     <controls:SettingsCard.ContextFlyout>
                         <MenuFlyout>
                             <MenuFlyoutItem
@@ -73,8 +77,9 @@
 
             <DataTemplate x:Key="ConfigurationButtonTemplate" x:DataType="viewmodel:ConfigurationButtonViewModel">
                 <controls:SettingsCard
-                    x:Name="SettingsCard"
+                    x:Name="SettingsCardControl"
                     Header="{Binding Description}"
+                    HeaderIcon="{Binding Icon}"
                     Style="{StaticResource ConfigurationSettingsCardTemplate}">
                     <controls:SettingsCard.ContextFlyout>
                         <MenuFlyout>

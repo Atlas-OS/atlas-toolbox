@@ -8,6 +8,7 @@
     xmlns:local="using:AtlasToolbox.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodel="using:AtlasToolbox.ViewModels"
+    x:Name="root"
     d:DataContext="{d:DesignInstance Type=viewmodel:SettingsPageViewModel}"
     mc:Ignorable="d">
 
@@ -23,16 +24,23 @@
         <StackPanel Margin="55,0,0,0">
             <TextBlock
                 x:Name="TitleTxt"
-                Grid.Row="0"
                 Margin="0,24,36,24"
                 Style="{StaticResource TitleTextBlockStyle}" />
-            <StackPanel x:Name="SettingToggles" Grid.Row="1">
+            <StackPanel x:Name="SettingToggles">
                 <StackPanel x:Name="BehaviorSettings">
                     <TextBlock x:Name="BehaviorHeader" Style="{StaticResource CategoryTitle}" />
+                    <!--  Background toggle  -->
                     <controls:SettingsCard x:Name="BackgroundDescription" Style="{StaticResource ConfigurationSettingsCardTemplate}">
+                        <controls:SettingsCard.HeaderIcon>
+                            <FontIcon Glyph="&#xEF1F;" />
+                        </controls:SettingsCard.HeaderIcon>
                         <ToggleSwitch IsOn="{x:Bind KeepBackground_State}" Toggled="KeepBackground_Toggled" />
                     </controls:SettingsCard>
+                    <!--  Language settings  -->
                     <controls:SettingsCard x:Name="LanguageHeader" Style="{StaticResource ConfigurationSettingsCardTemplate}">
+                        <controls:SettingsCard.HeaderIcon>
+                            <FontIcon Glyph="&#xE775;" />
+                        </controls:SettingsCard.HeaderIcon>
                         <ComboBox
                             x:Name="ConfigSwitch"
                             Width="200"
@@ -45,7 +53,11 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </controls:SettingsCard>
+                    <!--  Update settings  -->
                     <controls:SettingsCard x:Name="Update" Style="{StaticResource ConfigurationSettingsCardTemplate}">
+                        <controls:SettingsCard.HeaderIcon>
+                            <FontIcon Glyph="&#xE895;" />
+                        </controls:SettingsCard.HeaderIcon>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock
                                 x:Name="NoUpdatesBar"
@@ -63,8 +75,32 @@
                         </StackPanel>
                     </controls:SettingsCard>
                 </StackPanel>
+                <!--  Experiments  -->
+                <StackPanel>
+                    <TextBlock x:Name="ExperimentalHeader" Style="{StaticResource CategoryTitle}" />
+                    <controls:SettingsExpander
+                        x:Name="ExperimentsExpander"
+                        Header="Experiments"
+                        Style="{StaticResource ConfigurationSettingsExpanderTemplate}">
+                        <controls:SettingsExpander.HeaderIcon>
+                            <FontIcon Glyph="&#xF196;" />
+                        </controls:SettingsExpander.HeaderIcon>
+                        <controls:SettingsExpander.Items>
+                            <!--  Search experiment  -->
+                            <controls:SettingsCard x:Name="SearchExpCard" Tag="Search">
+                                <controls:SettingsCard.HeaderIcon>
+                                    <FontIcon Glyph="&#xE71E;" />
+                                </controls:SettingsCard.HeaderIcon>
+                                <ToggleSwitch
+                                    Loaded="IsExperimentEnabled"
+                                    Tag="Search"/>
+                            </controls:SettingsCard>
+                        </controls:SettingsExpander.Items>
+                    </controls:SettingsExpander>
+                </StackPanel>
                 <StackPanel>
                     <TextBlock x:Name="AboutHeader" Style="{StaticResource CategoryTitle}" />
+                    <!--  About Section  -->
                     <controls:SettingsExpander Header="AtlasOS Toolbox" Style="{StaticResource ConfigurationSettingsExpanderTemplate}">
                         <controls:SettingsExpander.HeaderIcon>
                             <BitmapIcon ShowAsMonochrome="False" UriSource="/assets/logo/toolbox-icon.ico" />

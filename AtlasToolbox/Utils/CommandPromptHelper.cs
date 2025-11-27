@@ -18,22 +18,19 @@ namespace AtlasToolbox.Utils
                 commandPrompt.StartInfo.CreateNoWindow = noWindow;
                 commandPrompt.StartInfo.UseShellExecute = false;
 
-                // 👇 redirect both output and error streams
                 commandPrompt.StartInfo.RedirectStandardOutput = true;
                 commandPrompt.StartInfo.RedirectStandardError = true;
 
                 commandPrompt.Start();
 
-                // Read output (non-blocking async way)
                 string output = commandPrompt.StandardOutput.ReadToEnd();
                 string error = commandPrompt.StandardError.ReadToEnd();
 
                 if (waitForExit)
                     commandPrompt.WaitForExit();
 
-                // Combine both streams if you want full context
                 string result = output + (string.IsNullOrWhiteSpace(error) ? "" : "\n[Error]\n" + error);
-
+                App.logger.Info($"[CMD] {command}:\n\t{result}");
                 return result;
             }
         }

@@ -230,20 +230,20 @@ namespace AtlasToolbox.HostBuilder
             ICommand buttonCommand;
             Dictionary<string, ConfigurationButton> configurationDictionary = new()
             {
-                ["RestartExplorerButton"] = new(buttonCommand = new RestartExplorerCommand(), App.GetValueFromItemList("RestartExplorerButton"), App.GetValueFromItemList("RestartExplorerButton", true), ConfigurationType.Interface),
-                ["ViewCurrentSettingsBootConfig"] = new(buttonCommand = new ViewCurrentValuesCommand(), App.GetValueFromItemList("ViewCurrentSettingsBootConfig"), App.GetValueFromItemList("ViewCurrentSettingsBootConfig", true), ConfigurationType.BootConfigurationSubMenu),
-                ["VBSCurrentConfig"] = new(buttonCommand = new CurrentVBSConfigurationCommand(), App.GetValueFromItemList("VBSCurrentConfig"), App.GetValueFromItemList("VBSCurrentConfig", true), ConfigurationType.CoreIsolationSubMenu),
-                ["ToggleDefender"] = new(buttonCommand = new ToggleDefenderCommand(), App.GetValueFromItemList("ToggleDefender"), App.GetValueFromItemList("ToggleDefender", true), ConfigurationType.DefenderSubMenu),
-                ["ResetFTH"] = new(buttonCommand = new ResetFTHCommand(), App.GetValueFromItemList("ResetFTH"), App.GetValueFromItemList("ResetFTH", true), ConfigurationType.MitigationsSubMenu),
-                ["InstallOpenShell"] = new(buttonCommand = new InstallOpenShellCommand(), App.GetValueFromItemList("InstallOpenShell"), App.GetValueFromItemList("InstallOpenShell", true), ConfigurationType.StartMenuSubMenu),
+                ["RestartExplorerButton"] = new(buttonCommand = new RestartExplorerCommand(), App.GetValueFromItemList("RestartExplorerButton"), App.GetValueFromItemList("RestartExplorerButton", true), ConfigurationType.Interface, "\uEC50"),
+                ["ViewCurrentSettingsBootConfig"] = new(buttonCommand = new ViewCurrentValuesCommand(), App.GetValueFromItemList("ViewCurrentSettingsBootConfig"), App.GetValueFromItemList("ViewCurrentSettingsBootConfig", true), ConfigurationType.BootConfigurationSubMenu, "\uF259"),
+                ["VBSCurrentConfig"] = new(buttonCommand = new CurrentVBSConfigurationCommand(), App.GetValueFromItemList("VBSCurrentConfig"), App.GetValueFromItemList("VBSCurrentConfig", true), ConfigurationType.CoreIsolationSubMenu, "\uF259"),
+                ["ToggleDefender"] = new(buttonCommand = new ToggleDefenderCommand(), App.GetValueFromItemList("ToggleDefender"), App.GetValueFromItemList("ToggleDefender", true), ConfigurationType.DefenderSubMenu, "\uE83D"),
+                ["ResetFTH"] = new(buttonCommand = new ResetFTHCommand(), App.GetValueFromItemList("ResetFTH"), App.GetValueFromItemList("ResetFTH", true), ConfigurationType.MitigationsSubMenu, "\uEBC4"),
+                ["InstallOpenShell"] = new(buttonCommand = new InstallOpenShellCommand(), App.GetValueFromItemList("InstallOpenShell"), App.GetValueFromItemList("InstallOpenShell", true), ConfigurationType.StartMenuSubMenu, "\uE8FC"),
 
-                ["FixErrors"] = new(buttonCommand = new FixErrorsCommand(), App.GetValueFromItemList("FixErrors"), App.GetValueFromItemList("FixErrors", true), ConfigurationType.Troubleshooting),
-                ["RepairWinComponent"] = new(buttonCommand = new RepairWindowsComponentsCommand(), App.GetValueFromItemList("FixErrors"), App.GetValueFromItemList("RepairWinComponent"), ConfigurationType.Troubleshooting),
-                ["TelemetryComponents"] = new(buttonCommand = new TelemetryComponentsCommand(), App.GetValueFromItemList("FixErrors"), App.GetValueFromItemList("TelemetryComponents"), ConfigurationType.Troubleshooting),
-                ["AtlasDefault"] = new(buttonCommand = new NetworkAtlasDefaults(), App.GetValueFromItemList("ResetFTH"), App.GetValueFromItemList("AtlasDefault"), ConfigurationType.TroubleshootingNetwork),
-                ["WindowsDefault"] = new(buttonCommand = new NetworkWindowsDefaults(), App.GetValueFromItemList("ResetFTH"), App.GetValueFromItemList("WindowsDefault"), ConfigurationType.TroubleshootingNetwork),
-                ["SetUpdateDeferral"] = new(buttonCommand = new SetUpdateDeferralConfigurationButton(), App.GetValueFromItemList("Set"), App.GetValueFromItemList("WindowsUpdateDeferral"), ConfigurationType.WindowsUpdate),
-                ["ResetUpdateDeferral"] = new(buttonCommand = new ResetWindowsUpdateDeferral(), App.GetValueFromItemList("ResetFTH"), App.GetValueFromItemList("ResetWindowsUpdateDeferral"), ConfigurationType.WindowsUpdate),
+                ["FixErrors"] = new(buttonCommand = new FixErrorsCommand(), App.GetValueFromItemList("FixErrors"), App.GetValueFromItemList("FixErrors", true), ConfigurationType.Troubleshooting, "\uE90F"),
+                ["RepairWinComponent"] = new(buttonCommand = new RepairWindowsComponentsCommand(), App.GetValueFromItemList("FixErrors"), App.GetValueFromItemList("RepairWinComponent"), ConfigurationType.Troubleshooting, "\uE90F"),
+                ["TelemetryComponents"] = new(buttonCommand = new TelemetryComponentsCommand(), App.GetValueFromItemList("FixErrors"), App.GetValueFromItemList("TelemetryComponents"), ConfigurationType.Troubleshooting, "\uE90F"),
+                ["AtlasDefault"] = new(buttonCommand = new NetworkAtlasDefaults(), App.GetValueFromItemList("ResetFTH"), App.GetValueFromItemList("AtlasDefault"), ConfigurationType.TroubleshootingNetwork, "\uE839"),
+                ["WindowsDefault"] = new(buttonCommand = new NetworkWindowsDefaults(), App.GetValueFromItemList("ResetFTH"), App.GetValueFromItemList("WindowsDefault"), ConfigurationType.TroubleshootingNetwork, "\uE839"),
+                ["SetUpdateDeferral"] = new(buttonCommand = new SetUpdateDeferralConfigurationButton(), App.GetValueFromItemList("Set"), App.GetValueFromItemList("WindowsUpdateDeferral"), ConfigurationType.WindowsUpdate, "\uE916"),
+                ["ResetUpdateDeferral"] = new(buttonCommand = new ResetWindowsUpdateDeferral(), App.GetValueFromItemList("ResetFTH"), App.GetValueFromItemList("ResetWindowsUpdateDeferral"), ConfigurationType.WindowsUpdate, "\uE81C"),
             };
 
             host.ConfigureServices((_, services) =>
@@ -272,23 +272,23 @@ namespace AtlasToolbox.HostBuilder
         {
             Dictionary<string, ConfigurationSubMenu> configurationDictionary = new()
             {
-                ["BootConfigAppearance"] = new(App.GetValueFromItemList("BootConfigAppearance"), App.GetValueFromItemList("BootConfigAppearance", true), ConfigurationType.BootConfigurationSubMenu),
-                ["BootConfigBehavior"] = new(App.GetValueFromItemList("BootConfigBehavior"), App.GetValueFromItemList("BootConfigBehavior", true), ConfigurationType.BootConfigurationSubMenu),
-                ["NvidiaDisplayContainerSubMenu"] = new(App.GetValueFromItemList("NvidiaDisplayContainerSubMenu"), App.GetValueFromItemList("NvidiaDisplayContainerSubMenu", true), ConfigurationType.ServicesSubMenu),
+                ["BootConfigAppearance"] = new("BootConfigAppearance", App.GetValueFromItemList("BootConfigAppearance"), App.GetValueFromItemList("BootConfigAppearance", true), ConfigurationType.BootConfigurationSubMenu, "\uE620"),
+                ["BootConfigBehavior"] = new("BootConfigBehavior", App.GetValueFromItemList("BootConfigBehavior"), App.GetValueFromItemList("BootConfigBehavior", true), ConfigurationType.BootConfigurationSubMenu, "\uF259"),
+                ["NvidiaDisplayContainerSubMenu"] = new("NvidiaDisplayContainerSubMenu", App.GetValueFromItemList("NvidiaDisplayContainerSubMenu"), App.GetValueFromItemList("NvidiaDisplayContainerSubMenu", true), ConfigurationType.ServicesSubMenu),
 
-                ["StartMenuSubMenu"] = new(App.GetValueFromItemList("StartMenuSubMenu"), App.GetValueFromItemList("StartMenuSubMenu", true), ConfigurationType.Interface),
-                ["ContextMenuSubMenu"] = new(App.GetValueFromItemList("ContextMenuSubMenu"), App.GetValueFromItemList("ContextMenuSubMenu", true), ConfigurationType.Interface),
-                ["AiSubMenu"] = new(App.GetValueFromItemList("AiSubMenu"), App.GetValueFromItemList("AiSubMenu", true), ConfigurationType.General),
-                ["ServicesSubMenu"] = new(App.GetValueFromItemList("ServicesSubMenu"), App.GetValueFromItemList("ServicesSubMenu", true), ConfigurationType.Advanced),
-                ["BootConfigurationSubMenu"] = new(App.GetValueFromItemList("BootConfigurationSubMenu"), App.GetValueFromItemList("BootConfigurationSubMenu", true), ConfigurationType.Advanced),
-                ["FileExplorerSubMenu"] = new(App.GetValueFromItemList("FileExplorerSubMenu"), App.GetValueFromItemList("FileExplorerSubMenu", true), ConfigurationType.Interface),
-                ["DriverConfigurationSubMenu"] = new(App.GetValueFromItemList("DriverConfigurationSubMenu"), App.GetValueFromItemList("DriverConfigurationSubMenu", true), ConfigurationType.Advanced),
-                ["CoreIsolationSubMenu"] = new(App.GetValueFromItemList("CoreIsolationSubMenu"), App.GetValueFromItemList("CoreIsolationSubMenu", true), ConfigurationType.Security),
-                ["DefenderSubMenu"] = new(App.GetValueFromItemList("DefenderSubMenu"), App.GetValueFromItemList("DefenderSubMenu", true), ConfigurationType.Security),
-                ["MitigationsSubMenu"] = new(App.GetValueFromItemList("MitigationsSubMenu"), App.GetValueFromItemList("MitigationsSubMenu", true), ConfigurationType.Security),
-                ["TroubleshootingNetwork"] = new(App.GetValueFromItemList("TroubleshootingNetwork"), App.GetValueFromItemList("TroubleshootingNetwork", true), ConfigurationType.Troubleshooting),
-                ["FileSharingSubMenu"] = new(App.GetValueFromItemList("FileSharingSubMenu"), App.GetValueFromItemList("FileSharingSubMenu", true), ConfigurationType.General),
-                ["WindowsUpdate"] = new(App.GetValueFromItemList("WindowsUpdate"), App.GetValueFromItemList("WindowsUpdate", true), ConfigurationType.General),
+                ["StartMenuSubMenu"] = new("StartMenuSubMenu", App.GetValueFromItemList("StartMenuSubMenu"), App.GetValueFromItemList("StartMenuSubMenu", true), ConfigurationType.Interface, "\uE8FC"),
+                ["ContextMenuSubMenu"] = new("ContextMenuSubMenu", App.GetValueFromItemList("ContextMenuSubMenu"), App.GetValueFromItemList("ContextMenuSubMenu", true), ConfigurationType.Interface),
+                ["AiSubMenu"] = new("AiSubMenu", App.GetValueFromItemList("AiSubMenu"), App.GetValueFromItemList("AiSubMenu", true), ConfigurationType.General, "\uF4A5"),
+                ["ServicesSubMenu"] = new("ServicesSubMenu", App.GetValueFromItemList("ServicesSubMenu"), App.GetValueFromItemList("ServicesSubMenu", true), ConfigurationType.Advanced, "\uE9F5"),
+                ["BootConfigurationSubMenu"] = new("BootConfigurationSubMenu", App.GetValueFromItemList("BootConfigurationSubMenu"), App.GetValueFromItemList("BootConfigurationSubMenu", true), ConfigurationType.Advanced, "\uF259"),
+                ["FileExplorerSubMenu"] = new("FileExplorerSubMenu", App.GetValueFromItemList("FileExplorerSubMenu"), App.GetValueFromItemList("FileExplorerSubMenu", true), ConfigurationType.Interface, "\uEC50"),
+                ["DriverConfigurationSubMenu"] = new("DriverConfigurationSubMenu", App.GetValueFromItemList("DriverConfigurationSubMenu"), App.GetValueFromItemList("DriverConfigurationSubMenu", true), ConfigurationType.Advanced, "\uE772"),
+                ["CoreIsolationSubMenu"] = new("CoreIsolationSubMenu", App.GetValueFromItemList("CoreIsolationSubMenu"), App.GetValueFromItemList("CoreIsolationSubMenu", true), ConfigurationType.Security, "\uEEA1"),
+                ["DefenderSubMenu"] = new("DefenderSubMenu", App.GetValueFromItemList("DefenderSubMenu"), App.GetValueFromItemList("DefenderSubMenu", true), ConfigurationType.Security, "\uE83D"),
+                ["MitigationsSubMenu"] = new("MitigationsSubMenu", App.GetValueFromItemList("MitigationsSubMenu"), App.GetValueFromItemList("MitigationsSubMenu", true), ConfigurationType.Security, "\uE730"),
+                ["TroubleshootingNetwork"] = new("TroubleshootingNetwork", App.GetValueFromItemList("TroubleshootingNetwork"), App.GetValueFromItemList("TroubleshootingNetwork", true), ConfigurationType.Troubleshooting, "\uE90F"),
+                ["FileSharingSubMenu"] = new("FileSharingSubMenu", App.GetValueFromItemList("FileSharingSubMenu"), App.GetValueFromItemList("FileSharingSubMenu", true), ConfigurationType.General, "\uF193"),
+                ["WindowsUpdate"] = new("WindowsUpdate", App.GetValueFromItemList("WindowsUpdate"), App.GetValueFromItemList("WindowsUpdate", true), ConfigurationType.General, "\uEDAB"),
             };
             host.ConfigureServices((_, services) =>
             {
@@ -325,10 +325,10 @@ namespace AtlasToolbox.HostBuilder
             // TODO: Change configuration types
             Dictionary<string, MultiOptionConfiguration> configurationDictionary = new()
             {
-                ["ContextMenuTerminals"] = new(App.GetValueFromItemList("ContextMenuTerminals"), "ContextMenuTerminals", ConfigurationType.ContextMenuSubMenu),
-                ["ShortcutIcon"] = new(App.GetValueFromItemList("ShortcutIcon"), "ShortcutIcon", ConfigurationType.Interface),
-                ["Mitigations"] = new(App.GetValueFromItemList("Mitigations"), "Mitigations", ConfigurationType.MitigationsSubMenu),
-                ["SafeMode"] = new(App.GetValueFromItemList("SafeMode"), "SafeMode", ConfigurationType.Troubleshooting),
+                ["ContextMenuTerminals"] = new(App.GetValueFromItemList("ContextMenuTerminals"), "ContextMenuTerminals", ConfigurationType.ContextMenuSubMenu, "\uE756"),
+                ["ShortcutIcon"] = new(App.GetValueFromItemList("ShortcutIcon"), "ShortcutIcon", ConfigurationType.Interface, "\uE8A7"),
+                ["Mitigations"] = new(App.GetValueFromItemList("Mitigations"), "Mitigations", ConfigurationType.MitigationsSubMenu, "\uF0EF"),
+                ["SafeMode"] = new(App.GetValueFromItemList("SafeMode"), "SafeMode", ConfigurationType.Troubleshooting, "\uEA18"),
             };
 
             host.ConfigureServices((_, services) =>

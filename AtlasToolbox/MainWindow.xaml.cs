@@ -1,8 +1,10 @@
+using AtlasToolbox.Enums;
 using AtlasToolbox.Utils;
 using AtlasToolbox.ViewModels;
 using AtlasToolbox.Views;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.WinUI;
+using CommunityToolkit.WinUI.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -11,6 +13,7 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -39,6 +42,7 @@ namespace AtlasToolbox
             ExtendsContentIntoTitleBar = true;
 
             LoadText();
+            LoadExperiments();
 
             // Setup root list
             RootList = new List<IConfigurationItem>();
@@ -81,6 +85,15 @@ namespace AtlasToolbox
             else this.Closed += AppBehaviorHelper.CloseApp;
         }
 
+        public void LoadExperiments()
+        {
+            // Search Experiment
+            if (RegistryHelper.IsMatch("HKLM\\SOFTWARE\\AtlasOS\\Toolbox\\Experiments\\Search", "enabled", 0) || !RegistryHelper.KeyExists("HKLM\\SOFTWARE\\AtlasOS\\Toolbox\\Experiments\\Search"))
+            {
+                SearchBox.Visibility = Visibility.Collapsed;
+            }
+        }
+
         public bool IsFullscreen()
         {
             var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
@@ -96,7 +109,7 @@ namespace AtlasToolbox
             }
             return false;
         }
-        
+
         private async void CheckUpdates()
         {
             bool update = await Task.Run(() => ToolboxUpdateHelper.CheckUpdates());
@@ -107,8 +120,11 @@ namespace AtlasToolbox
         }
         public void LoadText()
         {
+            // Updates
             UpdateTitleBar.Title = App.GetValueFromItemList("NewUpdateDesc");
             LearnMoreBtn.Content = App.GetValueFromItemList("LearnMore");
+
+            // Navigation Items
             Home.Content = App.GetValueFromItemList("Home_HeaderText");
             Software.Content = App.GetValueFromItemList("Software");
             GeneralConfig.Content = App.GetValueFromItemList("GeneralConfig");
@@ -118,6 +134,9 @@ namespace AtlasToolbox
             Security.Content = App.GetValueFromItemList("Security");
             Troubleshooting.Content = App.GetValueFromItemList("Troubleshooting");
             Setting.Content = App.GetValueFromItemList("Settings");
+
+            // Search Box
+            SearchBox.PlaceholderText = App.GetValueFromItemList("SearchPlaceholder");
         }
 
         /// <summary>
@@ -129,18 +148,32 @@ namespace AtlasToolbox
             return this.Content.XamlRoot;
         }
 
+        #region Navigation Control
         /// <summary>
         /// navigates to the correct page when a navigation item is clicked
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void NavigationViewControl_ItemInvoked(NavigationView sender,
-                      NavigationViewItemInvokedEventArgs args)
+        private void NavigationViewControl_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            if (App.CurrentCategory == args.InvokedItemContainer.Tag.ToString() || (App.CurrentCategory == "SettingsItem" && args.IsSettingsInvoked == true)) { return; }
-
-            App.CurrentCategory = args.InvokedItemContainer.Tag.ToString();
-            Navigate(args.InvokedItemContainer.Tag.ToString());
+            string selectedItem = args.SelectedItemContainer.Tag.ToString() ?? "";
+            if (App.CurrentCategory == selectedItem || (App.CurrentCategory == "SettingsItem" && args.IsSettingsSelected == true)) { return; }
+            App.CurrentCategory = selectedItem;
+            switch (selectedItem)
+            {
+                case "SettingsPage":
+                    Navigate(typeof(SettingsPage));
+                    break;
+                case "AtlasToolbox.Views.SoftwarePage":
+                    Navigate(typeof(SoftwarePage));
+                    break;
+                case "AtlasToolbox.Views.HomePage":
+                    Navigate(typeof(HomePage));
+                    break;
+                default:
+                    Navigate(typeof(ConfigPage));
+                    break;
+            }
             App.XamlRoot = this.Content.XamlRoot;
         }
 
@@ -148,38 +181,9 @@ namespace AtlasToolbox
         /// Navigates the ContentFrame to the selected page
         /// </summary>
         /// <param name="tag"></param>
-        private void Navigate(string tag)
+        private void Navigate(Type type)
         {
-            switch (tag)
-            {
-                case "SettingsPage":
-                    App.CurrentCategory = "SettingsItem";
-                    ContentFrame.Navigate(
-                        new SettingsPage().GetType(),
-                        null,
-                        new DrillInNavigationTransitionInfo());
-                    break;
-                case "AtlasToolbox.Views.SoftwarePage":
-                    ContentFrame.Navigate(
-                           new SoftwarePage().GetType(),
-                           null,
-                           new DrillInNavigationTransitionInfo()
-                           );
-                    break;
-                case "AtlasToolbox.Views.HomePage":
-                    Type newPage = Type.GetType(tag);
-                    ContentFrame.Navigate(
-                           new HomePage().GetType(),
-                           null,
-                           new DrillInNavigationTransitionInfo());
-                    break;
-                default:
-                    ContentFrame.Navigate(
-                           new ConfigPage().GetType(),
-                           null,
-                           new DrillInNavigationTransitionInfo());
-                    break;
-            }
+            ContentFrame.Navigate(type, null, new DrillInNavigationTransitionInfo());
         }
 
         public void GoBack()
@@ -221,6 +225,12 @@ namespace AtlasToolbox
                     App.logger.Error($"No matching NavigationViewItem found for category: {App.CurrentCategory}");
                 }
             }
+        }
+        #endregion Navigation Control
+
+        private void AppTitleBar_PaneToggleRequested(Microsoft.UI.Xaml.Controls.TitleBar sender, object args)
+        {
+            NavigationViewControl.IsPaneOpen = !NavigationViewControl.IsPaneOpen;
         }
 
 
@@ -379,16 +389,63 @@ namespace AtlasToolbox
         {
             var configItem = RootList.Where(item => item.Name == args.SelectedItem.ToString()).FirstOrDefault();
             string type = configItem.Type.ToString();
-
             if (configItem is not null)
             {
-                NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems
-                                .OfType<NavigationViewItem>()
-                                .First(n => n.Tag.Equals(configItem.Type.ToString()));
-                App.CurrentCategory = configItem.Type.ToString();
-                Navigate(configItem.Type.ToString());
+                // Search bar logic. WIP.
+                if (type.Contains("SubMenu"))
+                {
+                    SettingsCard settingCard = new SettingsCard();
+                    try
+                    {
+                        IEnumerable<ConfigurationSubMenuViewModel> items = App._host.Services.GetServices<ConfigurationSubMenuViewModel>();
+                        ConfigurationSubMenuViewModel itemViewModel = items.Where(vm => vm.Key == type).First();
+                        ConfigurationSubMenuViewModel rootItemViewModel = null;
+                        DataTemplate template = new DataTemplate();
+                        ObservableCollection<Folder> folders = new ObservableCollection<Folder>();
+                        while (type.Contains("SubMenu"))
+                        {
+                            string itemViewModelType = itemViewModel.Type.ToString();
+                            folders.Add(new Folder() { Name = itemViewModel.Name });
+                            if (rootItemViewModel is null) rootItemViewModel = items.Where(vm => vm.Key == type).First();
+                            if (itemViewModelType.Contains("SubMenu"))
+                            {
+                                type = itemViewModelType;
+                                itemViewModel = items.Where(vm => vm.Key == type).First();
+                                configItem = itemViewModel;
+                            }
+                            else
+                            {
+                                folders.Add(new Folder() { Name = itemViewModelType });
+                                type = itemViewModelType;
+                            }
+                        }
+                        //folders.Remove(folders.First());
+                        ContentFrame.Navigate(typeof(SubSection), new Tuple<ConfigurationSubMenuViewModel, DataTemplate, object>
+                            (rootItemViewModel, template, new ObservableCollection<Folder>(folders.Reverse())), new SlideNavigationTransitionInfo()
+                            { Effect = SlideNavigationTransitionEffect.FromRight });
+                    }
+                    catch (Exception ex)
+                    {
+                        App.logger.Error(ex.Message + ": An exception was thrown when trying to open a submenu:\n\n" + ex.InnerException);
+                    }
+                }
+                else
+                {
+                    NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems
+                                    .OfType<NavigationViewItem>()
+                                    .First(n => n.Tag.Equals(configItem.Type.ToString()));
+                    App.CurrentCategory = configItem.Type.ToString();
+                    Navigate(typeof(Views.ConfigPage));
+                }
             }
         }
+
+
+        //private async Task<IEnumerable<ConfigurationSubMenuViewModel>> GetSubMenuViewModels()
+        //{
+        //    var vms = await Task.Run(() => App._host.Services.GetServices<ConfigurationSubMenuViewModel>());
+        //    return vms;
+        //}
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {

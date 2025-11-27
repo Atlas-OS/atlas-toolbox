@@ -3,6 +3,7 @@ using AtlasToolbox.Models;
 using AtlasToolbox.Utils;
 using AtlasToolbox.ViewModels;
 using CommunityToolkit.WinUI.Controls;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -69,9 +70,10 @@ namespace AtlasToolbox.Views
                 BreadcrumbBar.ItemClicked += BreadcrumbBar_ItemClicked;
 
                 oldCat = App.CurrentCategory;
-                //App.CurrentCategory = item.Name;
             }
         }
+
+
 
         private void BreadcrumbBar_ItemClicked(BreadcrumbBar sender, BreadcrumbBarItemClickedEventArgs args)
         {

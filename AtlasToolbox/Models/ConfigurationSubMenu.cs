@@ -11,13 +11,15 @@ namespace AtlasToolbox.Models
 {
     public class ConfigurationSubMenu
     {
+        public string Key { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public ConfigurationType Type { get; set; }
         public FontIcon Icon { get; set; }
 
-        public ConfigurationSubMenu(string name, string description, ConfigurationType type, string icon = "\uE897")
+        public ConfigurationSubMenu(string key, string name, string description, ConfigurationType type, string icon = "\uE897")
         {
+            Key = key;
             Name = name;
             Description = description;
             Type = type;

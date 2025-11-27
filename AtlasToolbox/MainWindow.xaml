@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:AtlasToolbox"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="AtlasOS Toolbox"
     mc:Ignorable="d">
     <Window.SystemBackdrop>
         <MicaBackdrop Kind="Base" />
@@ -20,47 +21,61 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Border
+        <TitleBar
             x:Name="AppTitleBar"
             Grid.Column="1"
             Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
             Margin="48,0,0,0"
             VerticalAlignment="Stretch"
+            IsPaneToggleButtonVisible="True"
+            PaneToggleRequested="AppTitleBar_PaneToggleRequested"
             AutomationProperties.AutomationId="AppTitleBar"
-            Canvas.ZIndex="1"
-            IsHitTestVisible="True">
-            <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal">
-                <Button
-                    x:Name="AtlasButton"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Click="AtlasButton_Click">
-                    <Image
-                        Width="18"
+            Canvas.ZIndex="1">
+            <TitleBar.LeftHeader>
+                <StackPanel Orientation="Horizontal">
+                    <Button
+                        x:Name="AtlasButton"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Click="AtlasButton_Click">
+                        <Image
+                            Width="18"
+                            VerticalAlignment="Center"
+                            Source="ms-appx:///assets/logo/atlas-logo.png" />
+                    </Button>
+                    <TextBlock
+                        x:Name="AppTitle"
+                        Margin="12,-1,0,0"
                         VerticalAlignment="Center"
-                        Source="ms-appx:///assets/logo/atlas-logo.png" />
-                </Button>
-                <TextBlock
-                    x:Name="AppTitle"
-                    Margin="12,-1,0,0"
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Text="AtlasOS Toolbox" />
+                    </StackPanel>
+            </TitleBar.LeftHeader>
+            <TitleBar.Content>
+                <AutoSuggestBox
+                    x:Name="SearchBox"
+                    AutomationProperties.Name="Basic AutoSuggestBox"
+                    QueryIcon="Find"
+                    SuggestionChosen="AutoSuggestBox_SuggestionChosen"
+                    HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
-                    Style="{StaticResource CaptionTextBlockStyle}"
-                    Text="AtlasOS Toolbox" />
-            </StackPanel>
-        </Border>
+                    Width="320"
+                    TextChanged="AutoSuggestBox_TextChanged" />
+            </TitleBar.Content>
+        </TitleBar>
         <NavigationView
             x:Name="NavigationViewControl"
             Grid.RowSpan="2"
             Grid.Column="1"
             AlwaysShowHeader="True"
             BackRequested="NavigationViewControl_BackRequested"
+            IsPaneToggleButtonVisible="False"
             Header="Default Header"
             IsSettingsVisible="False"
             IsTabStop="False"
             IsTitleBarAutoPaddingEnabled="False"
-            ItemInvoked="NavigationViewControl_ItemInvoked">
-
-
+            SelectionChanged="NavigationViewControl_SelectionChanged">
+            <!--Main Content-->
             <NavigationView.Content>
                 <Grid>
                     <Frame x:Name="ContentFrame" Navigated="ContentFrame_Navigated" />
@@ -72,12 +87,11 @@
                         Background="#30313E"
                         IsOpen="False">
                         <InfoBar.ActionButton>
-                            <HyperlinkButton NavigateUri="https://github.com/atlas-os/atlas-toolbox/releases/latest" x:Name="LearnMoreBtn"/>
+                            <HyperlinkButton x:Name="LearnMoreBtn" NavigateUri="https://github.com/atlas-os/atlas-toolbox/releases/latest" />
                         </InfoBar.ActionButton>
                     </InfoBar>
                 </Grid>
             </NavigationView.Content>
-
             <NavigationView.Resources>
                 <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
                 <Thickness x:Key="NavigationViewMinimalContentMargin">0,48,0,0</Thickness>
@@ -85,12 +99,11 @@
                 <CornerRadius x:Key="NavigationViewContentGridCornerRadius">8,0,0,0</CornerRadius>
             </NavigationView.Resources>
 
-            <!--  Since this is WIP and really buggy at this stage, prefer to comment it rathen than releasing it.  -->
+            <!--  Currently an experiment  -->
             <!--<NavigationView.AutoSuggestBox>
                 <AutoSuggestBox
-                    Width="300"
+                    x:Name="SearchBox"
                     AutomationProperties.Name="Basic AutoSuggestBox"
-                    PlaceholderText="Search a tweak (WIP)"
                     QueryIcon="Find"
                     SuggestionChosen="AutoSuggestBox_SuggestionChosen"
                     TextChanged="AutoSuggestBox_TextChanged" />
@@ -144,7 +157,6 @@
                     Icon="Setting"
                     Tag="SettingsPage" />
             </NavigationView.FooterMenuItems>
-
         </NavigationView>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="TitleBarStates">
