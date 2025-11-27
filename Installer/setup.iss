@@ -32,9 +32,9 @@ ChangesAssociations=yes
 DisableProgramGroupPage=yes
 
 ;Test
-;LicenseFile=C:\Users\TheyCreeper\Documents\dev\atlas-toolbox\LICENSE
+LicenseFile=C:\Users\TheyCreeper\Documents\dev\atlas-toolbox\LICENSE
 ;Prod
-LicenseFile=D:\a\atlas-toolbox\atlas-toolbox\LICENSE
+;LicenseFile=D:\a\atlas-toolbox\atlas-toolbox\LICENSE
 
 OutputBaseFilename=AtlasToolbox-Setup
 SolidCompression=yes
@@ -48,11 +48,11 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 ; Test code
-;Source: "C:\Users\TheyCreeper\Documents\dev\atlas-toolbox\AtlasToolbox\bin\x64\Release\net8.0-windows10.0.26100.0\win-x64\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-;Source: "C:\Users\TheyCreeper\Documents\dev\atlas-toolbox\Installer\Toolbox\*"; DestDir: "C:\Windows\AtlasModules\Toolbox"; Flags: ignoreversion recursesubdirs
+Source: "C:\Users\TheyCreeper\Documents\dev\atlas-toolbox\AtlasToolbox\bin\x64\Release\net8.0-windows10.0.26100.0\win-x64\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\TheyCreeper\Documents\dev\atlas-toolbox\Installer\Toolbox\*"; DestDir: "C:\Windows\AtlasModules\Toolbox"; Flags: ignoreversion recursesubdirs
 ; Prod code
-Source: "D:\a\atlas-toolbox\atlas-toolbox\Deploy\src\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "D:\a\atlas-toolbox\atlas-toolbox\Installer\Toolbox\*"; DestDir: "C:\Windows\AtlasModules\Toolbox"; Flags: ignoreversion recursesubdirs
+;Source: "D:\a\atlas-toolbox\atlas-toolbox\Deploy\src\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+;Source: "D:\a\atlas-toolbox\atlas-toolbox\Installer\Toolbox\*"; DestDir: "C:\Windows\AtlasModules\Toolbox"; Flags: ignoreversion recursesubdirs
 
 [Registry]
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExt}\OpenWithProgids"; ValueType: string; ValueName: "{#MyAppAssocKey}"; ValueData: ""; Flags: uninsdeletevalue
@@ -71,11 +71,41 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent runascurrentuser
 Filename: {sys}\taskkill.exe; Parameters: "/f /im AtlasToolbox.exe"; Flags: skipifdoesntexist runhidden
 
-[Code]
-function InitializeSetup: Boolean;
-begin
-  // comment out functions to disable installing them
-  Dependency_AddDotNet8;
-    
-  Result := True;
- end;
+; Commented since we seem to not need this anymore
+;[Code]
+;
+;function CheckDotNetVersionAt(const Key, Value: String): Boolean;
+;var
+;  VersionStr: String;
+;begin
+;  Result := RegQueryStringValue(HKLM64, Key, Value, VersionStr);
+;  if Result then
+;    Result := (Length(VersionStr) >= 2) and (Copy(VersionStr, 1, 2) = '8.');
+;end;
+;
+;function IsDotNet8RuntimeInstalled(): Boolean;
+;begin
+;  Result :=
+;    CheckDotNetVersionAt(
+;      'SOFTWARE\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.NETCore.App',
+;      'Version'
+;    )
+;    or
+;    CheckDotNetVersionAt(
+;      'SOFTWARE\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.WindowsDesktop.App',
+;      'Version'
+;    );
+;  
+;  if not Result then
+;    Log('No .NET 8 runtime found.');
+;end;
+;
+;function InitializeSetup(): Boolean;
+;begin
+;  if not IsDotNet8RuntimeInstalled() then
+;  begin
+;    Dependency_AddDotNet8;
+;    
+;    Result := True;
+;  end;
+;
