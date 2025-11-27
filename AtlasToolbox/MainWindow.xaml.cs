@@ -385,6 +385,7 @@ namespace AtlasToolbox
             }
         }
 
+        #region Search experiment
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
             var configItem = RootList.Where(item => item.Name == args.SelectedItem.ToString()).FirstOrDefault();
@@ -440,13 +441,6 @@ namespace AtlasToolbox
             }
         }
 
-
-        //private async Task<IEnumerable<ConfigurationSubMenuViewModel>> GetSubMenuViewModels()
-        //{
-        //    var vms = await Task.Run(() => App._host.Services.GetServices<ConfigurationSubMenuViewModel>());
-        //    return vms;
-        //}
-
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             // Since selecting an item will also change the text,
@@ -473,5 +467,6 @@ namespace AtlasToolbox
                 sender.ItemsSource = suitableItems;
             }
         }
+        #endregion Search experiment
     }
 }

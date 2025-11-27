@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace AtlasToolbox.Utils
 {
@@ -26,12 +27,29 @@ namespace AtlasToolbox.Utils
                 string output = commandPrompt.StandardOutput.ReadToEnd();
                 string error = commandPrompt.StandardError.ReadToEnd();
 
+                string result = output + (string.IsNullOrWhiteSpace(error) ? "" : "\n[Error]\n" + error);
+                App.logger.Info($"[CMD] {command}:\n\t{result}");
+
                 if (waitForExit)
                     commandPrompt.WaitForExit();
 
-                string result = output + (string.IsNullOrWhiteSpace(error) ? "" : "\n[Error]\n" + error);
-                App.logger.Info($"[CMD] {command}:\n\t{result}");
                 return result;
+            }
+        }
+
+        public static void RunCommandToUpdate(string command, bool exitEnv = true)
+        {
+            using (Process commandPrompt = new Process())
+            {
+                commandPrompt.StartInfo.FileName = "cmd.exe";
+                commandPrompt.StartInfo.Arguments = $"/c {command}";
+                commandPrompt.StartInfo.CreateNoWindow = true;
+                commandPrompt.StartInfo.UseShellExecute = false;
+
+                commandPrompt.Start();
+
+                if (exitEnv)
+                    Environment.Exit(0);
             }
         }
         /// <summary>
