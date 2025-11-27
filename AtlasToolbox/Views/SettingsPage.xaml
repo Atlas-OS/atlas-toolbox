@@ -93,8 +93,7 @@
                                 </controls:SettingsCard.HeaderIcon>
                                 <ToggleSwitch
                                     Loaded="IsExperimentEnabled"
-                                    Tag="Search"
-                                    Toggled="ToggleState"/>
+                                    Tag="Search"/>
                             </controls:SettingsCard>
                         </controls:SettingsExpander.Items>
                     </controls:SettingsExpander>

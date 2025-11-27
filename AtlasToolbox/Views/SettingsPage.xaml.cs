@@ -107,12 +107,14 @@ namespace AtlasToolbox.Views
         {
             var s = sender as ToggleSwitch;
             s.IsOn = RegistryHelper.IsMatch(@$"HKLM\SOFTWARE\AtlasOS\Toolbox\Experiments\{s.Tag.ToString()}", "enabled", 1);
+            s.Toggled += ToggleState;
         }
 
         private void ToggleState(object sender, RoutedEventArgs e)
         {
             var s = sender as ToggleSwitch;
             RegistryHelper.SetValue(@$"HKLM\SOFTWARE\AtlasOS\Toolbox\Experiments\{s.Tag.ToString()}", "enabled", s.IsOn, Microsoft.Win32.RegistryValueKind.DWord);
+            App.ContentDialogCaller("restartApp");
         }
         #endregion experiments
 

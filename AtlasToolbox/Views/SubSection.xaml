@@ -83,8 +83,7 @@
                                     x:Name="SettingsCard"
                                     Header="{Binding Name}"
                                     Description="{Binding Description}"
-                                    Style="{StaticResource ConfigurationSettingsCardTemplate}"
-                                    HeaderIcon="{Binding Icon}">
+                                    Style="{StaticResource ConfigurationSettingsCardTemplate}">
                                     <controls:SettingsCard.ContextFlyout>
                                         <MenuFlyout>
                                             <MenuFlyoutItem
