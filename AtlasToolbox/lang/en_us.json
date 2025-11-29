@@ -222,8 +222,8 @@
   "StaticIp": "Automatically set static IP",
   "StaticIpDescription": "Automatically configures a static IP address for your network adapter",
 
-  "HideAppBrowserControl": "Hide app browser control",
-  "HideAppBrowserControlDescription": "Hides the embedded browser control in some apps to improve privacy",
+  "HideAppBrowserControl": "App browser control",
+  "HideAppBrowserControlDescription": "Show/Hides the embedded browser control in Windows Security",
 
   "SecurityHealthTray": "Security Health button in the task bar tray",
   "SecurityHealthTrayDescription": "Show or hide the Security Health button in the task bar tray",
