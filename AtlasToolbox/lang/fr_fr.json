@@ -222,8 +222,8 @@
   "StaticIp": "Définir automatiquement l'IP statique",
   "StaticIpDescription": "Configure automatiquement une adresse IP statique pour votre carte réseau",
 
-  "HideAppBrowserControl": "Masquer le contrôle de navigateur & d'application",
-  "HideAppBrowserControlDescription": "Masque le contrôle du navigateur intégré dans certaines applications afin d'améliorer la confidentialité",
+  "HideAppBrowserControl": "Contrôle de navigateur & d'application",
+  "HideAppBrowserControlDescription": "Masque/Affiche le contrôle du navigateur dans Sécurité Windows",
 
   "SecurityHealthTray": "Bouton Sécurité dans la barre des tâches",
   "SecurityHealthTrayDescription": "Monter ou Cacher le bouton Sécurité dans la barre des tâches",
