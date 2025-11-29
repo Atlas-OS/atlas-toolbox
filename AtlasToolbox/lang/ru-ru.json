@@ -2,6 +2,7 @@
   "LangName": "Русский (Россия)",
   "LangKey": "ru_ru",
 
+  "ToBeTranslated": "Для перевода",
   "OpenShellAtlasPreset": "Открыть пресет Shell AtlasOS",
   "InterfaceTweaksDocumentation": "Документация по настройке интерфейса",
   "ActivationPage": "Страница активации",

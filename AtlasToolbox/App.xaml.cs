@@ -252,7 +252,7 @@ namespace AtlasToolbox
                 string toReturn = "";
                 if (!desc) toReturn = StringList.Where(item => item.Key == key).Select(item => item.Value).FirstOrDefault();
                 else toReturn = StringList.Where(item => item.Key == key + "Description").Select(item => item.Value).FirstOrDefault();
-                if (toReturn == "" && toReturn != null) return "To be translated";
+                if (toReturn == "" || toReturn == null) return StringList.Where(item => item.Key == "ToBeTranslated").Select(item => item.Value).FirstOrDefault();
                 else return toReturn;
             }
             catch
