@@ -1,0 +1,369 @@
+{
+  "LangName": "简体中文",
+  "LangKey": "zh_cn",
+
+  "OpenShellAtlasPreset": "打开 Shell AtlasOS 预设",
+  "InterfaceTweaksDocumentation": "界面调整文档",
+  "ActivationPage": "激活页面",
+  "ColorsPage": "颜色个性化设置",
+  "DateAndTime": "日期和时间设置",
+  "DefaultApps": "默认应用程序",
+  "DefaultGraphicsSettings": "默认图形设置",
+  "RegionLanguage": "语言",
+  "Privacy": "隐私设置",
+  "RegionProperties": "区域属性",
+  "Taskbar": "任务栏设置",
+  "CoreIsolation": "核心隔离 - Windows 安全中心",
+  "WindowsSettingsDocumentation": "Windows 设置文档",
+  "BootConfigExplanations": "Microsoft 官方说明",
+  "InterrupAffinityTool": "中断亲和性工具",
+  "ProcessExplorerApp": "进程浏览器",
+  "ProcessExplorerDocumentation": "进程浏览器文档",
+  "NvidiaDisplayContainerMustReadFirst": "必读",
+  "AdvancedConfigMustRead": "高级配置文档",
+  "SecurityDocumentation": "安全文档",
+  "ResetPC": "重置此电脑（必读）",
+  "RestartExplorerButton": "重启 Explorer.exe",
+  "RestartExplorerButtonDescription": "某些界面设置可能需要您重启 explorer.exe",
+  "ViewCurrentSettingsBootConfig": "查看当前值",
+  "ViewCurrentSettingsBootConfigDescription": "查看启动配置值",
+  "VBSCurrentConfig": "VBS 当前配置",
+  "VBSCurrentConfigDescription": "查看当前 VBS 配置",
+  "ToggleDefender": "切换",
+  "ToggleDefenderDescription": "切换 Windows Defender",
+  "ResetFTH": "重置",
+  "ResetFTHDescription": "重置 FTH 项",
+  "InstallOpenShell": "安装 OpenShell",
+  "InstallOpenShellDescription": "安装",
+  "FixErrors": "故障排除",
+  "FixErrorsDescription": "修复错误 2502 和 2503",
+  "RepairWinComponent": "修复 Windows 组件",
+  "TelemetryComponents": "遥测组件",
+  "AtlasDefault": "将网络重置为 Atlas 默认设置",
+  "WindowsDefault": "将网络重置为 Windows 默认设置",
+  "BootConfigAppearance": "启动配置外观",
+  "BootConfigAppearanceDescription": "与 Windows 启动外观相关的所有内容",
+  "BootConfigBehavior": "启动行为",
+  "BootConfigBehaviorDescription": "与启动行为相关的所有内容",
+  "NvidiaDisplayContainerSubMenu": "NVIDIA 显示容器设置",
+  "NvidiaDisplayContainerSubMenuDescription": "与 NVIDIA 显示容器相关的所有内容",
+  "StartMenuSubMenu": "开始菜单",
+  "StartMenuSubMenuDescription": "与自定义 Windows 开始菜单相关的所有内容",
+  "ContextMenuSubMenu": "上下文菜单",
+  "ContextMenuSubMenuDescription": "与上下文菜单相关的所有内容",
+  "AiSubMenu": "人工智能功能",
+  "AiSubMenuDescription": "与 Windows 11 中的人工智能功能相关的所有内容",
+  "ServicesSubMenu": "服务",
+  "ServicesSubMenuDescription": "与 Windows 服务相关的所有内容",
+  "BootConfigurationSubMenu": "启动配置",
+  "BootConfigurationSubMenuDescription": "与 Windows 启动相关的所有内容",
+  "FileExplorerSubMenu": "文件浏览器自定义",
+  "FileExplorerSubMenuDescription": "与自定义 Windows 文件浏览器相关的所有内容",
+  "DriverConfigurationSubMenu": "驱动程序配置",
+  "DriverConfigurationSubMenuDescription": "与驱动程序配置相关的所有内容",
+  "CoreIsolationSubMenu": "核心隔离 (VBS)",
+  "CoreIsolationSubMenuDescription": "与核心隔离相关的所有内容",
+  "DefenderSubMenu": "Defender",
+  "DefenderSubMenuDescription": "与 Windows Defender 相关的所有内容",
+  "MitigationsSubMenu": "缓解措施",
+  "MitigationsSubMenuDescription": "与缓解措施相关的所有内容",
+  "TroubleshootingNetwork": "网络",
+  "TroubleshootingNetworkDescription": "与网络故障排除相关的所有内容",
+  "FileSharingSubMenu": "文件共享",
+  "FileSharingSubMenuDescription": "与 Windows 中的文件共享相关的所有内容",
+  "ContextMenuTerminals": "在上下文菜单中添加或删除终端",
+  "ShortcutIcon": "更改快捷方式的图标",
+  "Mitigations": "更改缓解措施状态",
+  "SafeMode": "启动时进入安全模式",
+
+  // 配置开关选项
+  "Animations": "动画效果",
+  "AnimationsDescription": "启用或禁用 Windows 动画",
+
+  "ExtractContextMenu": "上下文菜单中的\"解压\"选项",
+  "ExtractContextMenuDescription": "在压缩文件的上下文菜单中添加\"解压\"选项",
+
+  "RunWithPriority": "上下文菜单中的按优先级运行",
+  "RunWithPriorityDescription": "在应用程序的上下文菜单中添加\"按优先级运行\"选项",
+
+  "LanmanWorkstation": "Lanman 工作站 (SMB)",
+  "LanmanWorkstationDescription": "启用或禁用 Lanman 工作站服务以进行 SMB 文件共享",
+
+  "NetworkDiscovery": "网络发现",
+  "NetworkDiscoveryDescription": "启用或禁用网络发现以便于文件共享",
+
+  "Printing": "打印",
+  "PrintingDescription": "启用或禁用打印服务",
+
+  "NvidiaDispayContainer": "NVIDIA 显示容器",
+  "NvidiaDispayContainerDescription": "启用或禁用 NVIDIA 显示容器服务",
+
+  "AddNvidiaDisplayContainerContextMenu": "上下文菜单中的 NVIDIA 显示容器",
+  "AddNvidiaDisplayContainerContextMenuDescription": "在上下文菜单中添加 NVIDIA 显示容器切换",
+
+  "CpuIdleContextMenu": "上下文菜单中的 CPU 闲置切换",
+  "CpuIdleContextMenuDescription": "在上下文菜单中添加 CPU 闲置切换",
+
+  "LockScreen": "启用锁屏",
+  "LockScreenDescription": "启用或禁用 Windows 锁屏",
+
+  "ShortcutText": "快捷方式文本",
+  "ShortcutTextDescription": "显示或隐藏快捷方式上的\"快捷方式\"文本",
+
+  "BootLogo": "启动徽标",
+  "BootLogoDescription": "启用或禁用 Windows 启动徽标",
+
+  "BootMessages": "启动消息",
+  "BootMessagesDescription": "启用或禁用 Windows 启动消息",
+
+  "NewBootMenu": "新启动菜单",
+  "NewBootMenuDescription": "启用或禁用新的 Windows 启动菜单",
+
+  "SpinningAnimation": "旋转动画",
+  "SpinningAnimationDescription": "启用或禁用启动时的旋转动画",
+
+  "AdvancedBootOptions": "启动时的高级启动选项",
+  "AdvancedBootOptionsDescription": "启用或禁用启动时的高级启动选项",
+
+  "AutomaticRepair": "自动修复",
+  "AutomaticRepairDescription": "启用或禁用启动失败时的自动修复",
+
+  "KernelParameters": "启动时的内核参数",
+  "KernelParametersDescription": "启用或禁用启动时的内核参数",
+
+  "HighestMode": "最高模式",
+  "HighestModeDescription": "启用或禁用显示器的最高模式",
+
+  "CompactView": "紧凑视图",
+  "CompactViewDescription": "启用或禁用文件浏览器的紧凑视图",
+
+  "RemovableDrivesInSidebar": "侧边栏中的可移动驱动器",
+  "RemovableDrivesInSidebarDescription": "显示或隐藏文件浏览器侧边栏中的可移动驱动器",
+
+  "BackgroundApps": "后台应用程序",
+  "BackgroundAppsDescription": "启用或禁用后台应用程序",
+
+  "SearchIndexing": "搜索索引",
+  "SearchIndexingDescription": "启用或禁用搜索索引",
+
+  "FsoAndGameBar": "全屏优化和游戏栏",
+  "FsoAndGameBarDescription": "启用或禁用全屏优化和游戏栏",
+
+  "AutomaticUpdates": "自动更新",
+  "AutomaticUpdatesDescription": "启用或禁用自动更新",
+
+  "DeliveryOptimisation": "传输优化",
+  "DeliveryOptimisationDescription": "启用或禁用传输优化",
+
+  "Hibernation": "休眠",
+  "HibernationDescription": "启用或禁用休眠模式",
+
+  "Location": "位置",
+  "LocationDescription": "启用或禁用位置服务",
+
+  "PhoneLink": "手机链接和移动设备",
+  "PhoneLinkDescription": "启用或禁用手机链接和移动设备",
+
+  "PowerSaving": "省电",
+  "PowerSavingDescription": "启用或禁用省电功能",
+
+  "Sleep": "睡眠",
+  "SleepDescription": "启用或禁用睡眠模式",
+
+  "SystemRestore": "系统还原",
+  "SystemRestoreDescription": "启用或禁用系统还原",
+
+  "UpdateNotifications": "更新通知",
+  "UpdateNotificationsDescription": "启用或禁用更新通知",
+
+  "WebSearch": "开始菜单网页搜索",
+  "WebSearchDescription": "启用或禁用开始菜单中的网页搜索",
+
+  "Widgets": "桌面小部件",
+  "WidgetsDescription": "启用或禁用桌面小部件",
+
+  "WindowsSpotlight": "Windows Spotlight",
+  "WindowsSpotlightDescription": "启用或禁用锁屏上的 Windows Spotlight",
+
+  "AppStoreArchiving": "Microsoft Store 存档",
+  "AppStoreArchivingDescription": "启用或禁用 Microsoft Store 存档",
+
+  "TakeOwnership": "上下文菜单中添加\"取得所有权\"",
+  "TakeOwnershipDescription": "在文件和文件夹的上下文菜单中添加\"取得所有权\"选项",
+
+  "OldContextMenu": "旧版上下文菜单 (Windows 11 之前)",
+  "OldContextMenuDescription": "启用或禁用 Windows 11 之前的旧版上下文菜单",
+
+  "EdgeSwipe": "边缘滑动",
+  "EdgeSwipeDescription": "启用或禁用边缘滑动手势",
+
+  "AppIconsThumbnail": "缩略图上的应用程序图标",
+  "AppIconsThumbnailDescription": "显示或隐藏文件缩略图上的应用程序图标",
+
+  "AutomaticFolderDiscovery": "自动文件夹发现",
+  "AutomaticFolderDiscoveryDescription": "启用或禁用文件浏览器中的自动文件夹发现",
+
+  "Gallery": "启用库",
+  "GalleryDescription": "启用或禁用文件浏览器中的库",
+
+  "SnapLayout": "启用窗口对齐布局",
+  "SnapLayoutDescription": "启用或禁用窗口的对齐布局",
+
+  "RecentItems": "文件浏览器中解锁最近项目",
+  "RecentItemsDescription": "启用或禁用文件浏览器中的最近项目",
+
+  "VerboseStatusMessage": "详细状态消息",
+  "VerboseStatusMessageDescription": "启用或禁用启动和关闭时的详细状态消息",
+
+  "SuperFetch": "SuperFetch",
+  "SuperFetchDescription": "启用或禁用 SuperFetch (SysMain) 服务",
+
+  "StaticIp": "自动设置静态 IP",
+  "StaticIpDescription": "为网络适配器自动配置静态 IP 地址",
+
+  "HideAppBrowserControl": "隐藏应用程序浏览器控件",
+  "HideAppBrowserControlDescription": "隐藏某些应用程序中的嵌入式浏览器控件以改善隐私",
+
+  "SecurityHealthTray": "任务栏托盘中的安全中心按钮",
+  "SecurityHealthTrayDescription": "显示或隐藏任务栏托盘中的安全中心按钮",
+
+  "FaultTolerantHeap": "容错堆",
+  "FaultTolerantHeapDescription": "启用或禁用容错堆缓解措施",
+
+  "Copilot": "启用 Microsoft Copilot",
+  "CopilotDescription": "启用或禁用 Windows 11 中的 Microsoft Copilot 集成",
+
+  "Recall": "启用 Windows Recall",
+  "RecallDescription": "启用或禁用 Windows Recall 功能",
+
+  "CpuIdle": "启用 CPU 空闲",
+  "CpuIdleDescription": "启用或禁用 CPU 空闲功能",
+
+  "ProcessExplorer": "安装进程浏览器",
+  "ProcessExplorerDescription": "从 Microsoft Sysinternals 安装进程浏览器",
+
+  "VbsState": "启用 VBS",
+  "VbsStateDescription": "启用或禁用基于虚拟化的安全性 (VBS)",
+
+  "GiveAccessToMenu": "授权访问菜单",
+  "GiveAccessToMenuDescription": "为文件和文件夹的上下文菜单添加\"授权访问\"选项",
+
+  "NetworkNavigationPane": "网络导航窗格",
+  "NetworkNavigationPaneDescription": "显示或隐藏文件浏览器中的网络导航窗格",
+
+  "FileSharing": "文件共享",
+  "FileSharingDescription": "启用或禁用文件共享功能",
+
+  "WindowsHello": "Windows Hello",
+  "WindowsHelloDescription": "启用或禁用 Windows Hello 生物识别身份验证",
+
+  // 配置开关结束
+  
+  // 设置和主页文本
+  "Home_WinVer": "Windows 版本",
+  "Home_PlaybookVer": "Playbook 版本",
+  "Home_HeaderText": "主页",
+  "Home_ProfilesText": "配置文件",
+  "Home_Favorites": "收藏",
+  "NewProfilesButton": "创建新配置文件",
+  "IncompatibleVer": "当前 AtlasOS/Windows 安装与此工具箱版本不兼容。请升级到 AtlasOS ",
+  "StatingServices": "正在启动服务...",
+
+  // 对话框文本
+  "CurrentConfigIsSavedMessage": "您的当前配置将被保存到此配置文件",
+  "DeleteProfileConfirmation": "您确实想要删除此配置文件吗？",
+  "TryDeleteDefaultProfile": "您无法删除默认配置文件",
+  "Home_SetProfileConfig": "您确实想要设置此配置文件吗？",
+  "RestartPCPromptHeader": "为了完全应用更改，请重启您的电脑",
+  "RelogApplyDesc": "为了完全应用更改，请注销。",
+  "Yes": "是",
+  "No": "否",
+  "Cancel": "取消",
+  "Ok": "确定",
+  "Restart": "重启",
+  "Later": "稍后",
+  "Create": "创建",
+  "Home_SetProfileBtn": "设置此配置文件",
+  "Home_DeleteProfileBtn": "删除此配置文件",
+  "Settings": "设置",
+  "Behavior": "常规",
+  "Settings_BackgroundDesc": "保持工具箱在后台运行",
+  "About": "关于",
+  "CloneRepoCard": "克隆此存储库",
+  "BugReportCard": "提交错误报告",
+  "WarningHeader": "此代码由 AtlasOS 团队提供。此软件仅限于在受支持的 Windows 版本上与 AtlasOS 配合使用。不建议使用其他 Playbook 和/或不受支持的 Windows 版本。",
+  "InstallSoftware": "安装软件",
+  "InstallButton": "安装",
+  "Unstable": "不稳定",
+  "UnstableDescription": "此应用程序目前仅用于测试目的。该应用程序可能包含可能破坏您的 Windows 安装的错误。风险自承。",
+  "BetaVersion": "测试版",
+  "BetaVersionDescription": "此应用程序目前处于测试版。如果您发现错误或想要建议功能，请在 Discord 上提供反馈。功能可能会发生变化。",
+  "RestartApp": "重启工具箱以应用更改",
+  "RestartAppDesc": "为了应用这些更改，请重启工具箱。",
+  "RestartAppBtn": "立即重启工具箱",
+  "RestartPC": "重启您的电脑以应用。",
+  "RestartPCDesc": "为了应用这些更改，请重启您的电脑。",
+  "RestartBtn": "立即重启",
+  "RelogApply": "重新登录以应用",
+  "ReloadApplyDesc": "为了应用这些更改，请重新登录。",
+  "RelogBtn": "注销",
+  "CheckUpdates": "检查更新",
+  "CheckUpdatesBtn": "立即检查",
+  "LatestVer": "没有可用的更新",
+  "NewUpdate": "更新",
+  "NewUpdateDesc": "有新的更新可用。您现在想要安装吗？",
+  "InstallNow": "立即安装",
+  "ToggleWindowsUpdates": "切换 Windows 更新",
+  "WindowsUpdate": "Windows 更新",
+  "WindowsUpdateDescription": "与 Windows 更新相关的设置",
+  "FeatureHeader": "功能更新：",
+  "QualityHeader": "质量更新：",
+  "Set": "设置",
+  "WindowsUpdateDeferral": "设置 Windows 更新延迟天数",
+  "UpdateDeferralPromptTitle": "设置 Windows 更新延迟时间",
+  "ResetWindowsUpdateDeferral": "重置 Windows 更新延迟",
+  "MicrosoftStoreToggle": "切换 Microsoft Store",
+
+  // 主页磁贴
+  "Tile_DocumentationTitle": "文档",
+  "Tile_DocumentationDescription": "安装 AtlasOS、FAQ 等",
+  "Tile_DiscordTitle": "Discord",
+  "Tile_DiscordDescription": "获取支持并交个朋友！",
+  "Tile_GithubTitle": "GitHub",
+  "Tile_GithubDescription": "探索 AtlasOS 代码并做出贡献",
+  "Tile_KofiTitle": "在 Ko-Fi 上支持我们",
+  "Tile_KofiDescription": "帮助我们继续这个项目！",
+
+  // 菜单项和其他导航文本
+  "SearchPlaceholder": "（开发中）搜索设置...",
+
+  "Home": "主页",
+  "Software": "软件",
+  "GeneralConfig": "常规配置",
+  "Interface": "界面调整",
+  "Windows": "Windows 设置",
+  "Advanced": "高级配置",
+  "Security": "安全",
+  "Troubleshooting": "故障排除",
+
+  "Language": "语言",
+
+  "NoFavorites": "您还没有添加任何收藏。",
+  "SystemInfo": "关于此系统：",
+  "LearnMore": "了解详情",
+
+  "TroubleshootingDocumenation": "故障排除文档",
+
+  // 实验功能
+  "ExperimentsHeader": "实验功能",
+  "ExperimentsCardHeader": "实验性功能",
+  "ExperimentsCardDescription": "这些功能是实验性的，可能无法完全按预期工作。需要重启才能应用更改",
+
+  // 搜索实验
+  "SearchExperiment": "搜索栏",
+  "SearchExperimentDescription": "启用搜索栏以快速在工具箱中查找设置",
+
+  // 图标实验
+  "IconsExperiment": "图标",
+  "IconsExperimentDescription": "在每个设置旁边启用图标，以便更容易识别和视觉效果更好"
+}
