@@ -259,6 +259,9 @@
   "WindowsHello": "Windows Hello",
   "WindowsHelloDescription": "Activé ou Désactivé l'authentification biométrique Windows Hello",
 
+  "MicrosoftStoreToggle": "Activer/Désactiver Microsoft Store",
+  "MicrosoftStoreToggleDescription": "Activé ou Désactivé le Microsoft Store",
+
   // End of configuration toggle
 
   // Settings and Home texts

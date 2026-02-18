@@ -2,6 +2,7 @@
   "LangName": "English (United States)",
   "LangKey": "en_us",
 
+  "StartingServices": "Starting services...",
 
   "ToBeTranslated": "To be translated",
   "OpenShellAtlasPreset": "Open Shell AtlasOS preset",
@@ -260,6 +261,9 @@
   "WindowsHello": "Windows Hello",
   "WindowsHelloDescription": "Enable or disable Windows Hello biometric authentication",
 
+  "MicrosoftStoreToggle": "Toggle Microsoft Store",
+  "MicrosoftStoreToggleDescription": "Enables or disables the Microsoft Store",
+
   // End of configuration toggles
 
   // Settings and Home texts
@@ -325,7 +329,6 @@
   "WindowsUpdateDeferral": "Set the number of days for Windows Update Deferral",
   "UpdateDeferralPromptTitle": "Set Windows Update Deferral time",
   "ResetWindowsUpdateDeferral": "Reset Windows Update deferral",
-  "MicrosoftStoreToggle": "Toggle Microsoft Store",
 
 
   // Home tiles
