@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    class RecallSupportConfigurationService : IConfigurationService
+    class RecallSupportConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\recall";
         private const string STATE_VALUE_NAME = "state";

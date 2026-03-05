@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class DarkTitlebarsConfigurationService : IConfigurationService
+    public class DarkTitlebarsConfigurationService : IRoutable
     {
         private const string DWM_KEY_NAME = @"HKCU\SOFTWARE\Microsoft\Windows\DWM";
         private const string ACCENT_KEY_NAME = @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Accent";

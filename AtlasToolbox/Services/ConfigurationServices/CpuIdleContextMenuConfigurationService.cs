@@ -6,7 +6,7 @@ using System.IO;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class CpuIdleContextMenuConfigurationService : IConfigurationService
+    public class CpuIdleContextMenuConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\CPUIdleContextMenu";
         private const string STATE_VALUE_NAME = "state";

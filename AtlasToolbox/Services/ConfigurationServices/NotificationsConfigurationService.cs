@@ -6,7 +6,7 @@ using System.ServiceProcess;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class NotificationsConfigurationService : IConfigurationService
+    public class NotificationsConfigurationService : IRoutable
     {
         private const string WPN_SERVICE_SERVICE_NAME = "WpnService";
 

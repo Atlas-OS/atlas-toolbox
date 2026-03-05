@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class NewBootMenuConfigurationService : IConfigurationService
+    public class NewBootMenuConfigurationService : IRoutable
     {
 
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\NewBootMenu";

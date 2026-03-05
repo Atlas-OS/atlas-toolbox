@@ -6,7 +6,7 @@ using System.ServiceProcess;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class TroubleshootingConfigurationService : IConfigurationService
+    public class TroubleshootingConfigurationService : IRoutable
     {
         private const string DPS_SERVICE_NAME = "DPS";
         private const string WDI_SERVICE_HOST_SERVICE_NAME = "WdiServiceHost";

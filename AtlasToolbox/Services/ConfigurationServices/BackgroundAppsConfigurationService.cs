@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    internal class BackgroundAppsConfigurationService : IConfigurationService
+    internal class BackgroundAppsConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\BackgroundApps";
         private const string STATE_VALUE_NAME = "state";

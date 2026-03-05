@@ -3,25 +3,24 @@ using AtlasToolbox.Models;
 using AtlasToolbox.Stores;
 using System.Windows.Input;
 using AtlasToolbox.Commands;
-using AtlasToolbox.Enums;
 using Windows.UI;
 using Microsoft.UI.Xaml.Media;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml.Controls;
 //using System.Drawing;
 
-namespace AtlasToolbox.ViewModels
+namespace AtlasToolbox.ViewModels.ConfigurationVM
 {
     public class ConfigurationItemViewModel : IConfigurationItem
     {
         private readonly ConfigurationStore _configurationStore;
-        private readonly IConfigurationService _configurationService;
+        private readonly IRoutable _configurationService;
 
         public Configuration Configuration { get; set; }
         public string Name => Configuration.Name;
         public string Key => Configuration.Key;
         public string Description => Configuration.Description;
-        public ConfigurationType Type => Configuration.Type;
+        public string Route => Configuration.Route;
         public FontIcon Icon => Configuration.Icon;
 
         private bool _currentSetting;
@@ -54,7 +53,7 @@ namespace AtlasToolbox.ViewModels
         public ConfigurationItemViewModel(
             Configuration configuration,
             ConfigurationStore configurationStore,
-            IConfigurationService configurationService)
+            IRoutable configurationService)
         {
             _configurationStore = configurationStore;
             _configurationService = configurationService;

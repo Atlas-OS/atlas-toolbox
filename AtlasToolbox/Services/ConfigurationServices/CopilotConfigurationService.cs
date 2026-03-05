@@ -13,7 +13,7 @@ using Windows.Management.Deployment;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    internal class CopilotConfigurationService : IConfigurationService
+    internal class CopilotConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\MicrosoftCopilot";
         private const string STATE_VALUE_NAME = "state";

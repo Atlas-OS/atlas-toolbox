@@ -6,7 +6,7 @@ using System.ServiceProcess;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class WiFiConfigurationService : IConfigurationService
+    public class WiFiConfigurationService : IRoutable
     {
         private const string EVENTLOG_SERVICE_NAME = "eventlog";
         private const string VWIFIFLT_SERVICE_NAME = "vwififlt";

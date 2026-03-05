@@ -6,7 +6,7 @@ using System;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    internal class SystemRestoreConfigurationService : IConfigurationService
+    internal class SystemRestoreConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\SystemRestore";
         private const string STATE_VALUE_NAME = "state";

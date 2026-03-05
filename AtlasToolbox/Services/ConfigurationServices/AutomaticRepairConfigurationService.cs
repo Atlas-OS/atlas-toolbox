@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class AutomaticRepairConfigurationService : IConfigurationService
+    public class AutomaticRepairConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\AutomaticRepair";
         private const string STATE_VALUE_NAME = "state";

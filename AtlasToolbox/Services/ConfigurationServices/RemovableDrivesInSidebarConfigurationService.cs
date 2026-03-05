@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class RemovableDrivesInSidebarConfigurationService : IConfigurationService
+    public class RemovableDrivesInSidebarConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\RemovableDrivesInSidebar";
         private const string STATE_VALUE_NAME = "state";

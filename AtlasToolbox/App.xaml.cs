@@ -1,7 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using AtlasToolbox.HostBuilder;
 using Microsoft.Extensions.Hosting;
-using AtlasToolbox.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using System;
@@ -17,6 +16,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using Windows.ApplicationModel.Core;
 using System.Diagnostics;
+using AtlasToolbox.ViewModels.Configuration;
 
 namespace AtlasToolbox
 {

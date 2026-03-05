@@ -8,7 +8,7 @@ using System.ServiceProcess;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class PrintingConfigurationService : IConfigurationService
+    public class PrintingConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\Printing";
         private const string STATE_VALUE_NAME = "state";

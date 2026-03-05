@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class BootLogoConfigurationService : IConfigurationService
+    public class BootLogoConfigurationService : IRoutable
     {
 
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\BootLogo";

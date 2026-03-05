@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AtlasToolbox.Models;
 using Microsoft.UI.Xaml.Controls;
 
-namespace AtlasToolbox.ViewModels
+namespace AtlasToolbox.ViewModels.ConfigurationVM
 {
     public class SoftwareItemViewModel
     {

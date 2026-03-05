@@ -11,7 +11,7 @@ using System;
 namespace AtlasToolbox.Services.ConfigurationServices
 {
     // This one does not work, a 'System.UnauthorizedAccessException' is being thrown
-    public class FsoAndGameBarConfigurationService : IConfigurationService
+    public class FsoAndGameBarConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\FSOGameBar";
         private const string STATE_VALUE_NAME = "state";

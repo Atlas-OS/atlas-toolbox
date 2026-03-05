@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using AtlasToolbox.Models;
 using AtlasToolbox.Models.ProfileModels;
-using AtlasToolbox.ViewModels;
+using AtlasToolbox.ViewModels.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 

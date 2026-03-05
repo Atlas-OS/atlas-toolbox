@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class HagsConfigurationService : IConfigurationService
+    public class HagsConfigurationService : IRoutable
     {
         private const string GRAPHIC_DRIVERS_KEY_NAME = @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers";
 

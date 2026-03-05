@@ -6,7 +6,7 @@ using System;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class AnimationsConfigurationService : IConfigurationService
+    public class AnimationsConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\Animation";
         private const string STATE_VALUE_NAME = "state";

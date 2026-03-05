@@ -7,7 +7,7 @@ using System.ServiceProcess;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class VpnConfigurationService : IConfigurationService
+    public class VpnConfigurationService : IRoutable
     {
         private const string BFE_SERVICE_NAME = "BFE";
         private const string EAPHOST_SERVICE_NAME = "Eaphost";

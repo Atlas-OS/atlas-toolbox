@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class FaultTolerantHeapConfigurationService : IConfigurationService
+    public class FaultTolerantHeapConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\FaultTolerantHeap";
         private const string STATE_VALUE_NAME = "state";

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    internal class UpdateNotificationsConfigurationService : IConfigurationService
+    internal class UpdateNotificationsConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\UpdateNotifications";
         private const string STATE_VALUE_NAME = "state";

@@ -5,7 +5,7 @@ using System.ServiceProcess;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class EventLogConfigurationService : IConfigurationService
+    public class EventLogConfigurationService : IRoutable
     {
         private const string EVENTLOG_SERVICE_NAME = "EventLog";
 

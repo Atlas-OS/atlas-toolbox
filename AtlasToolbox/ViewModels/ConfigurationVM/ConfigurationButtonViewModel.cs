@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using AtlasToolbox.Enums;
 using AtlasToolbox.Models;
+using AtlasToolbox.ViewModels.ConfigurationVM;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
 
-namespace AtlasToolbox.ViewModels
+namespace AtlasToolbox.ViewModels.ConfigurationVM
 {
     public partial class ConfigurationButtonViewModel : IConfigurationItem
     {
@@ -19,7 +19,6 @@ namespace AtlasToolbox.ViewModels
         public string Description => ConfigButton.Description;
         public string Key => ConfigButton.Name.Replace(" ", "");
         public FontIcon Icon => ConfigButton.Icon;
-        public ConfigurationType Type => ConfigButton.Type;
 
         public ConfigurationButtonViewModel(ConfigurationButton configurationButton)
         {

@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class AppIconsThumbnailConfigurationService : IConfigurationService
+    public class AppIconsThumbnailConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\AppIconsThumbnail";
         private const string STATE_VALUE_NAME = "state";

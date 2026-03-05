@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class ModernAltTabConfigurationService : IConfigurationService
+    public class ModernAltTabConfigurationService : IRoutable
     {
         private const string EXPLORER_KEY_NAME = @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer";
 

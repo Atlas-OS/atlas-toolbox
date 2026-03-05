@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class TakeOwnershipConfigurationService : IConfigurationService
+    public class TakeOwnershipConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\TakeOwnership";
         private const string STATE_VALUE_NAME = "state";

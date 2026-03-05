@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class NvidiaDispayContainerConfigurationService : IConfigurationService
+    public class NvidiaDispayContainerConfigurationService : IRoutable
     {
 
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\NVidiaDisplayContainer";

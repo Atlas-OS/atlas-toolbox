@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    class WidgetsConfigurationService : IConfigurationService
+    class WidgetsConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\Widgets";
         private const string STATE_VALUE_NAME = "state";

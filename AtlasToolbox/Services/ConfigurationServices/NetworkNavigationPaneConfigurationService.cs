@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class NetworkNavigationPaneConfigurationService : IConfigurationService
+    public class NetworkNavigationPaneConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\NetworkNavigationPane";
         private const string STATE_VALUE_NAME = "state";

@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class KernelParametersConfigurationService : IConfigurationService
+    public class KernelParametersConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\KernelParameters";
         private const string STATE_VALUE_NAME = "state";

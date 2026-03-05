@@ -8,7 +8,7 @@ using System.ServiceProcess;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class LanmanWorkstationConfigurationService : IConfigurationService
+    public class LanmanWorkstationConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\LanmanWorkstation";
         private const string STATE_VALUE_NAME = "state";

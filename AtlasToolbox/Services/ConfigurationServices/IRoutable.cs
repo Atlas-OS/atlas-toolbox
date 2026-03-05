@@ -1,6 +1,6 @@
 ﻿namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public interface IConfigurationService
+    public interface IRoutable
     {
         bool IsEnabled();
         void Enable();

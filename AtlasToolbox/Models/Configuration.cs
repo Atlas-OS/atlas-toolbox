@@ -1,24 +1,22 @@
-﻿using AtlasToolbox.Enums;
+﻿using AtlasToolbox.ViewModels.ConfigurationVM;
+using Microsoft.Extensions.Configuration;
 using Microsoft.UI.Xaml.Controls;
 
 namespace AtlasToolbox.Models
 {
-    public class Configuration
+    public class Configuration : IConfigurationItem
     {
-        public string Name { get; set; }
         public string Key { get; set; }
-        public ConfigurationType Type { get; set; }
-        public FontIcon Icon { get; set; }
-        public string Description { get; set; }
+        public string Name { get => App.GetValueFromItemList(Key); }
+        public string Description { get => App.GetValueFromItemList(Key, true); }
+        public string Route { get; set; }
+        public FontIcon Icon { get; set; } = new();
 
-        public Configuration(string name, string key, ConfigurationType type, string icon = "\uE897")
+        public Configuration(string key, string route, string icon = "\uE897")
         {
-            Name = name;
             Key = key;
-            Type = type;
-            Icon = new FontIcon();
+            Route = route;
             Icon.Glyph = icon;
-            Description = App.GetValueFromItemList(key, true);
         }
     }
 }

@@ -8,7 +8,7 @@ using System.ServiceProcess;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class UwpConfigurationService : IConfigurationService
+    public class UwpConfigurationService : IRoutable
     {
         private const string BFE_SERVICE_NAME = "BFE";
         private const string MPS_SVC_SERVICE_NAME = "mpssvc";
@@ -26,14 +26,14 @@ namespace AtlasToolbox.Services.ConfigurationServices
 
         private readonly ConfigurationStore _uwpConfigurationStore;
         private readonly ConfigurationStore _microsoftStoreConfigurationStore;
-        private readonly IConfigurationService _microsoftStoreConfigurationService;
+        private readonly IRoutable _microsoftStoreConfigurationService;
         private readonly string _systemDirectory;
         private readonly string _systemAppsDirectory;
 
         public UwpConfigurationService(
             [FromKeyedServices("Uwp")] ConfigurationStore uwpConfigurationStore,
             [FromKeyedServices("MicrosoftStore")] ConfigurationStore microsoftStoreConfigurationStore,
-            [FromKeyedServices("MicrosoftStore")] IConfigurationService microsoftStoreConfigurationService)
+            [FromKeyedServices("MicrosoftStore")] IRoutable microsoftStoreConfigurationService)
         {
             _uwpConfigurationStore = uwpConfigurationStore;
             _microsoftStoreConfigurationStore = microsoftStoreConfigurationStore;

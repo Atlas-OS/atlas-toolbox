@@ -5,7 +5,7 @@ using System;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class ShortcutTextConfigurationService : IConfigurationService
+    public class ShortcutTextConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\ShortcutText";
         private const string STATE_VALUE_NAME = "state";

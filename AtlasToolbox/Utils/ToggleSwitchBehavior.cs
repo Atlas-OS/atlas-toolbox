@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
-using AtlasToolbox.ViewModels;
+using AtlasToolbox.ViewModels.Configuration;
 
 namespace AtlasToolbox
 {

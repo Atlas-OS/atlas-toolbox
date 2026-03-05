@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class AdvancedBootOptionsConfigurationService : IConfigurationService
+    public class AdvancedBootOptionsConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\AdvancedBootOptions";
         private const string STATE_VALUE_NAME = "state";

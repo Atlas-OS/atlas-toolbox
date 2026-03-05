@@ -5,7 +5,7 @@ using System;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    internal class AppStoreArchivingConfigurationService : IConfigurationService
+    internal class AppStoreArchivingConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\AppStoreArchiving";
         private const string STATE_VALUE_NAME = "state";

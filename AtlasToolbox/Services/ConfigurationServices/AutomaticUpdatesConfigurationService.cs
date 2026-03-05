@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    internal class AutomaticUpdatesConfigurationService : IConfigurationService
+    internal class AutomaticUpdatesConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\AutomaticUpdates";
         private const string STATE_VALUE_NAME = "state";

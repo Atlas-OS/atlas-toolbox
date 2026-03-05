@@ -10,7 +10,7 @@ using Microsoft.Win32;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    internal class PhoneLinkConfigurationService :IConfigurationService
+    internal class PhoneLinkConfigurationService :IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\PhoneLink";
         private const string STATE_VALUE_NAME = "state";

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    class WebSearchConfigurationService : IConfigurationService
+    class WebSearchConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\WebSearch";
         private const string STATE_VALUE_NAME = "state";

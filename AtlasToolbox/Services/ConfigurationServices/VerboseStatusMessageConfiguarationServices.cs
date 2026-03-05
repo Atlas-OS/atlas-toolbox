@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class VerboseStatusMessageConfiguarationServices : IConfigurationService
+    public class VerboseStatusMessageConfiguarationServices : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\VerboseStatusMessage";
         private const string STATE_VALUE_NAME = "state";

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class BootMessagesConfigurationService : IConfigurationService
+    public class BootMessagesConfigurationService : IRoutable
     {
         private readonly ConfigurationStore _bootMessagesConfigurationStore;
         private readonly IBcdService _bcdService;

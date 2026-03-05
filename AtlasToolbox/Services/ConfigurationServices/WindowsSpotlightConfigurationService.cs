@@ -5,7 +5,7 @@ using System;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    internal class WindowsSpotlightConfigurationService : IConfigurationService
+    internal class WindowsSpotlightConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\WindowsSpotlight";
         private const string STATE_VALUE_NAME = "state";

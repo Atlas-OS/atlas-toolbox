@@ -5,7 +5,7 @@ using System.ServiceProcess;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class TaskSchedulerConfigurationService : IConfigurationService
+    public class TaskSchedulerConfigurationService : IRoutable
     {
         private const string SCHEDULE_SERVICE_NAME = "Schedule";
 

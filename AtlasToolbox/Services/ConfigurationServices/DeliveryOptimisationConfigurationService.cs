@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class DeliveryOptimisationConfigurationService : IConfigurationService
+    public class DeliveryOptimisationConfigurationService : IRoutable
 
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\DeliveryOptimisation";

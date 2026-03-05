@@ -11,7 +11,7 @@ using Microsoft.Win32;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class SecurityHealthTrayConfigurationService : IConfigurationService
+    public class SecurityHealthTrayConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\SecurityHealthTray";
         private const string STATE_VALUE_NAME = "state";

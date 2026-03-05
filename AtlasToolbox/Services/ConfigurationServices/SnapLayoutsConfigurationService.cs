@@ -10,7 +10,7 @@ using Microsoft.Win32;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class SnapLayoutsConfigurationService : IConfigurationService
+    public class SnapLayoutsConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\SnapLayouts";
         private const string STATE_VALUE_NAME = "state";

@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class ExtractContextMenuConfigurationService : IConfigurationService
+    public class ExtractContextMenuConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\ExtractContextMenu";
         private const string STATE_VALUE_NAME = "state";

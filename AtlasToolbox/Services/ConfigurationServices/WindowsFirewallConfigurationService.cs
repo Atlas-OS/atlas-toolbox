@@ -6,7 +6,7 @@ using System.ServiceProcess;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class WindowsFirewallConfigurationService : IConfigurationService
+    public class WindowsFirewallConfigurationService : IRoutable
     {
         private const string BFE_SERVICE_NAME = "BFE";
         private const string MPSSVC_SERVICE_NAME = "mpssvc";

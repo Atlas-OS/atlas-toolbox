@@ -1,29 +1,28 @@
-﻿using System;
+﻿using AtlasToolbox.ViewModels.ConfigurationVM;
+using Microsoft.UI.Xaml.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using AtlasToolbox.Enums;
-using Microsoft.UI.Xaml.Controls;
 
 namespace AtlasToolbox.Models
 {
-    public class ConfigurationButton
+    public class ConfigurationButton : IConfigurationItem
     {
+        public string Key { get; set; }
+        public string Route { get; set; }
         public ICommand Command { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public ConfigurationType Type { get; set; }
-        public FontIcon Icon { get; set; }
+        public string Name { get => App.GetValueFromItemList(Key); }
+        public string Description { get => App.GetValueFromItemList(Key, true); }
+        public FontIcon Icon { get; set; } = new FontIcon();
 
-        public ConfigurationButton(ICommand command, string name, string description, ConfigurationType type, string icon = "\uE897") 
+        public ConfigurationButton(string key, ICommand command, string route, string icon = "\uE897") 
         {
+            Key = key;
+            Route = route;
             Command = command;
-            Name = name;
-            Description = description;
-            Type = type;
-            Icon = new FontIcon();
             Icon.Glyph = icon;
         }
     }

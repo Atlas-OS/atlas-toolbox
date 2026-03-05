@@ -3,12 +3,12 @@ using AtlasToolbox.Models;
 using AtlasToolbox.Stores;
 using System.Windows.Input;
 using AtlasToolbox.Commands;
-using AtlasToolbox.Enums;
+
 using Windows.UI;
 using System.Collections.Generic;
 using Microsoft.UI.Xaml.Controls;
 
-namespace AtlasToolbox.ViewModels
+namespace AtlasToolbox.ViewModels.ConfigurationVM
 {
     public class MultiOptionConfigurationItemViewModel : IConfigurationItem
     {
@@ -17,7 +17,6 @@ namespace AtlasToolbox.ViewModels
 
         public MultiOptionConfiguration Configuration { get; set; }
         public string Name => Configuration.Name;
-        public ConfigurationType Type => Configuration.Type;
         public FontIcon Icon => Configuration.Icon;
 
         public List<string> Options => _configurationStore.Options; 

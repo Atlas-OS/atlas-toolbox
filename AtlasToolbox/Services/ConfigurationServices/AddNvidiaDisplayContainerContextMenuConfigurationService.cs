@@ -10,7 +10,7 @@ using WinRT;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class AddNvidiaDisplayContainerContextMenuConfigurationService : IConfigurationService
+    public class AddNvidiaDisplayContainerContextMenuConfigurationService : IRoutable
     {
 
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\NVidiaDisplayContainerContextMenu";

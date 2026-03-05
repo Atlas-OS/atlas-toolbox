@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class WindowsHelloConfigurationServices : IConfigurationService
+    public class WindowsHelloConfigurationServices : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\WindowsHello";
         private const string STATE_VALUE_NAME = "state";

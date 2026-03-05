@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    internal class HibernationConfigurationService : IConfigurationService
+    internal class HibernationConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\Hibernation";
         private const string STATE_VALUE_NAME = "state";

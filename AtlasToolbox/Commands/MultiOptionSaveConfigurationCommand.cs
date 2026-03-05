@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AtlasToolbox.Services.ConfigurationServices;
 using AtlasToolbox.Stores;
 using AtlasToolbox.Utils;
-using AtlasToolbox.ViewModels;
+using AtlasToolbox.ViewModels.Configuration;
 using MVVMEssentials.Commands;
 
 namespace AtlasToolbox.Commands

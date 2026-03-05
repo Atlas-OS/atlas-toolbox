@@ -5,7 +5,7 @@ using System.ServiceProcess;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class SearchIndexingConfigurationService : IConfigurationService
+    public class SearchIndexingConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\SearchIndexing";
         private const string STATE_VALUE_NAME = "state";

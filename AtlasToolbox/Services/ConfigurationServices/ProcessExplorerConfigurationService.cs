@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class ProcessExplorerConfigurationService : IConfigurationService
+    public class ProcessExplorerConfigurationService : IRoutable
     {
         private readonly ConfigurationStore _configurationStore;
 

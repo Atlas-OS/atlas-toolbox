@@ -10,7 +10,7 @@ using Windows.ApplicationModel.Activation;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class GiveAccessToMenuConfigurationService : IConfigurationService
+    public class GiveAccessToMenuConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\GiveAccessToMenu";
         private const string STATE_VALUE_NAME = "state";

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class ModernVolumeFlyoutConfigurationService : IConfigurationService
+    public class ModernVolumeFlyoutConfigurationService : IRoutable
     {
         private const string MTCUVC_KEY_NAME = @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\MTCUVC";
 

@@ -2,7 +2,7 @@
 using AtlasToolbox.Services.ConfigurationServices;
 using AtlasToolbox.Stores;
 using AtlasToolbox.Utils;
-using AtlasToolbox.ViewModels;
+using AtlasToolbox.ViewModels.Configuration;
 using MVVMEssentials.Commands;
 using MVVMEssentials.Services;
 using System.Threading.Tasks;
@@ -13,12 +13,12 @@ namespace AtlasToolbox.Commands
     {
         private readonly ConfigurationItemViewModel _configurationItemViewModel;
         private readonly ConfigurationStore _configurationStore;
-        private readonly IConfigurationService _configurationService;
+        private readonly IRoutable _configurationService;
 
         public SaveConfigurationCommand(
             ConfigurationItemViewModel configurationItemViewModel,
             ConfigurationStore configurationStore,
-            IConfigurationService configurationService)
+            IRoutable configurationService)
         {
             _configurationItemViewModel = configurationItemViewModel;
             _configurationStore = configurationStore;

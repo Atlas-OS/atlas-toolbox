@@ -6,7 +6,7 @@ using Microsoft.Win32;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class SpinningAnimationConfigurationService : IConfigurationService
+    public class SpinningAnimationConfigurationService : IRoutable
     {
 
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\SpinningAnimations";

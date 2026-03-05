@@ -9,7 +9,7 @@ using System.ServiceProcess;
 
 namespace AtlasOSToolbox.Services.ConfigurationServices
 {
-    public class BluetoothConfigurationService : IConfigurationService
+    public class BluetoothConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\Bluetooth";
         private const string STATE_VALUE_NAME = "state";

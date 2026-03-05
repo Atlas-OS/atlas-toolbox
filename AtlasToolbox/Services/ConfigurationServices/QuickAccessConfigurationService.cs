@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class QuickAccessConfigurationService : IConfigurationService
+    public class QuickAccessConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\QuickAccess";
         private const string STATE_VALUE_NAME = "state";

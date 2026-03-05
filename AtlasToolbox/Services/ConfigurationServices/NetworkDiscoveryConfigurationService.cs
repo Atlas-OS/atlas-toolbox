@@ -7,14 +7,14 @@ using System.ServiceProcess;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class NetworkDiscoveryConfigurationService : IConfigurationService
+    public class NetworkDiscoveryConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\NetworkDiscovery";
         private const string STATE_VALUE_NAME = "state";
 
         private readonly ConfigurationStore _networkDiscoveryConfigurationStore;
         private readonly ConfigurationStore _lanmanWorkstationConfigurationStore;
-        private readonly IConfigurationService _lanmanWorkstationConfigurationService;
+        private readonly IRoutable _lanmanWorkstationConfigurationService;
 
         private const string EVENTLOG_SERVICE_NAME = "eventlog";
         private const string FDPHOST_SERVICE_NAME = "fdPHost";
@@ -27,7 +27,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
         public NetworkDiscoveryConfigurationService(
             [FromKeyedServices("NetworkDiscovery")] ConfigurationStore networkDiscoveryConfigurationStore,
             [FromKeyedServices("LanmanWorkstation")] ConfigurationStore lanmanWorkstationConfigurationStore,
-            [FromKeyedServices("LanmanWorkstation")] IConfigurationService lanmanWorkstationConfigurationService)
+            [FromKeyedServices("LanmanWorkstation")] IRoutable lanmanWorkstationConfigurationService)
         {
             _networkDiscoveryConfigurationStore = networkDiscoveryConfigurationStore;
             _lanmanWorkstationConfigurationStore = lanmanWorkstationConfigurationStore;

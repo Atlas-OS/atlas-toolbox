@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class RunWithPriorityConfigurationService : IConfigurationService
+    public class RunWithPriorityConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\RunWithPriority";
         private const string STATE_VALUE_NAME = "state";

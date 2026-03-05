@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    internal class PowerSavingConfigurationService : IConfigurationService
+    internal class PowerSavingConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\PowerSaving";
         private const string STATE_VALUE_NAME = "state";

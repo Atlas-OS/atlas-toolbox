@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class GameModeConfigurationService : IConfigurationService
+    public class GameModeConfigurationService : IRoutable
     {
         private const string GAME_BAR_KEY_NAME = @"HKCU\SOFTWARE\Microsoft\GameBar";
 

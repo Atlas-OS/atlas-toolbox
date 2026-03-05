@@ -1,7 +1,7 @@
-using AtlasToolbox.Enums;
+
 using AtlasToolbox.Models;
 using AtlasToolbox.Utils;
-using AtlasToolbox.ViewModels;
+using AtlasToolbox.ViewModels.Configuration;
 using CommunityToolkit.WinUI.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;

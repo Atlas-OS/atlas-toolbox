@@ -7,7 +7,7 @@ using System.ServiceProcess;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class MicrosoftStoreConfigurationService : IConfigurationService
+    public class MicrosoftStoreConfigurationService : IRoutable
     {
         private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services\MicrosoftStore";
         private const string STATE_VALUE_NAME = "state";

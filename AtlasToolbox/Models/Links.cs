@@ -1,27 +1,30 @@
-﻿using System;
+﻿using AtlasToolbox.ViewModels.ConfigurationVM;
+using Microsoft.UI.Xaml.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AtlasToolbox.Enums;
-using Microsoft.UI.Xaml.Controls;
 using Windows.Storage.Provider;
 
 namespace AtlasToolbox.Models
 {
-    public class Links
+    public class Links : IConfigurationItem
     {
-        public string link {  get; set; }
-        public string name { get; set; }
-        public ConfigurationType configurationType { get; set; }
-        public string Icon { get; set; }
+        public string Key { get; set; }
+        public string Route { get; set; }   
+        public string Link {  get; set; }
+        public string Name { get => App.GetValueFromItemList(Key); }
+        public string Description { get => App.GetValueFromItemList(Key, true); }
+        public FontIcon Icon { get; set; } = new FontIcon();
 
-        public Links(string link, string name, ConfigurationType configurationType, string icon = "\uF6FA")
+
+        public Links(string key, string link, string route, string icon = "\uF6FA")
         {
-            this.link = link;
-            this.name = name;
-            this.configurationType = configurationType;
-            Icon = icon;
+            Key = key;
+            Link = link;
+            Route = route;
+            Icon.Glyph = icon;
         }
     }
 }

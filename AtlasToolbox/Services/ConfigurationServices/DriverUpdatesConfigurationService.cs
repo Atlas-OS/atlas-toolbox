@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AtlasToolbox.Services.ConfigurationServices
 {
-    public class DriverUpdatesConfigurationService : IConfigurationService
+    public class DriverUpdatesConfigurationService : IRoutable
     {
         private const string DEVICE_UPDATE_KEY_NAME = @"HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Update";
         private const string DEFAULT_UPDATE_KEY_NAME = @"HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update";
