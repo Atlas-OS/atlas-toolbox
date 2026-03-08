@@ -23,7 +23,7 @@ using AtlasToolbox.Commands.ConfigurationButtonsCommand;
 using AtlasToolbox.Utils;
 using AtlasToolbox.Models.ProfileModels;
 using Newtonsoft.Json;
-using AtlasToolbox.ViewModels.Configuration;
+using AtlasToolbox.ViewModels.ConfigurationVM;
 
 namespace AtlasToolbox.HostBuilder
 {
