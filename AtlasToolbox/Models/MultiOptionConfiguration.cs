@@ -16,13 +16,13 @@ namespace AtlasToolbox.Models
         public string Name { get => App.GetValueFromItemList(Key);}
         public string Description { get => App.GetValueFromItemList(Key, true);}
         public string Key { get; set; }
-        public string Route { get; set; }
+        public string RouteItem { get; set; }
         public FontIcon Icon { get; set; } = new();
 
         public MultiOptionConfiguration(string key, string route, string icon = "\uE897")
         {
             Key = key;
-            Route = route;
+            RouteItem = route;
             Icon.Glyph = icon;
         }
     }

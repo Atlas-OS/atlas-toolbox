@@ -9,7 +9,7 @@
     xmlns:local="using:AtlasToolbox.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
-    xmlns:viewmodel="using:AtlasToolbox.ViewModels"
+    xmlns:viewmodel="using:AtlasToolbox.ViewModels.ConfigurationVM"
     d:DataContext="{d:DesignInstance Type=viewmodel:ConfigPageViewModel}"
     mc:Ignorable="d">
 
@@ -18,9 +18,9 @@
         <x:Double x:Key="BreadcrumbBarChevronFontSize">30</x:Double>
     </Page.Resources>
 
-    <Grid x:Name="MainGrid" Margin="55,0,0,0">
+    <Grid x:Name="MainGrid">
         <Grid.Resources>
-            <DataTemplate x:Key="ConfigurationItemTemplate" x:DataType="viewmodel:ConfigurationItemViewModel">
+            <DataTemplate x:Key="ConfigurationItemTemplate" x:DataType="viewmodel:ConfigPageViewModel">
                 <Grid>
                     <controls:SettingsCard
                         x:Name="SettingsCard"
@@ -43,13 +43,14 @@
                 </Grid>
             </DataTemplate>
 
-            <DataTemplate x:Key="ConfigurationSubMenuTemplate" x:DataType="viewmodel:ConfigurationSubMenuViewModel">
+            <DataTemplate x:Key="RouteTemplate" x:DataType="viewmodel:RouteViewModel">
                 <controls:SettingsCard
                     x:Name="SubMenuSettingsCard"
                     Click="OnCardClicked"
                     Description="{Binding Description}"
                     Header="{Binding Name}"
                     HeaderIcon="{Binding Icon}"
+                    Tag="{Binding Key}"
                     IsClickEnabled="True"
                     Style="{StaticResource ConfigurationSettingsCardTemplate}" />
             </DataTemplate>
@@ -103,7 +104,7 @@
                     ActionIconToolTip="Open in new window"
                     Click="LinkCard_Click"
                     Header="{Binding Name}"
-                    HeaderIcon="{Binding FontIcon, Converter={StaticResource FontIconConverter}}"
+                    HeaderIcon="{Binding FontIcon}"
                     IsClickEnabled="True"
                     Style="{StaticResource ConfigurationSettingsCardTemplate}">
                     <controls:SettingsCard.ContextFlyout>
@@ -120,34 +121,18 @@
             <local:ConfigItemDataTemplateSelector
                 x:Key="DataTemplateSelector"
                 ConfiguartionLink="{StaticResource LinksTemplate}"
+                RouteItem="{StaticResource RouteTemplate}"
                 ConfigurationButton="{StaticResource ConfigurationButtonTemplate}"
                 ConfigurationItem="{StaticResource ConfigurationItemTemplate}"
-                ConfigurationSubMenu="{StaticResource ConfigurationSubMenuTemplate}"
                 MultiOptionConfigurationItem="{StaticResource MultiOptionTemplate}" />
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <BreadcrumbBar x:Name="BreadcrumbBar">
-            <BreadcrumbBar.ItemTemplate>
-                <DataTemplate x:DataType="local:Folder">
-                    <BreadcrumbBarItem Content="{Binding}">
-                        <BreadcrumbBarItem.ContentTemplate>
-                            <DataTemplate>
-                                <TextBlock
-                                    Margin="0,24,30,24"
-                                    Style="{StaticResource TitleTextBlockStyle}"
-                                    Text="{Binding Name}" />
-                            </DataTemplate>
-                        </BreadcrumbBarItem.ContentTemplate>
-                    </BreadcrumbBarItem>
-                </DataTemplate>
-            </BreadcrumbBar.ItemTemplate>
-        </BreadcrumbBar>
         <ScrollViewer x:Name="ConfigScrollViewer" Grid.Row="1">
             <StackPanel>
-                <ItemsControl x:Name="ConfigItemsControl" ItemTemplateSelector="{StaticResource DataTemplateSelector}" ItemsSource="{Binding ConfigurationItems}" />
+                <ItemsControl x:Name="ConfigItemsControl" ItemTemplateSelector="{StaticResource DataTemplateSelector}" ItemsSource="{Binding FilteredItems, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

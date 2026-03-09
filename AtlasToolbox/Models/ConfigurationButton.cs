@@ -12,7 +12,7 @@ namespace AtlasToolbox.Models
     public class ConfigurationButton : IConfigurationItem
     {
         public string Key { get; set; }
-        public string Route { get; set; }
+        public string RouteItem { get; set; }
         public ICommand Command { get; set; }
         public string Name { get => App.GetValueFromItemList(Key); }
         public string Description { get => App.GetValueFromItemList(Key, true); }
@@ -21,7 +21,7 @@ namespace AtlasToolbox.Models
         public ConfigurationButton(string key, ICommand command, string route, string icon = "\uE897") 
         {
             Key = key;
-            Route = route;
+            RouteItem = route;
             Command = command;
             Icon.Glyph = icon;
         }

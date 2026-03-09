@@ -10,5 +10,6 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
     {
         string Name { get; }
         string Key { get; }
+        string RouteItem { get; }
     }
 }

@@ -1,26 +1,23 @@
-﻿using AtlasToolbox.Models;
-using AtlasToolbox.Services.ConfigurationServices;
+﻿using AtlasToolbox.Services.ConfigurationServices;
 using AtlasToolbox.Stores;
-using AtlasToolbox.Utils;
-using AtlasToolbox.ViewModels.Configuration;
+using AtlasToolbox.ViewModels.ConfigurationVM;
 using MVVMEssentials.Commands;
-using MVVMEssentials.Services;
 using System.Threading.Tasks;
 
 namespace AtlasToolbox.Commands
 {
     public class SaveConfigurationCommand : AsyncCommandBase
     {
-        private readonly ConfigurationItemViewModel _configurationItemViewModel;
+        private readonly ConfigurationItemViewModel _configuration;
         private readonly ConfigurationStore _configurationStore;
         private readonly IRoutable _configurationService;
 
         public SaveConfigurationCommand(
-            ConfigurationItemViewModel configurationItemViewModel,
+            ConfigurationItemViewModel configuration,
             ConfigurationStore configurationStore,
             IRoutable configurationService)
         {
-            _configurationItemViewModel = configurationItemViewModel;
+            _configuration = configuration;
             _configurationStore = configurationStore;
             _configurationService = configurationService;
         }
@@ -34,8 +31,8 @@ namespace AtlasToolbox.Commands
         {
             bool currentSetting = _configurationStore.CurrentSetting;
 
-            App.logger.Info($"Toggled {_configurationItemViewModel.Key} to {currentSetting}");
-            _configurationItemViewModel.IsBusy = true;
+            App.logger.Info($"Toggled {_configuration.Key} to {currentSetting}");
+            _configuration.IsBusy = true;
 
             try
             {
@@ -45,7 +42,7 @@ namespace AtlasToolbox.Commands
             }
             finally
             {
-                _configurationItemViewModel.IsBusy = false;
+                _configuration.IsBusy = false;
             }
         }
     }

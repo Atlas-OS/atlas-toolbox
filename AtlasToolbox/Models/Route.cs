@@ -1,24 +1,26 @@
-﻿
+﻿using AtlasToolbox.ViewModels.ConfigurationVM;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Web.WebView2.Core;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AtlasToolbox.Models
 {
-    public class Route
+    public class Route : IConfigurationItem
     {
         public string EndPoint { get; set; }
-        public string Name { get => App.GetValueFromItemList(EndPoint.Split("/").Last());}
+        public string Name { get => App.GetValueFromItemList(EndPoint.Split("/").Last()); }
         public string Description { get => App.GetValueFromItemList(EndPoint.Split("/").Last(), true); }
+        public bool RootRoute { get; set; }
         public FontIcon Icon { get; set; } = new FontIcon();
+        public string Key => EndPoint;
+        public string RouteItem => string.Join("/", EndPoint.Split('/').SkipLast(1));
 
-        public Route(string endPoint, string icon = "\uE897")
+        public Route(string endPoint, string icon = "\uE897", bool rootRoute = false)
         {
             EndPoint = endPoint;
             Icon.Glyph = icon;
+            RootRoute = rootRoute;
         }
     }
 }

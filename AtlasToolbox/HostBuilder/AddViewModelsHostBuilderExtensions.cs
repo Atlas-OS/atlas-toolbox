@@ -275,22 +275,22 @@ namespace AtlasToolbox.HostBuilder
             List<Route> routes = new()
             {
                 // 'General' routes
-                new Route("General", "\uE80F"),
+                new Route("General", "\uE80F", true),
                 new Route("General/AiSubMenu", "\uF4A5"),
                 new Route("General/FileSharingSubMenu", "\uF193"),
                 new Route("General/WindowsUpdate", "\uEDAB"),
 
                 // 'Interface' routes
-                new Route("Interface", "\uE713"),
+                new Route("Interface", "\uE713", true),
                 new Route("Interface/StartMenuSubMenu", "\uE8FC"),
                 new Route("Interface/ContextMenuSubMenu", null),
                 new Route("Interface/FileExplorerSubMenu", "\uEC50"),
 
                 // 'Windows' routes
-                new Route("Windows", "\uE71D"),
+                new Route("Windows", "\uE71D", true),
 
                 // 'Advanced' routes
-                new Route("Advanced", "\uE71D"),
+                new Route("Advanced", "\uE71D", true),
                 new Route("Advanced/ServicesSubMenu", "\uE9F5"),
                 new Route("Advanced/ServicesSubMenu/NvidiaDisplayContainerSubMenu", null),
                 new Route("Advanced/BootConfigurationSubMenu", "\uF259"),
@@ -299,13 +299,13 @@ namespace AtlasToolbox.HostBuilder
                 new Route("Advanced/DriverConfigurationSubMenu", "\uE772"),
 
                 // 'Security' routes
-                new Route("Security", "\uE71D"),
+                new Route("Security", "\uE71D", true),
                 new Route("Security/CoreIsolationSubMenu", "\uEEA1"),
                 new Route("Security/DefenderSubMenu", "\uE83D"),
                 new Route("Security/MitigationsSubMenu", "\uE730"),
 
                 // 'Troubleshooting' routes
-                new Route("Troubleshooting", "\uE71D"),
+                new Route("Troubleshooting", "\uE71D", true),
                 new Route("Troubleshooting/TroubleshootingNetwork", "\uE90F"),
             };
 
@@ -314,7 +314,7 @@ namespace AtlasToolbox.HostBuilder
                 services.AddSingleton<IEnumerable<Route>>(provider =>
                 {
                     App.logger.Info($"[VMHostBuilder] Successfully loaded {routes.Count} route entries");
-                    return routes;
+                    return routes.Where(r => !r.RootRoute);
                 });
             });
 
@@ -390,7 +390,7 @@ namespace AtlasToolbox.HostBuilder
 
                 // General - AI SubMenu
                 new("Copilot", "General/AiSubMenu"),
-                new("recall", "General/AiSubMenu"),
+                new("Recall", "General/AiSubMenu"),
 
                 // General - File Sharing SubMenu
                 new("GiveAccessToMenu", "General/FileSharingSubMenu"),
@@ -442,7 +442,7 @@ namespace AtlasToolbox.HostBuilder
                 new("BootLogo", "Advanced/BootConfigurationSubMenu/BootConfigAppearance"),
                 new("BootMessages", "Advanced/BootConfigurationSubMenu/BootConfigAppearance"),
                 new("NewBootMenu", "Advanced/BootConfigurationSubMenu/BootConfigAppearance"),
-                new("SpinningAnimations", "Advanced/BootConfigurationSubMenu/BootConfigAppearance"),
+                new("SpinningAnimation", "Advanced/BootConfigurationSubMenu/BootConfigAppearance"),
 
                 // Advanced - Boot Configuration SubMenu - Behavior
                 new("AdvancedBootOptions", "Advanced/BootConfigurationSubMenu/BootConfigBehavior"),
@@ -484,7 +484,8 @@ namespace AtlasToolbox.HostBuilder
             IServiceProvider serviceProvider, MultiOptionConfiguration configuration)
         {
             MultiOptionConfigurationItemViewModel viewModel = new(
-                configuration, serviceProvider.GetRequiredKeyedService<MultiOptionConfigurationStore>(configuration.Key), serviceProvider.GetRequiredKeyedService<IMultiOptionConfigurationServices>(key));
+                configuration, serviceProvider.GetRequiredKeyedService<MultiOptionConfigurationStore>(configuration.Key),
+                serviceProvider.GetRequiredKeyedService<IMultiOptionConfigurationServices>(configuration.Key));
 
             return viewModel;
         }
@@ -493,7 +494,8 @@ namespace AtlasToolbox.HostBuilder
             IServiceProvider serviceProvider, Configuration configuration)
         {
             ConfigurationItemViewModel viewModel = new(
-                configuration, serviceProvider.GetRequiredKeyedService<ConfigurationStore>(configuration.Key), serviceProvider.GetRequiredKeyedService<IRoutable>(key));
+                configuration, serviceProvider.GetRequiredKeyedService<ConfigurationStore>(configuration.Key),
+                serviceProvider.GetRequiredKeyedService<IRoutable>(configuration.Key));
 
             return viewModel;
         }
@@ -527,7 +529,8 @@ namespace AtlasToolbox.HostBuilder
                 serviceProvider.GetServices<LinksViewModel>(),
                 serviceProvider.GetServices<ConfigurationItemViewModel>(),
                 serviceProvider.GetServices<MultiOptionConfigurationItemViewModel>(),
-                serviceProvider.GetServices<ConfigurationButtonViewModel>());
+                serviceProvider.GetServices<ConfigurationButtonViewModel>(),
+                serviceProvider.GetServices<Route>());
         }
 
         private static HomePageViewModel CreateHomePageViewModel(IServiceProvider serviceProvider)

@@ -12,7 +12,7 @@ namespace AtlasToolbox.Models
     public class Links : IConfigurationItem
     {
         public string Key { get; set; }
-        public string Route { get; set; }   
+        public string RouteItem { get; set; }   
         public string Link {  get; set; }
         public string Name { get => App.GetValueFromItemList(Key); }
         public string Description { get => App.GetValueFromItemList(Key, true); }
@@ -23,7 +23,7 @@ namespace AtlasToolbox.Models
         {
             Key = key;
             Link = link;
-            Route = route;
+            RouteItem = route;
             Icon.Glyph = icon;
         }
     }

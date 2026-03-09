@@ -1,4 +1,4 @@
-﻿using AtlasToolbox.ViewModels.Configuration;
+﻿using AtlasToolbox.ViewModels.ConfigurationVM;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

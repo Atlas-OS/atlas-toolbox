@@ -1,7 +1,8 @@
 
+using AtlasToolbox.Models;
 using AtlasToolbox.Utils;
 using AtlasToolbox.ViewModels;
-using AtlasToolbox.ViewModels.Configuration;
+using AtlasToolbox.ViewModels.ConfigurationVM;
 using AtlasToolbox.Views;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.WinUI;
@@ -10,23 +11,25 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
+using System.Security;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WinUIEx;
 
-namespace AtlasToolbox
+namespace AtlasToolbox.Views
 {
     public sealed partial class MainWindow : Window
     {
-        public List<IConfigurationItem> RootList { get; set; }
-
+        public ObservableCollection<BreadcrumbItem> BreadCrumbBarList { get; set; } = new();
         public MainWindow()
         {
             this.InitializeComponent();
@@ -43,38 +46,16 @@ namespace AtlasToolbox
             ExtendsContentIntoTitleBar = true;
 
             LoadText();
-            LoadExperiments();
+            // LoadExperiments();
 
             // Setup root list
-            RootList = new List<IConfigurationItem>();
-            foreach (IConfigurationItem item in App._host.Services.GetServices<LinksViewModel>())
-            {
-                /*if (!item.Type.ToString().Contains("SubMenu"))*/
-                RootList.Add(item);
-            }
-            foreach (IConfigurationItem item in App._host.Services.GetServices<ConfigurationItemViewModel>())
-            {
-                /*if (!item.Type.ToString().Contains("SubMenu"))*/
-                RootList.Add(item);
-            }
-            foreach (IConfigurationItem item in App._host.Services.GetServices<MultiOptionConfigurationItemViewModel>())
-            {
-                /*if (!item.Type.ToString().Contains("SubMenu"))*/
-                RootList.Add(item);
-            }
-            foreach (IConfigurationItem item in App._host.Services.GetServices<ConfigurationSubMenuViewModel>())
-            {
-                /*if (!item.Type.ToString().Contains("SubMenu"))*/
-                RootList.Add(item);
-            }
-            foreach (IConfigurationItem item in App._host.Services.GetServices<ConfigurationButtonViewModel>())
-            {
-                /*if (!item.Type.ToString().Contains("SubMenu"))*/
-                RootList.Add(item);
-            }
-            App.RootList = this.RootList;
+            App.RootList = new List<IConfigurationItem>();
+            App.RootList.AddRange(App._host.Services.GetServices<LinksViewModel>());
+            App.RootList.AddRange(App._host.Services.GetServices<ConfigurationItemViewModel>());
+            App.RootList.AddRange(App._host.Services.GetServices<MultiOptionConfigurationItemViewModel>());
+            App.RootList.AddRange(App._host.Services.GetServices<ConfigurationButtonViewModel>());
+
             NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems.OfType<NavigationViewItem>().First();
-            App.CurrentCategory = "AtlasToolbox.Views.HomePage";
             ContentFrame.Navigate(
                        typeof(Views.HomePage),
                        null,
@@ -86,10 +67,7 @@ namespace AtlasToolbox
             else this.Closed += AppBehaviorHelper.CloseApp;
         }
 
-        public void LoadExperiments()
-        {
-            
-        }
+        public void LoadExperiments() { }
 
         public bool IsFullscreen()
         {
@@ -154,33 +132,57 @@ namespace AtlasToolbox
         private void NavigationViewControl_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             string selectedItem = args.SelectedItemContainer.Tag.ToString() ?? "";
-            if (App.CurrentCategory == selectedItem || (App.CurrentCategory == "SettingsItem" && args.IsSettingsSelected == true)) { return; }
-            App.CurrentCategory = selectedItem;
             switch (selectedItem)
             {
                 case "SettingsPage":
                     Navigate(typeof(SettingsPage));
+                    SwitchContentVisibility(false);
                     break;
                 case "AtlasToolbox.Views.SoftwarePage":
                     Navigate(typeof(SoftwarePage));
+                    SwitchContentVisibility(false);
                     break;
                 case "AtlasToolbox.Views.HomePage":
                     Navigate(typeof(HomePage));
+                    SwitchContentVisibility(false);
                     break;
                 default:
-                    Navigate(typeof(ConfigPage));
+                    Navigate(typeof(ConfigPage), selectedItem);
+                    SwitchContentVisibility(true);
                     break;
             }
             App.XamlRoot = this.Content.XamlRoot;
         }
 
         /// <summary>
+        /// Switches the maincontent visibilites
+        /// </summary>
+        /// <param name="showForConfigPage">True if is on a config page, else False</param>
+        private void SwitchContentVisibility(bool showForConfigPage)
+        {
+            if (BreadcrumbBar.Visibility == Visibility.Collapsed && !showForConfigPage) return;
+            if (showForConfigPage)
+            {
+                BreadcrumbBar.Visibility = Visibility.Visible;
+                Grid.SetRow(ContentFrame, 1);
+                Grid.SetRowSpan(ContentFrame, 1);
+                MainGrid.Margin = new Thickness(55,0,0,0);
+                return;
+            }
+            BreadcrumbBar.Visibility = Visibility.Collapsed;
+            Grid.SetRow(ContentFrame, 0);
+            Grid.SetRowSpan(ContentFrame, 2);
+            MainGrid.Margin = new Thickness(0);
+        }
+
+        /// <summary>
         /// Navigates the ContentFrame to the selected page
         /// </summary>
         /// <param name="tag"></param>
-        private void Navigate(Type type)
+        private void Navigate(Type type, string route = null)
         {
-            ContentFrame.Navigate(type, null, new DrillInNavigationTransitionInfo());
+            ContentFrame.Navigate(type, route, new DrillInNavigationTransitionInfo());
+            if (type == typeof(ConfigPage) && route is not null) GenerateBreadcrumBar(route);
         }
 
         public void GoBack()
@@ -209,20 +211,36 @@ namespace AtlasToolbox
                            .First(n => n.Tag.Equals("SettingsPage"));
                 return;
             }
-            if (ContentFrame.SourcePageType != typeof(Views.SubSection))
-            {
-                try
-                {
-                    NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems
-                        .OfType<NavigationViewItem>()
-                        .First(n => n.Tag.Equals(App.CurrentCategory));
-                }
-                catch (InvalidOperationException)
-                {
-                    App.logger.Error($"No matching NavigationViewItem found for category: {App.CurrentCategory}");
-                }
-            }
         }
+
+        public void DisableBreadcrumbBar()
+        {
+            BreadcrumbBar.IsEnabled = false;
+        }
+
+        public void GenerateBreadcrumBar(string route)
+        {
+            BreadCrumbBarList.Clear();
+            var segments = route.Split("/");
+            for (int i = segments.Length - 1; i >= 0; i--)
+            {
+                string routeName = string.Join("/", segments.SkipLast(i));
+                BreadCrumbBarList.Add(
+                    new(routeName,
+                    routeName.Split("/").Last()));
+            }
+            if (!BreadcrumbBar.IsEnabled) BreadcrumbBar.IsEnabled = true;
+        }
+
+        private void BreadcrumbBar_ItemClicked(BreadcrumbBar sender, BreadcrumbBarItemClickedEventArgs args)
+        {
+            for (int i = BreadCrumbBarList.Count - 1; i >= args.Index + 1; i--)
+            {
+                BreadCrumbBarList.RemoveAt(i);
+            }
+            Navigate(typeof(ConfigPage), BreadCrumbBarList.Last().Route);
+        }
+
         #endregion Navigation Control
 
         private void AppTitleBar_PaneToggleRequested(Microsoft.UI.Xaml.Controls.TitleBar sender, object args)
@@ -370,83 +388,76 @@ namespace AtlasToolbox
         int timesClicked;
         private void AtlasButton_Click(object sender, RoutedEventArgs e)
         {
-            if (timesClicked == 10)
-            {
-                App.f_window = new FWindow();
-                App.f_window.Activate();
-                timesClicked = 0;
-            }
-            else
-            {
-                timesClicked++;
-            }
+            App.f_window = new FWindow();
+            App.f_window.Activate();
+            timesClicked = 0;
         }
 
-        #region Search experiment
+        #region Search
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            var configItem = RootList.Where(item => item.Name == args.SelectedItem.ToString()).FirstOrDefault();
-            if (configItem is null) return;
-            
-            string type = configItem.Type.ToString();
-            if (configItem is not null)
-            {
-                // Search bar logic. WIP.
-                if (type.Contains("SubMenu"))
-                {
-                    SettingsCard settingCard = new SettingsCard();
-                    try
-                    {
-                        IEnumerable<ConfigurationSubMenuViewModel> items = App._host.Services.GetServices<ConfigurationSubMenuViewModel>();
-                        ConfigurationSubMenuViewModel itemViewModel = items.Where(vm => vm.Key == type).First();
-                        ConfigurationSubMenuViewModel rootItemViewModel = null;
-                        DataTemplate template = new DataTemplate();
-                        ObservableCollection<Folder> folders = new ObservableCollection<Folder>();
-                        while (type.Contains("SubMenu"))
-                        {
-                            string itemViewModelType = itemViewModel.Type.ToString();
-                            folders.Add(new Folder() { Name = itemViewModel.Name });
-                            if (rootItemViewModel is null) rootItemViewModel = items.Where(vm => vm.Key == type).First();
-                            if (itemViewModelType.Contains("SubMenu"))
-                            {
-                                type = itemViewModelType;
-                                itemViewModel = items.Where(vm => vm.Key == type).First();
-                                configItem = itemViewModel;
-                            }
-                            else
-                            {
-                                folders.Add(new Folder() { Name = itemViewModelType });
-                                type = itemViewModelType;
-                            }
-                        }
-                    //folders.Remove(folders.First());
-                    // Set the item key to highlight after navigation
-                    App.SearchHighlightItemKey = configItem.Key;
-                    
-                    ContentFrame.Navigate(typeof(SubSection), new Tuple<ConfigurationSubMenuViewModel, DataTemplate, object>
-                        (rootItemViewModel, template, new ObservableCollection<Folder>(folders.Reverse())), new SlideNavigationTransitionInfo()
-                        { Effect = SlideNavigationTransitionEffect.FromRight });
-                    }
-                    catch (Exception ex)
-                    {
-                        App.logger.Error(ex.Message + ": An exception was thrown when trying to open a submenu:\n\n" + ex.InnerException);
-                    }
-                }
-                else
-                {
-                    // Set the item key to highlight after navigation
-                    App.SearchHighlightItemKey = configItem.Key;
-                    
-                    NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems
-                                    .OfType<NavigationViewItem>()
-                                    .First(n => n.Tag.Equals(configItem.Type.ToString()));
-                    App.CurrentCategory = configItem.Type.ToString();
-                    Navigate(typeof(Views.ConfigPage));
-                }
-            }
-            
-            // Clear the search box after selection
-            sender.Text = string.Empty;
+            //    var configItem = RootList.Where(item => item.Name == args.SelectedItem.ToString()).FirstOrDefault();
+            //    if (configItem is null) return;
+
+            //    string type = configItem.Type.ToString();
+            //    if (configItem is not null)
+            //    {
+            //        // Search bar logic. WIP.
+            //        if (type.Contains("SubMenu"))
+            //        {
+            //            SettingsCard settingCard = new SettingsCard();
+            //            try
+            //            {
+            //                IEnumerable<ConfigurationSubMenuViewModel> items = App._host.Services.GetServices<ConfigurationSubMenuViewModel>();
+            //                ConfigurationSubMenuViewModel itemViewModel = items.Where(vm => vm.Key == type).First();
+            //                ConfigurationSubMenuViewModel rootItemViewModel = null;
+            //                DataTemplate template = new DataTemplate();
+            //                ObservableCollection<Folder> folders = new ObservableCollection<Folder>();
+            //                while (type.Contains("SubMenu"))
+            //                {
+            //                    string itemViewModelType = itemViewModel.Type.ToString();
+            //                    folders.Add(new Folder() { Name = itemViewModel.Name });
+            //                    if (rootItemViewModel is null) rootItemViewModel = items.Where(vm => vm.Key == type).First();
+            //                    if (itemViewModelType.Contains("SubMenu"))
+            //                    {
+            //                        type = itemViewModelType;
+            //                        itemViewModel = items.Where(vm => vm.Key == type).First();
+            //                        configItem = itemViewModel;
+            //                    }
+            //                    else
+            //                    {
+            //                        folders.Add(new Folder() { Name = itemViewModelType });
+            //                        type = itemViewModelType;
+            //                    }
+            //                }
+            //            //folders.Remove(folders.First());
+            //            // Set the item key to highlight after navigation
+            //            App.SearchHighlightItemKey = configItem.Key;
+
+            //            ContentFrame.Navigate(typeof(SubSection), new Tuple<ConfigurationSubMenuViewModel, DataTemplate, object>
+            //                (rootItemViewModel, template, new ObservableCollection<Folder>(folders.Reverse())), new SlideNavigationTransitionInfo()
+            //                { Effect = SlideNavigationTransitionEffect.FromRight });
+            //            }
+            //            catch (Exception ex)
+            //            {
+            //                App.logger.Error(ex.Message + ": An exception was thrown when trying to open a submenu:\n\n" + ex.InnerException);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            // Set the item key to highlight after navigation
+            //            App.SearchHighlightItemKey = configItem.Key;
+
+            //            NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems
+            //                            .OfType<NavigationViewItem>()
+            //                            .First(n => n.Tag.Equals(configItem.Type.ToString()));
+            //            App.CurrentCategory = configItem.Type.ToString();
+            //            Navigate(typeof(Views.ConfigPage));
+            //        }
+            //    }
+
+            //    // Clear the search box after selection
+            //    sender.Text = string.Empty;
         }
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -457,7 +468,7 @@ namespace AtlasToolbox
             {
                 var suitableItems = new List<string>();
                 var splitText = sender.Text.ToLower().Split(" ");
-                foreach (var viewModel in RootList)
+                foreach (var viewModel in App.RootList)
                 {
                     var found = splitText.All((key) =>
                     {
@@ -475,6 +486,6 @@ namespace AtlasToolbox
                 sender.ItemsSource = suitableItems;
             }
         }
-        #endregion Search experiment
+        #endregion Search
     }
 }

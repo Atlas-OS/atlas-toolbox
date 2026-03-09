@@ -1,7 +1,7 @@
 ﻿using AtlasToolbox.Models;
 using AtlasToolbox.Utils;
 using AtlasToolbox.ViewModels;
-using AtlasToolbox.ViewModels.Configuration;
+using AtlasToolbox.ViewModels.ConfigurationVM;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.WinUI.Controls;
 using Microsoft.Extensions.DependencyInjection;

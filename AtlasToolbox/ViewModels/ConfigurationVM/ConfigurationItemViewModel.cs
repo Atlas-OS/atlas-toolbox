@@ -20,7 +20,7 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
         public string Name => Configuration.Name;
         public string Key => Configuration.Key;
         public string Description => Configuration.Description;
-        public string Route => Configuration.Route;
+        public string RouteItem => Configuration.RouteItem;
         public FontIcon Icon => Configuration.Icon;
 
         private bool _currentSetting;
@@ -61,7 +61,6 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
 
             _currentSetting = FetchCurrentSetting();
             SaveConfigurationCommand = new SaveConfigurationCommand(this, configurationStore, configurationService);
-            
         }
 
         public bool FetchCurrentSetting()

@@ -1,16 +1,16 @@
-using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-
 using AtlasToolbox.Utils;
-using AtlasToolbox.ViewModels.Configuration;
+using AtlasToolbox.ViewModels.ConfigurationVM;
 using CommunityToolkit.WinUI.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Navigation;
 using NLog.Filters;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace AtlasToolbox.Views;
 
@@ -22,21 +22,19 @@ public sealed partial class ConfigPage : Page
     public ConfigPage()
     {
         this.InitializeComponent();
-
         _viewModel = App._host.Services.GetRequiredService<ConfigPageViewModel>();
-        // Gets all the items for the choosen category
-        Enum.TryParse(new ConfigurationType().GetType(), App.CurrentCategory, out configType);
-        _viewModel.ShowForType((ConfigurationType)configType);
-
         this.DataContext = _viewModel;
 
-        ConfigurationType type = (ConfigurationType)configType;
-        BreadcrumbBar.ItemsSource = new ObservableCollection<Folder> {
-            new Folder {Name = type.GetDescription()}
-        };
-        BreadcrumbBar.ItemClicked += BreadcrumbBar_ItemClicked;
-
         this.Loaded += ConfigPage_Loaded;
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+        if (e.Parameter is string route)
+        {
+            _viewModel.CurrentRoute = route;
+        }
     }
 
     private async void ConfigPage_Loaded(object sender, RoutedEventArgs e)
@@ -57,9 +55,10 @@ public sealed partial class ConfigPage : Page
     {
         // Find the index of the item in the vm
         int index = -1;
-        for (int i = 0; i < _viewModel.ConfigurationItems.Count; i++)
+        var filteredItems = _viewModel.FilteredItems.ToList();
+        for (int i = 0; i < filteredItems.Count; i++)
         {
-            if (_viewModel.ConfigurationItems[i].Key == itemKey)
+            if (filteredItems[i].Key == itemKey)
             {
                 index = i;
                 break;
@@ -129,29 +128,19 @@ public sealed partial class ConfigPage : Page
         return null;
     }
 
-    private void BreadcrumbBar_ItemClicked(BreadcrumbBar sender, BreadcrumbBarItemClickedEventArgs args)
-    {
-        var items = BreadcrumbBar.ItemsSource as ObservableCollection<string>;
-        for (int i = items.Count - 1; i >= args.Index + 1; i--)
-        {
-            items.RemoveAt(i);
-        }
-    }
-
     private void OnCardClicked(object sender, RoutedEventArgs e)
     {
         SettingsCard settingCard = sender as SettingsCard;
-        ConfigurationSubMenuViewModel item = settingCard.DataContext as ConfigurationSubMenuViewModel;
-
-        DataTemplate template = (DataTemplate)MainGrid.Resources["ConfigurationSubMenuTemplate"];
-
+        string route = settingCard.Tag.ToString();
         try
         {
-            Frame.Navigate(typeof(SubSection), new Tuple<ConfigurationSubMenuViewModel, DataTemplate, object>(item, template, this.BreadcrumbBar.ItemsSource), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            (App.m_window as MainWindow)?.DisableBreadcrumbBar();
+            _viewModel.CurrentRoute = route;
+            (App.m_window as MainWindow)?.GenerateBreadcrumBar(route);
         }
         catch (Exception ex)
         {
-            App.logger.Error($"Exception when attempting to navigate to {item.Type}: \n\t{ex.Message}\n\n{ex.InnerException}");
+            App.logger.Error($"Exception when attempting to navigate to route: \n\t{ex.Message}\n\n{ex.InnerException}");
         }
     }
 

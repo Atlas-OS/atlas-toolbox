@@ -20,6 +20,8 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
         public string Key => ConfigButton.Name.Replace(" ", "");
         public FontIcon Icon => ConfigButton.Icon;
 
+        public string RouteItem => ConfigButton.RouteItem;
+
         public ConfigurationButtonViewModel(ConfigurationButton configurationButton)
         {
             ConfigButton = configurationButton;

@@ -51,6 +51,8 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
 
         public ICommand MultiOptionSaveConfigurationCommand { get; }
 
+        public string RouteItem => Configuration.RouteItem;
+
         public MultiOptionConfigurationItemViewModel(
             MultiOptionConfiguration configuration,
             MultiOptionConfigurationStore configurationStore,

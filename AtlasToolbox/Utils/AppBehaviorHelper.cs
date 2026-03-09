@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using AtlasToolbox.Views;
+using Microsoft.UI.Xaml;
 using WinUIEx;
 
 namespace AtlasToolbox.Utils

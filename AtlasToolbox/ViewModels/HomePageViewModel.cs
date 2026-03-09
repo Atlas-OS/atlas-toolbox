@@ -2,7 +2,7 @@
 using AtlasToolbox.Models;
 using AtlasToolbox.Services.ConfigurationServices;
 using AtlasToolbox.Utils;
-using AtlasToolbox.ViewModels.Configuration;
+using AtlasToolbox.ViewModels.ConfigurationVM;
 using AtlasToolbox.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -30,6 +30,7 @@ namespace AtlasToolbox.ViewModels
         private IEnumerable<Profiles> _profiles;
         private IEnumerable<ConfigurationItemViewModel> ConfigurationItemViewModels { get; }
         private IEnumerable<MultiOptionConfigurationItemViewModel> MultiOptionConfigurationItemViewModels { get; }
+
 
         [ObservableProperty]
         public ObservableCollection<Profiles> _profilesList;

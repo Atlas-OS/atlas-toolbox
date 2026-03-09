@@ -10,6 +10,7 @@
     xmlns:model="using:AtlasToolbox.Models"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:viewmodel="using:AtlasToolbox.ViewModels"
+    xmlns:configVM="using:AtlasToolbox.ViewModels.ConfigurationVM"
     d:DataContext="{d:DesignInstance Type=viewmodel:HomePageViewModel}"
     mc:Ignorable="d">
     <Page.Resources>
@@ -123,7 +124,7 @@
                 MinHeight="300"
                 Margin="0,36,0,0">
                 <Grid.Resources>
-                    <DataTemplate x:Key="ControlItemTemplate" x:DataType="viewmodel:ConfigurationItemViewModel">
+                    <DataTemplate x:Key="ControlItemTemplate" x:DataType="configVM:ConfigurationItemViewModel">
                         <control:SettingsCard
                             x:Name="SettingsCard"
                             MinHeight="74"
@@ -144,7 +145,7 @@
                                 Loaded="ToggleSwitch_Loaded" />
                         </control:SettingsCard>
                     </DataTemplate>
-                    <DataTemplate x:Key="MultiOptionControlTemplate" x:DataType="viewmodel:MultiOptionConfigurationItemViewModel">
+                    <DataTemplate x:Key="MultiOptionControlTemplate" x:DataType="configVM:MultiOptionConfigurationItemViewModel">
                         <control:SettingsCard
                             Height="74"
                             Margin="36,0,36,10"
@@ -165,7 +166,7 @@
                                 SelectedItem="{Binding CurrentSetting, Mode=TwoWay}" />
                         </control:SettingsCard>
                     </DataTemplate>
-                    <DataTemplate x:Key="ConfigurationButtonTemplate" x:DataType="viewmodel:ConfigurationButtonViewModel">
+                    <DataTemplate x:Key="ConfigurationButtonTemplate" x:DataType="configVM:ConfigurationButtonViewModel">
                         <control:SettingsCard
                             x:Name="SettingsCard"
                             Height="74"
@@ -186,7 +187,7 @@
                                 Style="{StaticResource AccentButtonStyle}" />
                         </control:SettingsCard>
                     </DataTemplate>
-                    <DataTemplate x:Key="LinksTemplate" x:DataType="viewmodel:LinksViewModel">
+                    <DataTemplate x:Key="LinksTemplate" x:DataType="configVM:LinksViewModel">
                         <control:SettingsCard
                             x:Name="LinkCard"
                             Height="74"
