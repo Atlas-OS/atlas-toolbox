@@ -8,7 +8,7 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
 {
     class ConfigPageViewModel : ObservableObject
     {
-        public ObservableCollection<IConfigurationItem> ConfigurationItems { get; set; }
+        public List<IConfigurationItem> ConfigurationItems { get; set; }
 
         private string _currentRoute;
         public string CurrentRoute
