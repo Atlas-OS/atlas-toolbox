@@ -185,6 +185,12 @@ namespace AtlasToolbox.Views
             if (type == typeof(ConfigPage) && route is not null) GenerateBreadcrumBar(route);
         }
 
+        public void NavigateToRoute(string route, NavigationTransitionInfo transitionInfo)
+        {
+            ContentFrame.Navigate(typeof(ConfigPage), route, transitionInfo);
+            GenerateBreadcrumBar(route);
+        }
+
         public void GoBack()
         {
             if (ContentFrame.CanGoBack) ContentFrame.GoBack();
@@ -234,11 +240,8 @@ namespace AtlasToolbox.Views
 
         private void BreadcrumbBar_ItemClicked(BreadcrumbBar sender, BreadcrumbBarItemClickedEventArgs args)
         {
-            for (int i = BreadCrumbBarList.Count - 1; i >= args.Index + 1; i--)
-            {
-                BreadCrumbBarList.RemoveAt(i);
-            }
-            Navigate(typeof(ConfigPage), BreadCrumbBarList.Last().Route);
+            var route = ((BreadcrumbItem)args.Item).Route;
+            NavigateToRoute(route, new DrillInNavigationTransitionInfo());
         }
 
         #endregion Navigation Control

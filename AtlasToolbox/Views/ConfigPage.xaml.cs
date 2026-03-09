@@ -31,10 +31,17 @@ public sealed partial class ConfigPage : Page
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
+        ConfigItemsControl.ItemsSource = _viewModel.FilteredItems;
         if (e.Parameter is string route)
         {
             _viewModel.CurrentRoute = route;
         }
+    }
+
+    protected override void OnNavigatedFrom(NavigationEventArgs e)
+    {
+        base.OnNavigatedFrom(e);
+        ConfigItemsControl.ItemsSource = null;
     }
 
     private async void ConfigPage_Loaded(object sender, RoutedEventArgs e)
@@ -134,9 +141,8 @@ public sealed partial class ConfigPage : Page
         string route = settingCard.Tag.ToString();
         try
         {
-            (App.m_window as MainWindow)?.DisableBreadcrumbBar();
-            _viewModel.CurrentRoute = route;
-            (App.m_window as MainWindow)?.GenerateBreadcrumBar(route);
+            (App.m_window as MainWindow)?.NavigateToRoute(route,
+                new SlideNavigationTransitionInfo { Effect = SlideNavigationTransitionEffect.FromRight });
         }
         catch (Exception ex)
         {

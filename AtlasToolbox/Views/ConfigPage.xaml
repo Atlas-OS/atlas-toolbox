@@ -9,7 +9,6 @@
     xmlns:local="using:AtlasToolbox.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:CommunityToolkit.WinUI"
-    NavigationCacheMode="Required"
     xmlns:viewmodel="using:AtlasToolbox.ViewModels.ConfigurationVM"
     d:DataContext="{d:DesignInstance Type=viewmodel:ConfigPageViewModel}"
     mc:Ignorable="d">

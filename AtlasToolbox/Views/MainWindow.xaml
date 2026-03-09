@@ -99,7 +99,7 @@
                             </DataTemplate>
                         </BreadcrumbBar.ItemTemplate>
                     </BreadcrumbBar>
-                    <Frame Grid.Row="1" x:Name="ContentFrame" Navigated="ContentFrame_Navigated" />
+                    <Frame Grid.Row="1" x:Name="ContentFrame" Navigated="ContentFrame_Navigated" CacheSize="3" />
                     <InfoBar
                         x:Name="UpdateTitleBar"
                         Margin="0,26,36,0"
