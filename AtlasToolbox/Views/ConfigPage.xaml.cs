@@ -24,13 +24,12 @@ public sealed partial class ConfigPage : Page
         this.InitializeComponent();
         _viewModel = App._host.Services.GetRequiredService<ConfigPageViewModel>();
         this.DataContext = _viewModel;
-
-        this.Loaded += ConfigPage_Loaded;
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
+        this.Loaded += ConfigPage_Loaded;
         ConfigItemsControl.ItemsSource = _viewModel.FilteredItems;
         if (e.Parameter is string route)
         {
@@ -41,6 +40,7 @@ public sealed partial class ConfigPage : Page
     protected override void OnNavigatedFrom(NavigationEventArgs e)
     {
         base.OnNavigatedFrom(e);
+        this.Loaded -= ConfigPage_Loaded;
         ConfigItemsControl.ItemsSource = null;
     }
 
@@ -153,6 +153,7 @@ public sealed partial class ConfigPage : Page
     private void ToggleSwitch_Loaded(object sender, RoutedEventArgs e)
     {
         ToggleSwitch toggleSwitch = sender as ToggleSwitch;
+        toggleSwitch.Toggled -= ToggleSwitchBehavior.OnToggled;
         toggleSwitch.Toggled += ToggleSwitchBehavior.OnToggled;
     }
 

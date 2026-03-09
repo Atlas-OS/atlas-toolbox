@@ -188,6 +188,12 @@ namespace AtlasToolbox.Views
         public void NavigateToRoute(string route, NavigationTransitionInfo transitionInfo)
         {
             ContentFrame.Navigate(typeof(ConfigPage), route, transitionInfo);
+            // Remove previous ConfigPage entries from back-stack to prevent memory accumulation
+            for (int i = ContentFrame.BackStack.Count - 1; i >= 0; i--)
+            {
+                if (ContentFrame.BackStack[i].SourcePageType == typeof(ConfigPage))
+                    ContentFrame.BackStack.RemoveAt(i);
+            }
             GenerateBreadcrumBar(route);
         }
 
