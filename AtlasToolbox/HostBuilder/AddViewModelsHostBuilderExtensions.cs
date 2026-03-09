@@ -36,9 +36,9 @@ namespace AtlasToolbox.HostBuilder
             host.ConfigureServices((_, services) =>
             {
                 services.AddSingleton<MainViewModel>();
-                services.AddTransient(CreateConfigPageViewModel);
-                services.AddTransient(CreateHomePageViewModel);
-                services.AddTransient(CreateSoftwarePageViewModel);
+                services.AddSingleton(CreateConfigPageViewModel);
+                services.AddSingleton(CreateHomePageViewModel);
+                services.AddSingleton(CreateSoftwarePageViewModel);
             });
 
             host.AddConfigurationButtonItemViewModels();
