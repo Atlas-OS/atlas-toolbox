@@ -1,4 +1,4 @@
-﻿using AtlasToolbox.Services.ConfigurationServices;
+using AtlasToolbox.Services.ConfigurationServices;
 using AtlasToolbox.Models;
 using AtlasToolbox.Stores;
 using AtlasToolbox.ViewModels;
@@ -37,7 +37,7 @@ namespace AtlasToolbox.HostBuilder
                 services.AddSingleton<MainViewModel>();
                 services.AddTransient(CreateConfigPageViewModel);
                 services.AddTransient(CreateHomePageViewModel);
-                services.AddTransient(CreateSoftwarePageViewModel);
+                services.AddSingleton(CreateSoftwarePageViewModel);
             });
 
             host.AddConfigurationButtonItemViewModels();

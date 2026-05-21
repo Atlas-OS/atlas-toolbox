@@ -46,7 +46,7 @@
                             Click="OnCardClicked"
                             Description="{Binding Description}"
                             Header="{Binding Name}"
-                            HeaderIcon="{Binding Icon}"
+                            HeaderIcon="{Binding Icon, Converter={StaticResource FontIconConverter}}"
                             IsClickEnabled="True"
                             Style="{StaticResource ConfigurationSettingsCardTemplate}" />
                     </DataTemplate>
@@ -56,7 +56,7 @@
                 <ItemsControl x:Name="MultiOptionItemsControl">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <controls:SettingsCard Header="{Binding Name}" Style="{StaticResource ConfigurationSettingsCardTemplate}" HeaderIcon="{Binding Icon}">
+                            <controls:SettingsCard Header="{Binding Name}" Style="{StaticResource ConfigurationSettingsCardTemplate}" HeaderIcon="{Binding Icon, Converter={StaticResource FontIconConverter}}">
                                 <controls:SettingsCard.ContextFlyout>
                                     <MenuFlyout>
                                         <MenuFlyoutItem
@@ -109,7 +109,7 @@
                                 x:Name="SettingsCard"
                                 Header="{Binding Description}"
                                 Style="{StaticResource ConfigurationSettingsCardTemplate}"
-                                HeaderIcon="{Binding Icon}">
+                                HeaderIcon="{Binding Icon, Converter={StaticResource FontIconConverter}}">
                                 <controls:SettingsCard.ContextFlyout>
                                     <MenuFlyout>
                                         <MenuFlyoutItem

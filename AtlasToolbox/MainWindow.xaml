@@ -12,7 +12,7 @@
     <Window.SystemBackdrop>
         <MicaBackdrop Kind="Base" />
     </Window.SystemBackdrop>
-    <Grid x:Name="RootGrid">
+    <Grid x:Name="RootGrid" PointerPressed="RootGrid_PointerPressed">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
@@ -59,7 +59,7 @@
                     SuggestionChosen="AutoSuggestBox_SuggestionChosen"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
-                    Width="320"
+                    Width="360"
                     TextChanged="AutoSuggestBox_TextChanged" />
             </TitleBar.Content>
         </TitleBar>

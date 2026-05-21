@@ -1,4 +1,4 @@
-﻿using ABI.System.Collections;
+using ABI.System.Collections;
 using AtlasToolbox.Models;
 using AtlasToolbox.Services.ConfigurationServices;
 using AtlasToolbox.Utils;
@@ -26,7 +26,7 @@ namespace AtlasToolbox.ViewModels
 {
     public partial class HomePageViewModel : ObservableObject
     {
-        private IEnumerable<Profiles> _profiles;
+        
         private IEnumerable<ConfigurationItemViewModel> ConfigurationItemViewModels { get; }
         private IEnumerable<MultiOptionConfigurationItemViewModel> MultiOptionConfigurationItemViewModels { get; }
 

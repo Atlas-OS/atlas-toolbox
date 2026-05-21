@@ -25,6 +25,11 @@ namespace AtlasToolbox
     public sealed partial class MainWindow : Window
     {
         public List<IConfigurationItem> RootList { get; set; }
+        /// <summary>Timestamp of the last navigation — used to debounce rapid back/forward clicks.</summary>
+        private DateTime _lastNavTime = DateTime.MinValue;
+        private static readonly TimeSpan NavCooldown = TimeSpan.FromMilliseconds(350);
+        private bool IsNavigationAllowed() => (DateTime.Now - _lastNavTime) >= NavCooldown;
+        private void RecordNavigation() => _lastNavTime = DateTime.Now;
 
         public MainWindow()
         {
@@ -72,11 +77,12 @@ namespace AtlasToolbox
                 RootList.Add(item);
             }
             App.RootList = this.RootList;
-            NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems.OfType<NavigationViewItem>().First();
+            // Set CurrentCategory BEFORE SelectedItem so SelectionChanged early-exits and doesn't double-navigate
             App.CurrentCategory = "AtlasToolbox.Views.HomePage";
+            NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems.OfType<NavigationViewItem>().First();
             ContentFrame.Navigate(
                        typeof(Views.HomePage),
-                       null,
+                       App.CurrentCategory,
                        new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo()
                        );
             SetTitleBar(AppTitleBar);
@@ -179,16 +185,35 @@ namespace AtlasToolbox
         /// <param name="tag"></param>
         private void Navigate(Type type)
         {
-            ContentFrame.Navigate(type, null, new DrillInNavigationTransitionInfo());
+            if (!IsNavigationAllowed()) return;
+            RecordNavigation();
+            ContentFrame.Navigate(type, App.CurrentCategory, new DrillInNavigationTransitionInfo());
+        }
+
+        /// <summary>
+        /// Restores App.CurrentCategory from a navigation stack entry's stored parameter
+        /// </summary>
+        private void RestoreCategoryFromEntry(PageStackEntry entry)
+        {
+            if (entry?.Parameter is string category && !string.IsNullOrEmpty(category))
+            {
+                App.CurrentCategory = category;
+            }
         }
 
         public void GoBack()
         {
-            if (ContentFrame.CanGoBack) ContentFrame.GoBack();
+            if (!IsNavigationAllowed() || !ContentFrame.CanGoBack) return;
+            RecordNavigation();
+            RestoreCategoryFromEntry(ContentFrame.BackStack.LastOrDefault());
+            ContentFrame.GoBack();
         }
         public void NavigationViewControl_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
-            if (ContentFrame.CanGoBack) ContentFrame.GoBack();
+            if (!IsNavigationAllowed() || !ContentFrame.CanGoBack) return;
+            RecordNavigation();
+            RestoreCategoryFromEntry(ContentFrame.BackStack.LastOrDefault());
+            ContentFrame.GoBack();
         }
 
         private void ContentFrame_Navigated(object sender, NavigationEventArgs e)
@@ -227,6 +252,38 @@ namespace AtlasToolbox
         private void AppTitleBar_PaneToggleRequested(Microsoft.UI.Xaml.Controls.TitleBar sender, object args)
         {
             NavigationViewControl.IsPaneOpen = !NavigationViewControl.IsPaneOpen;
+        }
+
+        /// <summary>
+        /// Handles mouse side button navigation (XButton1 = Back, XButton2 = Forward)
+        /// </summary>
+        private void RootGrid_PointerPressed(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            var point = e.GetCurrentPoint(RootGrid);
+            if (point.Properties.IsXButton1Pressed)
+            {
+                if (!IsNavigationAllowed()) return;
+                // Back button
+                if (ContentFrame.CanGoBack)
+                {
+                    e.Handled = true;
+                    RecordNavigation();
+                    RestoreCategoryFromEntry(ContentFrame.BackStack.LastOrDefault());
+                    ContentFrame.GoBack();
+                }
+            }
+            else if (point.Properties.IsXButton2Pressed)
+            {
+                if (!IsNavigationAllowed()) return;
+                // Forward button
+                if (ContentFrame.CanGoForward)
+                {
+                    e.Handled = true;
+                    RecordNavigation();
+                    RestoreCategoryFromEntry(ContentFrame.ForwardStack.LastOrDefault());
+                    ContentFrame.GoForward();
+                }
+            }
         }
 
 

@@ -1,4 +1,4 @@
-﻿using AtlasToolbox.Services.ConfigurationServices;
+using AtlasToolbox.Services.ConfigurationServices;
 using AtlasToolbox.Models;
 using AtlasToolbox.Stores;
 using System.Windows.Input;
@@ -22,7 +22,7 @@ namespace AtlasToolbox.ViewModels
         public string Key => Configuration.Key;
         public string Description => Configuration.Description;
         public ConfigurationType Type => Configuration.Type;
-        public FontIcon Icon => Configuration.Icon;
+        public string Icon => Configuration.Icon;
 
         private bool _currentSetting;
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,15 +14,15 @@ namespace AtlasToolbox.Models
         public string Name { get; set; }
         public string Key { get; set; }
         public ConfigurationType Type { get; set; }
-        public FontIcon Icon { get; set; }
+        public string Icon { get; set; }
 
         public MultiOptionConfiguration(string name, string key, ConfigurationType type, string icon = "\uE897")
         {
             Name = name;
             Key = key;
             Type = type;
-            Icon = new FontIcon();
-            Icon.Glyph = icon;
+            
+            Icon = icon;
         }
     }
 }

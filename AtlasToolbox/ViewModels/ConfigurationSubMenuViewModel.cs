@@ -1,4 +1,4 @@
-﻿using AtlasToolbox.Enums;
+using AtlasToolbox.Enums;
 using AtlasToolbox.Models;
 using AtlasToolbox.Services.ConfigurationServices;
 using AtlasToolbox.Services.ConfigurationSubMenu;
@@ -22,7 +22,7 @@ namespace AtlasToolbox.ViewModels
         public string Name => _configurationSubMenu.Name;
         public string Description => _configurationSubMenu.Description;
         public ConfigurationType Type => _configurationSubMenu.Type;
-        public FontIcon Icon => _configurationSubMenu.Icon;
+        public string Icon => _configurationSubMenu.Icon;
 
         public string Key => _configurationSubMenu.Key;
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +18,7 @@ namespace AtlasToolbox.ViewModels
         public string Name => ConfigButton.Name;
         public string Description => ConfigButton.Description;
         public string Key => ConfigButton.Name.Replace(" ", "");
-        public FontIcon Icon => ConfigButton.Icon;
+        public string Icon => ConfigButton.Icon;
         public ConfigurationType Type => ConfigButton.Type;
 
         public ConfigurationButtonViewModel(ConfigurationButton configurationButton)

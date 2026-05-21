@@ -10,6 +10,7 @@
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:viewmodel="using:AtlasToolbox.ViewModels"
     d:DataContext="{d:DesignInstance Type=viewmodel:SoftwarePageViewModel}"
+    NavigationCacheMode="Required"
     mc:Ignorable="d">
     <Page.Resources>
         <local:BitmapIconConverter x:Key="BitmapIconConverter" />

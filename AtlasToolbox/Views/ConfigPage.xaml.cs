@@ -10,6 +10,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Navigation;
 using NLog.Filters;
 
 namespace AtlasToolbox.Views;
@@ -24,19 +25,26 @@ public sealed partial class ConfigPage : Page
         this.InitializeComponent();
 
         _viewModel = App._host.Services.GetRequiredService<ConfigPageViewModel>();
-        // Gets all the items for the choosen category
-        Enum.TryParse(new ConfigurationType().GetType(), App.CurrentCategory, out configType);
-        _viewModel.ShowForType((ConfigurationType)configType);
-
         this.DataContext = _viewModel;
 
-        ConfigurationType type = (ConfigurationType)configType;
-        BreadcrumbBar.ItemsSource = new ObservableCollection<Folder> {
-            new Folder {Name = type.GetDescription()}
-        };
         BreadcrumbBar.ItemClicked += BreadcrumbBar_ItemClicked;
-
         this.Loaded += ConfigPage_Loaded;
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+
+        // Read category from the navigation parameter (stored when Navigate() was called)
+        string category = e.Parameter as string ?? App.CurrentCategory;
+        if (Enum.TryParse(typeof(ConfigurationType), category, out configType))
+        {
+            _viewModel.ShowForType((ConfigurationType)configType);
+            BreadcrumbBar.ItemsSource = new ObservableCollection<Folder>
+            {
+                new Folder { Name = ((ConfigurationType)configType).GetDescription() }
+            };
+        }
     }
 
     private async void ConfigPage_Loaded(object sender, RoutedEventArgs e)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +15,7 @@ namespace AtlasToolbox.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public ConfigurationType Type { get; set; }
-        public FontIcon Icon { get; set; }
+        public string Icon { get; set; }
 
         public ConfigurationButton(ICommand command, string name, string description, ConfigurationType type, string icon = "\uE897") 
         {
@@ -23,8 +23,8 @@ namespace AtlasToolbox.Models
             Name = name;
             Description = description;
             Type = type;
-            Icon = new FontIcon();
-            Icon.Glyph = icon;
+            
+            Icon = icon;
         }
     }
 }

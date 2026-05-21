@@ -1,4 +1,4 @@
-﻿using AtlasToolbox.Enums;
+using AtlasToolbox.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +8,13 @@ namespace AtlasToolbox.ViewModels
 {
     class ConfigPageViewModel : ObservableObject
     {
-        public ObservableCollection<IConfigurationItem> ConfigurationItems { get; set; }
+        private readonly List<IConfigurationItem> _allItems;
+        private ObservableCollection<IConfigurationItem> _configurationItems;
+        public ObservableCollection<IConfigurationItem> ConfigurationItems
+        {
+            get => _configurationItems;
+            set => SetProperty(ref _configurationItems, value);
+        }
 
         public ConfigPageViewModel(
             IEnumerable<ConfigurationItemViewModel> configurationItemViewModels,
@@ -17,13 +23,13 @@ namespace AtlasToolbox.ViewModels
             IEnumerable<LinksViewModel> linksViewModel,
             IEnumerable<ConfigurationButtonViewModel> configurationButtonViewModel)
         {
-            ConfigurationItems = new ObservableCollection<IConfigurationItem>();
-            configurationSubMenuViewModel.ToList().ForEach(item => ConfigurationItems.Add(item));
-            multiOptionConfigurationItemViewModels.ToList().ForEach(item => ConfigurationItems.Add(item));
-            configurationItemViewModels.ToList().ForEach(item => ConfigurationItems.Add(item));
-            configurationButtonViewModel.ToList().ForEach(item => ConfigurationItems.Add(item));
-            linksViewModel.ToList().ForEach(item => ConfigurationItems.Add(item));
-
+            _allItems = new List<IConfigurationItem>();
+            configurationSubMenuViewModel.ToList().ForEach(item => _allItems.Add(item));
+            multiOptionConfigurationItemViewModels.ToList().ForEach(item => _allItems.Add(item));
+            configurationItemViewModels.ToList().ForEach(item => _allItems.Add(item));
+            configurationButtonViewModel.ToList().ForEach(item => _allItems.Add(item));
+            linksViewModel.ToList().ForEach(item => _allItems.Add(item));
+            _configurationItems = new ObservableCollection<IConfigurationItem>(_allItems);
         }
 
         /// <summary>
@@ -32,15 +38,8 @@ namespace AtlasToolbox.ViewModels
         /// <param name="configurationType">Type to get</param>
         public void ShowForType(ConfigurationType configurationType)
         {
-            ObservableCollection<IConfigurationItem> tempList = new();
-            foreach (var item in ConfigurationItems)
-            {
-                if (item.Type == configurationType)
-                {
-                    tempList.Add(item);
-                }
-            }
-            ConfigurationItems = tempList;
+            ConfigurationItems = new ObservableCollection<IConfigurationItem>(
+                _allItems.Where(item => item.Type == configurationType));
         }
 
         /// <summary>
