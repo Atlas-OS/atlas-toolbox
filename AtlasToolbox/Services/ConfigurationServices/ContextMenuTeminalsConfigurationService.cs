@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using AtlasToolbox.Stores;
 using AtlasToolbox.Utils;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,13 +14,13 @@ namespace AtlasToolbox.Services.ConfigurationServices
 
         private readonly MultiOptionConfigurationStore _contextMenuTeminalsConfigurationService;
 
-        private const string CONTEXT_MENU_REG_FILE_PATH = "C:\\Windows\\AtlasModues\\Scripts\\ConfigurationServices\\ContextMenuTerminals\\ContextMenuTerminals_";
+        private static readonly string CONTEXT_MENU_REG_FILE_PATH = @$"{Environment.GetEnvironmentVariable("windir")}\AtlasModules\Toolbox\ConfigurationServices\ContextMenuTerminals\ContextMenuTerminals_";
 
         private List<string> options = new List<string>()
         {
+            "Remove terminals from the context menu",
             "Add terminals",
             "Add terminals (no Windows Terminal)",
-            "Remove terminals from the context menu",
         };
 
         public ContextMenuTeminalsConfigurationService(

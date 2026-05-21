@@ -35,7 +35,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
         public void Enable()
         {
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 1);
-            CommandPromptHelper.RunCommand(@$"{Environment.GetEnvironmentVariable("windir")}\AtlasModules\Toolbox\Scripts\NVidia\DisableNVIDIADisplayContainerLS.cmd", false);
+            CommandPromptHelper.RunCommand(@$"{Environment.GetEnvironmentVariable("windir")}\AtlasModules\Toolbox\Scripts\NVidia\EnableNVIDIADisplayContainerLS.cmd", false);
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, "path", @$"{Environment.GetEnvironmentVariable("windir")}\AtlasDesktop\6. Advanced Configuration\Services\NVIDIA Display Container\Enable NVIDIA Display Container LS (default).cmd");
 
             _nvidiaDispayContainerConfigurationService.CurrentSetting = IsEnabled();

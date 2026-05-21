@@ -30,7 +30,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
         {
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 0);
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, "path", @$"{Environment.GetEnvironmentVariable("windir")}\AtlasDesktop\3. General Configuration\AI Features\Microsoft Copilot\Disable Microsoft Copilot (default).cmd");
-            ProcessHelper.StartShellExecute(@$"{Environment.GetEnvironmentVariable("windir")}AtlasModules\Toolbox\Scripts\Copilot\DisableMicrosoftCopilot.cmd");
+            ProcessHelper.StartShellExecute(@$"{Environment.GetEnvironmentVariable("windir")}\AtlasModules\Toolbox\Scripts\Copilot\DisableMicrosoftCopilot.cmd");
 
             _copilotConfigurationStore.CurrentSetting = IsEnabled();
         }
@@ -40,7 +40,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 1);
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, "path", @$"{Environment.GetEnvironmentVariable("windir")}\AtlasDesktop\3. General Configuration\AI Features\Microsoft Copilot\Enable Microsoft Copilot.cmd");
 
-            ProcessHelper.StartShellExecute(@$"{Environment.GetEnvironmentVariable("windir")}AtlasModules\Toolbox\Scripts\Copilot\EnableMicrosoftCopilot.cmd");
+            ProcessHelper.StartShellExecute(@$"{Environment.GetEnvironmentVariable("windir")}\AtlasModules\Toolbox\Scripts\Copilot\Enable Microsoft Copilot.cmd");
 
             _copilotConfigurationStore.CurrentSetting = IsEnabled();
         }

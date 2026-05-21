@@ -26,7 +26,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
         public void Disable()
         {
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 0);
-            CommandPromptHelper.RunCommand(@$"{Environment.GetEnvironmentVariable("windir")}AtlasModules\Toolbox\ConfigurationServices\FileSharing\disable.cmd", false);
+            CommandPromptHelper.RunCommand(@$"{Environment.GetEnvironmentVariable("windir")}\AtlasModules\Toolbox\ConfigurationServices\FIleSharing\disable.cmd", false);
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, "path", @$"{Environment.GetEnvironmentVariable("windir")}\AtlasDesktop\3. General Configuration\File Sharing\Disable File Sharing (default).cmd");
 
             _configurationStore.CurrentSetting = IsEnabled();
@@ -34,8 +34,8 @@ namespace AtlasToolbox.Services.ConfigurationServices
 
         public void Enable()
         {
-            RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 0);
-            CommandPromptHelper.RunCommand(@$"{Environment.GetEnvironmentVariable("windir")}AtlasModules\Toolbox\ConfigurationServices\FileSharing\enable.cmd", false);
+            RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 1);
+            CommandPromptHelper.RunCommand(@$"{Environment.GetEnvironmentVariable("windir")}\AtlasModules\Toolbox\ConfigurationServices\FIleSharing\enable.cmd", false);
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, "path", @$"{Environment.GetEnvironmentVariable("windir")}\AtlasDesktop\3. General Configuration\File Sharing\Enable File Sharing.cmd");
 
             _configurationStore.CurrentSetting = IsEnabled();

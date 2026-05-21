@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using AtlasToolbox.Stores;
 using AtlasToolbox.Utils;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,13 +13,13 @@ namespace AtlasToolbox.Services.ConfigurationServices
 
         private readonly MultiOptionConfigurationStore _mitigationsConfigurationService;
 
-        private const string CONTEXT_MENU_REG_FILE_PATH = "C:\\Windows\\AtlasModues\\Scripts\\ConfigurationServices\\Mitigations\\Mitigations_";
+        private static readonly string MITIGATIONS_SCRIPT_PATH = @$"{Environment.GetEnvironmentVariable("windir")}\AtlasModules\Toolbox\ConfigurationServices\Mitigations\Mitigations_";
 
         private List<string> options = new List<string>()
         {
             "Disable mitigations",
-            "Enable all mitigations",
             "Default Windows mitigations",
+            "Enable all mitigations",
         };
 
         public MitigationsConfigurationService(
@@ -30,7 +31,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
 
         public void ChangeStatus(int status)
         {
-            RegistryHelper.MergeRegFile(CONTEXT_MENU_REG_FILE_PATH + status.ToString() + ".reg");
+            ProcessHelper.StartShellExecute(MITIGATIONS_SCRIPT_PATH + status.ToString() + ".cmd");
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, status);
 
             _mitigationsConfigurationService.CurrentSetting = Status();
@@ -44,7 +45,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
             }
             catch
             {
-                ChangeStatus(2);
+                ChangeStatus(1);
                 return options[((int)RegistryHelper.GetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME))];
             }
         }

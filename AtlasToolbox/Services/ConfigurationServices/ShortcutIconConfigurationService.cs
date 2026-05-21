@@ -16,7 +16,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
         private const string STATE_VALUE_NAME = "state";
 
 
-        private const string SHORTCUT_ICON_REG_FILE_PATH = "C:\\Windows\\AtlasModues\\Scripts\\ConfigurationServices\\ShortcutIcon\\ShortcutIcon_";
+        private static readonly string SHORTCUT_ICON_REG_FILE_PATH = @$"{Environment.GetEnvironmentVariable("windir")}\AtlasModules\Toolbox\ConfigurationServices\ShortcutIcon\ShortcutIcon_";
 
         private List<string> options = new List<string>()
         {

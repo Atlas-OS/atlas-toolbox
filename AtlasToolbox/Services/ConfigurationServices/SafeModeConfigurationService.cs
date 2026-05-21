@@ -16,7 +16,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
 
         private readonly MultiOptionConfigurationStore _safeModeConfigurationService;
 
-        private const string CONTEXT_MENU_REG_FILE_PATH = "C:\\Windows\\AtlasModues\\Scripts\\ConfigurationServices\\SafeMode\\SafeMode_";
+        private static readonly string SAFE_MODE_SCRIPT_PATH = @$"{Environment.GetEnvironmentVariable("windir")}\AtlasModules\Toolbox\ConfigurationServices\SafeMode\SafeMode_";
 
         private List<string> options = new List<string>()
         {
@@ -35,7 +35,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
 
         public void ChangeStatus(int status)
         {
-            RegistryHelper.MergeRegFile(CONTEXT_MENU_REG_FILE_PATH + status.ToString() + ".reg");
+            ProcessHelper.StartShellExecute(SAFE_MODE_SCRIPT_PATH + status.ToString() + ".cmd");
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, status);
 
             _safeModeConfigurationService.CurrentSetting = Status();
