@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
@@ -25,15 +26,12 @@ namespace AtlasToolbox
     public sealed partial class MainWindow : Window
     {
         public List<IConfigurationItem> RootList { get; set; }
-        /// <summary>Timestamp of the last navigation — used to debounce rapid back/forward clicks.</summary>
-        private DateTime _lastNavTime = DateTime.MinValue;
-        private static readonly TimeSpan NavCooldown = TimeSpan.FromMilliseconds(350);
-        private bool IsNavigationAllowed() => (DateTime.Now - _lastNavTime) >= NavCooldown;
-        private void RecordNavigation() => _lastNavTime = DateTime.Now;
+        private bool _isNavigationInProgress;
 
         public MainWindow()
         {
             this.InitializeComponent();
+            RootGrid.AddHandler(UIElement.PointerPressedEvent, new PointerEventHandler(RootGrid_PointerPressed), true);
 
             OverlappedPresenter presenter = OverlappedPresenter.Create();
             presenter.PreferredMinimumWidth = 516;
@@ -185,9 +183,20 @@ namespace AtlasToolbox
         /// <param name="tag"></param>
         private void Navigate(Type type)
         {
-            if (!IsNavigationAllowed()) return;
-            RecordNavigation();
-            ContentFrame.Navigate(type, App.CurrentCategory, new DrillInNavigationTransitionInfo());
+            if (!TryStartNavigation()) return;
+
+            try
+            {
+                if (!ContentFrame.Navigate(type, App.CurrentCategory, new DrillInNavigationTransitionInfo()))
+                {
+                    FinishNavigation();
+                }
+            }
+            catch (Exception ex)
+            {
+                FinishNavigation();
+                App.logger.Error($"Navigation failed: {ex}");
+            }
         }
 
         /// <summary>
@@ -203,22 +212,72 @@ namespace AtlasToolbox
 
         public void GoBack()
         {
-            if (!IsNavigationAllowed() || !ContentFrame.CanGoBack) return;
-            RecordNavigation();
-            RestoreCategoryFromEntry(ContentFrame.BackStack.LastOrDefault());
-            ContentFrame.GoBack();
+            TryGoBack();
         }
         public void NavigationViewControl_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
-            if (!IsNavigationAllowed() || !ContentFrame.CanGoBack) return;
-            RecordNavigation();
-            RestoreCategoryFromEntry(ContentFrame.BackStack.LastOrDefault());
-            ContentFrame.GoBack();
+            TryGoBack();
+        }
+
+        private bool TryGoBack()
+        {
+            if (!ContentFrame.CanGoBack || !TryStartNavigation()) return false;
+
+            try
+            {
+                RestoreCategoryFromEntry(ContentFrame.BackStack.LastOrDefault());
+                ContentFrame.GoBack();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                FinishNavigation();
+                App.logger.Error($"Back navigation failed: {ex}");
+                return false;
+            }
+        }
+
+        private bool TryGoForward()
+        {
+            if (!ContentFrame.CanGoForward || !TryStartNavigation()) return false;
+
+            try
+            {
+                RestoreCategoryFromEntry(ContentFrame.ForwardStack.LastOrDefault());
+                ContentFrame.GoForward();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                FinishNavigation();
+                App.logger.Error($"Forward navigation failed: {ex}");
+                return false;
+            }
+        }
+
+        private bool TryStartNavigation()
+        {
+            if (_isNavigationInProgress) return false;
+
+            _isNavigationInProgress = true;
+            return true;
+        }
+
+        private void FinishNavigation()
+        {
+            _isNavigationInProgress = false;
         }
 
         private void ContentFrame_Navigated(object sender, NavigationEventArgs e)
         {
+            FinishNavigation();
             NavigateTo();
+        }
+
+        private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            FinishNavigation();
+            App.logger.Error($"Navigation failed: {e.Exception}");
         }
 
         private void NavigateTo()
@@ -257,32 +316,18 @@ namespace AtlasToolbox
         /// <summary>
         /// Handles mouse side button navigation (XButton1 = Back, XButton2 = Forward)
         /// </summary>
-        private void RootGrid_PointerPressed(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+        private void RootGrid_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             var point = e.GetCurrentPoint(RootGrid);
             if (point.Properties.IsXButton1Pressed)
             {
-                if (!IsNavigationAllowed()) return;
-                // Back button
-                if (ContentFrame.CanGoBack)
-                {
-                    e.Handled = true;
-                    RecordNavigation();
-                    RestoreCategoryFromEntry(ContentFrame.BackStack.LastOrDefault());
-                    ContentFrame.GoBack();
-                }
+                TryGoBack();
+                e.Handled = true;
             }
             else if (point.Properties.IsXButton2Pressed)
             {
-                if (!IsNavigationAllowed()) return;
-                // Forward button
-                if (ContentFrame.CanGoForward)
-                {
-                    e.Handled = true;
-                    RecordNavigation();
-                    RestoreCategoryFromEntry(ContentFrame.ForwardStack.LastOrDefault());
-                    ContentFrame.GoForward();
-                }
+                TryGoForward();
+                e.Handled = true;
             }
         }
 

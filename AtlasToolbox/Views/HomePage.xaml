@@ -217,8 +217,7 @@
                 </Grid.Resources>
                 <ItemsControl
                     x:Name="FavoritesControl"
-                    ItemTemplateSelector="{StaticResource FavoriteItemDataTemplateSelector}"
-                    ItemsSource="{x:Bind _configurationItems, Mode=OneWay}" />
+                    ItemTemplateSelector="{StaticResource FavoriteItemDataTemplateSelector}" />
                 <TextBlock
                     x:Name="NoFavoritesText"
                     HorizontalAlignment="Center"

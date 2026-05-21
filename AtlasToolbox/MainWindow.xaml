@@ -12,7 +12,7 @@
     <Window.SystemBackdrop>
         <MicaBackdrop Kind="Base" />
     </Window.SystemBackdrop>
-    <Grid x:Name="RootGrid" PointerPressed="RootGrid_PointerPressed">
+    <Grid x:Name="RootGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
@@ -78,7 +78,10 @@
             <!--Main Content-->
             <NavigationView.Content>
                 <Grid>
-                    <Frame x:Name="ContentFrame" Navigated="ContentFrame_Navigated" />
+                    <Frame
+                        x:Name="ContentFrame"
+                        Navigated="ContentFrame_Navigated"
+                        NavigationFailed="ContentFrame_NavigationFailed" />
                     <InfoBar
                         x:Name="UpdateTitleBar"
                         Margin="0,26,36,0"
@@ -173,7 +176,7 @@
                 </VisualState>
             </VisualStateGroup>
             <VisualStateGroup x:Name="WindowActivationStates">
-                <VisualState x:Name="Activated" />
+                <VisualState x:Name="Active" />
                 <VisualState x:Name="Deactivated">
                     <VisualState.Setters>
                         <Setter Target="AppTitle.Foreground" Value="{ThemeResource TextFillColorTertiaryBrush}" />

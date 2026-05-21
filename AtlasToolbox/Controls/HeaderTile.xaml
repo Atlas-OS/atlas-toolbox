@@ -46,7 +46,7 @@
             VerticalContentAlignment="Stretch"
             AutomationProperties.LabeledBy="{Binding ElementName=TitleText}"
             CornerRadius="{StaticResource OverlayCornerRadius}"
-            NavigateUri="{x:Bind Link, Mode=OneWay}">
+            NavigateUri="{x:Bind Link, Mode=OneTime}">
             <Grid
                 Padding="24"
                 VerticalAlignment="Stretch"
@@ -66,7 +66,7 @@
                 <ContentPresenter
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Content="{x:Bind Source, Mode=OneWay}" />
+                    Content="{x:Bind Source, Mode=OneTime}" />
 
                 <StackPanel
                     Grid.Row="1"
@@ -77,11 +77,11 @@
                         FontSize="18"
                         Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                         Style="{StaticResource BodyTextBlockStyle}"
-                        Text="{x:Bind Title, Mode=OneWay}" />
+                        Text="{x:Bind Title, Mode=OneTime}" />
                     <TextBlock
                         Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                         Style="{StaticResource CaptionTextBlockStyle}"
-                        Text="{x:Bind Description, Mode=OneWay}" />
+                        Text="{x:Bind Description, Mode=OneTime}" />
                 </StackPanel>
             </Grid>
         </HyperlinkButton>

@@ -1,40 +1,37 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using AtlasToolbox.Models;
 using AtlasToolbox.Utils;
-using AtlasToolbox.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
 
 namespace AtlasToolbox.ViewModels
 {
-    public partial class SettingsPageViewModel : INotifyPropertyChanged
+    public partial class SettingsPageViewModel : ObservableObject
     {
-        public Language _currentLanguage { get; set; }
+        private Language _currentLanguage;
+
         public Language CurrentLanguage 
         {
             get => _currentLanguage;
             set
             {
-                _currentLanguage = value;
-                OnPropertyChanged(); // Notifies UI
+                if (SetProperty(ref _currentLanguage, value))
+                {
+                    SaveLanguage();
+                }
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        private void SaveLanguage()
         {
+            if (CurrentLanguage == null) return;
+
             RegistryHelper.SetValue(@"HKLM\SOFTWARE\AtlasOS\Services\Toolbox", "lang", this.CurrentLanguage.Key);
             App.LoadLangString();
-            MainWindow mWindows = App.m_window as MainWindow;
         }
 
         public ObservableCollection<Language> Languages { get; set; }
