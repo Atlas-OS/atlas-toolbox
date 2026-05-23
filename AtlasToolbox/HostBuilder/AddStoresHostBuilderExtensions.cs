@@ -11,7 +11,7 @@ namespace AtlasToolbox.HostBuilder
         public static IHostBuilder AddStores(this IHostBuilder host)
         {
             host.AddConfigurationStores();
-            host.AddConfigurationMenu();
+            //host.AddConfigurationMenu();
 
             return host;
         }
@@ -112,30 +112,30 @@ namespace AtlasToolbox.HostBuilder
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>
-        private static IHostBuilder AddConfigurationMenu(this IHostBuilder host)
-        {
-            host.ConfigureServices((_, services) =>
-            {
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("ContextMenuSubMenu");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("AiSubMenu");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("ServicesSubMenu");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("BootConfigurationSubMenu");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("FileExplorerSubMenu");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("StartMenuSubMenu");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("BootConfigAppearance");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("BootConfigBehavior");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("DriverConfigurationSubMenu");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("NvidiaDisplayContainerSubMenu");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("CoreIsolationSubMenu");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("DefenderSubMenu");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("MitigationsSubMenu");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("TroubleshootingNetwork");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("FileSharingSubMenu");
-                services.AddKeyedSingleton<ConfigurationStoreSubMenu>("WindowsUpdate");
-            });
-            App.logger.Info($"[STORE] Added submenu stores to host");
+        //private static IHostBuilder AddConfigurationMenu(this IHostBuilder host)
+        //{
+        //    host.ConfigureServices((_, services) =>
+        //    {
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("ContextMenuSubMenu");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("AiSubMenu");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("ServicesSubMenu");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("BootConfigurationSubMenu");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("FileExplorerSubMenu");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("StartMenuSubMenu");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("BootConfigAppearance");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("BootConfigBehavior");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("DriverConfigurationSubMenu");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("NvidiaDisplayContainerSubMenu");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("CoreIsolationSubMenu");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("DefenderSubMenu");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("MitigationsSubMenu");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("TroubleshootingNetwork");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("FileSharingSubMenu");
+        //        services.AddKeyedSingleton<ConfigurationStoreSubMenu>("WindowsUpdate");
+        //    });
+        //    App.logger.Info($"[STORE] Added submenu stores to host");
 
-            return host;
-        }
+        //    return host;
+        //}
     }
 }

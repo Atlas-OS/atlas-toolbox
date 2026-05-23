@@ -171,7 +171,7 @@
   "BetaVersionDescription": "Denna applikation är för närvarande i en betaversion. Om du hittar buggar eller vill föreslå en funktion, vänligen ge feedback på Discord. Funktioner kan komma att ändras.",
   "Home": "Hem",
   "Software": "Programvara",
-  "GeneralConfig": "Allmän konfiguration",
+  "General": "Allmän konfiguration",
   "Interface": "Gränssnittsjusteringar",
   "Windows": "Windows-inställningar",
   "Advanced": "Avancerad konfiguration",

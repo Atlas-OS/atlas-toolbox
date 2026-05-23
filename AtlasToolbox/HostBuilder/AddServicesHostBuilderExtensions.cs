@@ -1,6 +1,5 @@
 ﻿using AtlasToolbox.Services.ConfigurationServices;
 using AtlasToolbox.Services;
-using AtlasToolbox.Services.ConfigurationSubMenu;
 using AtlasToolbox.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,7 +23,7 @@ namespace AtlasToolbox.HostBuilder
             });
 
             host.AddConfigurationServices();
-            host.AddConfigurationMenus();
+            //host.AddConfigurationMenus();
 
             return host;
         }
@@ -130,29 +129,29 @@ namespace AtlasToolbox.HostBuilder
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>
-        private static IHostBuilder AddConfigurationMenus(this IHostBuilder host)
-        {
-            host.ConfigureServices((_,services) =>
-            {
-                services.AddKeyedSingleton<IConfigurationSubMenu, ContextMenuSubMenu>("ContextMenu");
-                services.AddKeyedSingleton<IConfigurationSubMenu, AiSubMenu>("AiSubMenu");
-                services.AddKeyedSingleton<IConfigurationSubMenu, ServicesSubMenu>("ServicesSubMenu");
-                services.AddKeyedSingleton<IConfigurationSubMenu, BootConfigurationSubMenu>("BootConfigurationSubMenu");
-                services.AddKeyedSingleton<IConfigurationSubMenu, FileExplorerSubMenu>("FileExplorerSubMenu");
-                services.AddKeyedSingleton<IConfigurationSubMenu, StartMenuSubMenu>("StartMenuSubMenu");
-                services.AddKeyedSingleton<IConfigurationSubMenu, BootMenuAppearance>("BootConfigAppearance");
-                services.AddKeyedSingleton<IConfigurationSubMenu, BootConfigBehavior>("BootConfigBehavior");
-                services.AddKeyedSingleton<IConfigurationSubMenu, DriverConfigurationSubMenu>("DriverConfigurationSubMenu");
-                services.AddKeyedSingleton<IConfigurationSubMenu, NvidiaDisplayContainerSubMenu>("NvidiaDisplayContainerSubMenu");
-                services.AddKeyedSingleton<IConfigurationSubMenu, CoreIsolationSubMenu>("CoreIsolationSubMenu");
-                services.AddKeyedSingleton<IConfigurationSubMenu, DefenderSubMenu>("DefenderSubMenu");
-                services.AddKeyedSingleton<IConfigurationSubMenu, MitigationsSubMenu>("MitigationsSubMenu");
-                services.AddKeyedSingleton<IConfigurationSubMenu, TroubleshootingNetworkSubMenu>("TroubleshootingNetwork");
-                services.AddKeyedSingleton<IConfigurationSubMenu, FileSharingSubMenu>("FileSharingSubMenu");
-                services.AddKeyedSingleton<IConfigurationSubMenu, WindowsUpdateSubMenu>("WindowsUpdate");
-            });
-            App.logger.Info($"[SERVICES] Added submenu services to host");
-            return host;
-        }
+        //private static IHostBuilder AddConfigurationMenus(this IHostBuilder host)
+        //{
+        //    host.ConfigureServices((_,services) =>
+        //    {
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, ContextMenuSubMenu>("ContextMenu");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, AiSubMenu>("AiSubMenu");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, ServicesSubMenu>("ServicesSubMenu");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, BootConfigurationSubMenu>("BootConfigurationSubMenu");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, FileExplorerSubMenu>("FileExplorerSubMenu");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, StartMenuSubMenu>("StartMenuSubMenu");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, BootMenuAppearance>("BootConfigAppearance");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, BootConfigBehavior>("BootConfigBehavior");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, DriverConfigurationSubMenu>("DriverConfigurationSubMenu");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, NvidiaDisplayContainerSubMenu>("NvidiaDisplayContainerSubMenu");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, CoreIsolationSubMenu>("CoreIsolationSubMenu");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, DefenderSubMenu>("DefenderSubMenu");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, MitigationsSubMenu>("MitigationsSubMenu");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, TroubleshootingNetworkSubMenu>("TroubleshootingNetwork");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, FileSharingSubMenu>("FileSharingSubMenu");
+        //        services.AddKeyedSingleton<IConfigurationSubMenu, WindowsUpdateSubMenu>("WindowsUpdate");
+        //    });
+        //    App.logger.Info($"[SERVICES] Added submenu services to host");
+        //    return host;
+        //}
     }
 }

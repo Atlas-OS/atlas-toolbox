@@ -172,7 +172,7 @@
   "BetaVersionDescription": "Este aplicativo está atualmente em versão Beta. Se encontrar bugs ou quiser sugerir um recurso, por favor, dê feedback no Discord. Os recursos estão sujeitos a alterações.",
   "Home": "Início",
   "Software": "Software",
-  "GeneralConfig": "Configuração Geral",
+  "General": "Configuração Geral",
   "Interface": "Ajustes de Interface",
   "Windows": "Configurações do Windows",
   "Advanced": "Configuração Avançada",

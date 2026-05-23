@@ -141,7 +141,7 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItemSeparator />
-                <NavigationViewItem x:Name="GeneralConfig" Tag="General">
+                <NavigationViewItem x:Name="General" Tag="General">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF259;" />
                     </NavigationViewItem.Icon>

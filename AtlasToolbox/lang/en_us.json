@@ -262,6 +262,9 @@
 
   // End of configuration toggles
 
+  // Routes
+  // End of routes
+
   // Settings and Home texts
   "Home_WinVer": "Windows Version",
   "Home_PlaybookVer": "Playbook Version",
@@ -343,7 +346,7 @@
 
   "Home": "Home",
   "Software": "Software",
-  "GeneralConfig": "General Configuration",
+  "General": "General Configuration",
   "Interface": "Interface Tweaks",
   "Windows": "Windows Settings",
   "Advanced": "Advanced Configuration",
@@ -364,9 +367,6 @@
   "ExperimentsHeader": "Experiments",
   "ExperimentsCardHeader": "Experimental features",
   "ExperimentsCardDescription": "These features are experimental and may not work fully as intended. Requires a restart to apply changes",
-  // Search experiment
-  "SearchExperiment": "Search bar",
-  "SearchExperimentDescription": "Enables a search bar to quickly find settings in the Toolbox",
   // Icons experiment
   "IconsExperiment": "Icons",
   "IconsExperimentDescription": "Enables icons next to each setting for easier identification and more visual appeal"

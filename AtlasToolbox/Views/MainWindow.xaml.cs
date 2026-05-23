@@ -102,7 +102,7 @@ namespace AtlasToolbox.Views
             // Navigation Items
             Home.Content = App.GetValueFromItemList("Home_HeaderText");
             Software.Content = App.GetValueFromItemList("Software");
-            GeneralConfig.Content = App.GetValueFromItemList("GeneralConfig");
+            General.Content = App.GetValueFromItemList("General");
             Interface.Content = App.GetValueFromItemList("Interface");
             Windows.Content = App.GetValueFromItemList("Windows");
             Advanced.Content = App.GetValueFromItemList("Advanced");
@@ -230,18 +230,44 @@ namespace AtlasToolbox.Views
             BreadcrumbBar.IsEnabled = false;
         }
 
+        //public void GenerateBreadcrumBar(string route)
+        //{
+        //    BreadCrumbBarList.Clear();
+        //    var segments = route.Split("/");
+        //    for (int i = segments.Length - 1; i >= 0; i--)
+        //    {
+        //        string routeName = string.Join("/", segments.SkipLast(i));
+        //        BreadCrumbBarList.Add(
+        //            new(routeName,
+        //            App.GetValueFromItemList(routeName.Split("/").Last())));
+        //    }
+        //    if (!BreadcrumbBar.IsEnabled) BreadcrumbBar.IsEnabled = true;
+        //}
+
         public void GenerateBreadcrumBar(string route)
         {
             BreadCrumbBarList.Clear();
-            var segments = route.Split("/");
-            for (int i = segments.Length - 1; i >= 0; i--)
+
+            if (string.IsNullOrWhiteSpace(route))
             {
-                string routeName = string.Join("/", segments.SkipLast(i));
-                BreadCrumbBarList.Add(
-                    new(routeName,
-                    routeName.Split("/").Last()));
+                BreadcrumbBar.IsEnabled = false;
+                return;
             }
-            if (!BreadcrumbBar.IsEnabled) BreadcrumbBar.IsEnabled = true;
+
+            string[] segments = route.Split('/');
+            string currentRoute = string.Empty;
+
+            for (int i = 0; i < segments.Length; i++)
+            {
+                currentRoute = i == 0 ? segments[i] : $"{currentRoute}/{segments[i]}";
+
+                BreadCrumbBarList.Add(new(
+                    currentRoute,
+                    App.GetValueFromItemList(segments[i])));
+            }
+
+            if (!BreadcrumbBar.IsEnabled)
+                BreadcrumbBar.IsEnabled = true;
         }
 
         private void BreadcrumbBar_ItemClicked(BreadcrumbBar sender, BreadcrumbBarItemClickedEventArgs args)
