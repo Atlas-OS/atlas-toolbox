@@ -12,14 +12,14 @@ namespace AtlasToolbox.Models
         public string Name { get => App.GetValueFromItemList(EndPoint.Split("/").Last()); }
         public string Description { get => App.GetValueFromItemList(EndPoint.Split("/").Last(), true); }
         public bool RootRoute { get; set; }
-        public FontIcon Icon { get; set; } = new FontIcon();
+        public string Icon { get; set; } = string.Empty;
         public string Key => EndPoint;
         public string RouteItem => string.Join("/", EndPoint.Split('/').SkipLast(1));
 
         public Route(string endPoint, string icon = "\uE897", bool rootRoute = false)
         {
             EndPoint = endPoint;
-            Icon.Glyph = icon;
+            Icon = icon;
             RootRoute = rootRoute;
         }
     }

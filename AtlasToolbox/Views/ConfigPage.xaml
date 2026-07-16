@@ -49,7 +49,7 @@
                     Click="OnCardClicked"
                     Description="{Binding Description}"
                     Header="{Binding Name}"
-                    HeaderIcon="{Binding Icon}"
+                    HeaderIcon="{Binding Icon, Converter={StaticResource FontIconConverter}}"
                     Tag="{Binding Key}"
                     IsClickEnabled="True"
                     Style="{StaticResource ConfigurationSettingsCardTemplate}" />
