@@ -13,6 +13,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
         private const string PERSONALIZATION_KEY_NAME = @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Personalization";
 
         private const string NO_LOCK_SCREEN_VALUE_NAME = "NoLockScreen";
+        private const string NO_CHANGING_LOCK_SCREEN_VALUE_NAME = "NoChangingLockScreen";
 
         private readonly ConfigurationStore _lockScreenConfigurationStore;
 
@@ -25,6 +26,8 @@ namespace AtlasToolbox.Services.ConfigurationServices
         public void Disable()
         {
             RegistryHelper.SetValue(PERSONALIZATION_KEY_NAME, NO_LOCK_SCREEN_VALUE_NAME, 1, Microsoft.Win32.RegistryValueKind.DWord);
+            RegistryHelper.SetValue(PERSONALIZATION_KEY_NAME, NO_CHANGING_LOCK_SCREEN_VALUE_NAME, 1, Microsoft.Win32.RegistryValueKind.DWord);
+
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 0);
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, "path", @$"{Environment.GetEnvironmentVariable("windir")}\AtlasDesktop\4. Interface Tweaks\Lock Screen\Hide Lock Screen.cmd");
 
@@ -34,6 +37,8 @@ namespace AtlasToolbox.Services.ConfigurationServices
         public void Enable()
         {
             RegistryHelper.DeleteValue(PERSONALIZATION_KEY_NAME, NO_LOCK_SCREEN_VALUE_NAME);
+            RegistryHelper.DeleteValue(PERSONALIZATION_KEY_NAME, NO_CHANGING_LOCK_SCREEN_VALUE_NAME);
+
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 1);
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, "path", @$"{Environment.GetEnvironmentVariable("windir")}\AtlasDesktop\4. Interface Tweaks\Lock Screen\Show Lock Screen (default).cmd");
 
