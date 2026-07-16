@@ -1,0 +1,372 @@
+{
+  "LangName": "Українська (Україна)",
+  "LangKey": "uk_ua",
+
+  "ToBeTranslated": "Потребує перекладу",
+  "OpenShellAtlasPreset": "Пресет Open Shell для AtlasOS",
+  "InterfaceTweaksDocumentation": "Документація з налаштувань інтерфейсу",
+  "ActivationPage": "Сторінка активації",
+  "ColorsPage": "Налаштування персоналізації кольорів",
+  "DateAndTime": "Налаштування дати й часу",
+  "DefaultApps": "Програми за замовчуванням",
+  "DefaultGraphicsSettings": "Налаштування графіки за замовчуванням",
+  "RegionLanguage": "Мова",
+  "Privacy": "Налаштування конфіденційності",
+  "RegionProperties": "Регіональні параметри",
+  "Taskbar": "Налаштування панелі завдань",
+  "CoreIsolation": "Ізоляція ядра — Безпека Windows",
+  "WindowsSettingsDocumentation": "Документація з налаштувань Windows",
+  "BootConfigExplanations": "Пояснення від Microsoft",
+  "InterrupAffinityTool": "Інструмент прив’язки переривань",
+  "ProcessExplorerApp": "Process Explorer",
+  "ProcessExplorerDocumentation": "Документація Process Explorer",
+  "NvidiaDisplayContainerMustReadFirst": "Спочатку обов’язково прочитайте",
+  "AdvancedConfigMustRead": "Документація з розширеної конфігурації",
+  "SecurityDocumentation": "Документація з безпеки",
+  "ResetPC": "Скинути цей ПК (спочатку прочитайте)",
+  "RestartExplorerButton": "Перезапустити Explorer.exe",
+  "RestartExplorerButtonDescription": "Деякі налаштування інтерфейсу можуть вимагати перезапуску explorer.exe",
+  "ViewCurrentSettingsBootConfig": "Переглянути поточні значення",
+  "ViewCurrentSettingsBootConfigDescription": "Переглянути значення конфігурації завантаження",
+  "VBSCurrentConfig": "Поточна конфігурація VBS",
+  "VBSCurrentConfigDescription": "Переглянути поточну конфігурацію VBS",
+  "ToggleDefender": "Перемкнути",
+  "ToggleDefenderDescription": "Увімкнути або вимкнути Windows Defender",
+  "ResetFTH": "Скинути",
+  "ResetFTHDescription": "Скинути записи FTH",
+  "InstallOpenShell": "Установити OpenShell",
+  "InstallOpenShellDescription": "Установити",
+  "FixErrors": "Усунення несправностей",
+  "FixErrorsDescription": "Виправити помилки 2502 і 2503",
+  "RepairWinComponent": "Відновити компоненти Windows",
+  "TelemetryComponents": "Компоненти телеметрії",
+  "AtlasDefault": "Скинути мережу до стандартних налаштувань Atlas",
+  "WindowsDefault": "Скинути мережу до стандартних налаштувань Windows",
+  "BootConfigAppearance": "Вигляд конфігурації завантаження",
+  "BootConfigAppearanceDescription": "Усе, що стосується вигляду під час завантаження Windows",
+  "BootConfigBehavior": "Поведінка завантаження",
+  "BootConfigBehaviorDescription": "Усе, що стосується поведінки під час завантаження",
+  "NvidiaDisplayContainerSubMenu": "Налаштування NVIDIA Display Container",
+  "NvidiaDisplayContainerSubMenuDescription": "Усе, що стосується NVIDIA Display Container",
+  "StartMenuSubMenu": "Меню «Пуск»",
+  "StartMenuSubMenuDescription": "Усе, що стосується налаштування меню «Пуск» Windows",
+  "ContextMenuSubMenu": "Контекстне меню",
+  "ContextMenuSubMenuDescription": "Усе, що стосується контекстного меню",
+  "AiSubMenu": "Функції ШІ",
+  "AiSubMenuDescription": "Усе, що стосується функцій ШІ у Windows 11",
+  "ServicesSubMenu": "Служби",
+  "ServicesSubMenuDescription": "Усе, що стосується служб Windows",
+  "BootConfigurationSubMenu": "Конфігурація завантаження",
+  "BootConfigurationSubMenuDescription": "Усе, що стосується завантаження Windows",
+  "FileExplorerSubMenu": "Налаштування Провідника файлів",
+  "FileExplorerSubMenuDescription": "Усе, що стосується налаштування Провідника файлів Windows",
+  "DriverConfigurationSubMenu": "Конфігурація драйверів",
+  "DriverConfigurationSubMenuDescription": "Усе, що стосується конфігурації драйверів",
+  "CoreIsolationSubMenu": "Ізоляція ядра (VBS)",
+  "CoreIsolationSubMenuDescription": "Усе, що стосується ізоляції ядра",
+  "DefenderSubMenu": "Defender",
+  "DefenderSubMenuDescription": "Усе, що стосується Windows Defender",
+  "MitigationsSubMenu": "Мітігації",
+  "MitigationsSubMenuDescription": "Усе, що стосується мітігацій",
+  "TroubleshootingNetwork": "Мережа",
+  "TroubleshootingNetworkDescription": "Усе, що стосується усунення несправностей мережі",
+  "FileSharingSubMenu": "Спільний доступ до файлів",
+  "FileSharingSubMenuDescription": "Усе, що стосується спільного доступу до файлів у Windows",
+  "ContextMenuTerminals": "Додати або видалити термінали з контекстного меню",
+  "ShortcutIcon": "Змінити піктограму ярликів",
+  "Mitigations": "Змінити стан мітігацій",
+  "SafeMode": "Увійти в безпечний режим під час запуску",
+
+
+  // Configuration toggles
+  "Animations": "Анімації",
+  "AnimationsDescription": "Увімкнути або вимкнути анімації Windows",
+
+  "ExtractContextMenu": "Опція \"Видобути\" у контекстному меню",
+  "ExtractContextMenuDescription": "Додає опцію \"Видобути\" у контекстне меню для стиснутих файлів",
+
+  "RunWithPriority": "Запуск із пріоритетом у контекстному меню",
+  "RunWithPriorityDescription": "Додає опцію \"Запуск із пріоритетом\" у контекстне меню для програм",
+
+  "LanmanWorkstation": "Lanman Workstation (SMB)",
+  "LanmanWorkstationDescription": "Увімкнути або вимкнути службу Lanman Workstation для спільного доступу до файлів через SMB",
+
+  "NetworkDiscovery": "Виявлення мережі",
+  "NetworkDiscoveryDescription": "Увімкнути або вимкнути виявлення мережі для зручнішого спільного доступу до файлів",
+
+  "Printing": "Друк",
+  "PrintingDescription": "Увімкнути або вимкнути служби друку",
+
+  "NvidiaDispayContainer": "NVIDIA Display Container",
+  "NvidiaDispayContainerDescription": "Увімкнути або вимкнути службу NVIDIA Display Container",
+
+  "AddNvidiaDisplayContainerContextMenu": "NVIDIA Display Container у контекстному меню",
+  "AddNvidiaDisplayContainerContextMenuDescription": "Додає перемикач NVIDIA Display Container у контекстне меню",
+
+  "CpuIdleContextMenu": "Перемикач простою CPU у контекстному меню",
+  "CpuIdleContextMenuDescription": "Додає перемикач простою CPU у контекстне меню",
+
+  "LockScreen": "Увімкнути екран блокування",
+  "LockScreenDescription": "Увімкнути або вимкнути екран блокування Windows",
+
+  "ShortcutText": "Текст ярлика",
+  "ShortcutTextDescription": "Показати або приховати текст \"Ярлик\" на ярликах",
+
+  "BootLogo": "Логотип завантаження",
+  "BootLogoDescription": "Увімкнути або вимкнути логотип завантаження Windows",
+
+  "BootMessages": "Повідомлення завантаження",
+  "BootMessagesDescription": "Увімкнути або вимкнути повідомлення завантаження Windows",
+
+  "NewBootMenu": "Нове меню завантаження",
+  "NewBootMenuDescription": "Увімкнути або вимкнути нове меню завантаження Windows",
+
+  "SpinningAnimation": "Анімація обертання",
+  "SpinningAnimationDescription": "Увімкнути або вимкнути анімацію обертання під час завантаження",
+
+  "AdvancedBootOptions": "Розширені параметри завантаження під час запуску",
+  "AdvancedBootOptionsDescription": "Увімкнути або вимкнути розширені параметри завантаження під час запуску",
+
+  "AutomaticRepair": "Автоматичне відновлення",
+  "AutomaticRepairDescription": "Увімкнути або вимкнути автоматичне відновлення після збою завантаження",
+
+  "KernelParameters": "Параметри ядра під час запуску",
+  "KernelParametersDescription": "Увімкнути або вимкнути параметри ядра під час запуску",
+
+  "HighestMode": "Найвищий режим",
+  "HighestModeDescription": "Увімкнути або вимкнути найвищий режим для дисплеїв",
+
+  "CompactView": "Компактний вигляд",
+  "CompactViewDescription": "Увімкнути або вимкнути компактний вигляд у Провіднику файлів",
+
+  "RemovableDrivesInSidebar": "Знімні диски на бічній панелі",
+  "RemovableDrivesInSidebarDescription": "Показати або приховати знімні диски на бічній панелі Провідника файлів",
+
+  "BackgroundApps": "Фонові програми",
+  "BackgroundAppsDescription": "Увімкнути або вимкнути фонові програми",
+
+  "SearchIndexing": "Індексування пошуку",
+  "SearchIndexingDescription": "Увімкнути або вимкнути індексування пошуку",
+
+  "FsoAndGameBar": "FSO та Game Bar",
+  "FsoAndGameBarDescription": "Увімкнути або вимкнути повноекранні оптимізації та Game Bar",
+
+  "AutomaticUpdates": "Автоматичні оновлення",
+  "AutomaticUpdatesDescription": "Увімкнути або вимкнути автоматичні оновлення",
+
+  "DeliveryOptimisation": "Оптимізація доставки",
+  "DeliveryOptimisationDescription": "Увімкнути або вимкнути оптимізацію доставки",
+
+  "Hibernation": "Гібернація",
+  "HibernationDescription": "Увімкнути або вимкнути гібернацію",
+
+  "Location": "Розташування",
+  "LocationDescription": "Увімкнути або вимкнути служби розташування",
+
+  "PhoneLink": "Зв’язок із телефоном і мобільні пристрої",
+  "PhoneLinkDescription": "Увімкнути або вимкнути зв’язок із телефоном і мобільні пристрої",
+
+  "PowerSaving": "Енергозбереження",
+  "PowerSavingDescription": "Увімкнути або вимкнути функції енергозбереження",
+
+  "Sleep": "Сон",
+  "SleepDescription": "Увімкнути або вимкнути режим сну",
+
+  "SystemRestore": "Відновлення системи",
+  "SystemRestoreDescription": "Увімкнути або вимкнути відновлення системи",
+
+  "UpdateNotifications": "Сповіщення про оновлення",
+  "UpdateNotificationsDescription": "Увімкнути або вимкнути сповіщення про оновлення",
+
+  "WebSearch": "Вебпошук у меню «Пуск»",
+  "WebSearchDescription": "Увімкнути або вимкнути вебпошук у меню «Пуск»",
+
+  "Widgets": "Віджети робочого столу",
+  "WidgetsDescription": "Увімкнути або вимкнути віджети робочого столу",
+
+  "WindowsSpotlight": "Windows Spotlight",
+  "WindowsSpotlightDescription": "Увімкнути або вимкнути Windows Spotlight на екрані блокування",
+
+  "AppStoreArchiving": "Архівування Microsoft Store",
+  "AppStoreArchivingDescription": "Увімкнути або вимкнути архівування Microsoft Store",
+
+  "TakeOwnership": "Додати \"Отримати право власності\" у контекстне меню",
+  "TakeOwnershipDescription": "Додає опцію \"Отримати право власності\" у контекстне меню для файлів і папок",
+
+  "OldContextMenu": "Класичне контекстне меню (до Windows 11)",
+  "OldContextMenuDescription": "Увімкнути або вимкнути класичне контекстне меню з версій до Windows 11",
+
+  "EdgeSwipe": "Жест від краю екрана",
+  "EdgeSwipeDescription": "Увімкнути або вимкнути жести від краю екрана",
+
+  "AppIconsThumbnail": "Піктограми програм на мініатюрах",
+  "AppIconsThumbnailDescription": "Показати або приховати піктограми програм на мініатюрах файлів",
+
+  "AutomaticFolderDiscovery": "Автоматичне виявлення папок",
+  "AutomaticFolderDiscoveryDescription": "Увімкнути або вимкнути автоматичне виявлення папок у Провіднику файлів",
+
+  "Gallery": "Увімкнути галерею",
+  "GalleryDescription": "Увімкнути або вимкнути галерею у Провіднику файлів",
+
+  "SnapLayout": "Увімкнути макети прив’язки для вікон",
+  "SnapLayoutDescription": "Увімкнути або вимкнути макети прив’язки для вікон",
+
+  "RecentItems": "Розблокувати нещодавні елементи в Провіднику файлів",
+  "RecentItemsDescription": "Увімкнути або вимкнути нещодавні елементи в Провіднику файлів",
+
+  "VerboseStatusMessage": "Детальні повідомлення стану",
+  "VerboseStatusMessageDescription": "Увімкнути або вимкнути детальні повідомлення стану під час завантаження та вимкнення",
+
+  "SuperFetch": "SuperFetch",
+  "SuperFetchDescription": "Увімкнути або вимкнути службу SuperFetch (SysMain)",
+
+  "StaticIp": "Автоматично встановлювати статичну IP-адресу",
+  "StaticIpDescription": "Автоматично налаштовує статичну IP-адресу для вашого мережевого адаптера",
+
+  "HideAppBrowserControl": "Керування браузером програм",
+  "HideAppBrowserControlDescription": "Показати або приховати вбудований елемент керування браузером у Безпеці Windows",
+
+  "SecurityHealthTray": "Кнопка стану безпеки в області сповіщень панелі завдань",
+  "SecurityHealthTrayDescription": "Показати або приховати кнопку стану безпеки в області сповіщень панелі завдань",
+
+  "FaultTolerantHeap": "Fault Tolerant Heap",
+  "FaultTolerantHeapDescription": "Увімкнути або вимкнути мітігацію Fault Tolerant Heap",
+
+  "Copilot": "Увімкнути Microsoft Copilot",
+  "CopilotDescription": "Увімкнути або вимкнути інтеграцію Microsoft Copilot у Windows 11",
+
+  "Recall": "Увімкнути Windows Recall",
+  "RecallDescription": "Увімкнути або вимкнути функцію Windows Recall",
+
+  "CpuIdle": "Увімкнути простій CPU",
+  "CpuIdleDescription": "Увімкнути або вимкнути функцію простою CPU",
+
+  "ProcessExplorer": "Установити Process Explorer",
+  "ProcessExplorerDescription": "Установити Process Explorer від Microsoft Sysinternals",
+
+  "VbsState": "Увімкнути VBS",
+  "VbsStateDescription": "Увімкнути або вимкнути Virtualization Based Security (VBS)",
+
+  "GiveAccessToMenu": "Меню «Надати доступ»",
+  "GiveAccessToMenuDescription": "Додає опцію «Надати доступ» у контекстне меню для файлів і папок",
+
+  "NetworkNavigationPane": "Панель навігації мережі",
+  "NetworkNavigationPaneDescription": "Показати або приховати панель навігації мережі у Провіднику файлів",
+
+  "FileSharing": "Спільний доступ до файлів",
+  "FileSharingDescription": "Увімкнути або вимкнути функції спільного доступу до файлів",
+
+  "WindowsHello": "Windows Hello",
+  "WindowsHelloDescription": "Увімкнути або вимкнути біометричну автентифікацію Windows Hello",
+
+  // End of configuration toggles
+
+  // Settings and Home texts
+  "Home_WinVer": "Версія Windows",
+  "Home_PlaybookVer": "Версія Playbook",
+  "Home_HeaderText": "Головна",
+  "Home_ProfilesText": "Профілі",
+  "Home_Favorites": "Обране",
+  "NewProfilesButton": "Створити новий профіль",
+  "IncompatibleVer": "Поточна інсталяція AtlasOS/Windows несумісна з цією версією Toolbox. Оновіть AtlasOS до версії ",
+  "StatingServices": "Запуск служб...",
+
+  // Dialog text
+  "CurrentConfigIsSavedMessage": "Вашу поточну конфігурацію буде збережено в цей профіль",
+  "DeleteProfileConfirmation": "Ви справді хочете видалити цей профіль?",
+  "TryDeleteDefaultProfile": "Ви не можете видалити профіль за замовчуванням",
+  "Home_SetProfileConfig": "Ви справді хочете встановити цей профіль?",
+  "RestartPCPromptHeader": "Щоб повністю застосувати зміни, перезавантажте ПК",
+  "RelogApplyDesc": "Щоб повністю застосувати зміни, вийдіть із системи.",
+  "Yes": "Так",
+  "No": "Ні",
+  "Cancel": "Скасувати",
+  "Ok": "ОК",
+  "Restart": "Перезавантажити",
+  "Later": "Пізніше",
+  "Create": "Створити",
+  "Home_SetProfileBtn": "Установити цей профіль",
+  "Home_DeleteProfileBtn": "Видалити цей профіль",
+  "Settings": "Налаштування",
+  "Behavior": "Загальні",
+  "Settings_BackgroundDesc": "Залишати Toolbox у фоні",
+  "About": "Про програму",
+  "CloneRepoCard": "Клонувати цей репозиторій",
+  "BugReportCard": "Створити звіт про помилку",
+  "WarningHeader": "Цей код надано командою AtlasOS. Це програмне забезпечення призначене для використання з AtlasOS лише на підтримуваній версії Windows. Використання з будь-яким іншим playbook та/або непідтримуваною версією Windows не рекомендується.",
+  "InstallSoftware": "Установити програмне забезпечення",
+  "InstallButton": "Установити",
+  "Unstable": "Нестабільна версія",
+  "UnstableDescription": "Цей застосунок наразі призначений лише для тестування. Він може містити помилки, які можуть пошкодити інсталяцію Windows. Використовуйте на власний ризик.",
+  "BetaVersion": "Бета-версія",
+  "BetaVersionDescription": "Цей застосунок наразі перебуває в бета-версії. Якщо ви знайшли помилки або хочете запропонувати функцію, залиште відгук у Discord. Функції можуть змінюватися.",
+  "RestartApp": "Перезапустіть Toolbox, щоб застосувати",
+  "RestartAppDesc": "Щоб застосувати ці зміни, перезапустіть Toolbox.",
+  "RestartAppBtn": "Перезапустити Toolbox зараз",
+  "RestartPC": "Перезавантажте ПК, щоб застосувати.",
+  "RestartPCDesc": "Щоб застосувати ці зміни, перезавантажте ПК.",
+  "RestartBtn": "Перезавантажити зараз",
+  "RelogApply": "Повторно увійдіть, щоб застосувати",
+  "ReloadApplyDesc": "Щоб застосувати ці зміни, повторно увійдіть у систему.",
+  "RelogBtn": "Вийти із системи",
+  "CheckUpdates": "Перевірити наявність оновлень",
+  "CheckUpdatesBtn": "Перевірити зараз",
+  "LatestVer": "Немає доступних оновлень",
+  "NewUpdate": "Оновлення",
+  "NewUpdateDesc": "Доступне нове оновлення. Хочете встановити його зараз?",
+  "InstallNow": "Установити зараз",
+  "ToggleWindowsUpdates": "Перемкнути Windows Update",
+  "WindowsUpdate": "Windows Update",
+  "WindowsUpdateDescription": "Налаштування, пов’язані з Windows Update",
+  "FeatureHeader": "Функціональні оновлення:",
+  "QualityHeader": "Оновлення якості:",
+  "Set": "Установити",
+  "WindowsUpdateDeferral": "Установити кількість днів відтермінування Windows Update",
+  "UpdateDeferralPromptTitle": "Установити час відтермінування Windows Update",
+  "ResetWindowsUpdateDeferral": "Скинути відтермінування Windows Update",
+  "MicrosoftStoreToggle": "Перемкнути Microsoft Store",
+
+
+  // Home tiles
+  "Tile_DocumentationTitle": "Документація",
+  "Tile_DocumentationDescription": "Установлення AtlasOS, FAQ та багато іншого",
+  "Tile_DiscordTitle": "Discord",
+  "Tile_DiscordDescription": "Звертайтеся по підтримку та знаходьте друзів!",
+  "Tile_GithubTitle": "GitHub",
+  "Tile_GithubDescription": "Досліджуйте код AtlasOS і долучайтеся до розробки",
+  "Tile_KofiTitle": "Підтримайте нас на Ko-Fi",
+  "Tile_KofiDescription": "Допоможіть нам продовжувати цей проєкт!",
+
+  // Menu Items & other navigation item texts
+  "SearchPlaceholder": "Пошук налаштувань AtlasOS...",
+
+  "Home": "Головна",
+  "Software": "Програмне забезпечення",
+  "GeneralConfig": "Загальна конфігурація",
+  "Interface": "Налаштування інтерфейсу",
+  "Windows": "Налаштування Windows",
+  "Advanced": "Розширена конфігурація",
+  "Security": "Безпека",
+  "Troubleshooting": "Усунення несправностей",
+
+  "Language": "Мова",
+
+  "NoFavorites": "Ви ще нічого не додали до обраного.",
+  "SystemInfo": "Про цю систему:",
+  "LearnMore": "Дізнатися більше",
+
+  "TroubleshootingDocumenation": "Документація з усунення несправностей",
+
+  //
+  // Experiments
+  //
+  "ExperimentsHeader": "Експерименти",
+  "ExperimentsCardHeader": "Експериментальні функції",
+  "ExperimentsCardDescription": "Ці функції експериментальні й можуть працювати не зовсім так, як задумано. Для застосування змін потрібен перезапуск",
+  // Search experiment
+  "SearchExperiment": "Панель пошуку",
+  "SearchExperimentDescription": "Увімкнути панель пошуку для швидкого знаходження налаштувань у Toolbox",
+  // Icons experiment
+  "IconsExperiment": "Піктограми",
+  "IconsExperimentDescription": "Увімкнути піктограми поруч із кожним налаштуванням для легшої ідентифікації та кращого вигляду"
+}
