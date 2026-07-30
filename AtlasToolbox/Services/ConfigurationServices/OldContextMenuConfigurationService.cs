@@ -32,6 +32,8 @@ namespace AtlasToolbox.Services.ConfigurationServices
 
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 0);
 
+            CommandPromptHelper.RestartExplorer();
+
             _oldContextMenuConfigurationService.CurrentSetting = IsEnabled();
         }
 
@@ -41,12 +43,16 @@ namespace AtlasToolbox.Services.ConfigurationServices
 
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 1);
 
+            CommandPromptHelper.RestartExplorer();
+
             _oldContextMenuConfigurationService.CurrentSetting = IsEnabled();
         }
 
         public bool IsEnabled()
         {
-            return RegistryHelper.IsMatch(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 1);
+            // The InprocServer32 key is the actual switch Explorer reads; the Atlas
+            // state value can drift out of sync when the key is changed externally.
+            return RegistryHelper.KeyExists(INCROP_SERVER_32);
         }
     }
 }
