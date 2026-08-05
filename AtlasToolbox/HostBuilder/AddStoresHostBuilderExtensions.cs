@@ -99,6 +99,7 @@ namespace AtlasToolbox.HostBuilder
                 services.AddKeyedSingleton<ConfigurationStore>("FileSharing");
                 services.AddKeyedSingleton<ConfigurationStore>("WindowsHello");
                 services.AddKeyedSingleton<ConfigurationStore>("ToggleWindowsUpdates");
+                services.AddKeyedSingleton<ConfigurationStore>("ClickToDo");
                 services.AddKeyedSingleton<MultiOptionConfigurationStore>("ContextMenuTerminals");
                 services.AddKeyedSingleton<MultiOptionConfigurationStore>("ShortcutIcon");
                 services.AddKeyedSingleton<MultiOptionConfigurationStore>("Mitigations");

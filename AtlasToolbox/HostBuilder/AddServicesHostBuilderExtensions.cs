@@ -117,6 +117,7 @@ namespace AtlasToolbox.HostBuilder
                 services.AddKeyedTransient<IConfigurationService, FileSharingConfigurationService>("FileSharing");
                 services.AddKeyedTransient<IConfigurationService, WindowsHelloConfigurationServices>("WindowsHello");
                 services.AddKeyedTransient<IConfigurationService, ToggleWindowsUpdateConfigurationService>("ToggleWindowsUpdates");
+                services.AddKeyedTransient<IConfigurationService, ClickToDoConfigurationService>("ClickToDo");
                 services.AddKeyedTransient<IMultiOptionConfigurationServices, ContextMenuTeminalsConfigurationService>("ContextMenuTerminals");
                 services.AddKeyedTransient<IMultiOptionConfigurationServices, ShortcutIconConfigurationService>("ShortcutIcon");
                 services.AddKeyedTransient<IMultiOptionConfigurationServices, MitigationsConfigurationService>("Mitigations");

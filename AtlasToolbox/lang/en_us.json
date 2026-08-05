@@ -237,6 +237,9 @@
   "Copilot": "Enable Microsoft Copilot",
   "CopilotDescription": "Enable or disable Microsoft Copilot integration in Windows 11",
 
+  "ClickToDo": "Enable Click-to-Do",
+  "ClickToDoDescription": "Click-to-Do is Microsoft's tool to identify text and images on your screen.",
+
   "Recall": "Enable Windows Recall",
   "RecallDescription": "Enable or disable Windows Recall feature",
 

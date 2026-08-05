@@ -420,6 +420,7 @@ namespace AtlasToolbox.HostBuilder
                 ["WindowsHello"] = new(App.GetValueFromItemList("WindowsHello"), "WindowsHello", ConfigurationType.General),
                 ["ToggleWindowsUpdates"] = new(App.GetValueFromItemList("ToggleWindowsUpdates"), "ToggleWindowsUpdates", ConfigurationType.WindowsUpdate),
                 ["MicrosoftStore"] = new(App.GetValueFromItemList("MicrosoftStoreToggle"), "MicrosoftStore", ConfigurationType.Advanced),
+                ["ClickToDo"] = new(App.GetValueFromItemList("ClickToDo"), "ClickToDo", ConfigurationType.AiSubMenu),
             };
 
             host.ConfigureServices((_, services) =>
