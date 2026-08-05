@@ -90,8 +90,9 @@
                                     <BreadcrumbBarItem.ContentTemplate>
                                         <DataTemplate>
                                             <TextBlock
-                                                Margin="0,24,0,24"
+                                                Margin="0,0,0,0"
                                                 Style="{StaticResource TitleTextBlockStyle}"
+                                                VerticalAlignment="Bottom"
                                                 Text="{Binding Name}" />
                                         </DataTemplate>
                                     </BreadcrumbBarItem.ContentTemplate>

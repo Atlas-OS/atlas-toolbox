@@ -80,7 +80,7 @@
                 <controls:SettingsCard
                     x:Name="SettingsCardControl"
                     Header="{Binding Description}"
-                    HeaderIcon="{Binding Icon}"
+                    HeaderIcon="{Binding Icon, Converter={StaticResource FontIconConverter}}"
                     Style="{StaticResource ConfigurationSettingsCardTemplate}">
                     <controls:SettingsCard.ContextFlyout>
                         <MenuFlyout>

@@ -52,7 +52,7 @@ public sealed partial class ConfigPage : Page
             string targetKey = App.SearchHighlightItemKey;
             App.SearchHighlightItemKey = null; 
 
-            await System.Threading.Tasks.Task.Delay(100);
+            await System.Threading.Tasks.Task.Delay(200);
 
             ScrollToAndHighlightItem(targetKey);
         }

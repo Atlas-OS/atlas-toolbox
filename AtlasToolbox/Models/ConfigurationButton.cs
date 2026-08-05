@@ -16,14 +16,14 @@ namespace AtlasToolbox.Models
         public ICommand Command { get; set; }
         public string Name { get => App.GetValueFromItemList(Key); }
         public string Description { get => App.GetValueFromItemList(Key, true); }
-        public FontIcon Icon { get; set; } = new FontIcon();
+        public string Icon { get; set; } = string.Empty;
 
         public ConfigurationButton(string key, ICommand command, string route, string icon = "\uE897") 
         {
             Key = key;
             RouteItem = route;
             Command = command;
-            Icon.Glyph = icon;
+            Icon = icon;
         }
     }
 }
