@@ -175,7 +175,7 @@ namespace AtlasToolbox.HostBuilder
                 ["ExplorerPatcher"] = new("https://github.com/valinet/ExplorerPatcher", "ExplorerPatcher", ConfigurationType.StartMenuSubMenu),
                 ["StartAllBack"] = new("https://www.startallback.com/", "StartAllBack", ConfigurationType.StartMenuSubMenu),
                 ["OpenShellAtlasPreset"] = new(@"http://github.com/Atlas-OS/Atlas/blob/main/src/playbook/Executables/AtlasDesktop/4.%20Interface%20Tweaks/Start%20Menu/Atlas%20Open-Shell%20Preset.xml", App.GetValueFromItemList("OpenShellAtlasPreset"), ConfigurationType.StartMenuSubMenu),
-                ["InterfaceTweaksDocumentation"] = new(@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/interface-tweaks/", App.GetValueFromItemList("InterfaceTweaksDocumentation"), ConfigurationType.Interface),
+                ["InterfaceTweaksDocumentation"] = new(@"https://atlasos.net/docs/atlas-configuration/tweaks/", App.GetValueFromItemList("InterfaceTweaksDocumentation"), ConfigurationType.Interface),
 
                 ["ActivationPage"] = new(@"ms-settings:activation", App.GetValueFromItemList("ActivationPage"), ConfigurationType.Windows, "\uE713"),
                 ["ColorsPage"] = new(@"ms-settings:personalization-colors", App.GetValueFromItemList("ColorsPage"), ConfigurationType.Windows, "\uE713"),
@@ -189,18 +189,17 @@ namespace AtlasToolbox.HostBuilder
                 ["CoreIsolation"] = new(@"windowsdefender://coreisolation/", App.GetValueFromItemList("CoreIsolation"), ConfigurationType.CoreIsolationSubMenu, "\uE83D"),
 
                 ["BootConfigExplanations"] = new(@"https://learn.microsoft.com/windows-hardware/drivers/devtest/bcdedit--set", App.GetValueFromItemList("BootConfigExplanations"), ConfigurationType.BootConfigurationSubMenu),
-                ["AdvancedConfigMustRead"] = new(@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/advanced-configuration/", App.GetValueFromItemList("AdvancedConfigMustRead"), ConfigurationType.Advanced),
-                ["NvidiaDisplayContainerMustReadFirst"] = new(@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/advanced-configuration/#nvidia-display-container", App.GetValueFromItemList("NvidiaDisplayContainerMustReadFirst"), ConfigurationType.NvidiaDisplayContainerSubMenu),
-                ["SecurityDocumentation"] = new(@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/security/", App.GetValueFromItemList("SecurityDocumentation"), ConfigurationType.Security),
+                ["AdvancedConfigMustRead"] = new(@"https://atlasos.net/docs/atlas-configuration/advanced/", App.GetValueFromItemList("AdvancedConfigMustRead"), ConfigurationType.Advanced),
+                ["NvidiaDisplayContainerMustReadFirst"] = new(@"https://atlasos.net/docs/atlas-configuration/advanced/#nvidia-display-container", App.GetValueFromItemList("NvidiaDisplayContainerMustReadFirst"), ConfigurationType.NvidiaDisplayContainerSubMenu),
+                ["SecurityDocumentation"] = new(@"https://atlasos.net/docs/atlas-configuration/security/", App.GetValueFromItemList("SecurityDocumentation"), ConfigurationType.Security),
 
-                ["WindowsSettingsDocumentation"] = new(@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/windows-settings/", App.GetValueFromItemList("WindowsSettingsDocumentation"), ConfigurationType.Windows),
+                ["WindowsSettingsDocumentation"] = new(@"https://atlasos.net/docs/atlas-configuration/windows/", App.GetValueFromItemList("WindowsSettingsDocumentation"), ConfigurationType.Windows),
                 ["AutoGpuAffinity"] = new(@"https://github.com/valleyofdoom/AutoGpuAffinity", "AutoGpuAffinity", ConfigurationType.DriverConfigurationSubMenu),
                 ["GoInterruptPolicy"] = new(@"https://github.com/spddl/GoInterruptPolicy", "GoInterruptPolicy", ConfigurationType.DriverConfigurationSubMenu),
                 ["InterrupAffinityTool"] = new(@"https://www.techpowerup.com/download/microsoft-interrupt-affinity-tool", App.GetValueFromItemList("InterrupAffinityTool"), ConfigurationType.DriverConfigurationSubMenu),
                 ["MSIUtilityV3"] = new(@"https://forums.guru3d.com/threads/windows-line-based-vs-message-signaled-based-interrupts-msi-tool.378044", "MSI Utility V3", ConfigurationType.DriverConfigurationSubMenu),
                 ["ProcessExplorerApp"] = new(@"https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer", App.GetValueFromItemList("ProcessExplorerDocumentation"), ConfigurationType.Advanced),
-                ["ResetPC"] = new(@"https://docs.atlasos.net/getting-started/reverting-atlas/", App.GetValueFromItemList("ResetPC"), ConfigurationType.Troubleshooting),
-                ["TroubleshootingDocumentation"] = new(@"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/troubleshooting/", App.GetValueFromItemList("TroubleshootingDocumenation"), ConfigurationType.Troubleshooting),
+                ["ResetPC"] = new(@"https://atlasos.net/docs/faq/reverting/", App.GetValueFromItemList("ResetPC"), ConfigurationType.Troubleshooting),
             };
 
             host.ConfigureServices((_, services) =>
