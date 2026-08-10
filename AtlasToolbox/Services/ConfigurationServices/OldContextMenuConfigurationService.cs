@@ -50,9 +50,7 @@ namespace AtlasToolbox.Services.ConfigurationServices
 
         public bool IsEnabled()
         {
-            // The InprocServer32 key is the actual switch Explorer reads; the Atlas
-            // state value can drift out of sync when the key is changed externally.
-            return RegistryHelper.KeyExists(INCROP_SERVER_32);
+            return RegistryHelper.IsMatch(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 1);
         }
     }
 }
