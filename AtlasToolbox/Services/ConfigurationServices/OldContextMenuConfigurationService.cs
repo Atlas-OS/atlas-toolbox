@@ -32,6 +32,8 @@ namespace AtlasToolbox.Services.ConfigurationServices
 
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 0);
 
+            CommandPromptHelper.RestartExplorer();
+
             _oldContextMenuConfigurationService.CurrentSetting = IsEnabled();
         }
 
@@ -40,6 +42,8 @@ namespace AtlasToolbox.Services.ConfigurationServices
             RegistryHelper.SetValue(INCROP_SERVER_32, "", "");
 
             RegistryHelper.SetValue(ATLAS_STORE_KEY_NAME, STATE_VALUE_NAME, 1);
+
+            CommandPromptHelper.RestartExplorer();
 
             _oldContextMenuConfigurationService.CurrentSetting = IsEnabled();
         }
