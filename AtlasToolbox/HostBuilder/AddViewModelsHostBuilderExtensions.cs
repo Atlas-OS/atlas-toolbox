@@ -150,7 +150,6 @@ namespace AtlasToolbox.HostBuilder
                 {
                     configurationDictionary.Add(ProfileSerializing.DeserializeProfile(file.FullName));
                 }
-                ;
                 host.ConfigureServices((_, services) =>
                 {
                     services.AddSingleton<IEnumerable<Profiles>>(provider =>

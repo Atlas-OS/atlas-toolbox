@@ -23,7 +23,6 @@ namespace AtlasToolbox.ViewModels
             configurationItemViewModels.ToList().ForEach(item => ConfigurationItems.Add(item));
             configurationButtonViewModel.ToList().ForEach(item => ConfigurationItems.Add(item));
             linksViewModel.ToList().ForEach(item => ConfigurationItems.Add(item));
-
         }
 
         /// <summary>

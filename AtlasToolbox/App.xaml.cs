@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using Windows.ApplicationModel.Core;
 using System.Diagnostics;
+using System.Configuration;
 
 namespace AtlasToolbox
 {
@@ -99,7 +100,7 @@ namespace AtlasToolbox
             }
 #endif
             Version = RegistryHelper.GetValue($@"HKLM\SOFTWARE\AtlasOS\Toolbox", "Channel") + " v" + RegistryHelper.GetValue($@"HKLM\SOFTWARE\AtlasOS\Toolbox", "Version");
-            if (CompatibilityHelper.IsCompatible())
+            if (IsCompatible())
             {
                 Task.Run(() => StartNamedPipeServer());
 
@@ -260,6 +261,17 @@ namespace AtlasToolbox
             {
                 return "To be translated";
             }
+        }
+
+        public static bool IsCompatible()
+        {
+            string[] compatibleVersions = ConfigurationManager.AppSettings.Get("AtlasVersion").Split(',');
+            string atlasVersion = (string)RegistryHelper.GetValue("HKLM\\SOFTWARE\\AME\\Playbooks\\Applied\\{00000000-0000-4000-6174-6C6173203A33}", "version");
+            foreach (string version in compatibleVersions)
+            {
+                if (atlasVersion == version) return true;
+            }
+            return false;
         }
     }
 }

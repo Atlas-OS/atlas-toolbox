@@ -70,7 +70,7 @@ namespace AtlasToolbox.Views
 
         private void KeepBackground_Toggled(object sender, RoutedEventArgs e)
         {
-            SettingsBehaviorHelper.KeppBackground_Toggled(sender, e);
+            KeppBackground_Toggled(sender, e);
         }
 
         private void toCloneRepoCard_Click(object sender, RoutedEventArgs e)
@@ -102,6 +102,24 @@ namespace AtlasToolbox.Views
                 NoUpdatesBar.Visibility = Visibility.Visible;
             }
         }
+
+        private void KeppBackground_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (sender is ToggleSwitch toggleSwitch)
+            {
+                if (toggleSwitch.IsOn)
+                {
+                    RegistryHelper.SetValue("HKLM\\SOFTWARE\\AtlasOS\\Toolbox", "KeepInBackground", 1);
+                    App.m_window.Closed += AppBehaviorHelper.HideApp;
+                }
+                else
+                {
+                    RegistryHelper.DeleteValue("HKLM\\SOFTWARE\\AtlasOS\\Toolbox", "KeepInBackground");
+                    App.m_window.Closed += AppBehaviorHelper.CloseApp;
+                }
+            }
+        }
+
         #region experiments
         private void IsExperimentEnabled(object sender, RoutedEventArgs e)
         {
