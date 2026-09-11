@@ -80,8 +80,8 @@
 
 
   // Configuration toggles
-  "Animations": "Animations",
-  "AnimationsDescription": "Enable or disable Windows animations",
+  "Animation": "Animation",
+  "AnimationDescription": "Enable or disable Windows Animation",
 
   "ExtractContextMenu": "\"Extract\" option in the context menu",
   "ExtractContextMenuDescription": "Adds an \"Extract\" option in the context menu for compressed files",
@@ -98,10 +98,10 @@
   "Printing": "Printing",
   "PrintingDescription": "Enable or disable printing services",
 
-  "NvidiaDispayContainer": "NVIDIA Display Container",
+  "NVidiaDisplayContainer": "NVIDIA Display Container",
   "NvidiaDispayContainerDescription": "Enable or disable the NVIDIA Display Container service",
 
-  "AddNvidiaDisplayContainerContextMenu": "NVIDIA Display Container in context menu",
+  "NVidiaDisplayContainerContextMenu": "NVIDIA Display Container in context menu",
   "AddNvidiaDisplayContainerContextMenuDescription": "Adds a NVIDIA Display Container toggle in the context menu",
 
   "CpuIdleContextMenu": "CPU Idle toggle in context menu",
@@ -149,8 +149,8 @@
   "SearchIndexing": "Search Indexing",
   "SearchIndexingDescription": "Enable or disable search indexing",
 
-  "FsoAndGameBar": "FSO and Game Bar",
-  "FsoAndGameBarDescription": "Enable or disable Fullscreen Optimizations and Game Bar",
+  "FSOGameBar": "FSO and Game Bar",
+  "FSOGameBarDescription": "Enable or disable Fullscreen Optimizations and Game Bar",
 
   "AutomaticUpdates": "Automatic updates",
   "AutomaticUpdatesDescription": "Enable or disable automatic updates",
@@ -209,13 +209,13 @@
   "Gallery": "Enable the gallery",
   "GalleryDescription": "Enable or disable the gallery in File Explorer",
 
-  "SnapLayout": "Enables snap layouts for windows",
+  "SnapLayouts": "Enables snap layouts for windows",
   "SnapLayoutDescription": "Enable or disable snap layouts for windows",
 
   "RecentItems": "Unlocks recent items on file explorer",
   "RecentItemsDescription": "Enable or disable recent items on file explorer",
 
-  "VerboseStatusMessage": "Verbose status messages",
+  "VerboseMessages": "Verbose status messages",
   "VerboseStatusMessageDescription": "Enable or disable verbose status messages during boot and shutdown",
 
   "SuperFetch": "SuperFetch",

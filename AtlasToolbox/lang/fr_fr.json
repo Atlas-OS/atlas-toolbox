@@ -79,8 +79,8 @@
 
 
   //Configuration toggles
-  "Animations": "Animations",
-  "AnimationsDescription": "Activé ou Désactivé les animations Windows",
+  "Animation": "Animation",
+  "AnimationDescription": "Activé ou Désactivé les Animation Windows",
 
   "ExtractContextMenu": "Option \"Extraire\" dans le menu contextuel",
   "ExtractContextMenuDescription": "Ajouter l'option \"Extraire\" dans le menu contextuel pour les fichiers compressés",
@@ -97,10 +97,10 @@
   "Printing": "Impression",
   "PrintingDescription": "Activé ou Désactivé le service d'impression",
 
-  "NvidiaDispayContainer": "Conteneur d'affichage NVIDIA",
+  "NVidiaDisplayContainer": "Conteneur d'affichage NVIDIA",
   "NvidiaDispayContainerDescription": "Activé ou Désactivé le service Conteneur d'affichage NVIDIA",
 
-  "AddNvidiaDisplayContainerContextMenu": "Conteneur d'affichage NVIDIA dans le menu contextuel",
+  "NVidiaDisplayContainerContextMenu": "Conteneur d'affichage NVIDIA dans le menu contextuel",
   "AddNvidiaDisplayContainerContextMenuDescription": "Ajouté le Conteneur d'affichage NVIDIA dans le menu contextuel",
 
   "CpuIdleContextMenu": "Bascule du CPU inactif dans le menu contextuel",
@@ -122,7 +122,7 @@
   "NewBootMenuDescription": "Activé ou Désactivé le nouveau menu de démarrage",
 
   "SpinningAnimation": "Animation de rotation",
-  "SpinningAnimationDescription": "Activé ou Désactivé les animations de rotation au démarrage",
+  "SpinningAnimationDescription": "Activé ou Désactivé les Animation de rotation au démarrage",
 
   "AdvancedBootOptions": "Options avancées au démarrage de Windows",
   "AdvancedBootOptionsDescription": "Activé ou Désactivé les options avancées au démarrage de Windows",
@@ -148,8 +148,8 @@
   "SearchIndexing": "Indexation des recherches",
   "SearchIndexingDescription": "Activé ou Désactivé l'indexation des recherches",
 
-  "FsoAndGameBar": "FSO et Game Bar",
-  "FsoAndGameBarDescription": "Activé ou Désactivé l'optimisation plein écran et Game Bar",
+  "FSOGameBar": "FSO et Game Bar",
+  "FSOGameBarDescription": "Activé ou Désactivé l'optimisation plein écran et Game Bar",
 
   "AutomaticUpdates": "Mises à jour automatiques",
   "AutomaticUpdatesDescription": "Activé ou Désactivé les mises à jour automatiques",
@@ -208,13 +208,13 @@
   "Gallery": "Activer la galerie",
   "GalleryDescription": "Activé ou Désactivé la galerie dans l'explorateur de fichier",
 
-  "SnapLayout": "Active l'ancrage des fenêtres",
+  "SnapLayouts": "Active l'ancrage des fenêtres",
   "SnapLayoutDescription": "Activé ou Désactivé l'ancrage des fenêtres",
 
   "RecentItems": "Afficher les éléments récents dans l'explorateur de fichier",
   "RecentItemsDescription": "Activé ou Désactivé les éléments récents dans l'explorateur de fichier",
 
-  "VerboseStatusMessage": "Messages d'état détaillé",
+  "VerboseMessages": "Messages d'état détaillé",
   "VerboseStatusMessageDescription": "Activé ou Désactivé les messages d'état lors du démarrage et arrêt de windows",
 
   "SuperFetch": "SuperFetch",

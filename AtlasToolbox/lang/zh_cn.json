@@ -77,8 +77,8 @@
   "SafeMode": "启动时进入安全模式",
 
   // 配置开关选项
-  "Animations": "动画效果",
-  "AnimationsDescription": "启用或禁用 Windows 动画",
+  "Animation": "动画效果",
+  "AnimationDescription": "启用或禁用 Windows 动画",
 
   "ExtractContextMenu": "上下文菜单中的\"解压\"选项",
   "ExtractContextMenuDescription": "在压缩文件的上下文菜单中添加\"解压\"选项",
@@ -95,10 +95,10 @@
   "Printing": "打印",
   "PrintingDescription": "启用或禁用打印服务",
 
-  "NvidiaDispayContainer": "NVIDIA 显示容器",
+  "NVidiaDisplayContainer": "NVIDIA 显示容器",
   "NvidiaDispayContainerDescription": "启用或禁用 NVIDIA 显示容器服务",
 
-  "AddNvidiaDisplayContainerContextMenu": "上下文菜单中的 NVIDIA 显示容器",
+  "NVidiaDisplayContainerContextMenu": "上下文菜单中的 NVIDIA 显示容器",
   "AddNvidiaDisplayContainerContextMenuDescription": "在上下文菜单中添加 NVIDIA 显示容器切换",
 
   "CpuIdleContextMenu": "上下文菜单中的 CPU 闲置切换",
@@ -146,8 +146,8 @@
   "SearchIndexing": "搜索索引",
   "SearchIndexingDescription": "启用或禁用搜索索引",
 
-  "FsoAndGameBar": "全屏优化和游戏栏",
-  "FsoAndGameBarDescription": "启用或禁用全屏优化和游戏栏",
+  "FSOGameBar": "全屏优化和游戏栏",
+  "FSOGameBarDescription": "启用或禁用全屏优化和游戏栏",
 
   "AutomaticUpdates": "自动更新",
   "AutomaticUpdatesDescription": "启用或禁用自动更新",
@@ -206,13 +206,13 @@
   "Gallery": "启用库",
   "GalleryDescription": "启用或禁用文件浏览器中的库",
 
-  "SnapLayout": "启用窗口对齐布局",
+  "SnapLayouts": "启用窗口对齐布局",
   "SnapLayoutDescription": "启用或禁用窗口的对齐布局",
 
   "RecentItems": "文件浏览器中解锁最近项目",
   "RecentItemsDescription": "启用或禁用文件浏览器中的最近项目",
 
-  "VerboseStatusMessage": "详细状态消息",
+  "VerboseMessages": "详细状态消息",
   "VerboseStatusMessageDescription": "启用或禁用启动和关闭时的详细状态消息",
 
   "SuperFetch": "SuperFetch",

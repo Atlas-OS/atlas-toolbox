@@ -1,5 +1,8 @@
 ﻿using AtlasToolbox.Models;
+using AtlasToolbox.Services;
+using AtlasToolbox.ViewModels.ConfigurationVM;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -31,11 +34,11 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
         }
 
         public ConfigPageViewModel(
-            IEnumerable<ConfigurationItemViewModel> configuration,
-            IEnumerable<MultiOptionConfigurationItemViewModel> multiOptionConfigurationItemViewModels,
+           IEnumerable<ConfigurationItemViewModel> configuration,
+            IEnumerable<MultiConfigViewModel> multiOptionConfigurationItemViewModels,
             IEnumerable<LinksViewModel> linksViewModel,
-            IEnumerable<Route> routes,
-            IEnumerable<ConfigurationButtonViewModel> configurationButtonViewModel)
+            IEnumerable<ConfigurationButtonViewModel> configurationButtonViewModel,
+            IEnumerable<RouteViewModel> routes)
         {
             List<IConfigurationItem> configurationItems = new();
 
@@ -60,11 +63,11 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
         public static ConfigPageViewModel LoadViewModel(
             IEnumerable<LinksViewModel> linksViewModels,
             IEnumerable<ConfigurationItemViewModel> configuration,
-            IEnumerable<MultiOptionConfigurationItemViewModel> multiOptionConfigurationItemViewModels,
+            IEnumerable<MultiConfigViewModel> multiOptionConfigurationItemViewModels,
             IEnumerable<ConfigurationButtonViewModel> configurationButtonViewModels,
-            IEnumerable<Route> routes)
+            IEnumerable<RouteViewModel> routes)
         {
-            ConfigPageViewModel viewModel = new(configuration, multiOptionConfigurationItemViewModels, linksViewModels, routes,configurationButtonViewModels);
+            ConfigPageViewModel viewModel = new(configuration, multiOptionConfigurationItemViewModels, linksViewModels, configurationButtonViewModels, routes);
 
             return viewModel;
         }

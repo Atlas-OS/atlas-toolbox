@@ -28,7 +28,7 @@ namespace AtlasToolbox.Utils
             {
                 if (configItemViewModel.CurrentSetting == true) configModelList.Add(configItemViewModel.Key.ToString());
             }
-            foreach (MultiOptionConfigurationItemViewModel configItemViewModel in App._host.Services.GetRequiredService<IEnumerable<MultiOptionConfigurationItemViewModel>>())
+            foreach (MultiConfigViewModel configItemViewModel in App._host.Services.GetRequiredService<IEnumerable<MultiConfigViewModel>>())
             {
                 multiConfigModelList.Add(new (configItemViewModel.Key, configItemViewModel.CurrentSetting.ToString()));
             }

@@ -1,6 +1,6 @@
 ﻿using ABI.System.Collections;
 using AtlasToolbox.Models;
-using AtlasToolbox.Services.ConfigurationServices;
+
 using AtlasToolbox.Utils;
 using AtlasToolbox.ViewModels.ConfigurationVM;
 using AtlasToolbox.Views;
@@ -29,7 +29,7 @@ namespace AtlasToolbox.ViewModels
     {
         private IEnumerable<Profiles> _profiles;
         private IEnumerable<ConfigurationItemViewModel> ConfigurationItemViewModels { get; }
-        private IEnumerable<MultiOptionConfigurationItemViewModel> MultiOptionConfigurationItemViewModels { get; }
+        private IEnumerable<MultiConfigViewModel> MultiOptionConfigurationItemViewModels { get; }
 
 
         [ObservableProperty]
@@ -85,7 +85,7 @@ namespace AtlasToolbox.ViewModels
         {
             // need more research to figure out a better way to do this
             List<ConfigurationItemViewModel> configurationItemVMs = ConfigurationItemViewModels.ToList();
-            List<MultiOptionConfigurationItemViewModel> multiConfigurationItemVMs = MultiOptionConfigurationItemViewModels.ToList();
+            List<MultiConfigViewModel> multiConfigurationItemVMs = MultiOptionConfigurationItemViewModels.ToList();
             foreach (ConfigurationItemViewModel viewModel in configurationItemVMs)
             {
                 try
@@ -108,7 +108,7 @@ namespace AtlasToolbox.ViewModels
             }
             foreach (KeyValuePair<string, string> keyPair in ProfileSelected.MultiOptionConfigServices)
             {
-                foreach (MultiOptionConfigurationItemViewModel vm in multiConfigurationItemVMs)
+                foreach (MultiConfigViewModel vm in multiConfigurationItemVMs)
                 {
                     if (vm.Key == keyPair.Key && vm.CurrentSetting != keyPair.Value)
                     {

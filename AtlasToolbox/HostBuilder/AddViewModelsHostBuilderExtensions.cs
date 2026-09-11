@@ -1,5 +1,4 @@
-﻿using AtlasToolbox.Services.ConfigurationServices;
-using AtlasToolbox.Models;
+﻿using AtlasToolbox.Models;
 using AtlasToolbox.Stores;
 using AtlasToolbox.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +23,7 @@ using AtlasToolbox.Utils;
 using AtlasToolbox.Models.ProfileModels;
 using Newtonsoft.Json;
 using AtlasToolbox.ViewModels.ConfigurationVM;
+using AtlasToolbox.Services;
 
 namespace AtlasToolbox.HostBuilder
 {
@@ -52,13 +52,6 @@ namespace AtlasToolbox.HostBuilder
             App.logger.Info($"[VMHostBuilder] Successfully loaded host");
             return host;
         }
-
-
-        //private static string App.App.GetValueFromItemList(string key, bool desc = false)
-        //{
-        //    if (!desc) return list.Where(item => item.Key == key).Select(item => item.Value).FirstOrDefault();
-        //    else return list.Where(item => item.Key == key + "Description").Select(item => item.Value).FirstOrDefault();
-        //}
 
         /// <summary>
         /// Registers software items
@@ -171,7 +164,7 @@ namespace AtlasToolbox.HostBuilder
         /// <returns></returns>
         private static IHostBuilder AddLinksItemViewModels(this IHostBuilder host)
         {
-            List<Links> configurationDictionary = new()
+            List<LinkRegister> configurationDictionary = new()
             {
                 // Interface Tweaks links
                 new("ExplorerPatcher", @"https://github.com/valinet/ExplorerPatcher", "ExplorerPatcher", "Interface/StartMenuSubMenu"),
@@ -216,7 +209,7 @@ namespace AtlasToolbox.HostBuilder
                 {
                     List<LinksViewModel> viewModels = new();
 
-                    foreach (Links item in configurationDictionary)
+                    foreach (LinkRegister item in configurationDictionary)
                     {
                         viewModels.Add(CreateLinksViewModel(item));
                     }
@@ -235,7 +228,7 @@ namespace AtlasToolbox.HostBuilder
         private static IHostBuilder AddConfigurationButtonItemViewModels(this IHostBuilder host)
         {
             ICommand buttonCommand;
-            List<ConfigurationButton> configurationDictionary = new()
+            List<ButtonServiceRegister> configurationDictionary = new()
             {
                 new("RestartExplorerButton", buttonCommand = new RestartExplorerCommand(), "Interface"),
                 new("ViewCurrentSettingsBootConfig", buttonCommand = new ViewCurrentValuesCommand(), "Advanced/BootConfigurationSubMenu"),
@@ -259,7 +252,7 @@ namespace AtlasToolbox.HostBuilder
                 {
                     List<ConfigurationButtonViewModel> viewModels = new();
 
-                    foreach (ConfigurationButton item in configurationDictionary)
+                    foreach (ButtonServiceRegister item in configurationDictionary)
                     {
                         viewModels.Add(CreateButtonViewModel(item));
                     }
@@ -272,49 +265,55 @@ namespace AtlasToolbox.HostBuilder
 
         private static IHostBuilder AddRoutes(this IHostBuilder host)
         {
-            List<Route> routes = new()
+            List<RouteService> routes = new()
             {
-                // 'General' routes
-                new Route("General", "\uE80F", true),
-                new Route("General/AiSubMenu", "\uF4A5"),
-                new Route("General/FileSharingSubMenu", "\uF193"),
-                new Route("General/WindowsUpdate", "\uEDAB"),
+                // 'General' RouteServices
+                new RouteService("General", "\uE80F", true),
+                new RouteService("General/AiSubMenu", "\uF4A5"),
+                new RouteService("General/FileSharingSubMenu", "\uF193"),
+                new RouteService("General/WindowsUpdate", "\uEDAB"),
+                new RouteService("General/CpuIdleContextMenu", "\uEDAB"),
 
-                // 'Interface' routes
-                new Route("Interface", "\uE713", true),
-                new Route("Interface/StartMenuSubMenu", "\uE8FC"),
-                new Route("Interface/ContextMenuSubMenu", null),
-                new Route("Interface/FileExplorerSubMenu", "\uEC50"),
+                // 'Interface' RouteServices
+                new RouteService("Interface", "\uE713", true),
+                new RouteService("Interface/StartMenuSubMenu", "\uE8FC"),
+                new RouteService("Interface/ContextMenuSubMenu", null),
+                new RouteService("Interface/FileExplorerSubMenu", "\uEC50"),
 
-                // 'Windows' routes
-                new Route("Windows", "\uE71D", true),
+                // 'Windows' RouteServices
+                new RouteService("Windows", "\uE71D", true),
 
-                // 'Advanced' routes
-                new Route("Advanced", "\uE71D", true),
-                new Route("Advanced/ServicesSubMenu", "\uE9F5"),
-                new Route("Advanced/ServicesSubMenu/NvidiaDisplayContainerSubMenu", null),
-                new Route("Advanced/BootConfigurationSubMenu", "\uF259"),
-                new Route("Advanced/BootConfigurationSubMenu/BootConfigAppearance", "\uE620"),
-                new Route("Advanced/BootConfigurationSubMenu/BootConfigBehavior", "\uF259"),
-                new Route("Advanced/DriverConfigurationSubMenu", "\uE772"),
+                // 'Advanced' RouteServices
+                new RouteService("Advanced", "\uE71D", true),
+                new RouteService("Advanced/ServicesSubMenu", "\uE9F5"),
+                new RouteService("Advanced/ServicesSubMenu/NvidiaDisplayContainerSubMenu", null),
+                new RouteService("Advanced/BootConfigurationSubMenu", "\uF259"),
+                new RouteService("Advanced/BootConfigurationSubMenu/BootConfigAppearance", "\uE620"),
+                new RouteService("Advanced/BootConfigurationSubMenu/BootConfigBehavior", "\uF259"),
+                new RouteService("Advanced/DriverConfigurationSubMenu", "\uE772"),
 
-                // 'Security' routes
-                new Route("Security", "\uE71D", true),
-                new Route("Security/CoreIsolationSubMenu", "\uEEA1"),
-                new Route("Security/DefenderSubMenu", "\uE83D"),
-                new Route("Security/MitigationsSubMenu", "\uE730"),
+                // 'Security' RouteServices
+                new RouteService("Security", "\uE71D", true),
+                new RouteService("Security/CoreIsolationSubMenu", "\uEEA1"),
+                new RouteService("Security/DefenderSubMenu", "\uE83D"),
+                new RouteService("Security/MitigationsSubMenu", "\uE730"),
 
-                // 'Troubleshooting' routes
-                new Route("Troubleshooting", "\uE71D", true),
-                new Route("Troubleshooting/TroubleshootingNetwork", "\uE90F"),
+                // 'Troubleshooting' RouteServices
+                new RouteService("Troubleshooting", "\uE71D", true),
+                new RouteService("Troubleshooting/TroubleshootingNetwork", "\uE90F"),
             };
 
             host.ConfigureServices((_, services) =>
             {
-                services.AddSingleton<IEnumerable<Route>>(provider =>
+                services.AddSingleton<IEnumerable<RouteService>>(provider =>
                 {
+                    List<RouteViewModel> viewModels = new();
+                    foreach (RouteService item in routes)
+                    {
+                        viewModels.Add(new RouteViewModel(item));
+                    }
                     App.logger.Info($"[VMHostBuilder] Successfully loaded {routes.Count} route entries");
-                    return routes.Where(r => !r.RootRoute);
+                    return routes.Where(r => !r.IsRootRoute);
                 });
             });
 
@@ -329,28 +328,31 @@ namespace AtlasToolbox.HostBuilder
         /// <returns></returns>
         private static IHostBuilder AddMultiOptionConfigurationViewModels(this IHostBuilder host)
         {
-            List<MultiOptionConfiguration> configurations = new()
+            List<MultiServiceRegister> configurations = new()
             {
+                // General
+                new("Indexing", "General", ["Enable", "Disable", "Minimal"], "Minimal"),
+
                 // Interface
-                new("ContextMenuTerminals", "Interface/ContextMenuSubMenu", "\uE756"),
-                new("ShortcutIcon", "Interface", "\uE8A7"),
+                new("ContextMenuTerminals", "Interface/ContextMenuSubMenu", ["AddNoWindowsTerminal", "Add", "Remove"], "Remove", "\uE756"),
+                new("ShortcutIcon", "Interface", ["Classic", "Default", "None"], "Default","\uE8A7"),
                 
                 // Security
-                new("Mitigations", "Security/MitigationsSubMenu", "\uF0EF"),
+                new("Mitigations", "Security/MitigationsSubMenu",["Disable", "Enable", "WindowsDefault"], "WindowsDefault","\uF0EF"),
 
                 // Troubleshooting
-                new("SafeMode", "Troubleshooting", "\uEA18"),
+                new("SafeMode", "Troubleshooting", ["Exit", "CommandPrompt", "Networking", "Minimal"],"Exit","\uEA18"),
             };
 
             host.ConfigureServices((_, services) =>
             {
-                services.AddSingleton<IEnumerable<MultiOptionConfigurationItemViewModel>>(provider =>
+                services.AddSingleton<IEnumerable<MultiConfigViewModel>>(provider =>
                 {
-                    List<MultiOptionConfigurationItemViewModel> viewModels = new();
+                    List<MultiConfigViewModel> viewModels = new();
 
-                    foreach (MultiOptionConfiguration item in configurations)
+                    foreach (MultiServiceRegister item in configurations)
                     {
-                        viewModels.Add(CreateMultiOptionConfigurationItemViewModel(provider, item));
+                        viewModels.Add(CreateMultiOptionConfigurationItemViewModel(item));
                     }
                     App.logger.Info($"[VMHostBuilder] Successfully loaded {viewModels.Count} multi-configuration entries");
                     return viewModels;
@@ -366,99 +368,99 @@ namespace AtlasToolbox.HostBuilder
         /// <returns></returns>
         private static IHostBuilder AddConfigurationItemViewModels(this IHostBuilder host)
         {
-            List<Configuration> configurationDictionary = new()
+            List<ToggleServiceRegister> configurationDictionary = new()
             {
                 // General
-                new("BackgroundApps", "General"),
-                new("SearchIndexing", "General"),
-                new("FsoAndGameBar", "General"),
-                new("AutomaticUpdates", "General"),
-                new("DeliveryOptimisation", "General"),
-                new("Hibernation", "General"),
-                new("Location", "General"),
-                new("PhoneLink", "General"),
-                new("PowerSaving", "General"),
-                new("Sleep", "General"),
-                new("SystemRestore", "General"),
-                new("UpdateNotifications", "General"),
-                new("WebSearch", "General"),
-                new("Widgets", "General"),
-                new("WindowsSpotlight", "General"),
-                new("AppStoreArchiving", "General"),
-                new("CpuIdle", "General"),
-                new("WindowsHello", "General"),
+                new("BackgroundApps", "General", false),
+                new("FSOGameBar", "General", true),
+                new("AutomaticUpdates", "General", false),
+                new("DeliveryOptimisation", "General", false),
+                new("Hibernation", "General", false),
+                new("Location", "General", false),
+                new("PhoneLink", "General", false),
+                new("PowerSaving", "General", true),
+                new("Sleep", "General", true),
+                new("SystemRestore", "General", true),
+                new("UpdateNotifications", "General", true),
+                new("WebSearch", "General", false),
+                new("Widgets", "General", false),
+                new("WindowsSpotlight", "General", false),
+                new("AppStoreArchiving", "General", false),
+                new("Workplace", "General", false),
 
                 // General - AI SubMenu
-                new("Copilot", "General/AiSubMenu"),
-                new("Recall", "General/AiSubMenu"),
+                new("Copilot", "General/AiSubMenu", false),
+                new("Recall", "General/AiSubMenu", false),
+                new("ClickToDo", "General/AiSubMenu", false),
 
                 // General - File Sharing SubMenu
-                new("GiveAccessToMenu", "General/FileSharingSubMenu"),
-                new("NetworkNavigationPane", "General/FileSharingSubMenu"),
-                new("FileSharing", "General/FileSharingSubMenu"),
+                new("GiveAccessToMenu", "General/FileSharingSubMenu", false),
+                new("NetworkNavigationPane", "General/FileSharingSubMenu", false),
+                new("FileSharing", "General/FileSharingSubMenu", false),
 
-                // General - Windows Update
-                new("ToggleWindowsUpdates", "General/WindowsUpdate"),
+                // General - CPU Idle
+                new("CpuIdle", "General/CpuIdleContextMenu", true),
+                new("CpuIdleContextMenu", "General/CpuIdleContextMenu", false),
 
                 // Interface
-                new("Animations", "Interface"),
-                new("LockScreen", "Interface"),
-                new("ShortcutText", "Interface"),
-                new("EdgeSwipe", "Interface"),
-                new("SnapLayout", "Interface"),
-                new("RecentItems", "Interface"),
-                new("VerboseStatusMessage", "Interface"),
+                new("Animation", "Interface", false),
+                new("LockScreen", "Interface", true),
+                new("ShortcutText", "Interface", false),
+                new("EdgeSwipe", "Interface", true),
+                new("SnapLayouts", "Interface", true),
+                new("RecentItems", "Interface", false),
+                new("VerboseMessages", "Interface", false),
 
                 // Interface - Context Menu SubMenu
-                new("ExtractContextMenu", "Interface/ContextMenuSubMenu"),
-                new("RunWithPriority", "Interface/ContextMenuSubMenu"),
-                new("CpuIdleContextMenu", "Interface/ContextMenuSubMenu"),
-                new("TakeOwnership", "Interface/ContextMenuSubMenu"),
-                new("OldContextMenu", "Interface/ContextMenuSubMenu"),
+                new("ExtractContextMenu", "Interface/ContextMenuSubMenu", false),
+                new("RunWithPriority", "Interface/ContextMenuSubMenu", false),
+                new("TakeOwnership", "Interface/ContextMenuSubMenu", false),
+                new("OldContextMenu", "Interface/ContextMenuSubMenu", true),
 
                 // Interface - File Explorer SubMenu
-                new("CompactView", "Interface/FileExplorerSubMenu"),
-                new("RemovableDrivesInSidebar", "Interface/FileExplorerSubMenu"),
-                new("AppIconsThumbnail", "Interface/FileExplorerSubMenu"),
-                new("AutomaticFolderDiscovery", "Interface/FileExplorerSubMenu"),
-                new("Gallery", "Interface/FileExplorerSubMenu"),
+                new("CompactView", "Interface/FileExplorerSubMenu", true),
+                new("RemovableDrivesInSidebar", "Interface/FileExplorerSubMenu", false),
+                new("AppIconsThumbnail", "Interface/FileExplorerSubMenu", true),
+                new("AutomaticFolderDiscovery", "Interface/FileExplorerSubMenu", false),
+                new("Gallery", "Interface/FileExplorerSubMenu", false),
+                new("Home", "Interface/FileExplorerSubMenu", false),
 
                 // Advanced
-                new("ProcessExplorer", "Advanced"),
-                new("MicrosoftStore", "Advanced"),
+                new("ProcessExplorer", "Advanced", false),
+                new("MicrosoftStore", "Advanced", true),
 
                 // Advanced - Services SubMenu
-                new("Bluetooth", "Bluetooth", "Advanced/ServicesSubMenu"),
-                new("LanmanWorkstation", "Advanced/ServicesSubMenu"),
-                new("NetworkDiscovery", "Advanced/ServicesSubMenu"),
-                new("Printing", "Advanced/ServicesSubMenu"),
-                new("SuperFetch", "Advanced/ServicesSubMenu"),
+                new("Bluetooth", "Advanced/ServicesSubMenu", true),
+                new("LanmanWorkstation", "Advanced/ServicesSubMenu", true),
+                new("NetworkDiscovery", "Advanced/ServicesSubMenu", true),
+                new("Printing", "Advanced/ServicesSubMenu", true),
+                new("SuperFetch", "Advanced/ServicesSubMenu", true),
 
                 // Advanced - Services SubMenu - Nvidia Display Container SubMenu
-                new("NvidiaDispayContainer", "Advanced/ServicesSubMenu/NvidiaDisplayContainerSubMenu"),
-                new("AddNvidiaDisplayContainerContextMenu", "Advanced/ServicesSubMenu/NvidiaDisplayContainerSubMenu"),
+                new("NVidiaDisplayContainer", "Advanced/ServicesSubMenu/NvidiaDisplayContainerSubMenu", true),
+                new("NVidiaDisplayContainerContextMenu", "Advanced/ServicesSubMenu/NvidiaDisplayContainerSubMenu", false),
 
                 // Advanced - Boot Configuration SubMenu - Appearance
-                new("BootLogo", "Advanced/BootConfigurationSubMenu/BootConfigAppearance"),
-                new("BootMessages", "Advanced/BootConfigurationSubMenu/BootConfigAppearance"),
-                new("NewBootMenu", "Advanced/BootConfigurationSubMenu/BootConfigAppearance"),
-                new("SpinningAnimation", "Advanced/BootConfigurationSubMenu/BootConfigAppearance"),
+                new("BootLogo", "Advanced/BootConfigurationSubMenu/BootConfigAppearance", true),
+                new("BootMessages", "Advanced/BootConfigurationSubMenu/BootConfigAppearance", true),
+                new("NewBootMenu", "Advanced/BootConfigurationSubMenu/BootConfigAppearance", true),
+                new("SpinningAnimation", "Advanced/BootConfigurationSubMenu/BootConfigAppearance", true),
 
                 // Advanced - Boot Configuration SubMenu - Behavior
-                new("AdvancedBootOptions", "Advanced/BootConfigurationSubMenu/BootConfigBehavior"),
-                new("AutomaticRepair", "Advanced/BootConfigurationSubMenu/BootConfigBehavior"),
-                new("KernelParameters", "Advanced/BootConfigurationSubMenu/BootConfigBehavior"),
-                new("HighestMode", "Advanced/BootConfigurationSubMenu/BootConfigBehavior"),
+                new("AdvancedBootOptions", "Advanced/BootConfigurationSubMenu/BootConfigBehavior", false),
+                new("AutomaticRepair", "Advanced/BootConfigurationSubMenu/BootConfigBehavior", false),
+                new("KernelParameters", "Advanced/BootConfigurationSubMenu/BootConfigBehavior", false),
+                new("HighestMode", "Advanced/BootConfigurationSubMenu/BootConfigBehavior", false),
 
                 // Security - Core Isolation SubMenu
-                new("VbsState", "Security/CoreIsolationSubMenu"),
+                new("VbsState", "Security/CoreIsolationSubMenu", true),
 
                 // Security - Defender SubMenu
-                new("HideAppBrowserControl", "Security/DefenderSubMenu"),
-                new("SecurityHealthTray", "Security/DefenderSubMenu"),
+                new("HideAppBrowserControl", "Security/DefenderSubMenu", true),
+                new("SecurityHealthTray", "Security/DefenderSubMenu", false),
 
                 // Security - Mitigations SubMenu
-                new("FaultTolerantHeap", "Security/MitigationsSubMenu"),
+                new("FaultTolerantHeap", "Security/MitigationsSubMenu", false),
             };
 
             host.ConfigureServices((_, services) =>
@@ -467,9 +469,9 @@ namespace AtlasToolbox.HostBuilder
                 {
                     List<ConfigurationItemViewModel> viewModels = new();
 
-                    foreach (Configuration item in configurationDictionary)
+                    foreach (ToggleServiceRegister item in configurationDictionary)
                     {
-                        viewModels.Add(CreateConfigurationItemViewModel(provider, item));
+                        viewModels.Add(CreateConfigurationItemViewModel(item));
                     }
                     App.logger.Info($"[VMHostBuilder] Successfully loaded {viewModels.Count} configuration entries");
                     return viewModels;
@@ -480,22 +482,16 @@ namespace AtlasToolbox.HostBuilder
 
 
 
-        private static MultiOptionConfigurationItemViewModel CreateMultiOptionConfigurationItemViewModel(
-            IServiceProvider serviceProvider, MultiOptionConfiguration configuration)
+        private static MultiConfigViewModel CreateMultiOptionConfigurationItemViewModel(MultiServiceRegister configuration)
         {
-            MultiOptionConfigurationItemViewModel viewModel = new(
-                configuration, serviceProvider.GetRequiredKeyedService<MultiOptionConfigurationStore>(configuration.Key),
-                serviceProvider.GetRequiredKeyedService<IMultiOptionConfigurationServices>(configuration.Key));
+            MultiConfigViewModel viewModel = new(configuration);
 
             return viewModel;
         }
 
-        private static ConfigurationItemViewModel CreateConfigurationItemViewModel(
-            IServiceProvider serviceProvider, Configuration configuration)
+        private static ConfigurationItemViewModel CreateConfigurationItemViewModel(ToggleServiceRegister configuration)
         {
-            ConfigurationItemViewModel viewModel = new(
-                configuration, serviceProvider.GetRequiredKeyedService<ConfigurationStore>(configuration.Key),
-                serviceProvider.GetRequiredKeyedService<IRoutable>(configuration.Key));
+            ConfigurationItemViewModel viewModel = new(configuration);
 
             return viewModel;
         }
@@ -509,14 +505,14 @@ namespace AtlasToolbox.HostBuilder
             return viewModel;
         }
 
-        private static ConfigurationButtonViewModel CreateButtonViewModel(ConfigurationButton configurationButtonViewModel)
+        private static ConfigurationButtonViewModel CreateButtonViewModel(ButtonServiceRegister configurationButtonViewModel)
         {
             ConfigurationButtonViewModel viewModel = new(configurationButtonViewModel);
 
             return viewModel;
         }
 
-        private static LinksViewModel CreateLinksViewModel(Links linksItem)
+        private static LinksViewModel CreateLinksViewModel(LinkRegister linksItem)
         {
             LinksViewModel viewModel = new(linksItem);
 
@@ -528,9 +524,9 @@ namespace AtlasToolbox.HostBuilder
             return ConfigPageViewModel.LoadViewModel(
                 serviceProvider.GetServices<LinksViewModel>(),
                 serviceProvider.GetServices<ConfigurationItemViewModel>(),
-                serviceProvider.GetServices<MultiOptionConfigurationItemViewModel>(),
+                serviceProvider.GetServices<MultiConfigViewModel>(),
                 serviceProvider.GetServices<ConfigurationButtonViewModel>(),
-                serviceProvider.GetServices<Route>());
+                serviceProvider.GetServices<RouteViewModel>());
         }
 
         private static HomePageViewModel CreateHomePageViewModel(IServiceProvider serviceProvider)

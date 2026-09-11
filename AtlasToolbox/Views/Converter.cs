@@ -50,7 +50,7 @@ namespace AtlasToolbox.Views
             {
                 return ConfigurationItem;
             }
-            if (item is MultiOptionConfigurationItemViewModel)
+            if (item is MultiConfigViewModel)
             {
                 return MultiOptionConfigurationItem;
             }
@@ -83,7 +83,7 @@ namespace AtlasToolbox.Views
             {
                 return ConfigurationItem;
             }
-            if (item is MultiOptionConfigurationItemViewModel)
+            if (item is MultiConfigViewModel)
             {
                 return MultiOptionConfigurationItem;
             }

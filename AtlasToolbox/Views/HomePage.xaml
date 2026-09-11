@@ -145,7 +145,7 @@
                                 Loaded="ToggleSwitch_Loaded" />
                         </control:SettingsCard>
                     </DataTemplate>
-                    <DataTemplate x:Key="MultiOptionControlTemplate" x:DataType="configVM:MultiOptionConfigurationItemViewModel">
+                    <DataTemplate x:Key="MultiOptionControlTemplate" x:DataType="configVM:MultiConfigViewModel">
                         <control:SettingsCard
                             Height="74"
                             Margin="36,0,36,10"

@@ -18,6 +18,7 @@ using Windows.ApplicationModel.Core;
 using System.Diagnostics;
 using AtlasToolbox.ViewModels.ConfigurationVM;
 using AtlasToolbox.Views;
+using AtlasToolbox.HostBuilder;
 
 namespace AtlasToolbox
 {
@@ -57,9 +58,9 @@ namespace AtlasToolbox
         /// <returns></returns>
         public static IHostBuilder CreateHostBuilder() =>
             Host.CreateDefaultBuilder()
-                .AddStores()
                 .AddServices()
                 .AddViewModels();
+            
 
         /// <summary>
         /// Configures NLog for logging

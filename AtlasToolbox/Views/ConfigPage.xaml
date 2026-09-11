@@ -55,7 +55,7 @@
                     Style="{StaticResource ConfigurationSettingsCardTemplate}" />
             </DataTemplate>
 
-            <DataTemplate x:Key="MultiOptionTemplate" x:DataType="viewmodel:MultiOptionConfigurationItemViewModel">
+            <DataTemplate x:Key="MultiOptionTemplate" x:DataType="viewmodel:MultiConfigViewModel">
                 <controls:SettingsCard
                     Header="{Binding Name}"
                     HeaderIcon="{Binding Icon}"

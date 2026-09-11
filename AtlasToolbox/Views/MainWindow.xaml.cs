@@ -52,7 +52,7 @@ namespace AtlasToolbox.Views
             App.RootList = new List<IConfigurationItem>();
             App.RootList.AddRange(App._host.Services.GetServices<LinksViewModel>());
             App.RootList.AddRange(App._host.Services.GetServices<ConfigurationItemViewModel>());
-            App.RootList.AddRange(App._host.Services.GetServices<MultiOptionConfigurationItemViewModel>());
+            App.RootList.AddRange(App._host.Services.GetServices<MultiConfigViewModel>());
             App.RootList.AddRange(App._host.Services.GetServices<ConfigurationButtonViewModel>());
 
             NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems.OfType<NavigationViewItem>().First();

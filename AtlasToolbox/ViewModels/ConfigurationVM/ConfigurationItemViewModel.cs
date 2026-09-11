@@ -1,4 +1,4 @@
-﻿using AtlasToolbox.Services.ConfigurationServices;
+﻿
 using AtlasToolbox.Models;
 using AtlasToolbox.Stores;
 using System.Windows.Input;
@@ -7,32 +7,29 @@ using Windows.UI;
 using Microsoft.UI.Xaml.Media;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml.Controls;
+using AtlasToolbox.ViewModels.ConfigurationVM;
+using AtlasToolbox.Services;
 //using System.Drawing;
 
 namespace AtlasToolbox.ViewModels.ConfigurationVM
 {
     public class ConfigurationItemViewModel : IConfigurationItem
     {
-        private readonly ConfigurationStore _configurationStore;
-        private readonly IRoutable _configurationService;
+        public ToggleServiceRegister ToggleService { get; set; }
+        public string Name => ToggleService.Name;
+        public string Key => ToggleService.Key;
+        public string Description => ToggleService.Description;
+        public string RouteItem => ToggleService.Route;
+        public FontIcon Icon => ToggleService.Icon;
 
-        public Configuration Configuration { get; set; }
-        public string Name => Configuration.Name;
-        public string Key => Configuration.Key;
-        public string Description => Configuration.Description;
-        public string RouteItem => Configuration.RouteItem;
-        public FontIcon Icon => Configuration.Icon;
-
-        private bool _currentSetting;
+        private bool _currentSetting => ToggleService.CurrentState;
 
         public bool CurrentSetting
         {
             get => _currentSetting;
             set
             {
-                _currentSetting = value;
-                _configurationStore.CurrentSetting = CurrentSetting;
-                this.SaveConfigurationCommand.Execute(this);
+                ToggleService.CurrentState = CurrentSetting;
             }
         }
 
@@ -48,35 +45,11 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
         }
 
 
-        public ICommand SaveConfigurationCommand { get; }
 
         public ConfigurationItemViewModel(
-            Configuration configuration,
-            ConfigurationStore configurationStore,
-            IRoutable configurationService)
+            ToggleServiceRegister toggleService)
         {
-            _configurationStore = configurationStore;
-            _configurationService = configurationService;
-            Configuration = configuration;
-
-            _currentSetting = FetchCurrentSetting();
-            SaveConfigurationCommand = new SaveConfigurationCommand(this, configurationStore, configurationService);
-        }
-
-        public bool FetchCurrentSetting()
-        {
-            IsBusy = true;
-
-            try
-            {
-                bool currentSetting = _configurationService.IsEnabled();
-                _configurationStore.CurrentSetting = currentSetting;
-                return currentSetting;
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            ToggleService = toggleService;
         }
     }
 }
