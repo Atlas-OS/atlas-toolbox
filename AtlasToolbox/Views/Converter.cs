@@ -62,7 +62,7 @@ namespace AtlasToolbox.Views
             {
                 return ConfigurationButton;
             }
-            if (item is Route)
+            if (item is RouteViewModel)
             {
                 return RouteItem;
             }

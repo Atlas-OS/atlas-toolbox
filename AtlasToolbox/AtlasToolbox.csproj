@@ -27,12 +27,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Converter\**" />
+    <Compile Remove="Enums\**" />
     <Compile Remove="Themes\**" />
     <EmbeddedResource Remove="Converter\**" />
+    <EmbeddedResource Remove="Enums\**" />
     <EmbeddedResource Remove="Themes\**" />
     <None Remove="Converter\**" />
+    <None Remove="Enums\**" />
     <None Remove="Themes\**" />
     <Page Remove="Converter\**" />
+    <Page Remove="Enums\**" />
     <Page Remove="Themes\**" />
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +218,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Enums\" />
+    <PRIResource Remove="Enums\**" />
   </ItemGroup>
 </Project>

@@ -104,12 +104,15 @@ public sealed partial class ConfigPage : Page
         // Create a timer to fade out the highlight
         var timer = new DispatcherTimer();
         timer.Interval = TimeSpan.FromMilliseconds(1500);
-        timer.Tick += (s, e) =>
+        EventHandler<object> tickHandler = null;
+        tickHandler = (s, e) =>
         {
             timer.Stop();
             settingsCard.BorderBrush = originalBrush;
             settingsCard.BorderThickness = originalThickness;
+            timer.Tick -= tickHandler;
         };
+        timer.Tick += tickHandler;
         timer.Start();
     }
 

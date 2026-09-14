@@ -29,8 +29,6 @@ namespace AtlasToolbox.HostBuilder
 {
     public static class AddViewModelsHostBuilderExtensions
     {
-        private static List<Object> subMenuOnlyItems = new List<Object>();
-        private static Dictionary<string, string> list = new Dictionary<string, string>();
         public static IHostBuilder AddViewModels(this IHostBuilder host)
         {
             host.ConfigureServices((_, services) =>
@@ -41,12 +39,12 @@ namespace AtlasToolbox.HostBuilder
                 services.AddSingleton(CreateSoftwarePageViewModel);
             });
 
+            host.AddRoutes();
             host.AddConfigurationButtonItemViewModels();
             host.AddLinksItemViewModels();
             host.AddSoftwareItemsViewModels();
             host.AddMultiOptionConfigurationViewModels();
             host.AddConfigurationItemViewModels();
-            host.AddRoutes();
             host.AddProfiles();
 
             App.logger.Info($"[VMHostBuilder] Successfully loaded host");
@@ -305,15 +303,15 @@ namespace AtlasToolbox.HostBuilder
 
             host.ConfigureServices((_, services) =>
             {
-                services.AddSingleton<IEnumerable<RouteService>>(provider =>
+                services.AddSingleton<IEnumerable<RouteViewModel>>(provider =>
                 {
                     List<RouteViewModel> viewModels = new();
-                    foreach (RouteService item in routes)
+                    foreach (RouteService item in routes.Where(r => !r.IsRootRoute))
                     {
                         viewModels.Add(new RouteViewModel(item));
                     }
-                    App.logger.Info($"[VMHostBuilder] Successfully loaded {routes.Count} route entries");
-                    return routes.Where(r => !r.IsRootRoute);
+                    App.logger.Info($"[VMHostBuilder] Successfully loaded {viewModels.Count} route entries");
+                    return viewModels;
                 });
             });
 

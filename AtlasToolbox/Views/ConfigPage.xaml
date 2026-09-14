@@ -50,7 +50,7 @@
                     Description="{Binding Description}"
                     Header="{Binding Name}"
                     HeaderIcon="{Binding Icon, Converter={StaticResource FontIconConverter}}"
-                    Tag="{Binding Key}"
+                    Tag="{Binding FullRoute}"
                     IsClickEnabled="True"
                     Style="{StaticResource ConfigurationSettingsCardTemplate}" />
             </DataTemplate>

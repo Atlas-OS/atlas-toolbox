@@ -7,6 +7,7 @@ using CommunityToolkit.WinUI.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -245,6 +246,14 @@ namespace AtlasToolbox.Views
             {
                 App.logger.Error($@"{menuFlyoutItem.Tag.ToString()} value was not found");
             }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            // Unsubscribe from all events to prevent memory leaks
+            this.SizeChanged -= MainWindow_SizeChanged;
+            ProfilesListView.ItemsSource = null;
         }
     }
 }

@@ -17,6 +17,9 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using AtlasToolbox.Utils;
 using AtlasToolbox.ViewModels.ConfigurationVM;
+using System.Threading.Tasks;
+using AtlasToolbox.Utils;
+using AtlasToolbox.ViewModels.ConfigurationVM;
 
 namespace AtlasToolbox
 {
@@ -82,6 +85,13 @@ namespace AtlasToolbox
                 App.logger.Error(ex.Message);
                 return;
             }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            // Unsubscribe from all events to prevent memory leaks
+            _viewModel.SelectedSoftwareItemViewModels.Clear();
         }
     }
 }
