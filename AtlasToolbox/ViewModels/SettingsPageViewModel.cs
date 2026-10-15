@@ -32,7 +32,7 @@ namespace AtlasToolbox.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
-            RegistryHelper.SetValue(@"HKLM\SOFTWARE\AtlasOS\Services\Toolbox", "lang", this.CurrentLanguage.Key);
+            ToolboxSettings.Set("lang", this.CurrentLanguage.Key);
             App.LoadLangString();
             MainWindow mWindows = App.m_window as MainWindow;
         }
@@ -42,12 +42,12 @@ namespace AtlasToolbox.ViewModels
         public SettingsPageViewModel()
         {
             Languages = new();
-            Dictionary<string, string> langs = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(@$"lang\index.json"));
+            Dictionary<string, string> langs = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(App.LangPath("index.json")));
             foreach (KeyValuePair<string, string> language in langs)
             {
                 Languages.Add(new (language.Value, language.Key));
             }
-            string lang = (string)RegistryHelper.GetValue(@"HKLM\SOFTWARE\AtlasOS\Services\Toolbox", "lang");
+            string lang = (string)ToolboxSettings.Get("lang");
             CurrentLanguage = Languages.Where(item => item.Key == lang).FirstOrDefault();
         }
 

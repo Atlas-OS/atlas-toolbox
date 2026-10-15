@@ -65,6 +65,8 @@ namespace AtlasToolbox.Views
                        new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo()
                        );
             SetTitleBar(AppTitleBar);
+            // Dialogs need the window's XAML root, also before anything was navigated to.
+            if (this.Content is FrameworkElement content) content.Loaded += (_, _) => App.XamlRoot = content.XamlRoot;
             CheckUpdates();
             if (RegistryHelper.IsMatch("HKLM\\SOFTWARE\\AtlasOS\\Toolbox", "OnStartup", 1)) this.Closed += AppBehaviorHelper.HideApp;
             else this.Closed += AppBehaviorHelper.CloseApp;
@@ -330,7 +332,7 @@ namespace AtlasToolbox.Views
                 case "restart":
                     title = App.GetValueFromItemList("RestartPC");
                     desc = App.GetValueFromItemList("RestartPCDesc");
-                    primBtnTxt = App.GetValueFromItemList("RestartAppBtn");
+                    primBtnTxt = App.GetValueFromItemList("Restart");
                     command = new RelayCommand(ComputerStateHelper.RestartComputer);
                     break;
                 case "logoff":
@@ -376,16 +378,16 @@ namespace AtlasToolbox.Views
             try
             {
                 // Get Window size
-                width = int.Parse((string)RegistryHelper.GetValue(@"HKLM\SOFTWARE\AtlasOS\Services\Toolbox", "AppWidth"));
-                height = int.Parse((string)RegistryHelper.GetValue(@"HKLM\SOFTWARE\AtlasOS\Services\Toolbox", "AppHeight"));
+                width = int.Parse((string)ToolboxSettings.Get("AppWidth"));
+                height = int.Parse((string)ToolboxSettings.Get("AppHeight"));
             }
             catch (Exception ex)
             {
                 width = 1250;
                 height = 850;
                 // Reset the registry
-                RegistryHelper.SetValue(@"HKLM\SOFTWARE\AtlasOS\Services\Toolbox", "AppWidth", width, Microsoft.Win32.RegistryValueKind.String);
-                RegistryHelper.SetValue(@"HKLM\SOFTWARE\AtlasOS\Services\Toolbox", "AppHeight", height, Microsoft.Win32.RegistryValueKind.String);
+                ToolboxSettings.Set("AppWidth", width, Microsoft.Win32.RegistryValueKind.String);
+                ToolboxSettings.Set("AppHeight", height, Microsoft.Win32.RegistryValueKind.String);
                 // Log the error
                 App.logger.Warn("Window size values were incorrect. Reverting to defaults\n\n" + ex.Message);
             }
@@ -393,15 +395,13 @@ namespace AtlasToolbox.Views
             if (width == 1250 && height == 850)
             {
                 // Calculate size
-                if (screenWidth != 1920)
-                {
-                    width = (screenWidth / 1920) * 1250;
-                }
-                if (screenHeight != 1080)
-                {
-                    height = (screenHeight / 1080) * 850;
-                }
+                // Scaled from a 1920 x 1080 screen, in floating point: integer division
+                // made the window tiny on any smaller screen.
+                width = (int)(screenWidth / 1920.0 * 1250);
+                height = (int)(screenHeight / 1080.0 * 850);
             }
+            width = Math.Clamp(width, 800, Math.Max(800, screenWidth));
+            height = Math.Clamp(height, 600, Math.Max(600, screenHeight));
 
             // Calculate position to put on screen
             double centerX = (screenWidth - width) / 2;

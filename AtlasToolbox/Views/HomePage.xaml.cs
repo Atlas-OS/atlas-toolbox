@@ -64,19 +64,15 @@ namespace AtlasToolbox.Views
                 {
                     foreach (string valueName in key.GetValueNames())
                     {
-                        try
-                        {
-                            _configurationItems.Add(App.RootList.Where(item => item.Key == valueName).FirstOrDefault());
-                        }
-                        catch
-                        {
-                            App.logger.Error(@$"Value {valueName} was not found in RootList when trying to initialize favorites");
-                        }
+                        // A favorite whose item this Atlas or Toolbox no longer has is left out.
+                        IConfigurationItem favorite = App.RootList.FirstOrDefault(item => item.Key == valueName);
+                        if (favorite is not null) _configurationItems.Add(favorite);
+                        else App.logger.Warn(@$"Value {valueName} was not found in RootList when trying to initialize favorites");
                     }
                 }
                 else
                 {
-                    App.logger.Warn(@$"Key ""HKLM\SOFTWARE\AtlasOS\Services\Toolbox\Favorites"" was not found");
+                    App.logger.Warn(@$"Key ""HKLM\SOFTWARE\AtlasOS\Toolbox\Favorites"" was not found");
                 }
             }
             if (_configurationItems.Count == 0)
@@ -149,7 +145,7 @@ namespace AtlasToolbox.Views
 
             dialog.XamlRoot = this.XamlRoot;
             dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-            dialog.Title = App.GetValueFromItemList("Home_SetProfileConfirm");
+            dialog.Title = App.GetValueFromItemList("Home_SetProfileConfig");
             dialog.PrimaryButtonText = App.GetValueFromItemList("Yes"); ;
             dialog.CloseButtonText = App.GetValueFromItemList("No"); ;
             dialog.DefaultButton = ContentDialogButton.Primary;
@@ -157,30 +153,8 @@ namespace AtlasToolbox.Views
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
-                RestartPCPrompt();
-                _viewModel.SetProfileCommand.Execute(this);
-            }
-        }
-
-        /// <summary>
-        /// Prompts the user to restart their PC
-        /// </summary>
-        private async void RestartPCPrompt()
-        {
-            ContentDialog dialog = new ContentDialog();
-
-            dialog.XamlRoot = this.XamlRoot;
-            dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-            dialog.Title = App.GetValueFromItemList("RestartPCPromptHeader");
-            dialog.PrimaryButtonText = App.GetValueFromItemList("Restart"); ;
-            dialog.CloseButtonText = App.GetValueFromItemList("Later"); ;
-            dialog.DefaultButton = ContentDialogButton.Primary;
-            dialog.PrimaryButtonCommand = new RelayCommand(ComputerStateHelper.RestartComputer);
-
-            var result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
-            {
-                ComputerStateHelper.RestartComputer();
+                // Asks about restarting once every change has applied.
+                await _viewModel.SetProfileCommand.ExecuteAsync(null);
             }
         }
 
@@ -224,6 +198,7 @@ namespace AtlasToolbox.Views
         private void ToggleSwitch_Loaded(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = sender as ToggleSwitch;
+            toggleSwitch.Toggled -= ToggleSwitchBehavior.OnToggled;
             toggleSwitch.Toggled += ToggleSwitchBehavior.OnToggled;
         }
 
@@ -239,7 +214,7 @@ namespace AtlasToolbox.Views
             MenuFlyoutItem menuFlyoutItem = sender as MenuFlyoutItem;
             try
             {
-                RegistryHelper.DeleteValue(@"HKLM\SOFTWARE\\AtlasOS\\Toolbox\\Favorites", menuFlyoutItem.Tag.ToString());
+                RegistryHelper.DeleteValue(@"HKLM\SOFTWARE\AtlasOS\Toolbox\Favorites", menuFlyoutItem.Tag.ToString());
                 LoadFavorites();
             }
             catch

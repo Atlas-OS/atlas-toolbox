@@ -1,19 +1,11 @@
-﻿
-using AtlasToolbox.Models;
-using AtlasToolbox.Stores;
-using System.Windows.Input;
-using AtlasToolbox.Commands;
-using Windows.UI;
-using Microsoft.UI.Xaml.Media;
-using System.Threading.Tasks;
-using Microsoft.UI.Xaml.Controls;
-using AtlasToolbox.ViewModels.ConfigurationVM;
+using AtlasToolbox.Atlas;
 using AtlasToolbox.Services;
-//using System.Drawing;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.Threading.Tasks;
 
 namespace AtlasToolbox.ViewModels.ConfigurationVM
 {
-    public class ConfigurationItemViewModel : IConfigurationItem
+    public partial class ConfigurationItemViewModel : ObservableObject, IConfigurationItem
     {
         public ToggleServiceRegister ToggleService { get; set; }
         public string Name => ToggleService.Name;
@@ -22,34 +14,58 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
         public string RouteItem => ToggleService.Route;
         public string Icon => ToggleService.Icon;
 
-        private bool _currentSetting => ToggleService.CurrentState;
+        /// <summary>What Atlas has applied: the recorded choice, or its default.</summary>
+        public bool CurrentSetting { get; private set; }
 
-        public bool CurrentSetting
-        {
-            get => _currentSetting;
-            set
-            {
-                ToggleService.CurrentState = value;
-            }
-        }
+        /// <summary>What the switch shows: the applied state, except while the user's change runs.</summary>
+        [ObservableProperty]
+        private bool _isOn;
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsIdle))]
         private bool _isBusy;
 
-        public bool IsBusy
-        {
-            get => _isBusy;
-            set
-            {
-                _isBusy = value;
-            }
-        }
-
-
+        public bool IsIdle => !IsBusy;
 
         public ConfigurationItemViewModel(
             ToggleServiceRegister toggleService)
         {
             ToggleService = toggleService;
+            ShowApplied(AtlasContract.State);
+            AtlasContract.StateChanged += (_, state) => App.UiQueue?.TryEnqueue(() => { if (!IsBusy) ShowApplied(state); });
+        }
+
+        /// <summary>
+        /// Applies the state the switch was moved to, then shows what Atlas applied, which
+        /// is the old state again when the change didn't apply.
+        /// </summary>
+        public async Task ApplyAsync(bool on)
+        {
+            if (IsBusy) return;
+            if (on == CurrentSetting)
+            {
+                IsOn = on;
+                return;
+            }
+            // Busy first: showing the requested state raises Toggled, which must not
+            // start a second run.
+            IsBusy = true;
+            IsOn = on;
+            try
+            {
+                await ToggleService.SetAsync(on);
+            }
+            finally
+            {
+                IsBusy = false;
+                ShowApplied(AtlasContract.State);
+            }
+        }
+
+        private void ShowApplied(AtlasState state)
+        {
+            CurrentSetting = ToggleService.ReadIsOn(state);
+            IsOn = CurrentSetting;
         }
     }
 }

@@ -32,9 +32,14 @@ namespace AtlasToolbox
         public static Window f_window;
         public static XamlRoot XamlRoot { get; set; }
 
+        /// <summary>The interface thread's queue, for changes that arrive on other threads.</summary>
+        public static Microsoft.UI.Dispatching.DispatcherQueue UiQueue { get; private set; }
+
         public static List<IConfigurationItem> RootList { get; set; }
         public static string SearchHighlightItemKey { get; set; }
         private static Dictionary<string, string> StringList = new Dictionary<string, string>();
+        // English, for text a translation doesn't have yet.
+        private static Dictionary<string, string> FallbackStringList = new Dictionary<string, string>();
         private static Mutex _mutex = new(true, "{AtlasToolbox}");
 
         public static string Version { get; set; }
@@ -42,11 +47,8 @@ namespace AtlasToolbox
         {
             ConfigureNLog();
             logger.Info("[APP]: App Started");
+            ToolboxSettings.MoveLegacy();
             LoadLangString();
-            _host = CreateHostBuilder().Build();
-            logger.Info("[HOST]: Building host");
-            _host.Start();
-            logger.Info("[HOST]: Starting host");
             this.InitializeComponent();
             logger.Info("[HOST]: Finished initializing components");
             this.UnhandledException += OnAppUnhandledException;
@@ -58,7 +60,6 @@ namespace AtlasToolbox
         /// <returns></returns>
         public static IHostBuilder CreateHostBuilder() =>
             Host.CreateDefaultBuilder()
-                .AddServices()
                 .AddViewModels();
             
 
@@ -67,7 +68,18 @@ namespace AtlasToolbox
         /// </summary>
         private void ConfigureNLog()
         {
-            string name = $"logs/toolbox-log-{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Hour}_{DateTime.Now.Minute}_{DateTime.Now.Second}.log";
+            string logs;
+            try
+            {
+                logs = ProtectedFolder.Ensure(Atlas.AtlasPaths.DataRoot, Atlas.AtlasPaths.Logs);
+            }
+            catch (Exception ex)
+            {
+                // Without a folder only administrators can change, nothing is logged.
+                System.Diagnostics.Debug.WriteLine($"Logging is off: {ex.Message}");
+                return;
+            }
+            string name = Path.Combine(logs, $"toolbox-log-{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Hour}_{DateTime.Now.Minute}_{DateTime.Now.Second}.log");
             var config = new LoggingConfiguration();
             var logfile = new FileTarget("logfile")
             {
@@ -100,9 +112,15 @@ namespace AtlasToolbox
                 DebugSettings.BindingFailed += DebugSettings_BindingFailed;
             }
 #endif
+            UiQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
             Version = RegistryHelper.GetValue($@"HKLM\SOFTWARE\AtlasOS\Toolbox", "Channel") + " v" + RegistryHelper.GetValue($@"HKLM\SOFTWARE\AtlasOS\Toolbox", "Version");
-            if (IsCompatible())
+            if (Atlas.AtlasContract.Load(ConfigurationManager.AppSettings.Get("AtlasVersion")))
             {
+                // Built only for a supported Atlas: every item reads Atlas's catalog.
+                _host = CreateHostBuilder().Build();
+                _host.Start();
+                logger.Info("[HOST]: Started host");
+                Atlas.AtlasContract.Watch();
                 Task.Run(() => StartNamedPipeServer());
 
                 if (!_mutex.WaitOne(TimeSpan.Zero, true))
@@ -126,6 +144,7 @@ namespace AtlasToolbox
             }
             else
             {
+                logger.Warn($"[APP]: This Atlas can't be used: {Atlas.AtlasContract.IncompatibleReason}");
                 m_window = new IncompatibleVersionWindow();
                 m_window.Activate();
             }
@@ -234,17 +253,20 @@ namespace AtlasToolbox
             mainWindow.ContentDialogContoller(type);
         }
 
+        /// <summary>The language files, beside the app whatever folder it was started from.</summary>
+        public static string LangPath(string file) => Path.Combine(AppContext.BaseDirectory, "lang", file);
+
         public static void LoadLangString()
         {
+            FallbackStringList = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(LangPath("en_us.json")));
             try
             {
-                string lang = (string)RegistryHelper.GetValue(@"HKLM\SOFTWARE\AtlasOS\Services\Toolbox", "lang");
-                StringList = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(@$"lang\{lang}.json"));
+                string lang = (string)ToolboxSettings.Get("lang");
+                StringList = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(LangPath($"{lang}.json")));
             } catch
             {
-                RegistryHelper.SetValue(@"HKLM\SOFTWARE\AtlasOS\Services\Toolbox", "lang", "en_us");
-                string lang = (string)RegistryHelper.GetValue(@"HKLM\SOFTWARE\AtlasOS\Services\Toolbox", "lang");
-                StringList = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(@$"lang\{lang}.json"));
+                ToolboxSettings.Set("lang", "en_us");
+                StringList = FallbackStringList;
             }
         }
 
@@ -252,27 +274,15 @@ namespace AtlasToolbox
         {
             try
             {
-                string toReturn = "";
-                if (!desc) toReturn = StringList.Where(item => item.Key == key).Select(item => item.Value).FirstOrDefault();
-                else toReturn = StringList.Where(item => item.Key == key + "Description").Select(item => item.Value).FirstOrDefault();
-                if (toReturn == "" || toReturn == null) return StringList.Where(item => item.Key == "ToBeTranslated").Select(item => item.Value).FirstOrDefault();
-                else return toReturn;
+                string name = desc ? key + "Description" : key;
+                if (StringList.TryGetValue(name, out string text) && !string.IsNullOrEmpty(text)) return text;
+                if (FallbackStringList.TryGetValue(name, out text) && !string.IsNullOrEmpty(text)) return text;
+                return StringList.TryGetValue("ToBeTranslated", out text) ? text : "To be translated";
             }
             catch
             {
                 return "To be translated";
             }
-        }
-        public static bool IsCompatible()
-        {
-            string[] compatibleVersions = ConfigurationManager.AppSettings.Get("AtlasVersion").Split(',');
-
-            string atlasOSFolder = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + @"\AtlasOS\state.json";
-            Object jsonObj = JsonConvert.DeserializeObject(File.ReadAllText(atlasOSFolder));
-            string atlasVersion = ((dynamic)jsonObj).installedVersion;
-
-            if (compatibleVersions.Contains(atlasVersion)) return true;
-            return false;
         }
     }
 }

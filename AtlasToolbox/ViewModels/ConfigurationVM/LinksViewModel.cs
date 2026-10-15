@@ -16,7 +16,7 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
         public string Name => link.Name ?? "N/A";
         public string Link => link.Link;
         public string FontIcon => link.Icon;
-        public string Key => link.Name.ToLower().Replace(" ", "") ?? "N/A";
+        public string Key => link.Key;
 
         public string RouteItem => link.Route;
         public LinksViewModel(LinkRegister link)

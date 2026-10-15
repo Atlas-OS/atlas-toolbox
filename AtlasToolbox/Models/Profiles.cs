@@ -1,10 +1,4 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace AtlasToolbox.Models
 {
@@ -15,18 +9,25 @@ namespace AtlasToolbox.Models
         public string Key { get; set; }
 
         public List<string> ConfigurationServices { get; set; }
+        /// <summary>The on/off items to turn off; null in a profile from an earlier release.</summary>
+        public List<string> DisabledServices { get; set; }
         public List<KeyValuePair<string, string>> MultiOptionConfigServices { get; set; }
+
+        // What screen readers announce for the item.
+        public override string ToString() => Name;
 
         public Profiles(
             string name,
             string key,
             List<string> configurationServices,
-            List<KeyValuePair<string, string>> multiOptionConfigServices) 
+            List<string> disabledServices,
+            List<KeyValuePair<string, string>> multiOptionConfigServices)
         {
             Name = name;
             Key = key;
-            ConfigurationServices = configurationServices;
-            MultiOptionConfigServices = multiOptionConfigServices;
+            ConfigurationServices = configurationServices ?? new();
+            DisabledServices = disabledServices;
+            MultiOptionConfigServices = multiOptionConfigServices ?? new();
         }
 
     }

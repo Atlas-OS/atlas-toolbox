@@ -1,105 +1,48 @@
-﻿
-using AtlasToolbox.Utils;
-using Microsoft.UI.Xaml.Controls;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
+using AtlasToolbox.Atlas;
 using System.Threading.Tasks;
-using Windows.Storage.Provider;
 
 namespace AtlasToolbox.Services
 {
+    /// <summary>
+    /// An on/off item: an Atlas toggle whose two states are Disable and Enable.
+    /// </summary>
     public class ToggleServiceRegister : BaseServiceRegister
     {
-        private const string ATLAS_STORE_KEY_NAME = @"HKLM\SOFTWARE\AtlasOS\Services";
-        private static readonly string toggleLauncherPath = Path.Combine(
-           Environment.GetFolderPath(Environment.SpecialFolder.Windows),
-           @"AtlasModules\Scripts\Entry\Invoke-AtlasToggleLauncher.cmd"
-       );
-        private readonly string switchStateCommand = $"call {toggleLauncherPath}";
-        public bool DefaultValue { get; set; }
-        private bool _currentState;
-        public bool CurrentState { 
-            get => _currentState;
-            set
-            {
-                _currentState = value;
-                this.SwitchState();
-            }
-        }
+        public CatalogToggle Toggle { get; }
+
+        private readonly bool? _unrecorded;
 
         /// <summary>
-        /// Contstructor for the base registry service.
+        /// Contstructor for the toggle service.
         /// </summary>
-        /// <param name="key">Name of the service in the AtlasToggleLauncher</param>
+        /// <param name="key">Name of the toggle in Atlas's catalog</param>
         /// <param name="route">Where the service should appear in the toolbox</param>
-        /// <param name="defaultValue">False for default is disable, True for enable is default</param>
         /// <param name="icon">Icon shown of the item</param>
-        public ToggleServiceRegister(string key, string route, bool defaultValue, string icon = "\uE897")
+        /// <param name="unrecorded">What to show while Atlas has recorded no choice and its catalog names no default</param>
+        public ToggleServiceRegister(string key, string route, string icon = "\uE897", string textKey = null, bool? unrecorded = null)
+            : base(key, route, icon)
         {
-            Key = key;
-            Route = route;
-            Icon = icon;
-            DefaultValue = defaultValue;
-            try
-            {
-                _currentState = GetCurrentState();
-            
-            }
-            catch
-            {
-                App.logger.Error($"[INITIALIZATION] {Key} was not 1 or 0 in the registry. Reverting to default value...");
-                ToDefault();
-            }
+            TextKey = textKey;
+            _unrecorded = unrecorded;
+            Toggle = AtlasContract.Catalog.Find(key);
         }
 
-        private bool GetCurrentState()
+        /// <summary>Whether this Atlas has the toggle as an on/off choice.</summary>
+        public bool IsAvailable => Toggle is { IsSwitch: true };
+
+        /// <summary>
+        /// Whether the toggle is on: the recorded choice, or, when Atlas recorded none, the
+        /// state Atlas applies by default.
+        /// </summary>
+        public bool ReadIsOn(AtlasState state)
         {
-            return RegistryHelper.IsMatch(ATLAS_STORE_KEY_NAME + Key, "state", 1);
+            if (state?.Recorded(Key) is int recorded) return recorded == 1;
+            if (Toggle.DefaultState is CatalogState fallback) return fallback.Name == "Enable";
+            return _unrecorded ?? false;
         }
 
-        private string SwitchState()
-        {
-            string returnString = ServiceToggle(_currentState ? "Enable" : "Disable");
-            return returnString;
-            //return "tempo";
-        }
-        private string ToDefault()
-        {
-            string returnString = ServiceToggle(DefaultValue ? "Enable" : "Disable");
-            _currentState = GetCurrentState();
-            return returnString;
-        }
+        public CatalogState StateFor(bool on) => Toggle.State(on ? "Enable" : "Disable");
 
-        private string ServiceToggle(string toggleValue)
-        {
-            using (Process commandPrompt = new Process())
-            {
-                commandPrompt.StartInfo.FileName = "cmd.exe";
-                commandPrompt.StartInfo.Arguments = $"/c {switchStateCommand} {this.Key} {toggleValue} \"%~f0\"";
-                App.logger.Info($"[CMD] {switchStateCommand} {this.Key} {toggleValue} \"%~f0\"");
-                commandPrompt.StartInfo.CreateNoWindow = true;
-                commandPrompt.StartInfo.UseShellExecute = false;
-
-                commandPrompt.StartInfo.RedirectStandardOutput = true;
-                commandPrompt.StartInfo.RedirectStandardError = true;
-
-                commandPrompt.Start();
-
-                string output = commandPrompt.StandardOutput.ReadToEnd();
-                string error = commandPrompt.StandardError.ReadToEnd();
-
-                string result = output + (string.IsNullOrWhiteSpace(error) ? "" : "\n[Error]\n" + error);
-                App.logger.Info($"[CMD] {switchStateCommand}:\n\t{result}");
-                commandPrompt.WaitForExit();
-
-                return result;
-            }
-        }
+        public Task<bool> SetAsync(bool on) => ToggleActions.ApplyAsync(Toggle, StateFor(on));
     }
 }
-

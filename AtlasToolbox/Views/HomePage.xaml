@@ -141,7 +141,8 @@
                             </control:SettingsCard.ContextFlyout>
                             <ToggleSwitch
                                 x:Name="ConfigSwitch"
-                                IsOn="{Binding CurrentSetting}"
+                                IsEnabled="{Binding IsIdle}"
+                                IsOn="{Binding IsOn, Mode=TwoWay}"
                                 Loaded="ToggleSwitch_Loaded" />
                         </control:SettingsCard>
                     </DataTemplate>
@@ -162,8 +163,11 @@
                             <ComboBox
                                 x:Name="ConfigSwitch"
                                 Width="200"
+                                DisplayMemberPath="Label"
+                                IsEnabled="{Binding IsIdle}"
                                 ItemsSource="{Binding Options}"
-                                SelectedItem="{Binding CurrentSetting, Mode=TwoWay}" />
+                                SelectedValue="{Binding CurrentSetting, Mode=TwoWay}"
+                                SelectedValuePath="Name" />
                         </control:SettingsCard>
                     </DataTemplate>
                     <DataTemplate x:Key="ConfigurationButtonTemplate" x:DataType="configVM:ConfigurationButtonViewModel">
@@ -182,7 +186,7 @@
                                 </MenuFlyout>
                             </control:SettingsCard.ContextFlyout>
                             <Button
-                                Command="{Binding ExecuteCommandCommand}"
+                                Command="{Binding Command}"
                                 Content="{Binding Name}"
                                 Style="{StaticResource AccentButtonStyle}" />
                         </control:SettingsCard>

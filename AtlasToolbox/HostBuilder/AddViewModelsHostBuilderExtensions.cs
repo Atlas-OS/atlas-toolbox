@@ -3,7 +3,6 @@ using AtlasToolbox.Stores;
 using AtlasToolbox.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MVVMEssentials.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,16 +13,16 @@ using System.Security.Cryptography;
 using Microsoft.Graphics.Canvas.Text;
 using System.Linq;
 using System.Threading.Tasks;
-using AtlasToolbox.Commands;
 using System.Windows.Input;
 using Windows.Security.Cryptography.Core;
 using Windows.Devices.WiFi;
-using AtlasToolbox.Commands.ConfigurationButtonsCommand;
 using AtlasToolbox.Utils;
 using AtlasToolbox.Models.ProfileModels;
 using Newtonsoft.Json;
 using AtlasToolbox.ViewModels.ConfigurationVM;
 using AtlasToolbox.Services;
+using AtlasToolbox.Atlas;
+using CommunityToolkit.Mvvm.Input;
 
 namespace AtlasToolbox.HostBuilder
 {
@@ -33,7 +32,6 @@ namespace AtlasToolbox.HostBuilder
         {
             host.ConfigureServices((_, services) =>
             {
-                services.AddSingleton<MainViewModel>();
                 services.AddSingleton(CreateConfigPageViewModel);
                 services.AddSingleton(CreateHomePageViewModel);
                 services.AddSingleton(CreateSoftwarePageViewModel);
@@ -119,38 +117,41 @@ namespace AtlasToolbox.HostBuilder
         }
 
         /// <summary>
-        /// Regsiters profiles from the profile folder
+        /// Registers profiles from the profile folder
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>
         private static IHostBuilder AddProfiles(this IHostBuilder host)
         {
             List<Profiles> configurationDictionary = new List<Profiles>();
-            DirectoryInfo profilesDirectory = new DirectoryInfo($"{Environment.GetEnvironmentVariable("windir")}\\AtlasModules\\Toolbox\\Profiles");
+            ProfileSerializing.MoveLegacyProfiles();
+            FileInfo[] files = [];
             try
             {
-                FileInfo[] profileFile = profilesDirectory.GetFiles();
+                files = new DirectoryInfo(ProtectedFolder.Ensure(AtlasPaths.DataRoot, AtlasPaths.Profiles)).GetFiles("*.json");
             }
-            catch
+            catch (Exception ex)
             {
-                Directory.CreateDirectory($"{Environment.GetEnvironmentVariable("windir")}\\AtlasModules\\Toolbox\\Profiles");
+                App.logger.Error(ex, "[PROFILES] The profiles folder can't be used");
             }
-            finally
+            foreach (FileInfo file in files)
             {
-                FileInfo[] profileFile = profilesDirectory.GetFiles();
-                foreach (FileInfo file in profileFile)
+                try
                 {
                     configurationDictionary.Add(ProfileSerializing.DeserializeProfile(file.FullName));
                 }
-                ;
-                host.ConfigureServices((_, services) =>
+                catch (Exception ex)
                 {
-                    services.AddSingleton<IEnumerable<Profiles>>(provider =>
-                    {
-                        return configurationDictionary;
-                    });
-                });
+                    App.logger.Error(ex, $"[PROFILES] Couldn't read profile \"{file.Name}\"");
+                }
             }
+            host.ConfigureServices((_, services) =>
+            {
+                services.AddSingleton<IEnumerable<Profiles>>(provider =>
+                {
+                    return configurationDictionary;
+                });
+            });
 
             return host;
         }
@@ -167,7 +168,7 @@ namespace AtlasToolbox.HostBuilder
                 // Interface Tweaks links
                 new("ExplorerPatcher", @"https://github.com/valinet/ExplorerPatcher", "ExplorerPatcher", "Interface/StartMenuSubMenu"),
                 new("StartAllBack", @"https://www.startallback.com/", "StartAllBack", "Interface/StartMenuSubMenu"),
-                new("OpenShellAtlasPreset", @"http://github.com/Atlas-OS/Atlas/blob/main/src/playbook/Executables/AtlasDesktop/4.%20Interface%20Tweaks/Start%20Menu/Atlas%20Open-Shell%20Preset.xml", "Interface/StartMenuSubMenu"),
+                new("OpenShellAtlasPreset", @"https://github.com/Atlas-OS/Atlas/blob/main/playbook/Executables/AtlasDesktop/4.%20Interface%20Tweaks/Start%20Menu/Atlas%20Open-Shell%20Preset.xml", "Interface/StartMenuSubMenu"),
                 new("InterfaceTweaksDocumentation", @"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/interface-tweaks/", "Interface"),
 
                 // Windows tweaks links
@@ -219,29 +220,30 @@ namespace AtlasToolbox.HostBuilder
         }
 
         /// <summary>
-        /// Registers configuration buttons
+        /// Registers configuration buttons. Each runs an Atlas action, as its launcher in
+        /// the Atlas folder does.
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>
         private static IHostBuilder AddConfigurationButtonItemViewModels(this IHostBuilder host)
         {
-            ICommand buttonCommand;
+            static ICommand RunAction(string toggle, string state, bool? interactive = null) =>
+                new AsyncRelayCommand(() => ToggleActions.RunActionAsync(toggle, state, interactive));
+
             List<ButtonServiceRegister> configurationDictionary = new()
             {
-                new("RestartExplorerButton", buttonCommand = new RestartExplorerCommand(), "Interface"),
-                new("ViewCurrentSettingsBootConfig", buttonCommand = new ViewCurrentValuesCommand(), "Advanced/BootConfigurationSubMenu"),
-                new("VBSCurrentConfig", buttonCommand = new CurrentVBSConfigurationCommand(), "Security/CoreIsolationSubMenu"),
-                new("ToggleDefender", buttonCommand = new ToggleDefenderCommand(), "Security/DefenderSubMenu"),
-                new("ResetFTH", buttonCommand = new ResetFTHCommand(), "Security/MitigationsSubMenu"),
-                new("InstallOpenShell", buttonCommand = new InstallOpenShellCommand(), "Interface/StartMenuSubMenu"),
+                new("RestartExplorerButton", RunAction("RestartExplorer", "Run", interactive: false), "Interface"),
+                new("ViewCurrentSettingsBootConfig", RunAction("ViewCurrentValues", "View"), "Advanced/BootConfigurationSubMenu"),
+                new("VBSCurrentConfig", RunAction("ConfigVBS", "Run"), "Security/CoreIsolationSubMenu"),
+                new("ToggleDefender", RunAction("ToggleDefender", "Run"), "Security/DefenderSubMenu"),
+                new("ResetFTH", new AsyncRelayCommand(ToggleActions.ResetFaultTolerantHeapAsync), "Security/MitigationsSubMenu"),
+                new("InstallOpenShell", new AsyncRelayCommand(() => ToggleActions.RunLauncherAsync(@"4. Interface Tweaks\Start Menu\Install Open-Shell.cmd")), "Interface/StartMenuSubMenu"),
 
-                new("FixErrors", buttonCommand = new FixErrorsCommand(), "Troubleshooting"),
-                new("RepairWinComponent", buttonCommand = new RepairWindowsComponentsCommand(), "Troubleshooting", "\uE90F"),
-                new("TelemetryComponents", buttonCommand = new TelemetryComponentsCommand(), "Troubleshooting", "\uE90F"),
-                new("AtlasDefault", buttonCommand = new NetworkAtlasDefaults(), "Troubleshooting/TroubleshootingNetwork", "\uE839"),
-                new("WindowsDefault", buttonCommand = new NetworkWindowsDefaults(), "Troubleshooting/TroubleshootingNetwork", "\uE839"),
-                new("SetUpdateDeferral", buttonCommand = new SetUpdateDeferralConfigurationButton(), "General/WindowsUpdate", "\uE916"),
-                new("ResetUpdateDeferral", buttonCommand = new ResetWindowsUpdateDeferral(), "General/WindowsUpdate", "\uE81C"),
+                new("FixErrors", RunAction("FixErrors2502and2503", "Run"), "Troubleshooting"),
+                new("RepairWinComponent", RunAction("RepairWindowsComponents", "Run"), "Troubleshooting", "\uE90F"),
+                new("TelemetryComponents", RunAction("TelemetryComponents", "Run"), "Troubleshooting", "\uE90F"),
+                new("AtlasDefault", RunAction("DefaultAtlasNetwork", "Enable"), "Troubleshooting/TroubleshootingNetwork", "\uE839"),
+                new("WindowsDefault", RunAction("DefaultAtlasNetwork", "Disable"), "Troubleshooting/TroubleshootingNetwork", "\uE839"),
             };
 
             host.ConfigureServices((_, services) =>
@@ -329,17 +331,17 @@ namespace AtlasToolbox.HostBuilder
             List<MultiServiceRegister> configurations = new()
             {
                 // General
-                new("Indexing", "General", ["Enable", "Disable", "Minimal"], "Minimal"),
+                new("Indexing", "General"),
 
                 // Interface
-                new("ContextMenuTerminals", "Interface/ContextMenuSubMenu", ["AddNoWindowsTerminal", "Add", "Remove"], "Remove", "\uE756"),
-                new("ShortcutIcon", "Interface", ["Classic", "Default", "None"], "Default","\uE8A7"),
-                
+                new("ContextMenuTerminals", "Interface/ContextMenuSubMenu", "\uE756"),
+                new("ShortcutIcon", "Interface", "\uE8A7"),
+
                 // Security
-                new("Mitigations", "Security/MitigationsSubMenu",["Disable", "Enable", "WindowsDefault"], "WindowsDefault","\uF0EF"),
+                new("Mitigations", "Security/MitigationsSubMenu", "\uF0EF"),
 
                 // Troubleshooting
-                new("SafeMode", "Troubleshooting", ["Exit", "CommandPrompt", "Networking", "Minimal"],"Exit","\uEA18"),
+                new("SafeMode", "Troubleshooting", "\uEA18"),
             };
 
             host.ConfigureServices((_, services) =>
@@ -350,6 +352,11 @@ namespace AtlasToolbox.HostBuilder
 
                     foreach (MultiServiceRegister item in configurations)
                     {
+                        if (!item.IsAvailable)
+                        {
+                            App.logger.Warn($"[VMHostBuilder] This Atlas has no toggle {item.Key}; left out");
+                            continue;
+                        }
                         viewModels.Add(CreateMultiOptionConfigurationItemViewModel(item));
                     }
                     App.logger.Info($"[VMHostBuilder] Successfully loaded {viewModels.Count} multi-configuration entries");
@@ -360,7 +367,7 @@ namespace AtlasToolbox.HostBuilder
         }
 
         /// <summary>
-        /// Registers configuration items
+        /// Registers configuration items: Atlas toggles with an Enable and a Disable state.
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>
@@ -369,96 +376,101 @@ namespace AtlasToolbox.HostBuilder
             List<ToggleServiceRegister> configurationDictionary = new()
             {
                 // General
-                new("BackgroundApps", "General", false),
-                new("FSOGameBar", "General", true),
-                new("AutomaticUpdates", "General", false),
-                new("DeliveryOptimisation", "General", false),
-                new("Hibernation", "General", false),
-                new("Location", "General", false),
-                new("PhoneLink", "General", false),
-                new("PowerSaving", "General", true),
-                new("Sleep", "General", true),
-                new("SystemRestore", "General", true),
-                new("UpdateNotifications", "General", true),
-                new("WebSearch", "General", false),
-                new("Widgets", "General", false),
-                new("WindowsSpotlight", "General", false),
-                new("AppStoreArchiving", "General", false),
-                new("Workplace", "General", false),
+                new("BackgroundApps", "General"),
+                new("FSOGameBar", "General"),
+                new("AutomaticUpdates", "General"),
+                new("DeliveryOptimisation", "General"),
+                new("Hibernation", "General"),
+                new("Location", "General"),
+                new("PhoneLink", "General"),
+                new("PowerSaving", "General"),
+                new("Sleep", "General"),
+                new("SystemRestore", "General"),
+                new("UpdateNotifications", "General"),
+                new("WebSearch", "General"),
+                new("Widgets", "General"),
+                new("WindowsSpotlight", "General"),
+                new("AppStoreArchiving", "General"),
+                new("Workplace", "General", unrecorded: false),
+
+                // General - Windows Update SubMenu
+                new("ToggleWindowsUpdates", "General/WindowsUpdate", unrecorded: true),
+                new("PauseUpdates", "General/WindowsUpdate", unrecorded: false),
 
                 // General - AI SubMenu
-                new("Copilot", "General/AiSubMenu", false),
-                new("Recall", "General/AiSubMenu", false),
-                new("ClickToDo", "General/AiSubMenu", false),
+                new("Copilot", "General/AiSubMenu"),
+                new("Recall", "General/AiSubMenu"),
+                new("ClickToDo", "General/AiSubMenu"),
 
                 // General - File Sharing SubMenu
-                new("GiveAccessToMenu", "General/FileSharingSubMenu", false),
-                new("NetworkNavigationPane", "General/FileSharingSubMenu", false),
-                new("FileSharing", "General/FileSharingSubMenu", false),
+                new("GiveAccessToMenu", "General/FileSharingSubMenu"),
+                new("NetworkNavigationPane", "General/FileSharingSubMenu"),
+                new("FileSharing", "General/FileSharingSubMenu"),
 
                 // General - CPU Idle
-                new("CpuIdle", "General/CpuIdleContextMenu", true),
-                new("CpuIdleContextMenu", "General/CpuIdleContextMenu", false),
+                new("CpuIdle", "General/CpuIdleContextMenu"),
+                new("CpuIdleContextMenu", "General/CpuIdleContextMenu"),
 
                 // Interface
-                new("Animation", "Interface", false),
-                new("LockScreen", "Interface", true),
-                new("ShortcutText", "Interface", false),
-                new("EdgeSwipe", "Interface", true),
-                new("SnapLayouts", "Interface", true),
-                new("RecentItems", "Interface", false),
-                new("VerboseMessages", "Interface", false),
+                new("Animation", "Interface"),
+                new("LockScreen", "Interface"),
+                new("ShortcutText", "Interface"),
+                new("EdgeSwipe", "Interface"),
+                new("SnapLayouts", "Interface"),
+                new("RecentItems", "Interface"),
+                new("VerboseMessages", "Interface"),
+                new("KeyboardShortcuts", "Interface", unrecorded: true),
 
                 // Interface - Context Menu SubMenu
-                new("ExtractContextMenu", "Interface/ContextMenuSubMenu", false),
-                new("RunWithPriority", "Interface/ContextMenuSubMenu", false),
-                new("TakeOwnership", "Interface/ContextMenuSubMenu", false),
-                new("OldContextMenu", "Interface/ContextMenuSubMenu", true),
+                new("ExtractContextMenu", "Interface/ContextMenuSubMenu"),
+                new("RunWithPriority", "Interface/ContextMenuSubMenu"),
+                new("TakeOwnership", "Interface/ContextMenuSubMenu"),
+                new("OldContextMenu", "Interface/ContextMenuSubMenu"),
 
                 // Interface - File Explorer SubMenu
-                new("CompactView", "Interface/FileExplorerSubMenu", true),
-                new("RemovableDrivesInSidebar", "Interface/FileExplorerSubMenu", false),
-                new("AppIconsThumbnail", "Interface/FileExplorerSubMenu", true),
-                new("AutomaticFolderDiscovery", "Interface/FileExplorerSubMenu", false),
-                new("Gallery", "Interface/FileExplorerSubMenu", false),
-                new("Home", "Interface/FileExplorerSubMenu", false),
+                new("CompactView", "Interface/FileExplorerSubMenu"),
+                new("RemovableDrivesInSidebar", "Interface/FileExplorerSubMenu"),
+                new("AppIconThumbnail", "Interface/FileExplorerSubMenu"),
+                new("AutomaticFolderDiscovery", "Interface/FileExplorerSubMenu"),
+                new("Gallery", "Interface/FileExplorerSubMenu"),
+                new("Home", "Interface/FileExplorerSubMenu", textKey: "ExplorerHome"),
+                new("QuickAccess", "Interface/FileExplorerSubMenu"),
 
                 // Advanced
-                new("ProcessExplorer", "Advanced", false),
-                new("MicrosoftStore", "Advanced", true),
+                new("ProcessExplorer", "Advanced", unrecorded: false),
+                new("MicrosoftStore", "Advanced"),
 
                 // Advanced - Services SubMenu
-                new("Bluetooth", "Advanced/ServicesSubMenu", true),
-                new("LanmanWorkstation", "Advanced/ServicesSubMenu", true),
-                new("NetworkDiscovery", "Advanced/ServicesSubMenu", true),
-                new("Printing", "Advanced/ServicesSubMenu", true),
-                new("SuperFetch", "Advanced/ServicesSubMenu", true),
+                new("Bluetooth", "Advanced/ServicesSubMenu"),
+                new("LanmanWorkstation", "Advanced/ServicesSubMenu"),
+                new("NetworkDiscovery", "Advanced/ServicesSubMenu"),
+                new("Printing", "Advanced/ServicesSubMenu"),
+                new("SuperFetch", "Advanced/ServicesSubMenu"),
 
                 // Advanced - Services SubMenu - Nvidia Display Container SubMenu
-                new("NVidiaDisplayContainer", "Advanced/ServicesSubMenu/NvidiaDisplayContainerSubMenu", true),
-                new("NVidiaDisplayContainerContextMenu", "Advanced/ServicesSubMenu/NvidiaDisplayContainerSubMenu", false),
+                new("NVidiaDisplayContainer", "Advanced/ServicesSubMenu/NvidiaDisplayContainerSubMenu"),
+                new("NVidiaDisplayContainerContextMenu", "Advanced/ServicesSubMenu/NvidiaDisplayContainerSubMenu"),
 
                 // Advanced - Boot Configuration SubMenu - Appearance
-                new("BootLogo", "Advanced/BootConfigurationSubMenu/BootConfigAppearance", true),
-                new("BootMessages", "Advanced/BootConfigurationSubMenu/BootConfigAppearance", true),
-                new("NewBootMenu", "Advanced/BootConfigurationSubMenu/BootConfigAppearance", true),
-                new("SpinningAnimation", "Advanced/BootConfigurationSubMenu/BootConfigAppearance", true),
+                new("BootLogo", "Advanced/BootConfigurationSubMenu/BootConfigAppearance"),
+                new("NewBootMenu", "Advanced/BootConfigurationSubMenu/BootConfigAppearance"),
+                new("SpinningAnimations", "Advanced/BootConfigurationSubMenu/BootConfigAppearance"),
 
                 // Advanced - Boot Configuration SubMenu - Behavior
-                new("AdvancedBootOptions", "Advanced/BootConfigurationSubMenu/BootConfigBehavior", false),
-                new("AutomaticRepair", "Advanced/BootConfigurationSubMenu/BootConfigBehavior", false),
-                new("KernelParameters", "Advanced/BootConfigurationSubMenu/BootConfigBehavior", false),
-                new("HighestMode", "Advanced/BootConfigurationSubMenu/BootConfigBehavior", false),
+                new("AdvancedBootOptions", "Advanced/BootConfigurationSubMenu/BootConfigBehavior"),
+                new("AutomaticRepair", "Advanced/BootConfigurationSubMenu/BootConfigBehavior"),
+                new("KernelParameters", "Advanced/BootConfigurationSubMenu/BootConfigBehavior"),
+                new("HighestMode", "Advanced/BootConfigurationSubMenu/BootConfigBehavior"),
 
                 // Security - Core Isolation SubMenu
-                new("VbsState", "Security/CoreIsolationSubMenu", true),
+                new("VbsState", "Security/CoreIsolationSubMenu", unrecorded: true),
 
                 // Security - Defender SubMenu
-                new("HideAppBrowserControl", "Security/DefenderSubMenu", true),
-                new("SecurityHealthTray", "Security/DefenderSubMenu", false),
+                new("HideAppBrowserControl", "Security/DefenderSubMenu"),
+                new("SecurityHealthTray", "Security/DefenderSubMenu"),
 
                 // Security - Mitigations SubMenu
-                new("FaultTolerantHeap", "Security/MitigationsSubMenu", false),
+                new("FaultTolerantHeap", "Security/MitigationsSubMenu"),
             };
 
             host.ConfigureServices((_, services) =>
@@ -469,6 +481,11 @@ namespace AtlasToolbox.HostBuilder
 
                     foreach (ToggleServiceRegister item in configurationDictionary)
                     {
+                        if (!item.IsAvailable)
+                        {
+                            App.logger.Warn($"[VMHostBuilder] This Atlas has no on/off toggle {item.Key}; left out");
+                            continue;
+                        }
                         viewModels.Add(CreateConfigurationItemViewModel(item));
                     }
                     App.logger.Info($"[VMHostBuilder] Successfully loaded {viewModels.Count} configuration entries");
@@ -530,8 +547,9 @@ namespace AtlasToolbox.HostBuilder
         private static HomePageViewModel CreateHomePageViewModel(IServiceProvider serviceProvider)
         {
             return HomePageViewModel.LoadViewModel(
-                serviceProvider.GetServices<Profiles>(),
-                serviceProvider.GetServices<ConfigurationItemViewModel>());
+                serviceProvider.GetRequiredService<IEnumerable<Profiles>>(),
+                serviceProvider.GetRequiredService<IEnumerable<ConfigurationItemViewModel>>(),
+                serviceProvider.GetRequiredService<IEnumerable<MultiConfigViewModel>>());
         }
         private static SoftwarePageViewModel CreateSoftwarePageViewModel(IServiceProvider serviceProvider)
         {

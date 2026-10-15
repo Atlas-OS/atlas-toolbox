@@ -15,10 +15,11 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
     public partial class ConfigurationButtonViewModel : IConfigurationItem
     {
         private ButtonServiceRegister ConfigButton { get; set; }
+        /// <summary>The button's action; an asynchronous one disables the button while it runs.</summary>
         public ICommand Command => ConfigButton.Command;
         public string Name => ConfigButton.Name;
         public string Description => ConfigButton.Description;
-        public string Key => ConfigButton.Name.Replace(" ", "");
+        public string Key => ConfigButton.Key;
         public string Icon => ConfigButton.Icon;
 
         public string RouteItem => ConfigButton.Route;
@@ -26,12 +27,6 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
         public ConfigurationButtonViewModel(ButtonServiceRegister configurationButton)
         {
             ConfigButton = configurationButton;
-        }
-
-        [RelayCommand]
-        public void ExecuteCommand()
-        {
-            Command.Execute(this);
         }
     }
 }

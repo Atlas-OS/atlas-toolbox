@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Page
     x:Class="AtlasToolbox.Views.ConfigPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -37,7 +37,8 @@
                         </controls:SettingsCard.ContextFlyout>
                         <ToggleSwitch
                             x:Name="ConfigSwitch"
-                            IsOn="{Binding CurrentSetting}"
+                            IsEnabled="{Binding IsIdle}"
+                            IsOn="{Binding IsOn, Mode=TwoWay}"
                             Loaded="ToggleSwitch_Loaded" />
                     </controls:SettingsCard>
                 </Grid>
@@ -71,8 +72,11 @@
                     <ComboBox
                         x:Name="ConfigSwitch"
                         Width="200"
+                        DisplayMemberPath="Label"
+                        IsEnabled="{Binding IsIdle}"
                         ItemsSource="{Binding Options}"
-                        SelectedItem="{Binding CurrentSetting, Mode=TwoWay}" />
+                        SelectedValue="{Binding CurrentSetting, Mode=TwoWay}"
+                        SelectedValuePath="Name" />
                 </controls:SettingsCard>
             </DataTemplate>
 
@@ -91,7 +95,7 @@
                         </MenuFlyout>
                     </controls:SettingsCard.ContextFlyout>
                     <Button
-                        Command="{Binding ExecuteCommandCommand}"
+                        Command="{Binding Command}"
                         Content="{Binding Name}"
                         Style="{StaticResource AccentButtonStyle}" />
                 </controls:SettingsCard>

@@ -1,33 +1,20 @@
-﻿using ABI.System.Collections;
+using AtlasToolbox.Atlas;
 using AtlasToolbox.Models;
-
 using AtlasToolbox.Utils;
 using AtlasToolbox.ViewModels.ConfigurationVM;
-using AtlasToolbox.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Windows.Foundation.Collections;
-using Windows.Services.Maps;
-using WinRT.AtlasToolboxVtableClasses;
 
 namespace AtlasToolbox.ViewModels
 {
     public partial class HomePageViewModel : ObservableObject
     {
-        private IEnumerable<Profiles> _profiles;
         private IEnumerable<ConfigurationItemViewModel> ConfigurationItemViewModels { get; }
         private IEnumerable<MultiConfigViewModel> MultiOptionConfigurationItemViewModels { get; }
 
@@ -43,19 +30,22 @@ namespace AtlasToolbox.ViewModels
 
         public HomePageViewModel(
             IEnumerable<Profiles> profiles,
-            IEnumerable<ConfigurationItemViewModel> configurationItemViewModels)
+            IEnumerable<ConfigurationItemViewModel> configurationItemViewModels,
+            IEnumerable<MultiConfigViewModel> multiOptionConfigurationItemViewModels)
         {
             _name = "";
             ConfigurationItemViewModels = configurationItemViewModels;
+            MultiOptionConfigurationItemViewModels = multiOptionConfigurationItemViewModels;
             _profilesList = new();
             foreach (Profiles profile in profiles) { ProfilesList.Add(profile); }
         }
 
         public static HomePageViewModel LoadViewModel(
             IEnumerable<Profiles> profiles,
-            IEnumerable<ConfigurationItemViewModel> configurationItemViewModels)
+            IEnumerable<ConfigurationItemViewModel> configurationItemViewModels,
+            IEnumerable<MultiConfigViewModel> multiOptionConfigurationItemViewModels)
         {
-            HomePageViewModel viewModel = new(profiles, configurationItemViewModels);
+            HomePageViewModel viewModel = new(profiles, configurationItemViewModels, multiOptionConfigurationItemViewModels);
 
             return viewModel;
         }
@@ -63,60 +53,61 @@ namespace AtlasToolbox.ViewModels
         [RelayCommand]
         private void AddProfile()
         {
-            ProfileSerializing.CreateProfile(Name.Trim());
-            ProfilesList.Add(ProfileSerializing.CreateProfile(Name.Trim()));
+            try
+            {
+                Profiles profile = ProfileSerializing.CreateProfile(Name.Trim());
+                Profiles existing = ProfilesList.FirstOrDefault(item => item.Key == profile.Key);
+                if (existing is not null) ProfilesList.Remove(existing);
+                ProfilesList.Add(profile);
+            }
+            catch (Exception ex)
+            {
+                App.logger.Error(ex, "[PROFILES] Couldn't save the profile");
+            }
         }
 
         [RelayCommand]
-        private void RemoveProfile() 
+        private void RemoveProfile()
         {
-            DirectoryInfo profilesDirectory = new DirectoryInfo($"{Environment.GetEnvironmentVariable("windir")}\\AtlasModules\\Toolbox\\Profiles\\");
-            FileInfo[] profileFile = profilesDirectory.GetFiles();
-
-            foreach (FileInfo file in profileFile.ToList())
-            {
-                if (ProfileSelected.Key + ".json" == file.Name) File.Delete(file.FullName);
-            }
+            if (ProfileSelected is null) return;
+            string file = Path.Combine(AtlasPaths.Profiles, ProfileSelected.Key + ".json");
+            if (File.Exists(file)) File.Delete(file);
             ProfilesList.Remove(ProfileSelected);
         }
 
+        /// <summary>
+        /// Applies the selected profile: only what differs from what Atlas has applied,
+        /// one change after another.
+        /// </summary>
         [RelayCommand]
-        private void SetProfile()
+        private async Task SetProfile()
         {
-            // need more research to figure out a better way to do this
-            List<ConfigurationItemViewModel> configurationItemVMs = ConfigurationItemViewModels.ToList();
-            List<MultiConfigViewModel> multiConfigurationItemVMs = MultiOptionConfigurationItemViewModels.ToList();
-            foreach (ConfigurationItemViewModel viewModel in configurationItemVMs)
+            Profiles profile = ProfileSelected;
+            if (profile is null)
             {
-                try
-                {
-                    if (ProfileSelected.ConfigurationServices.Contains(viewModel.Key))
-                    {
-                        //ConfigurationItemViewModel config = App._host.Services.GetKeyedService<ConfigurationItemViewModel>(viewModel.Key);
-                        viewModel.CurrentSetting = true;
-                    }
-                    else if (viewModel.CurrentSetting == true)
-                    {
-                        viewModel.CurrentSetting = false;
-                    }
-                }
-                catch
-                {
-                    App.logger.Warn("Tried to set a profile whilst nothing was selected");
-                    break;
-                }
+                App.logger.Warn("Tried to set a profile whilst nothing was selected");
+                return;
             }
-            foreach (KeyValuePair<string, string> keyPair in ProfileSelected.MultiOptionConfigServices)
+            await ToggleActions.RunBatchAsync(async () =>
             {
-                foreach (MultiConfigViewModel vm in multiConfigurationItemVMs)
+                foreach (ConfigurationItemViewModel viewModel in ConfigurationItemViewModels)
                 {
-                    if (vm.Key == keyPair.Key && vm.CurrentSetting != keyPair.Value)
+                    bool? wanted = profile.ConfigurationServices.Contains(viewModel.Key) ? true
+                        : profile.DisabledServices?.Contains(viewModel.Key) == true ? false
+                        : null;
+                    if (wanted is bool on && on != viewModel.CurrentSetting) await viewModel.ApplyAsync(on);
+                }
+                foreach (KeyValuePair<string, string> keyPair in profile.MultiOptionConfigServices)
+                {
+                    // An action such as Safe Mode never runs from a profile.
+                    MultiConfigViewModel viewModel = MultiOptionConfigurationItemViewModels.FirstOrDefault(vm => vm.Key == keyPair.Key);
+                    if (viewModel is not null && !viewModel.Configuration.Toggle.NoStateRecord &&
+                        keyPair.Value is not null && viewModel.Options.Any(option => option.Name == keyPair.Value))
                     {
-                        vm.CurrentSetting = keyPair.Value;
+                        await viewModel.ApplyAsync(keyPair.Value);
                     }
                 }
-            }
-            App.ContentDialogCaller("restart");
+            });
         }
     }
 }

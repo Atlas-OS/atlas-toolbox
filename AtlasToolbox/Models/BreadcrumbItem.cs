@@ -10,5 +10,8 @@ namespace AtlasToolbox.Models
     {
         public string Route { get; set; } = route;
         public string Name { get; set; } = name;
+
+        // What screen readers announce for the item.
+        public override string ToString() => Name;
     }
 }

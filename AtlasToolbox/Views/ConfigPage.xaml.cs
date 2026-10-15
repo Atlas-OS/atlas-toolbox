@@ -170,6 +170,6 @@ public sealed partial class ConfigPage : Page
     private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
     {
         MenuFlyoutItem menuFlyoutItem = sender as MenuFlyoutItem;
-        RegistryHelper.SetValue(@"HKLM\SOFTWARE\\AtlasOS\\Toolbox\\Favorites", menuFlyoutItem.Tag.ToString(), true);
+        RegistryHelper.SetValue(@"HKLM\SOFTWARE\AtlasOS\Toolbox\Favorites", menuFlyoutItem.Tag.ToString(), true);
     }
 }
