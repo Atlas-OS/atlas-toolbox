@@ -1,0 +1,385 @@
+{
+  "LangName": "Tiếng Việt (Việt Nam)",
+  "LangKey": "vi_vn",
+
+  
+  "ToBeTranslated": "Cần được dịch",
+  "OpenShellAtlasPreset": "Cấu hình Open Shell AtlasOS",
+  "InterfaceTweaksDocumentation": "Tài liệu tinh chỉnh giao diện",
+  "ActivationPage": "Trang Kích hoạt",
+  "ColorsPage": "Cài đặt cá nhân hóa màu sắc",
+  "DateAndTime": "Cài đặt ngày và giờ",
+  "DefaultApps": "Ứng dụng mặc định",
+  "DefaultGraphicsSettings": "Cài đặt đồ họa mặc định",
+  "RegionLanguage": "Ngôn ngữ",
+  "Privacy": "Cài đặt Quyền riêng tư",
+  "RegionProperties": "Thuộc tính khu vực",
+  "Taskbar": "Cài đặt thanh tác vụ",
+  "CoreIsolation": "Cách ly lõi - Bảo mật Windows",
+  "WindowsSettingsDocumentation": "Tài liệu Cài đặt Windows",
+  "BootConfigExplanations": "Giải thích từ Microsoft",
+  "InterrupAffinityTool": "Công cụ Interrupt Affinity",
+  "ProcessExplorerApp": "Process Explorer",
+  "ProcessExplorerDocumentation": "Tài liệu Process Explorer",
+  "NvidiaDisplayContainerMustReadFirst": "Phải đọc trước",
+  "AdvancedConfigMustRead": "Tài liệu cấu hình nâng cao",
+  "SecurityDocumentation": "Tài liệu bảo mật",
+  "ResetPC": "Đặt lại PC này (đọc trước)",
+  "RestartExplorerButton": "Khởi động lại Explorer.exe",
+  "RestartExplorerButtonDescription": "Một số cài đặt giao diện có thể yêu cầu bạn khởi động lại explorer.exe",
+  "ViewCurrentSettingsBootConfig": "Xem các giá trị hiện tại",
+  "ViewCurrentSettingsBootConfigDescription": "Xem các giá trị cấu hình khởi động",
+  "VBSCurrentConfig": "Cấu hình VBS hiện tại",
+  "VBSCurrentConfigDescription": "Xem cấu hình VBS hiện tại",
+  "ToggleDefender": "Bật/Tắt",
+  "ToggleDefenderDescription": "Bật/Tắt Windows Defender",
+  "ResetFTH": "Đặt lại",
+  "ResetFTHDescription": "Đặt lại các mục FTH",
+  "InstallOpenShell": "Cài đặt OpenShell",
+  "InstallOpenShellDescription": "Cài đặt",
+  "FixErrors": "Khắc phục sự cố",
+  "FixErrorsDescription": "Sửa lỗi 2502 và 2503",
+  "RepairWinComponent": "Sửa chữa các thành phần Windows",
+  "TelemetryComponents": "Các thành phần Từ xa (Telemetry)",
+  "AtlasDefault": "Đặt lại Mạng về Mặc định của Atlas",
+  "WindowsDefault": "Đặt lại Mạng về Mặc định của Windows",
+  "BootConfigAppearance": "Giao diện khởi động",
+  "BootConfigAppearanceDescription": "Các thiết lập liên quan đến giao diện khởi động Windows",
+  "BootConfigBehavior": "Hành vi khởi động",
+  "BootConfigBehaviorDescription": "Mọi thứ liên quan đến hành vi khởi động",
+  "NvidiaDisplayContainerSubMenu": "Cài đặt NVIDIA Display Container",
+  "NvidiaDisplayContainerSubMenuDescription": "Mọi thứ liên quan đến NVIDIA Display Container",
+  "StartMenuSubMenu": "Menu Start",
+  "StartMenuSubMenuDescription": "Tùy chỉnh Menu Start của Windows",
+  "ContextMenuSubMenu": "Menu Ngữ cảnh",
+  "ContextMenuSubMenuDescription": "Mọi thứ liên quan đến menu ngữ cảnh",
+  "AiSubMenu": "Tính năng AI",
+  "AiSubMenuDescription": "Cài đặt liên quan đến các tính năng AI trong Windows 11",
+  "ServicesSubMenu": "Dịch vụ",
+  "ServicesSubMenuDescription": "Mọi thứ liên quan đến các dịch vụ trong Windows",
+  "BootConfigurationSubMenu": "Cấu hình khởi động",
+  "BootConfigurationSubMenuDescription": "Mọi thứ liên quan đến quá trình khởi động trong Windows",
+  "FileExplorerSubMenu": "Tùy chỉnh File Explorer",
+  "FileExplorerSubMenuDescription": "Mọi thứ liên quan đến việc tùy chỉnh File Explorer của Windows",
+  "DriverConfigurationSubMenu": "Cấu hình Driver",
+  "DriverConfigurationSubMenuDescription": "Mọi thứ liên quan đến cấu hình driver",
+  "CoreIsolationSubMenu": "Cách ly lõi (VBS)",
+  "CoreIsolationSubMenuDescription": "Mọi thứ liên quan đến tính năng cách ly lõi",
+  "DefenderSubMenu": "Phần mềm bảo vệ Windows",
+  "DefenderSubMenuDescription": "Cài đặt liên quan đến Windows Defender",
+  "MitigationsSubMenu": "Giảm nhẹ rủi ro (Mitigations)",
+  "MitigationsSubMenuDescription": "Mọi thứ liên quan đến các biện pháp giảm nhẹ rủi ro",
+  "TroubleshootingNetwork": "Mạng",
+  "TroubleshootingNetworkDescription": "Mọi thứ liên quan đến khắc phục sự cố mạng",
+  "FileSharingSubMenu": "Chia sẻ Tệp",
+  "FileSharingSubMenuDescription": "Mọi thứ liên quan đến chia sẻ tệp trong Windows",
+  "ContextMenuTerminals": "Thêm hoặc xóa Terminal khỏi menu ngữ cảnh",
+  "ShortcutIcon": "Thay đổi biểu tượng của lối tắt (shortcuts)",
+  "Mitigations": "Thay đổi trạng thái giảm nhẹ rủi ro",
+  "SafeMode": "Vào chế độ an toàn (Safe mode) khi khởi động",
+
+
+  // Configuration toggles (// Các tùy chọn cấu hình)
+  "Animation": "Hiệu ứng động",
+  "AnimationDescription": "Bật hoặc tắt hiệu ứng động của Windows",
+
+  "ExtractContextMenu": "Tùy chọn Giải nén",
+  "ExtractContextMenuDescription": "Thêm tùy chọn Giải nén vào menu chuột phải cho tệp nén",
+
+  "RunWithPriority": "Chạy với Mức ưu tiên (Run With Priority) trong menu ngữ cảnh",
+  "RunWithPriorityDescription": "Thêm tùy chọn \"Chạy với Mức ưu tiên\" vào menu ngữ cảnh cho các ứng dụng",
+
+  "LanmanWorkstation": "Lanman Workstation (SMB)",
+  "LanmanWorkstationDescription": "Bật hoặc tắt dịch vụ Lanman Workstation để chia sẻ tệp SMB",
+
+  "NetworkDiscovery": "Khám phá mạng",
+  "NetworkDiscoveryDescription": "Bật hoặc tắt tính năng khám phá mạng để chia sẻ tệp dễ dàng hơn",
+
+  "Printing": "In ấn",
+  "PrintingDescription": "Bật hoặc tắt các dịch vụ in ấn",
+
+  "NVidiaDisplayContainer": "NVIDIA Display Container",
+  "NvidiaDispayContainerDescription": "Bật hoặc tắt dịch vụ NVIDIA Display Container",
+
+  "NVidiaDisplayContainerContextMenu": "NVIDIA Display Container trong menu ngữ cảnh",
+  "AddNvidiaDisplayContainerContextMenuDescription": "Thêm tùy chọn bật/tắt NVIDIA Display Container vào menu ngữ cảnh",
+
+  "CpuIdleContextMenu": "Bật/tắt CPU Idle trong menu ngữ cảnh",
+  "CpuIdleContextMenuDescription": "Thêm tùy chọn bật/tắt CPU Idle vào menu ngữ cảnh",
+
+  "LockScreen": "Bật màn hình khóa",
+  "LockScreenDescription": "Bật hoặc tắt màn hình khóa của Windows",
+
+  "ShortcutText": "Chữ \"Shortcut\"",
+  "ShortcutTextDescription": "Hiển thị hoặc ẩn chữ \"Shortcut\" trên các lối tắt",
+
+  "BootLogo": "Logo Khởi động",
+  "BootLogoDescription": "Bật hoặc tắt logo khởi động của Windows",
+
+  "BootMessages": "Thông báo Khởi động",
+  "BootMessagesDescription": "Bật hoặc tắt các thông báo khởi động của Windows",
+
+  "NewBootMenu": "Menu Khởi động Mới",
+  "NewBootMenuDescription": "Bật hoặc tắt menu khởi động mới của Windows",
+
+  "SpinningAnimation": "Hoạt ảnh xoay",
+  "SpinningAnimationDescription": "Bật hoặc tắt hoạt ảnh vòng xoay khi khởi động",
+
+  "AdvancedBootOptions": "Tùy chọn Khởi động Nâng cao lúc Khởi động",
+  "AdvancedBootOptionsDescription": "Bật hoặc tắt các tùy chọn khởi động nâng cao lúc khởi động",
+
+  "AutomaticRepair": "Tự động Sửa chữa (Automatic Repair)",
+  "AutomaticRepairDescription": "Bật hoặc tắt tính năng tự động sửa chữa khi lỗi khởi động",
+
+  "KernelParameters": "Tham số Kernel khi Khởi động",
+  "KernelParametersDescription": "Bật hoặc tắt các tham số kernel khi khởi động",
+
+  "HighestMode": "Chế độ Hiển thị Cao nhất",
+  "HighestModeDescription": "Bật hoặc tắt chế độ hiển thị cao nhất cho màn hình",
+
+  "CompactView": "Chế độ xem thu gọn",
+  "CompactViewDescription": "Bật hoặc tắt chế độ xem thu gọn trong File Explorer",
+
+  "RemovableDrivesInSidebar": "Ổ đĩa rời ở Thanh bên",
+  "RemovableDrivesInSidebarDescription": "Hiển thị hoặc ẩn ổ đĩa rời ở thanh bên của File Explorer",
+
+  "BackgroundApps": "Ứng dụng nền",
+  "BackgroundAppsDescription": "Bật hoặc tắt các ứng dụng nền",
+
+  "SearchIndexing": "Lập chỉ mục Tìm kiếm",
+  "SearchIndexingDescription": "Bật hoặc tắt tính năng lập chỉ mục tìm kiếm",
+
+  "FSOGameBar": "Tối ưu hóa Toàn màn hình (FSO) và Game Bar",
+  "FSOGameBarDescription": "Bật hoặc tắt Tính năng Tối ưu hóa Toàn màn hình và Game Bar",
+
+  "AutomaticUpdates": "Cập nhật tự động",
+  "AutomaticUpdatesDescription": "Bật hoặc tắt tính năng cập nhật tự động",
+
+  "DeliveryOptimisation": "Tối ưu hóa Phân phối (Delivery Optimization)",
+  "DeliveryOptimisationDescription": "Bật hoặc tắt tính năng Tối ưu hóa Phân phối",
+
+  "Hibernation": "Ngủ đông",
+  "HibernationDescription": "Bật hoặc tắt chế độ ngủ đông",
+
+  "Location": "Vị trí",
+  "LocationDescription": "Bật hoặc tắt các dịch vụ vị trí",
+
+  "PhoneLink": "Liên kết điện thoại và thiết bị di động",
+  "PhoneLinkDescription": "Bật hoặc tắt liên kết điện thoại và thiết bị di động",
+
+  "PowerSaving": "Tiết kiệm pin",
+  "PowerSavingDescription": "Bật hoặc tắt các tính năng tiết kiệm pin",
+
+  "Sleep": "Ngủ (Sleep)",
+  "SleepDescription": "Bật hoặc tắt chế độ ngủ",
+
+  "SystemRestore": "Khôi phục Hệ thống (System Restore)",
+  "SystemRestoreDescription": "Bật hoặc tắt tính năng khôi phục hệ thống",
+
+  "UpdateNotifications": "Thông báo Cập nhật",
+  "UpdateNotificationsDescription": "Bật hoặc tắt các thông báo cập nhật",
+
+  "WebSearch": "Tìm kiếm Web trên Menu Start",
+  "WebSearchDescription": "Bật hoặc tắt tính năng tìm kiếm web trong Menu Start",
+
+  "Widgets": "Tiện ích máy tính (Widgets)",
+  "WidgetsDescription": "Bật hoặc tắt các tiện ích (widgets) trên màn hình chính",
+
+  "WindowsSpotlight": "Windows Spotlight",
+  "WindowsSpotlightDescription": "Bật hoặc tắt Windows Spotlight trên màn hình khóa",
+
+  "AppStoreArchiving": "Lưu trữ ứng dụng Microsoft Store",
+  "AppStoreArchivingDescription": "Bật hoặc tắt tính năng lưu trữ ứng dụng của Microsoft Store",
+
+  "TakeOwnership": "Thêm \"Nhận quyền sở hữu\" (Take Ownership) vào menu ngữ cảnh",
+  "TakeOwnershipDescription": "Thêm tùy chọn \"Nhận quyền sở hữu\" vào menu ngữ cảnh cho các tệp và thư mục",
+
+  "OldContextMenu": "Menu ngữ cảnh cũ (trước Windows 11)",
+  "OldContextMenuDescription": "Bật hoặc tắt menu ngữ cảnh cũ của các phiên bản trước Windows 11",
+
+  "EdgeSwipe": "Vuốt từ cạnh màn hình",
+  "EdgeSwipeDescription": "Bật hoặc tắt các thao tác vuốt từ cạnh màn hình",
+
+  "AppIconsThumbnail": "Biểu tượng ứng dụng trên hình thu nhỏ",
+  "AppIconsThumbnailDescription": "Hiển thị hoặc ẩn biểu tượng ứng dụng trên hình thu nhỏ (thumbnail) của tệp",
+
+  "AutomaticFolderDiscovery": "Tự động khám phá thư mục",
+  "AutomaticFolderDiscoveryDescription": "Bật hoặc tắt tính năng tự động khám phá thư mục trong File Explorer",
+
+  "Gallery": "Bật Thư viện (Gallery)",
+  "GalleryDescription": "Bật hoặc tắt tính năng Thư viện trong File Explorer",
+
+  "SnapLayouts": "Bật bố cục Snap cho cửa sổ",
+  "SnapLayoutDescription": "Bật hoặc tắt tính năng bố cục Snap (Snap layouts) cho cửa sổ",
+
+  "RecentItems": "Mở khóa các mục gần đây trên File Explorer",
+  "RecentItemsDescription": "Bật hoặc tắt hiển thị các mục gần đây trên File Explorer",
+
+  "VerboseMessages": "Thông báo trạng thái chi tiết",
+  "VerboseStatusMessageDescription": "Bật hoặc tắt các thông báo trạng thái chi tiết trong quá trình khởi động và tắt máy",
+
+  "SuperFetch": "SuperFetch",
+  "SuperFetchDescription": "Bật hoặc tắt dịch vụ SuperFetch (SysMain)",
+
+  "StaticIp": "Tự động thiết lập IP tĩnh",
+  "StaticIpDescription": "Tự động định cấu hình địa chỉ IP tĩnh cho bộ điều hợp mạng của bạn",
+
+  "HideAppBrowserControl": "Kiểm soát ứng dụng và trình duyệt",
+  "HideAppBrowserControlDescription": "Hiển thị/Ẩn tính năng kiểm soát ứng dụng và trình duyệt trong Bảo mật Windows",
+
+  "SecurityHealthTray": "Nút Security Health trên khay hệ thống",
+  "SecurityHealthTrayDescription": "Hiển thị hoặc ẩn nút Security Health trên khay hệ thống (taskbar tray)",
+
+  "FaultTolerantHeap": "Fault Tolerant Heap",
+  "FaultTolerantHeapDescription": "Bật hoặc tắt tính năng giảm nhẹ rủi ro Fault Tolerant Heap",
+
+  "Copilot": "Bật Microsoft Copilot",
+  "CopilotDescription": "Bật hoặc tắt tích hợp Microsoft Copilot trong Windows 11",
+
+  "Recall": "Bật Windows Recall",
+  "RecallDescription": "Bật hoặc tắt tính năng Windows Recall",
+
+  "CpuIdle": "Bật CPU Idling",
+  "CpuIdleDescription": "Bật hoặc tắt tính năng CPU Idling",
+
+  "ProcessExplorer": "Cài đặt Process Explorer",
+  "ProcessExplorerDescription": "Cài đặt Process Explorer từ Microsoft Sysinternals",
+
+  "VbsState": "Bật VBS",
+  "VbsStateDescription": "Bật hoặc tắt Virtualization Based Security (VBS)",
+
+  "GiveAccessToMenu": "Quyền truy cập (Give access to)",
+  "GiveAccessToMenuDescription": "Thêm tùy chọn 'Cấp quyền truy cập cho' vào menu ngữ cảnh đối với các tệp và thư mục",
+
+  "NetworkNavigationPane": "Ngăn điều hướng mạng",
+  "NetworkNavigationPaneDescription": "Hiển thị hoặc ẩn ngăn điều hướng mạng trong File Explorer",
+
+  "FileSharing": "Chia sẻ Tệp",
+  "FileSharingDescription": "Bật hoặc tắt các tính năng chia sẻ tệp",
+
+  "WindowsHello": "Windows Hello",
+  "WindowsHelloDescription": "Bật hoặc tắt xác thực sinh trắc học Windows Hello",
+
+  // End of configuration toggles (// Kết thúc các tùy chọn cấu hình)
+
+  // Settings and Home texts (// Văn bản cho phần Cài đặt và Trang chủ)
+  "Home_WinVer": "Phiên bản Windows",
+  "Home_PlaybookVer": "Phiên bản Playbook",
+  "Home_HeaderText": "Trang chủ",
+  "Home_ProfilesText": "Cấu hình",
+  "Home_Favorites": "Yêu thích",
+  "NewProfilesButton": "Tạo một cấu hình mới",
+  "IncompatibleVer": "Bản cài đặt AtlasOS/Windows hiện tại không tương thích với phiên bản Toolbox này. Vui lòng nâng cấp lên AtlasOS ",
+  "StatingServices": "Đang khởi động các dịch vụ...",
+
+ // Dialog text (// Văn bản hộp thoại)
+  "CurrentConfigIsSavedMessage": "Cấu hình hiện tại của bạn sẽ được lưu vào cấu hình (profile) này",
+  "DeleteProfileConfirmation": "Bạn có thực sự muốn xóa cấu hình này không?",
+  "TryDeleteDefaultProfile": "Bạn không thể xóa cấu hình mặc định",
+  "Home_SetProfileConfig": "Bạn có thực sự muốn áp dụng cấu hình này không?",
+  "RestartPCPromptHeader": "Để áp dụng đầy đủ các thay đổi, vui lòng khởi động lại PC của bạn",
+  "RelogApplyDesc": "Để áp dụng đầy đủ các thay đổi, vui lòng đăng xuất.",
+  "Yes": "Có",
+  "No": "Không",
+  "Cancel": "Hủy",
+  "Ok": "OK",
+  "Restart": "Khởi động lại",
+  "Later": "Để sau",
+  "Create": "Tạo",
+  "Home_SetProfileBtn": "Áp dụng cấu hình này",
+  "Home_DeleteProfileBtn": "Xóa cấu hình này",
+  "Settings": "Cài đặt",
+  "Behavior": "Chung",
+  "Settings_BackgroundDesc": "Giữ Toolbox chạy ngầm",
+  "About": "Giới thiệu",
+  "CloneRepoCard": "Sao chép (clone) kho lưu trữ này",
+  "BugReportCard": "Tạo báo cáo lỗi",
+  "WarningHeader": "Mã này được cung cấp bởi đội ngũ AtlasOS. Phần mềm này CHỈ nhằm mục đích sử dụng với AtlasOS trên các phiên bản Windows được hỗ trợ. Bất kỳ playbook nào khác và/hoặc phiên bản Windows không được hỗ trợ đều không được khuyến khích.",
+  "InstallSoftware": "Cài đặt Phần mềm",
+  "InstallButton": "Cài đặt",
+  "Unstable": "Không ổn định",
+  "UnstableDescription": "Việc sử dụng ứng dụng này hiện chỉ dành cho mục đích thử nghiệm. Ứng dụng có thể chứa các lỗi có nguy cơ làm hỏng bản cài đặt Windows của bạn. Tự chịu rủi ro khi sử dụng.",
+  "BetaVersion": "Phiên bản Beta",
+  "BetaVersionDescription": "Ứng dụng này hiện đang ở phiên bản Beta. Nếu bạn tìm thấy lỗi hoặc muốn đề xuất tính năng, vui lòng gửi phản hồi trên Discord. Các tính năng có thể thay đổi.",
+  "RestartApp": "Khởi động lại Toolbox để áp dụng",
+  "RestartAppDesc": "Để áp dụng các thay đổi này, vui lòng khởi động lại Toolbox.",
+  "RestartAppBtn": "Khởi động lại Toolbox ngay",
+  "RestartPC": "Khởi động lại PC của bạn để áp dụng.",
+  "RestartPCDesc": "Để áp dụng các thay đổi này, vui lòng khởi động lại PC của bạn.",
+  "RestartBtn": "Khởi động lại ngay",
+  "RelogApply": "Đăng xuất để áp dụng",
+  "ReloadApplyDesc": "Để áp dụng các thay đổi này, vui lòng đăng xuất.",
+  "RelogBtn": "Đăng xuất",
+  "CheckUpdates": "Kiểm tra bản cập nhật",
+  "CheckUpdatesBtn": "Kiểm tra ngay",
+  "LatestVer": "Không có bản cập nhật nào",
+  "NewUpdate": "Cập nhật",
+  "NewUpdateDesc": "Có một bản cập nhật mới. Bạn có muốn cài đặt nó ngay bây giờ không?",
+  "InstallNow": "Cài đặt ngay",
+  "ToggleWindowsUpdates": "Bật/Tắt Windows Update",
+  "WindowsUpdate": "Windows Update",
+  "WindowsUpdateDescription": "Các cài đặt liên quan đến Windows Update",
+  "FeatureHeader": "Bản cập nhật tính năng:",
+  "QualityHeader": "Bản cập nhật chất lượng:",
+  "Set": "Áp dụng",
+  "WindowsUpdateDeferral": "Đặt số ngày trì hoãn Windows Update",
+  "UpdateDeferralPromptTitle": "Thiết lập thời gian trì hoãn Windows Update",
+  "ResetWindowsUpdateDeferral": "Đặt lại độ trễ Windows Update",
+  "MicrosoftStoreToggle": "Bật/Tắt Microsoft Store",
+
+
+ // Home tiles (// Ô (tiles) trên Trang chủ)
+  "Tile_DocumentationTitle": "Tài liệu",
+  "Tile_DocumentationDescription": "Cài đặt AtlasOS, FAQ, và nhiều hơn nữa",
+  "Tile_DiscordTitle": "Discord",
+  "Tile_DiscordDescription": "Yêu cầu hỗ trợ và kết bạn!",
+  "Tile_GithubTitle": "GitHub",
+  "Tile_GithubDescription": "Khám phá mã nguồn AtlasOS và đóng góp",
+  "Tile_KofiTitle": "Ủng hộ chúng tôi trên Ko-Fi",
+  "Tile_KofiDescription": "Giúp chúng tôi tiếp tục duy trì dự án này!",
+
+   // Menu Items & other navigation item texts (// Mục Menu & các mục điều hướng khác)
+  "SearchPlaceholder": "Tìm kiếm cài đặt AtlasOS...",
+
+  "Home": "Trang chủ",
+  "Software": "Phần mềm",
+  "General": "Cấu hình Chung",
+  "Interface": "Tinh chỉnh Giao diện",
+  "Windows": "Cài đặt Windows",
+  "Advanced": "Cấu hình Nâng cao",
+  "Security": "Bảo mật",
+  "Troubleshooting": "Khắc phục sự cố",
+
+  "Language": "Ngôn ngữ",
+
+  "NoFavorites": "Bạn chưa thêm bất kỳ mục yêu thích nào.",
+  "SystemInfo": "Thông tin hệ thống này:",
+  "LearnMore": "Tìm hiểu thêm",
+
+  "TroubleshootingDocumenation": "Tài liệu khắc phục sự cố",
+
+  //
+  // Experiments (// Thử nghiệm)
+  //
+  "ExperimentsHeader": "Thử nghiệm",
+  "ExperimentsCardHeader": "Các tính năng thử nghiệm",
+  "ExperimentsCardDescription": "Các tính năng này đang trong quá trình thử nghiệm và có thể hoạt động không đúng như dự kiến. Cần khởi động lại để áp dụng các thay đổi",
+    // Search experiment (// Thử nghiệm tìm kiếm)
+  "SearchExperiment": "Thanh tìm kiếm",
+  "SearchExperimentDescription": "Bật thanh tìm kiếm để nhanh chóng tìm thấy các cài đặt trong Toolbox",
+   // Icons experiment (// Thử nghiệm biểu tượng)
+  "IconsExperiment": "Biểu tượng",
+  "IconsExperimentDescription": "Bật các biểu tượng bên cạnh mỗi cài đặt để dễ dàng nhận dạng và có giao diện trực quan hơn",
+  "AppIconThumbnail": "Biểu tượng ứng dụng trên hình thu nhỏ",
+  "AppIconThumbnailDescription": "Hiển thị hoặc ẩn biểu tượng ứng dụng trên hình thu nhỏ (thumbnail) của tệp",
+  "SpinningAnimations": "Hoạt ảnh xoay",
+  "SpinningAnimationsDescription": "Bật hoặc tắt hoạt ảnh vòng xoay khi khởi động",
+  "SnapLayoutsDescription": "Bật hoặc tắt tính năng bố cục Snap (Snap layouts) cho cửa sổ",
+  "VerboseMessagesDescription": "Bật hoặc tắt các thông báo trạng thái chi tiết trong quá trình khởi động và tắt máy",
+  "NVidiaDisplayContainerDescription": "Bật hoặc tắt dịch vụ NVIDIA Display Container",
+  "NVidiaDisplayContainerContextMenuDescription": "Thêm tùy chọn bật/tắt NVIDIA Display Container vào menu ngữ cảnh",
+  "Indexing": "Lập chỉ mục Tìm kiếm",
+  "IndexingDescription": "Bật hoặc tắt tính năng lập chỉ mục tìm kiếm",
+  "TroubleshootingDocumentation": "Tài liệu khắc phục sự cố",
+  "MicrosoftStore": "Bật/Tắt Microsoft Store"
+}

@@ -217,5 +217,10 @@
   "UpdateDeferralPromptTitle": "Definir tempo de adiamento do Windows Update",
   "ResetWindowsUpdateDeferral": "Redefinir adiamento do Windows Update",
   "MicrosoftStoreToggle": "Alternar Microsoft Store",
-  "TroubleshootingDocumenation": "Documentação de solução de problemas"
+  "TroubleshootingDocumenation": "Documentação de solução de problemas",
+  "AppIconThumbnail": "Ícones de aplicativos nas miniaturas",
+  "SpinningAnimations": "Animação de Carregamento",
+  "Indexing": "Indexação de Pesquisa",
+  "TroubleshootingDocumentation": "Documentação de solução de problemas",
+  "MicrosoftStore": "Alternar Microsoft Store"
 }

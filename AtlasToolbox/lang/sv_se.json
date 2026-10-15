@@ -216,5 +216,10 @@
   "UpdateDeferralPromptTitle": "Set Windows Update Deferral time (TBT)",
   "ResetWindowsUpdateDeferral": "Reset Windows Update deferral (TBT)",
   "MicrosoftStoreToggle": "Toggle Microsoft Store (TBT)",
-  "TroubleshootingDocumenation": "Troubleshooting documentation (TBT)"
+  "TroubleshootingDocumenation": "Troubleshooting documentation (TBT)",
+  "AppIconThumbnail": "Appikoner på miniatyrbilder",
+  "SpinningAnimations": "Snurrande animation",
+  "Indexing": "Sökindexering",
+  "TroubleshootingDocumentation": "Troubleshooting documentation (TBT)",
+  "MicrosoftStore": "Toggle Microsoft Store (TBT)"
 }

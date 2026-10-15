@@ -365,5 +365,17 @@
 
   // 图标实验
   "IconsExperiment": "图标",
-  "IconsExperimentDescription": "在每个设置旁边启用图标，以便更容易识别和视觉效果更好"
+  "IconsExperimentDescription": "在每个设置旁边启用图标，以便更容易识别和视觉效果更好",
+  "AppIconThumbnail": "缩略图上的应用程序图标",
+  "AppIconThumbnailDescription": "显示或隐藏文件缩略图上的应用程序图标",
+  "SpinningAnimations": "旋转动画",
+  "SpinningAnimationsDescription": "启用或禁用启动时的旋转动画",
+  "SnapLayoutsDescription": "启用或禁用窗口的对齐布局",
+  "VerboseMessagesDescription": "启用或禁用启动和关闭时的详细状态消息",
+  "NVidiaDisplayContainerDescription": "启用或禁用 NVIDIA 显示容器服务",
+  "NVidiaDisplayContainerContextMenuDescription": "在上下文菜单中添加 NVIDIA 显示容器切换",
+  "Indexing": "搜索索引",
+  "IndexingDescription": "启用或禁用搜索索引",
+  "TroubleshootingDocumentation": "故障排除文档",
+  "MicrosoftStore": "切换 Microsoft Store"
 }

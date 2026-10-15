@@ -368,5 +368,17 @@
   "SearchExperimentDescription": "Permet d'utiliser une barre de recherche pour trouver rapidement les paramètres dans ToolBox.",
   // Icons experiment
   "IconsExperiment": "Icônes",
-  "IconsExperimentDescription": "Active les icônes à côté de chaque paramètre pour faciliter l'identification et améliorer l'attrait visuel."
+  "IconsExperimentDescription": "Active les icônes à côté de chaque paramètre pour faciliter l'identification et améliorer l'attrait visuel.",
+  "AppIconThumbnail": "Icônes d'application par défaut sur les vignettes",
+  "AppIconThumbnailDescription": "Monter ou Cacher les icônes d'application par défaut sur les vignettes",
+  "SpinningAnimations": "Animation de rotation",
+  "SpinningAnimationsDescription": "Activé ou Désactivé les Animation de rotation au démarrage",
+  "SnapLayoutsDescription": "Activé ou Désactivé l'ancrage des fenêtres",
+  "VerboseMessagesDescription": "Activé ou Désactivé les messages d'état lors du démarrage et arrêt de windows",
+  "NVidiaDisplayContainerDescription": "Activé ou Désactivé le service Conteneur d'affichage NVIDIA",
+  "NVidiaDisplayContainerContextMenuDescription": "Ajouté le Conteneur d'affichage NVIDIA dans le menu contextuel",
+  "Indexing": "Indexation des recherches",
+  "IndexingDescription": "Activé ou Désactivé l'indexation des recherches",
+  "TroubleshootingDocumentation": "Documentation pour la résolution des problèmes",
+  "MicrosoftStore": "Activer/Désactiver Microsoft Store"
 }
