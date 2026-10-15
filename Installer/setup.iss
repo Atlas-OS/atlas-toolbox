@@ -3,7 +3,7 @@
 #include "CodeDependencies.iss"
 
 #define MyAppName "Atlas Toolbox"
-#define MyAppVersion "0.1.13"
+#define MyAppVersion "0.2.0"
 #define MyAppPublisher "AtlasOS"
 #define MyAppURL "https://www.atlasos.net/"
 #define MyAppExeName "AtlasToolbox.exe"
@@ -30,6 +30,9 @@ ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 ChangesAssociations=yes
 DisableProgramGroupPage=yes
+; Releases before 0.2.0 copied files into Atlas's own folder and listed them in their
+; uninstall log. Rewriting the log keeps uninstalling from deleting files Atlas owns.
+UninstallLogMode=overwrite
 
 ;Test
 ;LicenseFile=C:\Users\TheyCreeper\Documents\dev\atlas-toolbox\LICENSE
@@ -49,10 +52,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 ; Test code
 ;Source: "C:\Users\TheyCreeper\Documents\dev\atlas-toolbox\AtlasToolbox\bin\x64\Release\net8.0-windows10.0.26100.0\win-x64\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-;Source: "C:\Users\TheyCreeper\Documents\dev\atlas-toolbox\Installer\Toolbox\*"; DestDir: "C:\Windows\AtlasModules\Toolbox"; Flags: ignoreversion recursesubdirs
 ; Prod code
 Source: "D:\a\atlas-toolbox\atlas-toolbox\Deploy\src\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "D:\a\atlas-toolbox\atlas-toolbox\Installer\Toolbox\*"; DestDir: "{sd}\Windows\AtlasModules\Toolbox"; Flags: ignoreversion recursesubdirs
 
 [Registry]
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExt}\OpenWithProgids"; ValueType: string; ValueName: "{#MyAppAssocKey}"; ValueData: ""; Flags: uninsdeletevalue

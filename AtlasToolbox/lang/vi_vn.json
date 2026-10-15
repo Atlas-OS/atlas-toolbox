@@ -80,8 +80,8 @@
 
 
   // Configuration toggles (// Các tùy chọn cấu hình)
-  "Animations": "Hiệu ứng động",
-  "AnimationsDescription": "Bật hoặc tắt hiệu ứng động của Windows",
+  "Animation": "Hiệu ứng động",
+  "AnimationDescription": "Bật hoặc tắt hiệu ứng động của Windows",
 
   "ExtractContextMenu": "Tùy chọn Giải nén",
   "ExtractContextMenuDescription": "Thêm tùy chọn Giải nén vào menu chuột phải cho tệp nén",
@@ -98,10 +98,10 @@
   "Printing": "In ấn",
   "PrintingDescription": "Bật hoặc tắt các dịch vụ in ấn",
 
-  "NvidiaDispayContainer": "NVIDIA Display Container",
+  "NVidiaDisplayContainer": "NVIDIA Display Container",
   "NvidiaDispayContainerDescription": "Bật hoặc tắt dịch vụ NVIDIA Display Container",
 
-  "AddNvidiaDisplayContainerContextMenu": "NVIDIA Display Container trong menu ngữ cảnh",
+  "NVidiaDisplayContainerContextMenu": "NVIDIA Display Container trong menu ngữ cảnh",
   "AddNvidiaDisplayContainerContextMenuDescription": "Thêm tùy chọn bật/tắt NVIDIA Display Container vào menu ngữ cảnh",
 
   "CpuIdleContextMenu": "Bật/tắt CPU Idle trong menu ngữ cảnh",
@@ -149,8 +149,8 @@
   "SearchIndexing": "Lập chỉ mục Tìm kiếm",
   "SearchIndexingDescription": "Bật hoặc tắt tính năng lập chỉ mục tìm kiếm",
 
-  "FsoAndGameBar": "Tối ưu hóa Toàn màn hình (FSO) và Game Bar",
-  "FsoAndGameBarDescription": "Bật hoặc tắt Tính năng Tối ưu hóa Toàn màn hình và Game Bar",
+  "FSOGameBar": "Tối ưu hóa Toàn màn hình (FSO) và Game Bar",
+  "FSOGameBarDescription": "Bật hoặc tắt Tính năng Tối ưu hóa Toàn màn hình và Game Bar",
 
   "AutomaticUpdates": "Cập nhật tự động",
   "AutomaticUpdatesDescription": "Bật hoặc tắt tính năng cập nhật tự động",
@@ -209,13 +209,13 @@
   "Gallery": "Bật Thư viện (Gallery)",
   "GalleryDescription": "Bật hoặc tắt tính năng Thư viện trong File Explorer",
 
-  "SnapLayout": "Bật bố cục Snap cho cửa sổ",
+  "SnapLayouts": "Bật bố cục Snap cho cửa sổ",
   "SnapLayoutDescription": "Bật hoặc tắt tính năng bố cục Snap (Snap layouts) cho cửa sổ",
 
   "RecentItems": "Mở khóa các mục gần đây trên File Explorer",
   "RecentItemsDescription": "Bật hoặc tắt hiển thị các mục gần đây trên File Explorer",
 
-  "VerboseStatusMessage": "Thông báo trạng thái chi tiết",
+  "VerboseMessages": "Thông báo trạng thái chi tiết",
   "VerboseStatusMessageDescription": "Bật hoặc tắt các thông báo trạng thái chi tiết trong quá trình khởi động và tắt máy",
 
   "SuperFetch": "SuperFetch",
@@ -343,7 +343,7 @@
 
   "Home": "Trang chủ",
   "Software": "Phần mềm",
-  "GeneralConfig": "Cấu hình Chung",
+  "General": "Cấu hình Chung",
   "Interface": "Tinh chỉnh Giao diện",
   "Windows": "Cài đặt Windows",
   "Advanced": "Cấu hình Nâng cao",
@@ -369,5 +369,17 @@
   "SearchExperimentDescription": "Bật thanh tìm kiếm để nhanh chóng tìm thấy các cài đặt trong Toolbox",
    // Icons experiment (// Thử nghiệm biểu tượng)
   "IconsExperiment": "Biểu tượng",
-  "IconsExperimentDescription": "Bật các biểu tượng bên cạnh mỗi cài đặt để dễ dàng nhận dạng và có giao diện trực quan hơn"
+  "IconsExperimentDescription": "Bật các biểu tượng bên cạnh mỗi cài đặt để dễ dàng nhận dạng và có giao diện trực quan hơn",
+  "AppIconThumbnail": "Biểu tượng ứng dụng trên hình thu nhỏ",
+  "AppIconThumbnailDescription": "Hiển thị hoặc ẩn biểu tượng ứng dụng trên hình thu nhỏ (thumbnail) của tệp",
+  "SpinningAnimations": "Hoạt ảnh xoay",
+  "SpinningAnimationsDescription": "Bật hoặc tắt hoạt ảnh vòng xoay khi khởi động",
+  "SnapLayoutsDescription": "Bật hoặc tắt tính năng bố cục Snap (Snap layouts) cho cửa sổ",
+  "VerboseMessagesDescription": "Bật hoặc tắt các thông báo trạng thái chi tiết trong quá trình khởi động và tắt máy",
+  "NVidiaDisplayContainerDescription": "Bật hoặc tắt dịch vụ NVIDIA Display Container",
+  "NVidiaDisplayContainerContextMenuDescription": "Thêm tùy chọn bật/tắt NVIDIA Display Container vào menu ngữ cảnh",
+  "Indexing": "Lập chỉ mục Tìm kiếm",
+  "IndexingDescription": "Bật hoặc tắt tính năng lập chỉ mục tìm kiếm",
+  "TroubleshootingDocumentation": "Tài liệu khắc phục sự cố",
+  "MicrosoftStore": "Bật/Tắt Microsoft Store"
 }

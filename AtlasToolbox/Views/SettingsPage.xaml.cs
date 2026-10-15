@@ -3,6 +3,7 @@ using AtlasToolbox.ViewModels;
 using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog.LayoutRenderers;
@@ -34,10 +35,21 @@ namespace AtlasToolbox.Views
             this.InitializeComponent();
             this.DataContext = new SettingsPageViewModel();
             LoadText();
-            ConfigSwitch.Loaded += (s, e) =>
-            {
-                ConfigSwitch.SelectionChanged += ConfigSwitch_SelectionChanged;
-            };
+            ConfigSwitch.Loaded += ConfigSwitch_Loaded;
+        }
+
+        private void ConfigSwitch_Loaded(object sender, RoutedEventArgs e)
+        {
+            ConfigSwitch.Loaded -= ConfigSwitch_Loaded;
+            ConfigSwitch.SelectionChanged += ConfigSwitch_SelectionChanged;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            // Unsubscribe from all events to prevent memory leaks
+            ConfigSwitch.Loaded -= ConfigSwitch_Loaded;
+            ConfigSwitch.SelectionChanged -= ConfigSwitch_SelectionChanged;
         }
 
         public void LoadText()

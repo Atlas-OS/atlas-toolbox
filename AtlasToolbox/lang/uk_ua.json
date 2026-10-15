@@ -79,8 +79,8 @@
 
 
   // Configuration toggles
-  "Animations": "Анімації",
-  "AnimationsDescription": "Увімкнути або вимкнути анімації Windows",
+  "Animation": "Анімації",
+  "AnimationDescription": "Увімкнути або вимкнути анімації Windows",
 
   "ExtractContextMenu": "Опція \"Видобути\" у контекстному меню",
   "ExtractContextMenuDescription": "Додає опцію \"Видобути\" у контекстне меню для стиснутих файлів",
@@ -97,10 +97,10 @@
   "Printing": "Друк",
   "PrintingDescription": "Увімкнути або вимкнути служби друку",
 
-  "NvidiaDispayContainer": "NVIDIA Display Container",
+  "NVidiaDisplayContainer": "NVIDIA Display Container",
   "NvidiaDispayContainerDescription": "Увімкнути або вимкнути службу NVIDIA Display Container",
 
-  "AddNvidiaDisplayContainerContextMenu": "NVIDIA Display Container у контекстному меню",
+  "NVidiaDisplayContainerContextMenu": "NVIDIA Display Container у контекстному меню",
   "AddNvidiaDisplayContainerContextMenuDescription": "Додає перемикач NVIDIA Display Container у контекстне меню",
 
   "CpuIdleContextMenu": "Перемикач простою CPU у контекстному меню",
@@ -148,8 +148,8 @@
   "SearchIndexing": "Індексування пошуку",
   "SearchIndexingDescription": "Увімкнути або вимкнути індексування пошуку",
 
-  "FsoAndGameBar": "FSO та Game Bar",
-  "FsoAndGameBarDescription": "Увімкнути або вимкнути повноекранні оптимізації та Game Bar",
+  "FSOGameBar": "FSO та Game Bar",
+  "FSOGameBarDescription": "Увімкнути або вимкнути повноекранні оптимізації та Game Bar",
 
   "AutomaticUpdates": "Автоматичні оновлення",
   "AutomaticUpdatesDescription": "Увімкнути або вимкнути автоматичні оновлення",
@@ -208,13 +208,13 @@
   "Gallery": "Увімкнути галерею",
   "GalleryDescription": "Увімкнути або вимкнути галерею у Провіднику файлів",
 
-  "SnapLayout": "Увімкнути макети прив’язки для вікон",
+  "SnapLayouts": "Увімкнути макети прив’язки для вікон",
   "SnapLayoutDescription": "Увімкнути або вимкнути макети прив’язки для вікон",
 
   "RecentItems": "Розблокувати нещодавні елементи в Провіднику файлів",
   "RecentItemsDescription": "Увімкнути або вимкнути нещодавні елементи в Провіднику файлів",
 
-  "VerboseStatusMessage": "Детальні повідомлення стану",
+  "VerboseMessages": "Детальні повідомлення стану",
   "VerboseStatusMessageDescription": "Увімкнути або вимкнути детальні повідомлення стану під час завантаження та вимкнення",
 
   "SuperFetch": "SuperFetch",
@@ -342,7 +342,7 @@
 
   "Home": "Головна",
   "Software": "Програмне забезпечення",
-  "GeneralConfig": "Загальна конфігурація",
+  "General": "Загальна конфігурація",
   "Interface": "Налаштування інтерфейсу",
   "Windows": "Налаштування Windows",
   "Advanced": "Розширена конфігурація",
@@ -368,5 +368,17 @@
   "SearchExperimentDescription": "Увімкнути панель пошуку для швидкого знаходження налаштувань у Toolbox",
   // Icons experiment
   "IconsExperiment": "Піктограми",
-  "IconsExperimentDescription": "Увімкнути піктограми поруч із кожним налаштуванням для легшої ідентифікації та кращого вигляду"
+  "IconsExperimentDescription": "Увімкнути піктограми поруч із кожним налаштуванням для легшої ідентифікації та кращого вигляду",
+  "AppIconThumbnail": "Піктограми програм на мініатюрах",
+  "AppIconThumbnailDescription": "Показати або приховати піктограми програм на мініатюрах файлів",
+  "SpinningAnimations": "Анімація обертання",
+  "SpinningAnimationsDescription": "Увімкнути або вимкнути анімацію обертання під час завантаження",
+  "SnapLayoutsDescription": "Увімкнути або вимкнути макети прив’язки для вікон",
+  "VerboseMessagesDescription": "Увімкнути або вимкнути детальні повідомлення стану під час завантаження та вимкнення",
+  "NVidiaDisplayContainerDescription": "Увімкнути або вимкнути службу NVIDIA Display Container",
+  "NVidiaDisplayContainerContextMenuDescription": "Додає перемикач NVIDIA Display Container у контекстне меню",
+  "Indexing": "Індексування пошуку",
+  "IndexingDescription": "Увімкнути або вимкнути індексування пошуку",
+  "TroubleshootingDocumentation": "Документація з усунення несправностей",
+  "MicrosoftStore": "Перемкнути Microsoft Store"
 }

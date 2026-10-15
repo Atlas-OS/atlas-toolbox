@@ -80,8 +80,8 @@
 
 
   // Configuration toggles
-  "Animations": "Animations",
-  "AnimationsDescription": "Enable or disable Windows animations",
+  "Animation": "Animation",
+  "AnimationDescription": "Enable or disable Windows Animation",
 
   "ExtractContextMenu": "\"Extract\" option in the context menu",
   "ExtractContextMenuDescription": "Adds an \"Extract\" option in the context menu for compressed files",
@@ -98,10 +98,10 @@
   "Printing": "Printing",
   "PrintingDescription": "Enable or disable printing services",
 
-  "NvidiaDispayContainer": "NVIDIA Display Container",
+  "NVidiaDisplayContainer": "NVIDIA Display Container",
   "NvidiaDispayContainerDescription": "Enable or disable the NVIDIA Display Container service",
 
-  "AddNvidiaDisplayContainerContextMenu": "NVIDIA Display Container in context menu",
+  "NVidiaDisplayContainerContextMenu": "NVIDIA Display Container in context menu",
   "AddNvidiaDisplayContainerContextMenuDescription": "Adds a NVIDIA Display Container toggle in the context menu",
 
   "CpuIdleContextMenu": "CPU Idle toggle in context menu",
@@ -149,8 +149,8 @@
   "SearchIndexing": "Search Indexing",
   "SearchIndexingDescription": "Enable or disable search indexing",
 
-  "FsoAndGameBar": "FSO and Game Bar",
-  "FsoAndGameBarDescription": "Enable or disable Fullscreen Optimizations and Game Bar",
+  "FSOGameBar": "FSO and Game Bar",
+  "FSOGameBarDescription": "Enable or disable Fullscreen Optimizations and Game Bar",
 
   "AutomaticUpdates": "Automatic updates",
   "AutomaticUpdatesDescription": "Enable or disable automatic updates",
@@ -209,13 +209,13 @@
   "Gallery": "Enable the gallery",
   "GalleryDescription": "Enable or disable the gallery in File Explorer",
 
-  "SnapLayout": "Enables snap layouts for windows",
+  "SnapLayouts": "Enables snap layouts for windows",
   "SnapLayoutDescription": "Enable or disable snap layouts for windows",
 
   "RecentItems": "Unlocks recent items on file explorer",
   "RecentItemsDescription": "Enable or disable recent items on file explorer",
 
-  "VerboseStatusMessage": "Verbose status messages",
+  "VerboseMessages": "Verbose status messages",
   "VerboseStatusMessageDescription": "Enable or disable verbose status messages during boot and shutdown",
 
   "SuperFetch": "SuperFetch",
@@ -261,6 +261,9 @@
   "WindowsHelloDescription": "Enable or disable Windows Hello biometric authentication",
 
   // End of configuration toggles
+
+  // Routes
+  // End of routes
 
   // Settings and Home texts
   "Home_WinVer": "Windows Version",
@@ -343,7 +346,7 @@
 
   "Home": "Home",
   "Software": "Software",
-  "GeneralConfig": "General Configuration",
+  "General": "General Configuration",
   "Interface": "Interface Tweaks",
   "Windows": "Windows Settings",
   "Advanced": "Advanced Configuration",
@@ -364,10 +367,51 @@
   "ExperimentsHeader": "Experiments",
   "ExperimentsCardHeader": "Experimental features",
   "ExperimentsCardDescription": "These features are experimental and may not work fully as intended. Requires a restart to apply changes",
-  // Search experiment
-  "SearchExperiment": "Search bar",
-  "SearchExperimentDescription": "Enables a search bar to quickly find settings in the Toolbox",
   // Icons experiment
   "IconsExperiment": "Icons",
-  "IconsExperimentDescription": "Enables icons next to each setting for easier identification and more visual appeal"
+  "IconsExperimentDescription": "Enables icons next to each setting for easier identification and more visual appeal",
+  "AppIconThumbnail": "App icons on thumbnails",
+  "AppIconThumbnailDescription": "Show or hide app icons on file thumbnails",
+  "SpinningAnimations": "Spinning Animation",
+  "SpinningAnimationsDescription": "Enable or disable the spinning animation on boot",
+  "SnapLayoutsDescription": "Enable or disable snap layouts for windows",
+  "VerboseMessagesDescription": "Enable or disable verbose status messages during boot and shutdown",
+  "NVidiaDisplayContainerDescription": "Enable or disable the NVIDIA Display Container service",
+  "NVidiaDisplayContainerContextMenuDescription": "Adds a NVIDIA Display Container toggle in the context menu",
+  "Indexing": "Search Indexing",
+  "IndexingDescription": "Enable or disable search indexing",
+  "TroubleshootingDocumentation": "Troubleshooting documentation",
+  "MicrosoftStore": "Toggle Microsoft Store",
+  "Continue": "Continue",
+  "ToggleWarningTitle": "Before you continue",
+  "ToggleFailedTitle": "Atlas couldn't make this change",
+  "ToggleFailedDesc": "Atlas didn't give a reason. The Toolbox log has the details.",
+  "ToggleUnavailable": "This version of Atlas doesn't have this setting.",
+  "Workplace": "Access work or school page",
+  "WorkplaceDescription": "Show or hide Access work or school in Settings",
+  "ClickToDo": "Click to Do",
+  "ClickToDoDescription": "Enable or disable Click to Do",
+  "MicrosoftStoreDescription": "Remove Microsoft Store for every user, or restore it for your account",
+  "Bluetooth": "Bluetooth",
+  "BluetoothDescription": "Enable or disable the Bluetooth services, drivers and devices",
+  "KeyboardShortcuts": "Keyboard language shortcuts",
+  "KeyboardShortcutsDescription": "Switch languages with Alt+Shift and keyboard layouts with Ctrl+Shift",
+  "ExplorerHome": "Home in File Explorer",
+  "ExplorerHomeDescription": "Show or hide Home in the File Explorer navigation pane",
+  "QuickAccess": "Quick access",
+  "QuickAccessDescription": "Show or hide Quick access in File Explorer",
+  "ToggleWindowsUpdatesDescription": "Turn Windows Update on or off",
+  "PauseUpdates": "Pause Windows updates",
+  "PauseUpdatesDescription": "Pause updates until you unpause them. Security and driver updates don't install while paused.",
+  "ExplorerPatcher": "ExplorerPatcher",
+  "StartAllBack": "StartAllBack",
+  "AutoGpuAffinity": "AutoGpuAffinity",
+  "GoInterruptPolicy": "GoInterruptPolicy",
+  "MSIUtilityV3": "MSI Utility v3",
+  "ContextMenuTerminals_AddNoWindowsTerminal": "Add, without Windows Terminal",
+  "Mitigations_WindowsDefault": "Windows default",
+  "SafeMode_Minimal": "Restart in Safe Mode",
+  "SafeMode_CommandPrompt": "Restart in Safe Mode with Command Prompt",
+  "SafeMode_Networking": "Restart in Safe Mode with Networking",
+  "SafeMode_Exit": "Leave Safe Mode at the next restart"
 }
