@@ -26,10 +26,11 @@ namespace AtlasToolbox.Views
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            BitmapIcon BitMapIcon = new BitmapIcon();
-            BitMapIcon.UriSource = new Uri(value.ToString());
-            BitMapIcon.ShowAsMonochrome = false;
-            return BitMapIcon;
+            if (value is not string source || string.IsNullOrEmpty(source))
+            {
+                return new SymbolIcon(Symbol.AllApps);
+            }
+            return new BitmapIcon { UriSource = new Uri(source), ShowAsMonochrome = false };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

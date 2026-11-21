@@ -11,10 +11,13 @@ namespace AtlasToolbox.Models
         public string Name;
         public string Key;
 
-        public SoftwareItem(string name, string key) 
+        public bool HasWinstallIcon { get; }
+
+        public SoftwareItem(string name, string key, bool hasWinstallIcon = true)
         {
             Name = name;
             Key = key;
+            HasWinstallIcon = hasWinstallIcon;
         }
     }
 }

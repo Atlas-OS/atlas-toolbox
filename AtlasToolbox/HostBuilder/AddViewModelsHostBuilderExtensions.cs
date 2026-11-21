@@ -58,7 +58,7 @@ namespace AtlasToolbox.HostBuilder
         {
             List<SoftwareItem> configurationDictionary = new()
             {
-                new("Ungoogled Chromium", "eloston.ungoogled-chromium"),
+                new("Ungoogled Chromium", "eloston.ungoogled-chromium", hasWinstallIcon: false),
                 new("Google Chrome", "Google.Chrome"),
                 new("Mozilla Firefox", "Mozilla.Firefox"),
                 new("Waterfox", "Waterfox.Waterfox"),
@@ -69,19 +69,19 @@ namespace AtlasToolbox.HostBuilder
                 new("Discord Canary", "Discord.Discord.Canary"),
                 new("Steam", "Valve.Steam"),
                 new("Playnite", "Playnite.Playnite"),
-                new("Heroic", "HeroicGamesLauncher.HeroicGamesLauncher"),
+                new("Heroic", "HeroicGamesLauncher.HeroicGamesLauncher", hasWinstallIcon: false),
                 new("Everything", "voidtools.Everything"),
                 new("Mozilla Thunderbird", "Mozilla.Thunderbird"),
                 new("IrfanView", "IrfanSkiljan.IrfanView"),
                 new("Git", "Git.Git"),
                 new("VLC", "VideoLAN.VLC"),
                 new("PuTTY", "PuTTY.PuTTY"),
-                new("Ditto", "Ditto.Ditto"),
+                new("Ditto", "Ditto.Ditto", hasWinstallIcon: false),
                 new("7-Zip", "7zip.7zip"),
                 new("Teamspeak", "TeamSpeakSystems.TeamSpeakClient"),
                 new("Spotify", "Spotify.Spotify"),
                 new("OBS Studio", "OBSProject.OBSStudio"),
-                new("MSI Afterburner", "Guru3D.Afterburner"),
+                new("MSI Afterburner", "Guru3D.Afterburner", hasWinstallIcon: false),
                 new("NVCleanstall", "TechPowerUp.NVCleanstall"),
                 new("foobar2000", "PeterPawlowski.foobar2000"),
                 new("CPU-Z", "CPUID.CPU-Z"),
@@ -90,11 +90,11 @@ namespace AtlasToolbox.HostBuilder
                 new("VSCode", "Microsoft.VisualStudioCode"),
                 new("VSCodium", "VSCodium.VSCodium"),
                 new("BCUninstaller", "Klocman.BulkCrapUninstaller"),
-                new("HWiNFO", "REALiX.HWiNFO"),
+                new("HWiNFO", "REALiX.HWiNFO", hasWinstallIcon: false),
                 new("Lightshot", "Skillbrains.Lightshot"),
                 new("ShareX", "ShareX.ShareX"),
-                new("Snipping Tool", "9MZ95KL8MR0L"),
-                new("ExplorerPatcher", "valinet.ExplorerPatcher"),
+                new("Snipping Tool", "9MZ95KL8MR0L", hasWinstallIcon: false),
+                new("ExplorerPatcher", "valinet.ExplorerPatcher", hasWinstallIcon: false),
                 new("Powershell 7", "Microsoft.PowerShell"),
                 new("UniGetUI", "MartiCliment.UniGetUI"),
             };
@@ -168,8 +168,8 @@ namespace AtlasToolbox.HostBuilder
                 // Interface Tweaks links
                 new("ExplorerPatcher", @"https://github.com/valinet/ExplorerPatcher", "ExplorerPatcher", "Interface/StartMenuSubMenu"),
                 new("StartAllBack", @"https://www.startallback.com/", "StartAllBack", "Interface/StartMenuSubMenu"),
-                new("OpenShellAtlasPreset", @"https://github.com/Atlas-OS/Atlas/blob/main/playbook/Executables/AtlasDesktop/4.%20Interface%20Tweaks/Start%20Menu/Atlas%20Open-Shell%20Preset.xml", "Interface/StartMenuSubMenu"),
-                new("InterfaceTweaksDocumentation", @"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/interface-tweaks/", "Interface"),
+                new("OpenShellAtlasPreset", @"https://github.com/Atlas-OS/Atlas/blob/c6afe6c84409b918c59d3da8d93184e21ce3fa49/playbook/Executables/AtlasDesktop/4.%20Interface%20Tweaks/Start%20Menu/Atlas%20Open-Shell%20Preset.xml", "Interface/StartMenuSubMenu"),
+                new("InterfaceTweaksDocumentation", @"https://atlasos.net/docs/atlas-configuration/tweaks/", "Interface"),
 
                 // Windows tweaks links
                 new("ActivationPage", @"ms-settings:activation", "Windows", "\uE713"),
@@ -181,25 +181,25 @@ namespace AtlasToolbox.HostBuilder
                 new("Privacy", @"ms-settings:privacy", "Windows", "\uE713"),
                 new("RegionProperties", @"ms-settings:regionProperties", "Windows", "\uE713"),
                 new("Taskbar", @"ms-settings:taskbar", "Windows", "\uE713"),
-                new("WindowsSettingsDocumentation", @"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/windows-settings/", "Windows"),
+                new("WindowsSettingsDocumentation", @"https://atlasos.net/docs/atlas-configuration/windows/", "Windows"),
 
                 // Advanced tweaks links
-                new("AdvancedConfigMustRead", @"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/advanced-configuration/", "Advanced"),
+                new("AdvancedConfigMustRead", @"https://atlasos.net/docs/atlas-configuration/advanced/", "Advanced"),
                 new("BootConfigExplanations", @"https://learn.microsoft.com/windows-hardware/drivers/devtest/bcdedit--set", "Advanced/BootConfigurationSubMenu"),
                 new("AutoGpuAffinity", @"https://github.com/valleyofdoom/AutoGpuAffinity", "AutoGpuAffinity", "Advanced/DriverConfigurationSubMenu"),
-                new("NvidiaDisplayContainerMustReadFirst", @"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/advanced-configuration/#nvidia-display-container", "Advanced/ServicesSubMenu/NvidiaDisplayContainerSubMenu"),
+                new("NvidiaDisplayContainerMustReadFirst", @"https://atlasos.net/docs/atlas-configuration/advanced/#nvidia-display-container", "Advanced/ServicesSubMenu/NvidiaDisplayContainerSubMenu"),
                 new("GoInterruptPolicy", @"https://github.com/spddl/GoInterruptPolicy", "GoInterruptPolicy", "Advanced/DriverConfigurationSubMenu"),
                 new("InterrupAffinityTool", @"https://www.techpowerup.com/download/microsoft-interrupt-affinity-tool", "Advanced/DriverConfigurationSubMenu"),
                 new("MSIUtilityV3", @"https://forums.guru3d.com/threads/windows-line-based-vs-message-signaled-based-interrupts-msi-tool.378044", "Advanced/DriverConfigurationSubMenu"),
                 new("ProcessExplorerApp", @"https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer", "Advanced"),
 
                 // Security links
-                new("SecurityDocumentation", @"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/security/", "Security"),
+                new("SecurityDocumentation", @"https://atlasos.net/docs/atlas-configuration/security/", "Security"),
                 new("CoreIsolation", @"windowsdefender://coreisolation/", "Security/CoreIsolationSubMenu", "\uE83D"),
 
                 // Troubleshooting links
-                new("ResetPC", @"https://docs.atlasos.net/getting-started/reverting-atlas/", "Troubleshooting"),
-                new("TroubleshootingDocumentation", @"https://docs.atlasos.net/getting-started/post-installation/atlas-folder/troubleshooting/", "Troubleshooting"),
+                new("ResetPC", @"https://atlasos.net/docs/faq/reverting/", "Troubleshooting"),
+                new("TroubleshootingDocumentation", @"https://atlasos.net/docs/atlas-configuration/troubleshooting/", "Troubleshooting"),
             };
 
             host.ConfigureServices((_, services) =>

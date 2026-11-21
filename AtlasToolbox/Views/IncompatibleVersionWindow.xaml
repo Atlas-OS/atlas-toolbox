@@ -13,6 +13,6 @@
     </Window.SystemBackdrop>
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock x:Name="IncompatibleVer" FontSize="20" />
-        <HyperlinkButton HorizontalAlignment="Center" FontSize="20">https://docs.atlasos.net/getting-started/</HyperlinkButton>
+        <HyperlinkButton HorizontalAlignment="Center" FontSize="20" NavigateUri="https://atlasos.net/docs/install/">https://atlasos.net/docs/install/</HyperlinkButton>
     </StackPanel>
 </Window>

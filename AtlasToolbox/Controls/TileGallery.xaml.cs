@@ -1,7 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-// Taken from https://github.com/microsoft/WinUI-Gallery/blob/main/WinUIGallery/Controls/TileGallery.xaml.cs
+// Taken from https://github.com/microsoft/WinUI-Gallery/blob/1f88f9327e23ca658b45d4df0530a663eddfbe11/WinUIGallery/Controls/TileGallery.xaml.cs
 namespace AtlasToolbox.Controls
 {
     public sealed partial class TileGallery : UserControl

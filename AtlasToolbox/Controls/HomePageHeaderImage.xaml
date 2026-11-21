@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--  Taken from https://github.com/microsoft/WinUI-Gallery/blob/main/WinUIGallery/Controls/HomePageHeaderImage.xaml  -->
+<!--  Taken from https://github.com/microsoft/WinUI-Gallery/blob/1f88f9327e23ca658b45d4df0530a663eddfbe11/WinUIGallery/Controls/HomePageHeaderImage.xaml  -->
 <UserControl
     x:Class="AtlasToolbox.Controls.HomePageHeaderImage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
