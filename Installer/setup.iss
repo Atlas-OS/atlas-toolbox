@@ -5,7 +5,7 @@
 #define MyAppName "Atlas Toolbox"
 #define MyAppVersion "0.2.0"
 #define MyAppPublisher "AtlasOS"
-#define MyAppURL "https://www.atlasos.net/"
+#define MyAppURL "https://atlasos.net/"
 #define MyAppExeName "AtlasToolbox.exe"
 #define MyAppAssocName MyAppName + ""
 #define MyAppAssocExt ".exe"

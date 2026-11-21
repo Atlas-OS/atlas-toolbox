@@ -129,7 +129,7 @@
                                 ContentAlignment="Vertical">
                                 <StackPanel Margin="-12,0,0,0" Orientation="Vertical">
                                     <HyperlinkButton Content="Windows UI Library" NavigateUri="https://learn.microsoft.com/en-us/windows/apps/winui/winui3/" />
-                                    <HyperlinkButton Content="Windows Community Toolkit" NavigateUri="https://github.com/CommunityToolkit/WindowsCommunityToolkit" />
+                                    <HyperlinkButton Content="Windows Community Toolkit" NavigateUri="https://github.com/CommunityToolkit/Windows" />
                                 </StackPanel>
                             </controls:SettingsCard>
                             <controls:SettingsCard

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--  Taken from https://github.com/microsoft/WinUI-Gallery/blob/main/WinUIGallery/Controls/TileGallery.xaml  -->
+<!--  Taken from https://github.com/microsoft/WinUI-Gallery/blob/1f88f9327e23ca658b45d4df0530a663eddfbe11/WinUIGallery/Controls/TileGallery.xaml  -->
 <UserControl
     x:Class="AtlasToolbox.Controls.TileGallery"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -136,7 +136,7 @@
                 <StackPanel Orientation="Horizontal" Spacing="12">
                     <local:HeaderTile
                         x:Name="DocumentationTile"            
-                        Link="https://docs.atlasos.net">
+                        Link="https://atlasos.net/docs/">
                         <local:HeaderTile.Source>
                             <Image Source="..\assets\logo\atlas-logo.png" />
                         </local:HeaderTile.Source>
@@ -157,7 +157,7 @@
                     </local:HeaderTile>
                     <local:HeaderTile
                         x:Name="DiscordTile"
-                        Link="https://discord.atlasos.net">
+                        Link="https://discord.com/invite/atlasos">
                         <local:HeaderTile.Source>
                             <Image Source="..\assets\logo\discord-mark-blue.png" />
                         </local:HeaderTile.Source>

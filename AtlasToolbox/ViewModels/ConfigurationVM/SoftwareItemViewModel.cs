@@ -20,7 +20,7 @@ namespace AtlasToolbox.ViewModels.ConfigurationVM
         public SoftwareItemViewModel(SoftwareItem softwareItem)
         {
             SoftwareItem = softwareItem;
-            BitMapIcon = $"https://api.winstall.app/icons/next/{Key}.webp";
+            BitMapIcon = softwareItem.HasWinstallIcon ? $"https://api.winstall.app/icons/next/{Key}.webp" : string.Empty;
         }
     }
 }
