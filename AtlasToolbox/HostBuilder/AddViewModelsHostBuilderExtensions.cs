@@ -537,11 +537,11 @@ namespace AtlasToolbox.HostBuilder
         private static ConfigPageViewModel CreateConfigPageViewModel(IServiceProvider serviceProvider)
         {
             return ConfigPageViewModel.LoadViewModel(
-                serviceProvider.GetServices<LinksViewModel>(),
-                serviceProvider.GetServices<ConfigurationItemViewModel>(),
-                serviceProvider.GetServices<MultiConfigViewModel>(),
-                serviceProvider.GetServices<ConfigurationButtonViewModel>(),
-                serviceProvider.GetServices<RouteViewModel>());
+                serviceProvider.GetRequiredService<IEnumerable<LinksViewModel>>(),
+                serviceProvider.GetRequiredService<IEnumerable<ConfigurationItemViewModel>>(),
+                serviceProvider.GetRequiredService<IEnumerable<MultiConfigViewModel>>(),
+                serviceProvider.GetRequiredService<IEnumerable<ConfigurationButtonViewModel>>(),
+                serviceProvider.GetRequiredService<IEnumerable<RouteViewModel>>());
         }
 
         private static HomePageViewModel CreateHomePageViewModel(IServiceProvider serviceProvider)

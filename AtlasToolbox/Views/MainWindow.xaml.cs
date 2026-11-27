@@ -32,6 +32,8 @@ namespace AtlasToolbox.Views
         public Stack<BreadcrumbBarItem> breadcrumbBarItems = new();
         private bool _isNavigating;
         private bool _isUpdatingBreadcrumb = true;
+        private bool _isSyncingSelection;
+        private ConfigPageViewModel _configViewModel;
 
         public MainWindow()
         {
@@ -51,12 +53,12 @@ namespace AtlasToolbox.Views
             LoadText();
             // LoadExperiments();
 
-            // Setup root list
+            _configViewModel = App._host.Services.GetRequiredService<ConfigPageViewModel>();
             App.RootList = new List<IConfigurationItem>();
-            App.RootList.AddRange(App._host.Services.GetServices<LinksViewModel>());
-            App.RootList.AddRange(App._host.Services.GetServices<ConfigurationItemViewModel>());
-            App.RootList.AddRange(App._host.Services.GetServices<MultiConfigViewModel>());
-            App.RootList.AddRange(App._host.Services.GetServices<ConfigurationButtonViewModel>());
+            App.RootList.AddRange(_configViewModel.ConfigurationItems.OfType<LinksViewModel>());
+            App.RootList.AddRange(_configViewModel.ConfigurationItems.OfType<ConfigurationItemViewModel>());
+            App.RootList.AddRange(_configViewModel.ConfigurationItems.OfType<MultiConfigViewModel>());
+            App.RootList.AddRange(_configViewModel.ConfigurationItems.OfType<ConfigurationButtonViewModel>());
 
             NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems.OfType<NavigationViewItem>().First();
             ContentFrame.Navigate(
@@ -136,7 +138,7 @@ namespace AtlasToolbox.Views
         /// <param name="args"></param>
         private void NavigationViewControl_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            if (args.SelectedItemContainer is null)
+            if (_isSyncingSelection || args.SelectedItemContainer is null)
             {
                 return;
             }
@@ -200,10 +202,6 @@ namespace AtlasToolbox.Views
             {
                 _isNavigating = true;
                 ContentFrame.Navigate(type, route, new DrillInNavigationTransitionInfo());
-                if (type == typeof(ConfigPage) && route is not null)
-                {
-                    GenerateBreadcrumBar(route);
-                }
             }
             finally
             {
@@ -211,16 +209,21 @@ namespace AtlasToolbox.Views
             }
         }
 
-        public async void NavigateToRoute(string route, NavigationTransitionInfo transitionInfo)
+        public bool NavigateToRoute(string route, NavigationTransitionInfo transitionInfo)
         {
-            ContentFrame.Navigate(typeof(ConfigPage), route, transitionInfo);
+            if (!ContentFrame.Navigate(typeof(ConfigPage), route, transitionInfo))
+            {
+                App.logger.Error($"Failed to navigate to configuration route: {route}");
+                return false;
+            }
             // Remove previous ConfigPage entries from back-stack to prevent memory accumulation
             for (int i = ContentFrame.BackStack.Count - 1; i >= 0; i--)
             {
                 if (ContentFrame.BackStack[i].SourcePageType == typeof(ConfigPage))
                     ContentFrame.BackStack.RemoveAt(i);
             }
-            GenerateBreadcrumBar(route);
+            NavigationViewControl.IsBackEnabled = ContentFrame.CanGoBack;
+            return true;
         }
 
         public void GoBack()
@@ -234,20 +237,30 @@ namespace AtlasToolbox.Views
 
         private void ContentFrame_Navigated(object sender, NavigationEventArgs e)
         {
-            NavigateTo();
-        }
-
-        private void NavigateTo()
-        {
             NavigationViewControl.IsBackEnabled = ContentFrame.CanGoBack;
             NavigationViewControl.Header = null;
 
-            if (ContentFrame.SourcePageType == typeof(Views.SettingsPage))
+            string tag;
+            if (e.SourcePageType == typeof(ConfigPage) && e.Parameter is string route)
             {
-                NavigationViewControl.SelectedItem = NavigationViewControl.FooterMenuItems
-                           .OfType<NavigationViewItem>()
-                           .First(n => n.Tag.Equals("SettingsPage"));
-                return;
+                tag = route.Split('/')[0];
+                GenerateBreadcrumBar(route);
+                SwitchContentVisibility(true);
+            }
+            else
+            {
+                tag = e.SourcePageType == typeof(SettingsPage) ? "SettingsPage" : e.SourcePageType.FullName;
+                SwitchContentVisibility(false);
+            }
+
+            var item = NavigationViewControl.MenuItems.OfType<NavigationViewItem>()
+                .Concat(NavigationViewControl.FooterMenuItems.OfType<NavigationViewItem>())
+                .FirstOrDefault(n => Equals(n.Tag, tag));
+            if (item != null)
+            {
+                _isSyncingSelection = true;
+                try { NavigationViewControl.SelectedItem = item; }
+                finally { _isSyncingSelection = false; }
             }
         }
 
@@ -448,97 +461,49 @@ namespace AtlasToolbox.Views
         }
 
         #region Search
-        private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        public sealed class SearchResult
         {
-            //    var configItem = RootList.Where(item => item.Name == args.SelectedItem.ToString()).FirstOrDefault();
-            //    if (configItem is null) return;
+            public IConfigurationItem Item { get; }
+            public string Name => Item.Name;
+            public string Location { get; }
 
-            //    string type = configItem.Type.ToString();
-            //    if (configItem is not null)
-            //    {
-            //        // Search bar logic. WIP.
-            //        if (type.Contains("SubMenu"))
-            //        {
-            //            SettingsCard settingCard = new SettingsCard();
-            //            try
-            //            {
-            //                IEnumerable<ConfigurationSubMenuViewModel> items = App._host.Services.GetServices<ConfigurationSubMenuViewModel>();
-            //                ConfigurationSubMenuViewModel itemViewModel = items.Where(vm => vm.Key == type).First();
-            //                ConfigurationSubMenuViewModel rootItemViewModel = null;
-            //                DataTemplate template = new DataTemplate();
-            //                ObservableCollection<Folder> folders = new ObservableCollection<Folder>();
-            //                while (type.Contains("SubMenu"))
-            //                {
-            //                    string itemViewModelType = itemViewModel.Type.ToString();
-            //                    folders.Add(new Folder() { Name = itemViewModel.Name });
-            //                    if (rootItemViewModel is null) rootItemViewModel = items.Where(vm => vm.Key == type).First();
-            //                    if (itemViewModelType.Contains("SubMenu"))
-            //                    {
-            //                        type = itemViewModelType;
-            //                        itemViewModel = items.Where(vm => vm.Key == type).First();
-            //                        configItem = itemViewModel;
-            //                    }
-            //                    else
-            //                    {
-            //                        folders.Add(new Folder() { Name = itemViewModelType });
-            //                        type = itemViewModelType;
-            //                    }
-            //                }
-            //            //folders.Remove(folders.First());
-            //            // Set the item key to highlight after navigation
-            //            App.SearchHighlightItemKey = configItem.Key;
+            public SearchResult(IConfigurationItem item)
+            {
+                Item = item;
+                Location = string.Join(" / ", item.RouteItem.Split('/').Select(segment => App.GetValueFromItemList(segment)));
+            }
+        }
 
-            //            ContentFrame.Navigate(typeof(SubSection), new Tuple<ConfigurationSubMenuViewModel, DataTemplate, object>
-            //                (rootItemViewModel, template, new ObservableCollection<Folder>(folders.Reverse())), new SlideNavigationTransitionInfo()
-            //                { Effect = SlideNavigationTransitionEffect.FromRight });
-            //            }
-            //            catch (Exception ex)
-            //            {
-            //                App.logger.Error(ex.Message + ": An exception was thrown when trying to open a submenu:\n\n" + ex.InnerException);
-            //            }
-            //        }
-            //        else
-            //        {
-            //            // Set the item key to highlight after navigation
-            //            App.SearchHighlightItemKey = configItem.Key;
+        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            var result = args.ChosenSuggestion as SearchResult;
+            if (result == null && !string.IsNullOrWhiteSpace(args.QueryText))
+            {
+                result = (sender.ItemsSource as IEnumerable<SearchResult>)?.FirstOrDefault();
+            }
+            if (result == null) return;
 
-            //            NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems
-            //                            .OfType<NavigationViewItem>()
-            //                            .First(n => n.Tag.Equals(configItem.Type.ToString()));
-            //            App.CurrentCategory = configItem.Type.ToString();
-            //            Navigate(typeof(Views.ConfigPage));
-            //        }
-            //    }
-
-            //    // Clear the search box after selection
-            //    sender.Text = string.Empty;
+            if (NavigateToRoute(result.Item.RouteItem, new DrillInNavigationTransitionInfo()) &&
+                ContentFrame.Content is ConfigPage page)
+            {
+                page.HighlightItem(result.Item);
+                sender.Text = string.Empty;
+                sender.ItemsSource = null;
+            }
         }
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            // Since selecting an item will also change the text,
-            // only listen to changes caused by user entering text.
-            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
-            {
-                var suitableItems = new List<string>();
-                var splitText = sender.Text.ToLower().Split(" ");
-                foreach (var viewModel in App.RootList)
-                {
-                    var found = splitText.All((key) =>
-                    {
-                        return viewModel.Name.ToLower().Contains(key);
-                    });
-                    if (found)
-                    {
-                        suitableItems.Add(viewModel.Name);
-                    }
-                }
-                if (suitableItems.Count == 0)
-                {
-                    suitableItems.Add("No results found");
-                }
-                sender.ItemsSource = suitableItems;
-            }
+            if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput || _configViewModel == null) return;
+
+            string[] terms = sender.Text.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+            sender.ItemsSource = terms.Length == 0
+                ? Array.Empty<SearchResult>()
+                : _configViewModel.ConfigurationItems
+                    .Where(item => !string.IsNullOrWhiteSpace(item.Name) &&
+                        terms.All(term => item.Name.Contains(term, StringComparison.CurrentCultureIgnoreCase)))
+                    .Select(item => new SearchResult(item))
+                    .ToList();
         }
         #endregion Search
     }

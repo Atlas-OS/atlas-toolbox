@@ -36,7 +36,6 @@ namespace AtlasToolbox
         public static Microsoft.UI.Dispatching.DispatcherQueue UiQueue { get; private set; }
 
         public static List<IConfigurationItem> RootList { get; set; }
-        public static string SearchHighlightItemKey { get; set; }
         private static Dictionary<string, string> StringList = new Dictionary<string, string>();
         // English, for text a translation doesn't have yet.
         private static Dictionary<string, string> FallbackStringList = new Dictionary<string, string>();

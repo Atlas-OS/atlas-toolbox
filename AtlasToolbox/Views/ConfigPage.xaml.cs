@@ -18,6 +18,11 @@ public sealed partial class ConfigPage : Page
 {
     private readonly ConfigPageViewModel _viewModel;
     private object configType;
+    private IConfigurationItem _highlightItem;
+    private SettingsCard _highlightedCard;
+    private object _originalBorderBrush;
+    private object _originalBorderThickness;
+    private DispatcherTimer _highlightTimer;
 
     public ConfigPage()
     {
@@ -29,7 +34,6 @@ public sealed partial class ConfigPage : Page
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
-        this.Loaded += ConfigPage_Loaded;
         ConfigItemsControl.ItemsSource = _viewModel.FilteredItems;
         if (e.Parameter is string route)
         {
@@ -40,80 +44,72 @@ public sealed partial class ConfigPage : Page
     protected override void OnNavigatedFrom(NavigationEventArgs e)
     {
         base.OnNavigatedFrom(e);
-        this.Loaded -= ConfigPage_Loaded;
+        LayoutUpdated -= ConfigPage_LayoutUpdated;
+        _highlightItem = null;
+        ClearHighlight();
         ConfigItemsControl.ItemsSource = null;
     }
 
-    private async void ConfigPage_Loaded(object sender, RoutedEventArgs e)
+    public void HighlightItem(IConfigurationItem item)
     {
-        // Check if there's an item to highlight from search
-        if (!string.IsNullOrEmpty(App.SearchHighlightItemKey))
+        ClearHighlight();
+        LayoutUpdated -= ConfigPage_LayoutUpdated;
+        if (!_viewModel.FilteredItems.Contains(item))
         {
-            string targetKey = App.SearchHighlightItemKey;
-            App.SearchHighlightItemKey = null; 
-
-            await System.Threading.Tasks.Task.Delay(200);
-
-            ScrollToAndHighlightItem(targetKey);
+            App.logger.Warn($"Search result {item.Key} was not found on route {item.RouteItem}");
+            return;
         }
+
+        _highlightItem = item;
+        LayoutUpdated += ConfigPage_LayoutUpdated;
+        ConfigPage_LayoutUpdated(this, null);
     }
 
-    private void ScrollToAndHighlightItem(string itemKey)
+    private void ConfigPage_LayoutUpdated(object sender, object e)
     {
-        // Find the index of the item in the vm
-        int index = -1;
-        var filteredItems = _viewModel.FilteredItems.ToList();
-        for (int i = 0; i < filteredItems.Count; i++)
-        {
-            if (filteredItems[i].Key == itemKey)
-            {
-                index = i;
-                break;
-            }
-        }
+        int index = _viewModel.FilteredItems.IndexOf(_highlightItem);
+        var container = ConfigItemsControl.ContainerFromIndex(index) as DependencyObject;
+        var settingsCard = container == null ? null : FindDescendant<SettingsCard>(container);
+        if (settingsCard == null || settingsCard.ActualHeight <= 0 || ConfigScrollViewer.ActualHeight <= 0) return;
 
-        if (index < 0) return;
-
-        // Get the item SettingsCard
-        var container = ConfigItemsControl.ContainerFromIndex(index) as ContentPresenter;
-        if (container == null) return;
-
-        var settingsCard = FindDescendant<SettingsCard>(container);
-        if (settingsCard == null) return;
-
-        // Scroll to the item
+        LayoutUpdated -= ConfigPage_LayoutUpdated;
+        _highlightItem = null;
         var transform = settingsCard.TransformToVisual(ConfigScrollViewer);
         var position = transform.TransformPoint(new Windows.Foundation.Point(0, 0));
-        
         double scrollPosition = ConfigScrollViewer.VerticalOffset + position.Y - (ConfigScrollViewer.ActualHeight / 2) + (settingsCard.ActualHeight / 2);
         ConfigScrollViewer.ChangeView(null, Math.Max(0, scrollPosition), null);
 
-        HighlightSettingsCard(settingsCard);
+        _highlightedCard = settingsCard;
+        _originalBorderBrush = settingsCard.ReadLocalValue(Control.BorderBrushProperty);
+        _originalBorderThickness = settingsCard.ReadLocalValue(Control.BorderThicknessProperty);
+        settingsCard.BorderBrush = new SolidColorBrush(new Windows.UI.ViewManagement.UISettings().GetColorValue(Windows.UI.ViewManagement.UIColorType.Accent));
+        settingsCard.BorderThickness = new Thickness(3);
+        _highlightTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+        _highlightTimer.Tick += HighlightTimer_Tick;
+        _highlightTimer.Start();
     }
 
-    private void HighlightSettingsCard(SettingsCard settingsCard)
+    private void HighlightTimer_Tick(object sender, object e) => ClearHighlight();
+
+    private void ClearHighlight()
     {
-        var originalBrush = settingsCard.BorderBrush;
-        var originalThickness = settingsCard.BorderThickness;
-
-        var highlightBrush = new SolidColorBrush(Microsoft.UI.Colors.Gold);
-        highlightBrush.Opacity = 0.3;
-        settingsCard.BorderBrush = highlightBrush;
-        settingsCard.BorderThickness = new Thickness(3);
-
-        // Create a timer to fade out the highlight
-        var timer = new DispatcherTimer();
-        timer.Interval = TimeSpan.FromMilliseconds(1500);
-        EventHandler<object> tickHandler = null;
-        tickHandler = (s, e) =>
+        if (_highlightTimer != null)
         {
-            timer.Stop();
-            settingsCard.BorderBrush = originalBrush;
-            settingsCard.BorderThickness = originalThickness;
-            timer.Tick -= tickHandler;
-        };
-        timer.Tick += tickHandler;
-        timer.Start();
+            _highlightTimer.Stop();
+            _highlightTimer.Tick -= HighlightTimer_Tick;
+            _highlightTimer = null;
+        }
+        if (_highlightedCard == null) return;
+
+        if (_originalBorderBrush == DependencyProperty.UnsetValue)
+            _highlightedCard.ClearValue(Control.BorderBrushProperty);
+        else
+            _highlightedCard.SetValue(Control.BorderBrushProperty, _originalBorderBrush);
+        if (_originalBorderThickness == DependencyProperty.UnsetValue)
+            _highlightedCard.ClearValue(Control.BorderThicknessProperty);
+        else
+            _highlightedCard.SetValue(Control.BorderThicknessProperty, _originalBorderThickness);
+        _highlightedCard = null;
     }
 
     private T FindDescendant<T>(DependencyObject parent) where T : DependencyObject
