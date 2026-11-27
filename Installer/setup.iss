@@ -3,7 +3,7 @@
 #include "CodeDependencies.iss"
 
 #define MyAppName "Atlas Toolbox"
-#define MyAppVersion "0.2.0"
+#define MyAppVersion "0.2.1"
 #define MyAppPublisher "AtlasOS"
 #define MyAppURL "https://atlasos.net/"
 #define MyAppExeName "AtlasToolbox.exe"
